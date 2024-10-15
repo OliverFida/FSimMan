@@ -1,0 +1,16 @@
+﻿<ui:OFWindow
+    x:Class="OliverFida.FSimMan.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OliverFida.FSimMan"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="clr-namespace:OliverFida.FSimMan.UI"
+    Title="{Binding AppTitle}"
+    d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
+    Style="{StaticResource OFWindowStyle}"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Vertical" />
+</ui:OFWindow>

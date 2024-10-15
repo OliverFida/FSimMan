@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <RootNamespace>OliverFida.Controls</RootNamespace>
+    <PackageId>OliverFida.ControlLib</PackageId>
+    <Authors>Oliver Fida</Authors>
+    <Product>ControlLib</Product>
+    <Copyright>Oliver Fida</Copyright>
+  </PropertyGroup>
+	
+</Project>

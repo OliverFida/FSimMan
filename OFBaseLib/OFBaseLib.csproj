@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>OliverFida.Base</RootNamespace>
+    <PackageId>OliverFida.BaseLib</PackageId>
+    <Authors>Oliver Fida</Authors>
+    <Product>BaseLib</Product>
+  </PropertyGroup>
+
+</Project>
