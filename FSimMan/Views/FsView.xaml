@@ -30,9 +30,10 @@
                 <ui:ImageButton
                     Margin="5,0,0,5"
                     VerticalAlignment="Bottom"
+                    Command="{Binding ImportModPackCommand}"
                     Content="Import"
                     ImageSource="/UI/Resources/Images/Download.png"
-                    Visibility="{Binding IsModPackImportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
+                    Visibility="{Binding IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
                 <ui:ImageButton
                     Margin="5,0,0,5"
                     VerticalAlignment="Bottom"

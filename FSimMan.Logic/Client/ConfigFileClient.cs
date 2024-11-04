@@ -1,5 +1,6 @@
 ﻿using OliverFida.Base;
 using OliverFida.FSimMan.Exceptions.Config;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -36,7 +37,35 @@ namespace OliverFida.FSimMan.Client
             return data;
         }
 
-        internal static void SerializeFile<T>(string fileName, T data)
+        internal static T Deserialize<T>(Stream stream, string fileName) where T : DataObjectBase
+        {
+            T? data;
+            try
+            {
+                using (XmlReader reader = XmlReader.Create(stream))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+
+                    try
+                    {
+                        data = serializer.Deserialize(reader) as T;
+                    }
+                    catch (InvalidOperationException ex) when (ex.InnerException is XmlException)
+                    {
+                        throw new InvalidConfigFileException(fileName);
+                    }
+                }
+            }
+            catch (Exception ex) when (ex is not OFException)
+            {
+                return Activator.CreateInstance<T>();
+            }
+
+            if (data == null) throw new InvalidConfigFileException(fileName);
+            return data;
+        }
+
+        internal static void SerializeFile<T>(string fileName, T data) where T : DataObjectBase
         {
             FileStream fileStream = File.Create(ResolveFilePath(fileName));
 
@@ -44,6 +73,12 @@ namespace OliverFida.FSimMan.Client
             serializer.Serialize(fileStream, data);
 
             fileStream.Close();
+        }
+
+        internal static void Serialize<T>(ref Stream stream, T data) where T : DataObjectBase
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            serializer.Serialize(stream, data);
         }
         #endregion
 

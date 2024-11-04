@@ -65,7 +65,7 @@ namespace OliverFida.FSimMan.Config.ModPack
             private set => SetProperty(ref _mods, value);
         }
 
-        private string _modsDirectoryPath
+        public string ModsDirectoryPath
         {
             get => Path.Combine(CurrentApplication.MODPACKS_PATH, _fsEdition.ToString(), Key.ToString(), "mods");
         }
@@ -98,8 +98,8 @@ namespace OliverFida.FSimMan.Config.ModPack
         public void CheckModFiles() => CheckModFiles(false);
         public void CheckModFiles(bool final)
         {
-            if (!Directory.Exists(_modsDirectoryPath)) Directory.CreateDirectory(_modsDirectoryPath);
-            string[] modFilePaths = Directory.GetFiles(_modsDirectoryPath);
+            if (!Directory.Exists(ModsDirectoryPath)) Directory.CreateDirectory(ModsDirectoryPath);
+            string[] modFilePaths = Directory.GetFiles(ModsDirectoryPath);
             if (!Directory.Exists(_modsTempDirectoryPath)) Directory.CreateDirectory(_modsTempDirectoryPath);
             string[] tempFilePaths = Directory.GetFiles(_modsTempDirectoryPath);
 
@@ -115,7 +115,7 @@ namespace OliverFida.FSimMan.Config.ModPack
                     if (matchingFile == null) throw new MissingModFileException(mod.FileName);
 
                     FileInfo fileInfo = new FileInfo(matchingFile);
-                    string targetFilePath = Path.Combine(_modsDirectoryPath, fileInfo.Name);
+                    string targetFilePath = Path.Combine(ModsDirectoryPath, fileInfo.Name);
 
                     File.Move(matchingFile, targetFilePath);
                 }
@@ -189,8 +189,8 @@ namespace OliverFida.FSimMan.Config.ModPack
             };
 
             // Mod file copying
-            string targetFilePath = Path.Combine(_modsDirectoryPath, fileInfo.Name);
-            if (!Directory.Exists(_modsDirectoryPath)) Directory.CreateDirectory(_modsDirectoryPath);
+            string targetFilePath = Path.Combine(ModsDirectoryPath, fileInfo.Name);
+            if (!Directory.Exists(ModsDirectoryPath)) Directory.CreateDirectory(ModsDirectoryPath);
             File.Copy(fileInfo.FullName, targetFilePath, true);
 
             Mods.Add(newMod);

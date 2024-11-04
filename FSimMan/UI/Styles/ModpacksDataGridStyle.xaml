@@ -100,6 +100,13 @@
                 Style="{StaticResource SquareImageButtonStyle}" />
             <ui:ImageButton
                 Margin="0,0,5,0"
+                Command="{Binding DataContext.ExportModpackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                CommandParameter="{Binding}"
+                ImageSource="/UI/Resources/Images/Download.png"
+                Style="{StaticResource SquareImageButtonStyle}"
+                Visibility="{Binding DataContext.IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <ui:ImageButton
+                Margin="0,0,5,0"
                 Command="{Binding DataContext.DeleteModpackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 CommandParameter="{Binding}"
                 ImageSource="/UI/Resources/Images/Trash.png"

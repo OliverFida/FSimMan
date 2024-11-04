@@ -54,6 +54,18 @@ namespace OliverFida.FSimMan
                 return Path.Combine(temp, "modPacks");
             }
         }
+
+        public static string TEMP_PATH
+        {
+            get
+            {
+                string temp = Path.Combine($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}Low", "Oliver Fida", "FSimMan");
+#if DEBUG
+                temp = Path.Combine(temp, "_debug");
+#endif
+                return Path.Combine(temp, "temp");
+            }
+        }
         #endregion
 
         #region Methods INTERNAL

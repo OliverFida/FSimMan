@@ -1,4 +1,5 @@
 ﻿using OliverFida.Base;
+using OliverFida.FSimMan.Exceptions;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
@@ -12,6 +13,23 @@ namespace OliverFida.FSimMan.Config.ModPack
 
         public void AddModPack(ModPack modPack)
         {
+            ModPack? existingModPack = (from p in _list where p.Key.Equals(modPack.Key) select p).SingleOrDefault();
+            if (existingModPack != null) throw new ModPackAlreadyExistsException();
+
+            _list.Add(modPack);
+            OnPropertyChanged(nameof(List));
+        }
+
+        public void UpdateModPack(ModPack modPack)
+        {
+            ModPack? existingModPack = (from p in _list where p.Key.Equals(modPack.Key) select p).SingleOrDefault();
+            if (existingModPack == null)
+            {
+                AddModPack(modPack);
+                return;
+            }
+
+            _list.Remove(existingModPack);
             _list.Add(modPack);
             OnPropertyChanged(nameof(List));
         }

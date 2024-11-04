@@ -1,9 +1,13 @@
 ﻿using OliverFida.FSimMan.Base;
 using OliverFida.FSimMan.Client.ModPack;
 using OliverFida.FSimMan.Config.ModPack;
+using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.Exceptions.Fs;
 using OliverFida.FSimMan.FS22;
+using OliverFida.FSimMan.FS22.Mod;
+using OliverFida.FSimMan.ImportExport;
 using System.Diagnostics;
+using System.IO.Compression;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -38,8 +42,8 @@ namespace OliverFida.FSimMan.Client
         }
 
 
-        protected ModPacks? _configModPacks;
-        public ModPacks? ConfigModPacks
+        protected ModPacks _configModPacks;
+        public ModPacks ConfigModPacks
         {
             get => _configModPacks;
         }
@@ -49,6 +53,7 @@ namespace OliverFida.FSimMan.Client
         public FsBaseClient(FsEdition fsEdition)
         {
             _fsEdition = fsEdition;
+            _configModPacks = new ModPacks();
 
             Initialize();
         }
@@ -78,8 +83,6 @@ namespace OliverFida.FSimMan.Client
 
         public void StoreModPacks()
         {
-            if (_configModPacks == null) return;
-
             bool modPacksIsEditing = ConfigModPacks?.IsEditing ?? false;
             if (modPacksIsEditing) ConfigModPacks!.EndEdit();
             ModPacksClient.StoreModPacks(FsEdition, _configModPacks);
@@ -88,8 +91,6 @@ namespace OliverFida.FSimMan.Client
 
         public Config.ModPack.ModPack? BeginNewModPack()
         {
-            if (ConfigModPacks == null) return null;
-
             ConfigModPacks.BeginEdit();
             Config.ModPack.ModPack newModPack = new Config.ModPack.ModPack("New modpack", "unknown", _fsEdition);
             ConfigModPacks.AddModPack(newModPack);
@@ -97,10 +98,45 @@ namespace OliverFida.FSimMan.Client
             return newModPack;
         }
 
+        public bool ImportCheckModPackExists(FsmmpFile fsmmpFile)
+        {
+            Config.ModPack.ModPack? matchingModpack = (from p in ConfigModPacks.List where p.Key.Equals(fsmmpFile.ModPackData!.Key) select p).SingleOrDefault();
+            if (matchingModpack != null) return true;
+
+            return false;
+        }
+
+        public void ImportModPack(FsmmpFile fsmmpFile, bool overwrite)
+        {
+            try
+            {
+                ConfigModPacks.BeginEdit();
+                fsmmpFile.ImportModPack();
+                if (overwrite)
+                {
+                    ConfigModPacks.UpdateModPack(fsmmpFile.ModPack!);
+                }
+                else
+                {
+                    ConfigModPacks.AddModPack(fsmmpFile.ModPack!);
+                }
+                fsmmpFile.ModPack!.CheckModFiles();
+                StoreModPacks();
+                ConfigModPacks.EndEdit();
+            }
+            catch
+            {
+                ConfigModPacks.CancelEdit();
+            }
+        }
+
+        public void ExportModPack(Config.ModPack.ModPack modPack, string targetArchiveFilePath)
+        {
+            using (FsmmpFile fsmmpFile = new FsmmpFile(targetArchiveFilePath, modPack)) { }
+        }
+
         public void DeleteModPack(Config.ModPack.ModPack modPack)
         {
-            if (ConfigModPacks == null) return;
-
             ConfigModPacks.BeginEdit();
             ConfigModPacks.RemoveModPack(modPack);
             ConfigModPacks.EndEdit();
