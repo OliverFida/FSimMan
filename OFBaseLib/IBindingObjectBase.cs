@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace OliverFida.Base
+﻿namespace OliverFida.Base
 {
-    public interface IBindingObjectBase : INotifyPropertyChanged { }
+    public interface INotifyPropertyChanged : System.ComponentModel.INotifyPropertyChanged { }
 }

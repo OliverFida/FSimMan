@@ -1,0 +1,8 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="clr-namespace:OliverFida.FSimMan.UI">
+    <Style x:Key="SectionStyle" TargetType="{x:Type Grid}">
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+</ResourceDictionary>

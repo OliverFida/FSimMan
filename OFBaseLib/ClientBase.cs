@@ -1,16 +1,30 @@
 ﻿namespace OliverFida.Base
 {
-    public class ClientBase : ObjectBase
+    public class ClientBase : ObjectBase, IClientBase
     {
-        private string _title;
-        public string Title
+        private bool _isBusy = false;
+        public bool IsBusy
         {
-            get => _title;
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
 
-        public ClientBase(string title)
+        private string _busyContent = string.Empty;
+        public string BusyContent
         {
-            _title = title;
+            get => _busyContent;
+            set => SetProperty(ref _busyContent, value);
+        }
+
+        public ClientBase()
+        {
+            ResetBusyIndicator();
+        }
+
+        public void ResetBusyIndicator()
+        {
+            IsBusy = false;
+            BusyContent = "Please wait...";
         }
     }
 }

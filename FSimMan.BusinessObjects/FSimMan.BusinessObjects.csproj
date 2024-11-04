@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>OliverFida.FSimMan</RootNamespace>
+    <PackageId>OliverFida.$(AssemblyName)</PackageId>
+    <Authors>Oliver Fida</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OFBaseLib\OFBaseLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="FS22\Mod\" />
+  </ItemGroup>
+
+</Project>

@@ -1,4 +1,4 @@
 ﻿namespace OliverFida.Base
 {
-    internal interface IObjectBase : IBindingObjectBase { }
+    public interface IObjectBase : INotifyPropertyChanged { }
 }

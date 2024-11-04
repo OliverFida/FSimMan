@@ -11,7 +11,84 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+    <Page Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="UI\Resources\Images\ArrowLeft.png" />
+    <None Remove="UI\Resources\Images\Check.png" />
+    <None Remove="UI\Resources\Images\Debug.png" />
+    <None Remove="UI\Resources\Images\Download.png" />
+    <None Remove="UI\Resources\Images\Error.png" />
+    <None Remove="UI\Resources\Images\FS22.png" />
+    <None Remove="UI\Resources\Images\FS25.png" />
+    <None Remove="UI\Resources\Images\Gear.png" />
+    <None Remove="UI\Resources\Images\Home.png" />
+    <None Remove="UI\Resources\Images\Info.png" />
+    <None Remove="UI\Resources\Images\Missing-Image.png" />
+    <None Remove="UI\Resources\Images\Play.png" />
+    <None Remove="UI\Resources\Images\Plus.png" />
+    <None Remove="UI\Resources\Images\Question.png" />
+    <None Remove="UI\Resources\Images\Trash.png" />
+    <None Remove="UI\Resources\Images\Warning.png" />
+    <None Remove="UI\Resources\Images\X.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BusyIndicators" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\Resources\Images\ArrowLeft.png" />
+    <Resource Include="UI\Resources\Images\Download.png" />
+    <Resource Include="UI\Resources\Images\Missing-Image.png" />
+    <Resource Include="UI\Resources\Images\Plus.png" />
+    <Resource Include="UI\Resources\Images\Question.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSimMan.BusinessObjects\FSimMan.BusinessObjects.csproj" />
+    <ProjectReference Include="..\FSimMan.Logic\FSimMan.Logic.csproj" />
     <ProjectReference Include="..\OFBaseLib\OFBaseLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\Resources\Images\Check.png" />
+    <Resource Include="UI\Resources\Images\Debug.png" />
+    <Resource Include="UI\Resources\Images\Error.png" />
+    <Resource Include="UI\Resources\Images\FS22.png" />
+    <Resource Include="UI\Resources\Images\FS25.png" />
+    <Resource Include="UI\Resources\Images\Gear.png" />
+    <Resource Include="UI\Resources\Images\Home.png" />
+    <Resource Include="UI\Resources\Images\Info.png" />
+    <Resource Include="UI\Resources\Images\Play.png" />
+    <Resource Include="UI\Resources\Images\Trash.png" />
+    <Resource Include="UI\Resources\Images\Warning.png" />
+    <Resource Include="UI\Resources\Images\X.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UI\DialogWindow\QuestionView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UI\DialogWindow\InfoView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UI\DialogWindow\WarningView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Styles\ImageButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>
