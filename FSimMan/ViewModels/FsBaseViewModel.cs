@@ -5,7 +5,6 @@ using OliverFida.FSimMan.Config;
 using OliverFida.FSimMan.ImportExport;
 using OliverFida.FSimMan.UI;
 using OliverFida.FSimMan.ViewModels.Modpack;
-using System.IO;
 
 namespace OliverFida.FSimMan.ViewModels
 {

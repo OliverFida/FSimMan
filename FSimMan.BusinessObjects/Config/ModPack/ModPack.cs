@@ -65,14 +65,24 @@ namespace OliverFida.FSimMan.Config.ModPack
             private set => SetProperty(ref _mods, value);
         }
 
+        private string _modPackDirectoryPath
+        {
+            get => Path.Combine(CurrentApplication.MODPACKS_PATH, _fsEdition.ToString(), Key.ToString());
+        }
+
         public string ModsDirectoryPath
         {
-            get => Path.Combine(CurrentApplication.MODPACKS_PATH, _fsEdition.ToString(), Key.ToString(), "mods");
+            get => Path.Combine(_modPackDirectoryPath, "mods");
         }
 
         private string _modsTempDirectoryPath
         {
-            get => Path.Combine(CurrentApplication.MODPACKS_PATH, _fsEdition.ToString(), Key.ToString(), "modsTemp");
+            get => Path.Combine(_modPackDirectoryPath, "modsTemp");
+        }
+
+        public string ModIconsDirectoryPath
+        {
+            get => Path.Combine(_modPackDirectoryPath, "modIcons");
         }
         #endregion
 
@@ -162,30 +172,45 @@ namespace OliverFida.FSimMan.Config.ModPack
 
             FileInfo fileInfo = new FileInfo(filePath);
             modDesc? modDescription;
+            string? iconFileName = null;
             using (ZipArchive archive = ZipFile.OpenRead(filePath))
             {
                 // modDesc.xml Deserialization
-                ZipArchiveEntry? entry = archive.GetEntry("modDesc.xml");
-                if (entry == null) throw new InvalidFsModFileException(fileInfo.Name);
-
-
-                using (Stream stream = entry.Open())
-                using (XmlReader reader = XmlReader.Create(stream))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(modDesc));
-                    modDescription = (modDesc?)serializer.Deserialize(reader);
+                    ZipArchiveEntry? entry = archive.GetEntry("modDesc.xml");
+                    if (entry == null) throw new InvalidFsModFileException(fileInfo.Name);
+
+                    using (Stream stream = entry.Open())
+                    using (XmlReader reader = XmlReader.Create(stream))
+                    {
+                        XmlSerializer serializer = new XmlSerializer(typeof(modDesc));
+                        modDescription = (modDesc?)serializer.Deserialize(reader);
+                    }
+                    if (modDescription == null) throw new InvalidFsModFileException(fileInfo.Name);
                 }
-                if (modDescription == null) throw new InvalidFsModFileException(fileInfo.Name);
+
+                // icon.dds
+                if (modDescription.iconFilename.EndsWith(".dds"))
+                {
+                    ZipArchiveEntry? entry = archive.GetEntry(modDescription.iconFilename);
+                    if (entry != null)
+                    {
+                        iconFileName = $"icon_{Path.GetFileNameWithoutExtension(fileInfo.FullName)}.dds";
+                        string iconFilePath = Path.Combine(ModIconsDirectoryPath, iconFileName);
+                        if (!Directory.Exists(ModIconsDirectoryPath)) Directory.CreateDirectory(ModIconsDirectoryPath);
+                        entry.ExtractToFile(iconFilePath, true);
+                    }
+                }
             }
 
             // Mod object generation
-            Mod newMod = new Mod(modDescription.title.en, fileInfo.Name)
+            Mod newMod = new Mod(this, modDescription.title.en, fileInfo.Name)
             {
                 _version = modDescription.version,
                 _author = modDescription.author,
                 _description = modDescription.description.en.Trim(),
                 _isMultiplayerCompatible = modDescription.multiplayer.supported,
-                // TODO: _imageSource = ,
+                _imageSource = iconFileName,
             };
 
             // Mod file copying

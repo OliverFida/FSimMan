@@ -1,13 +1,10 @@
 ﻿using OliverFida.FSimMan.Base;
 using OliverFida.FSimMan.Client.ModPack;
 using OliverFida.FSimMan.Config.ModPack;
-using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.Exceptions.Fs;
 using OliverFida.FSimMan.FS22;
-using OliverFida.FSimMan.FS22.Mod;
 using OliverFida.FSimMan.ImportExport;
 using System.Diagnostics;
-using System.IO.Compression;
 using System.Xml;
 using System.Xml.Serialization;
 

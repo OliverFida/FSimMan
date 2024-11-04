@@ -25,8 +25,6 @@ namespace OliverFida.FSimMan.ImportExport
         {
             get => _modPack;
         }
-
-        private string _modsDirectoryPath;
         #endregion
 
         #region Constructor & Finalizer
@@ -39,8 +37,7 @@ namespace OliverFida.FSimMan.ImportExport
             _archive = ZipFile.OpenRead(_archiveFilePath);
             ReadModPackData();
             _modPack = _modPackData!.FromData();
-            _modsDirectoryPath = _modPack.ModsDirectoryPath;
-            if (!Directory.Exists(_modsDirectoryPath)) Directory.CreateDirectory(_modsDirectoryPath);
+            if (!Directory.Exists(_modPack.ModsDirectoryPath)) Directory.CreateDirectory(_modPack.ModsDirectoryPath);
         }
 
         public FsmmpFile(string archiveFilePath, ModPack modPack)
@@ -52,7 +49,6 @@ namespace OliverFida.FSimMan.ImportExport
             _modPack = modPack;
             _modPackData = new ModPackData();
             _modPackData.ToData(_modPack);
-            _modsDirectoryPath = _modPack.ModsDirectoryPath;
             using (FileStream fileStream = File.Create(_archiveFilePath))
             {
                 _archive = new ZipArchive(fileStream, ZipArchiveMode.Create);
@@ -74,12 +70,26 @@ namespace OliverFida.FSimMan.ImportExport
         {
             foreach (Mod mod in ModPack!.Mods)
             {
-                string sourceModFilePath = $@"mods\{mod.FileName}";
-                ZipArchiveEntry? entry = _archive.GetEntry(sourceModFilePath);
-                if (entry == null) throw new InvalidFsModFileException(mod.FileName);
+                {
+                    string sourceModFilePath = $@"mods\{mod.FileName}";
+                    ZipArchiveEntry? entry = _archive.GetEntry(sourceModFilePath);
+                    if (entry == null) throw new InvalidFsModFileException(mod.FileName);
 
-                string targetModFilePath = Path.Combine(ModPack.ModsDirectoryPath, mod.FileName);
-                entry.ExtractToFile(targetModFilePath, true);
+                    string targetModFilePath = Path.Combine(_modPack!.ModsDirectoryPath, mod.FileName);
+                    entry.ExtractToFile(targetModFilePath, true);
+                }
+
+                if (!string.IsNullOrWhiteSpace(mod.ImageSource))
+                {
+                    string sourceModIconFilePath = $@"modIcons\{mod.ImageSource}";
+                    ZipArchiveEntry? entry = _archive.GetEntry(sourceModIconFilePath);
+                    if (entry != null)
+                    {
+                        string targetModIconFilePath = mod.FullImageSource!;
+                        if (!Directory.Exists(ModPack.ModIconsDirectoryPath)) Directory.CreateDirectory(ModPack.ModIconsDirectoryPath);
+                        entry.ExtractToFile(targetModIconFilePath, true);
+                    }
+                }
             }
         }
         #endregion
@@ -120,6 +130,13 @@ namespace OliverFida.FSimMan.ImportExport
                 string sourceModFilePath = Path.Combine(_modPack!.ModsDirectoryPath, mod.FileName);
                 string targetModFilePath = $@"mods\{mod.FileName}";
                 _archive.CreateEntryFromFile(sourceModFilePath, targetModFilePath);
+
+                string? sourceModIconFilePath = mod.FullImageSource;
+                if (!string.IsNullOrWhiteSpace(sourceModIconFilePath))
+                {
+                    string targetModIconFilePath = $@"modIcons\{mod.ImageSource}";
+                    _archive.CreateEntryFromFile(sourceModIconFilePath, targetModIconFilePath);
+                }
             }
         }
         #endregion

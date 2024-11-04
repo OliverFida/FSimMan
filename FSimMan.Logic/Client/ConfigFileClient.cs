@@ -1,6 +1,5 @@
 ﻿using OliverFida.Base;
 using OliverFida.FSimMan.Exceptions.Config;
-using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 

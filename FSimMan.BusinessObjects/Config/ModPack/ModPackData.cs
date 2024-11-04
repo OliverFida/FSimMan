@@ -43,7 +43,7 @@ namespace OliverFida.FSimMan.Config.ModPack
             };
             foreach (ModData mod in Mods)
             {
-                temp._mods.Add(mod.FromData());
+                temp._mods.Add(mod.FromData(temp));
             }
 
             return temp;

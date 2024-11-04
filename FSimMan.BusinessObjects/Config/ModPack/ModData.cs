@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
-    public class ModData : DataObjectBase<Mod>
+    public class ModData : ParentedDataObjectBase<Mod>
     {
         public string Title = string.Empty;
 
@@ -19,19 +19,20 @@ namespace OliverFida.FSimMan.Config.ModPack
         public bool IsMultiplayerCompatible = false;
 
         [XmlElement(IsNullable = true)]
-        public string ImageSource = string.Empty;
+        public string? ImageSource = null;
 
         [XmlElement(IsNullable = false)]
         public string FileName = string.Empty;
 
-        public override Mod FromData()
+        public override Mod FromData(object parent)
         {
-            Mod temp = new Mod(Title, FileName)
+            Mod temp = new Mod((ModPack)parent, Title, FileName)
             {
                 _version = Version,
                 _author = Author,
                 _description = Description,
-                _isMultiplayerCompatible = IsMultiplayerCompatible
+                _isMultiplayerCompatible = IsMultiplayerCompatible,
+                _imageSource = ImageSource
             };
 
             return temp;
@@ -44,6 +45,7 @@ namespace OliverFida.FSimMan.Config.ModPack
             Author = value.Author;
             Description = value.Description;
             IsMultiplayerCompatible = value.IsMultiplayerCompatible;
+            ImageSource = value.ImageSource;
             FileName = value.FileName;
         }
     }
