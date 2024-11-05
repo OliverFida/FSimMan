@@ -63,20 +63,29 @@ namespace OliverFida.FSimMan.ViewModels
 
         #region Commands
         public Command NewModPackCommand { get; }
-        private void NewModPackDelegate()
+        private async Task NewModPackDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                Config.ModPack.ModPack? modPack = Client.BeginNewModPack();
-                if (modPack == null) return;
+                try
+                {
+                    Client.IsBusy = true;
 
-                EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack, EditMode.New);
-                MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    Config.ModPack.ModPack? modPack = Client.BeginNewModPack();
+                    if (modPack == null) return;
+
+                    EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack, EditMode.New);
+                    MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                finally
+                {
+                    Client.ResetBusyIndicator();
+                }
+            });
         }
 
         public Command ImportModPackCommand { get; }
@@ -87,6 +96,7 @@ namespace OliverFida.FSimMan.ViewModels
                 try
                 {
                     Client.IsBusy = true;
+
                     OpenFileDialog fileDialog = new OpenFileDialog()
                     {
                         InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
@@ -123,6 +133,8 @@ namespace OliverFida.FSimMan.ViewModels
             {
                 try
                 {
+                    Client.IsBusy = true;
+
                     if (PlayModpackCommand.Parameter == null) return;
                     Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)PlayModpackCommand.Parameter;
 
@@ -134,75 +146,107 @@ namespace OliverFida.FSimMan.ViewModels
                 {
                     UiFunctions.ShowError(ex);
                 }
+                finally
+                {
+                    Client.ResetBusyIndicator();
+                }
             });
         }
 
         public Command EditModpackCommand { get; }
-        private void EditModpackDelegate()
+        private async Task EditModpackDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (EditModpackCommand.Parameter == null) return;
-                Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)EditModpackCommand.Parameter;
+                try
+                {
+                    Client.IsBusy = true;
 
-                EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack);
-                MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (EditModpackCommand.Parameter == null) return;
+                    Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)EditModpackCommand.Parameter;
+
+                    EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack);
+                    MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                finally
+                {
+                    Client.ResetBusyIndicator();
+                }
+            });
         }
 
         public Command ExportModpackCommand { get; }
-        private void ExportModpackDelegate()
+        private async Task ExportModpackDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (ExportModpackCommand.Parameter == null) return;
-                Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)ExportModpackCommand.Parameter;
-
-                if (!UiFunctions.ShowWarningOkCancel("FSimMan is exporting ALL you mods!\r\nPlease be aware to not act against copyright and distribution laws!\r\nFSimMan and it's developers are NOT responsible for any violations!")) return;
-
-                string fileName = $"{_client.FsEdition.ToString().ToLower()}_{modPack.Title.Replace(" ", "")}";
-                if (!string.IsNullOrWhiteSpace(modPack.Version)) fileName += $"_v{modPack.Version}";
-                fileName += ".fsmmp";
-
-                SaveFileDialog fileDialog = new SaveFileDialog()
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                    Filter = "Modpack files (*.fsmmp)|*.fsmmp",
-                    Title = "Save modpack",
-                    DefaultExt = "fsmmp",
-                    FileName = fileName
-                };
-                bool? result = fileDialog.ShowDialog();
-                if (result != true) return;
+                    Client.IsBusy = true;
 
-                Client.ExportModPack(modPack, fileDialog.FileName);
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (ExportModpackCommand.Parameter == null) return;
+                    Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)ExportModpackCommand.Parameter;
+
+                    if (!UiFunctions.ShowWarningOkCancel("FSimMan is exporting ALL you mods!\r\nPlease be aware to not act against copyright and distribution laws!\r\nFSimMan and it's developers are NOT responsible for any violations!")) return;
+
+                    string fileName = $"{_client.FsEdition.ToString().ToLower()}_{modPack.Title.Replace(" ", "")}";
+                    if (!string.IsNullOrWhiteSpace(modPack.Version)) fileName += $"_v{modPack.Version}";
+                    fileName += ".fsmmp";
+
+                    SaveFileDialog fileDialog = new SaveFileDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                        Filter = "Modpack files (*.fsmmp)|*.fsmmp",
+                        Title = "Save modpack",
+                        DefaultExt = "fsmmp",
+                        FileName = fileName
+                    };
+                    bool? result = fileDialog.ShowDialog();
+                    if (result != true) return;
+
+                    Client.BusyContent = $@"Exporting ""{modPack.Title}""...";
+                    Client.ExportModPack(modPack, fileDialog.FileName);
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                finally
+                {
+                    Client.ResetBusyIndicator();
+                }
+            });
         }
 
         public Command DeleteModpackCommand { get; }
-        private void DeleteModpackDelegate()
+        private async Task DeleteModpackDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (DeleteModpackCommand.Parameter == null) return;
-                Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)DeleteModpackCommand.Parameter;
+                try
+                {
+                    Client.IsBusy = true;
 
-                if (!UiFunctions.ShowQuestion($@"Are you sure you want to delete the modpack ""{modPack.Title}""?")) return;
+                    if (DeleteModpackCommand.Parameter == null) return;
+                    Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)DeleteModpackCommand.Parameter;
 
-                Client.DeleteModPack(modPack);
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (!UiFunctions.ShowQuestion($@"Are you sure you want to delete the modpack ""{modPack.Title}""?")) return;
+
+                    Client.DeleteModPack(modPack);
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                finally
+                {
+                    Client.ResetBusyIndicator();
+                }
+            });
         }
         #endregion
     }

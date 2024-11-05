@@ -1,5 +1,6 @@
 ﻿using OliverFida.Base;
 using OliverFida.FSimMan.ViewModels.UI.DialogWindow;
+using System.Windows;
 
 namespace OliverFida.FSimMan.UI
 {
@@ -45,30 +46,34 @@ namespace OliverFida.FSimMan.UI
 
         private static bool ShowDialogWindow(ViewModelBase viewModel, DialogWindowButtonLayout buttons, string title)
         {
-            DialogWindow window = new DialogWindow(viewModel, buttons);
-            window.Title = $"{CurrentApplication.AppTitleBase} - {title}";
-
-
             bool isNotCanceledResult = false;
-            EventHandler<DialogWindowClosedEventArgs> onCloseHandler = (object? sender, DialogWindowClosedEventArgs e) =>
+
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                switch (e.Button)
+                DialogWindow window = new DialogWindow(viewModel, buttons);
+                window.Title = $"{CurrentApplication.AppTitleBase} - {title}";
+
+
+                EventHandler<DialogWindowClosedEventArgs> onCloseHandler = (object? sender, DialogWindowClosedEventArgs e) =>
                 {
-                    case DialogWindowButton.Cancel:
-                    case DialogWindowButton.No:
-                        isNotCanceledResult = false;
-                        break;
-                    case DialogWindowButton.Ok:
-                    case DialogWindowButton.Yes:
-                        isNotCanceledResult = true;
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            };
-            window.DialogWindowClosed += onCloseHandler;
-            window.ShowDialog();
-            window.DialogWindowClosed -= onCloseHandler;
+                    switch (e.Button)
+                    {
+                        case DialogWindowButton.Cancel:
+                        case DialogWindowButton.No:
+                            isNotCanceledResult = false;
+                            break;
+                        case DialogWindowButton.Ok:
+                        case DialogWindowButton.Yes:
+                            isNotCanceledResult = true;
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                };
+                window.DialogWindowClosed += onCloseHandler;
+                window.ShowDialog();
+                window.DialogWindowClosed -= onCloseHandler;
+            });
 
             return isNotCanceledResult;
         }

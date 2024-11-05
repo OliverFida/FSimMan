@@ -55,19 +55,31 @@ namespace OliverFida.FSimMan.Client
             Initialize();
         }
 
-        private void Initialize()
+        private async Task Initialize()
         {
-            // gameSettings.xml
-            ReadGameSettings();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    IsBusy = true;
 
-            // TODO: SaveGames
-            //{                
-            //    string[] saveGamePaths = Directory.GetDirectories(CurrentApplication.AppSettings.Fs22DataPath).Where(d => d.Contains("savegame") && !d.Contains("savegameBackup")).ToArray();
-            //    _saveGames = (from p in saveGamePaths select new Fs22SaveGame(p)).ToList();
-            //}
+                    // gameSettings.xml
+                    ReadGameSettings();
 
-            // ModPacks
-            RefreshModPacks();
+                    // TODO: SaveGames
+                    //{                
+                    //    string[] saveGamePaths = Directory.GetDirectories(CurrentApplication.AppSettings.Fs22DataPath).Where(d => d.Contains("savegame") && !d.Contains("savegameBackup")).ToArray();
+                    //    _saveGames = (from p in saveGamePaths select new Fs22SaveGame(p)).ToList();
+                    //}
+
+                    // ModPacks
+                    RefreshModPacks();
+                }
+                finally
+                {
+                    ResetBusyIndicator();
+                }
+            });
         }
         #endregion
 

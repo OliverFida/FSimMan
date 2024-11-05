@@ -21,113 +21,169 @@ namespace OliverFida.FSimMan.ViewModels
             }
         }
 
-        public Command SaveSettingsCommand { get; } = new Command(SaveSettingsDelegate);
-        private static void SaveSettingsDelegate()
+        public SettingsViewModel()
         {
-            try
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            SaveSettingsCommand = new Command(this, target => ((SettingsViewModel)target).SaveSettingsDelegate());
+            SelectFs22GamePathCommand = new Command(this, target => ((SettingsViewModel)target).SelectFs22GamePathDelegate());
+            SelectFs22DataPathCommand= new Command(this, target => ((SettingsViewModel)target).SelectFs22DataPathDelegate());
+            SelectFs25GamePathCommand = new Command(this, target => ((SettingsViewModel)target).SelectFs25GamePathDelegate());
+            SelectFs25DataPathCommand= new Command(this, target => ((SettingsViewModel)target).SelectFs25DataPathDelegate());
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        }
+
+        public Command SaveSettingsCommand { get; }
+        private async Task SaveSettingsDelegate()
+        {
+            await Task.Run(() =>
             {
-                if (CurrentApplication.AppSettings == null) return;
-                AppSettingsClient.StoreSettings(CurrentApplication.AppSettings);
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                try
+                {
+                    //Client.IsBusy = true;
+
+                    if (CurrentApplication.AppSettings == null) return;
+                    AppSettingsClient.StoreSettings(CurrentApplication.AppSettings);
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                //finally
+                //{
+                //    Client.ResetBusyIndicator();
+                //}
+            });
         }
 
         #region FS22
-        public Command SelectFs22GamePathCommand { get; } = new Command(SelectFs22GamePathDelegate);
-        private static void SelectFs22GamePathDelegate()
+        public Command SelectFs22GamePathCommand { get; }
+        private async Task SelectFs22GamePathDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (CurrentApplication.AppSettings == null) return;
-
-                OpenFolderDialog dialog = new OpenFolderDialog()
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
-                    Title = "Select FS22 Installation Folder",
-                    Multiselect = false
-                };
-                if (dialog.ShowDialog() != true) return;
+                    //Client.IsBusy = true;
 
-                CurrentApplication.AppSettings.Fs22GamePath = dialog.FolderName;
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (CurrentApplication.AppSettings == null) return;
+
+                    OpenFolderDialog dialog = new OpenFolderDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                        Title = "Select FS22 Installation Folder",
+                        Multiselect = false
+                    };
+                    if (dialog.ShowDialog() != true) return;
+
+                    CurrentApplication.AppSettings.Fs22GamePath = dialog.FolderName;
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                //finally
+                //{
+                //    Client.ResetBusyIndicator();
+                //}
+            });
         }
 
-        public Command SelectFs22DataPathCommand { get; } = new Command(SelectFs22DataPathDelegate);
-        private static void SelectFs22DataPathDelegate()
+        public Command SelectFs22DataPathCommand { get; }
+        private async Task SelectFs22DataPathDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (CurrentApplication.AppSettings == null) return;
-
-                OpenFolderDialog dialog = new OpenFolderDialog()
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    Title = "Select FS22 Data Folder",
-                    Multiselect = false
-                };
-                if (dialog.ShowDialog() != true) return;
+                    //Client.IsBusy = true;
 
-                CurrentApplication.AppSettings.Fs22DataPath = dialog.FolderName;
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (CurrentApplication.AppSettings == null) return;
+
+                    OpenFolderDialog dialog = new OpenFolderDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                        Title = "Select FS22 Data Folder",
+                        Multiselect = false
+                    };
+                    if (dialog.ShowDialog() != true) return;
+
+                    CurrentApplication.AppSettings.Fs22DataPath = dialog.FolderName;
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                //finally
+                //{
+                //    Client.ResetBusyIndicator();
+                //}
+            });
         }
         #endregion
 
         #region FS25
-        public Command SelectFs25GamePathCommand { get; } = new Command(SelectFs25GamePathDelegate);
-        private static void SelectFs25GamePathDelegate()
+        public Command SelectFs25GamePathCommand { get; }
+        private async Task SelectFs25GamePathDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (CurrentApplication.AppSettings == null) return;
-
-                OpenFolderDialog dialog = new OpenFolderDialog()
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
-                    Title = "Select FS25 Installation Folder",
-                    Multiselect = false
-                };
-                if (dialog.ShowDialog() != true) return;
+                    //Client.IsBusy = true;
 
-                CurrentApplication.AppSettings.Fs25GamePath = dialog.FolderName;
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (CurrentApplication.AppSettings == null) return;
+
+                    OpenFolderDialog dialog = new OpenFolderDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                        Title = "Select FS25 Installation Folder",
+                        Multiselect = false
+                    };
+                    if (dialog.ShowDialog() != true) return;
+
+                    CurrentApplication.AppSettings.Fs25GamePath = dialog.FolderName;
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                //finally
+                //{
+                //    Client.ResetBusyIndicator();
+                //}
+            });
         }
 
-        public Command SelectFs25DataPathCommand { get; } = new Command(SelectFs25DataPathDelegate);
-        private static void SelectFs25DataPathDelegate()
+        public Command SelectFs25DataPathCommand { get; }
+        private async Task SelectFs25DataPathDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                if (CurrentApplication.AppSettings == null) return;
-
-                OpenFolderDialog dialog = new OpenFolderDialog()
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    Title = "Select FS25 Data Folder",
-                    Multiselect = false
-                };
-                if (dialog.ShowDialog() != true) return;
+                    //Client.IsBusy = true;
 
-                CurrentApplication.AppSettings.Fs25DataPath = dialog.FolderName;
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    if (CurrentApplication.AppSettings == null) return;
+
+                    OpenFolderDialog dialog = new OpenFolderDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                        Title = "Select FS25 Data Folder",
+                        Multiselect = false
+                    };
+                    if (dialog.ShowDialog() != true) return;
+
+                    CurrentApplication.AppSettings.Fs25DataPath = dialog.FolderName;
+                }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                //finally
+                //{
+                //    Client.ResetBusyIndicator();
+                //}
+            });
         }
         #endregion
     }
