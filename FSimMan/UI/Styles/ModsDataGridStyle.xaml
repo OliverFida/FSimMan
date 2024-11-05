@@ -26,26 +26,22 @@
                     <TextBlock
                         Margin="5,0,0,6"
                         VerticalAlignment="Bottom"
-                        FontFamily="Arial"
                         FontSize="12"
                         Foreground="DarkGray"
                         Text="v" />
                     <TextBlock
                         Margin="0,0,0,6"
                         VerticalAlignment="Bottom"
-                        FontFamily="Arial"
                         FontSize="12"
                         Foreground="DarkGray"
                         Text="{Binding Version}" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock
-                        FontFamily="Arial"
                         FontSize="12"
                         Foreground="DarkGray"
                         Text="by " />
                     <TextBlock
-                        FontFamily="Arial"
                         FontSize="12"
                         Foreground="DarkGray"
                         Text="{Binding Author}" />
@@ -60,7 +56,6 @@
             Width="Auto"
             MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"
             VerticalAlignment="Center"
-            FontFamily="Arial"
             FontSize="12"
             Text="{Binding Description}"
             TextWrapping="Wrap" />
