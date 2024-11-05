@@ -14,10 +14,10 @@ namespace OliverFida.FSimMan
             get => _appTitleBase;
         }
 
-        private static Version? _assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        private static Version? _assemblyVersion = Assembly.GetEntryAssembly()!.GetName().Version;
         public static string AssemblyVersionText
         {
-            get => $"v{_assemblyVersion}";
+            get => $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
         }
         public static string AppTitle
         {
