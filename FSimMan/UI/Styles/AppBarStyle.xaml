@@ -24,15 +24,20 @@
                             Grid.Column="0"
                             Margin="5,0,5,0"
                             Orientation="Horizontal">
+                            <Image
+                                Width="70"
+                                Height="70"
+                                Source="/UI/Resources/Images/Logo.png" />
                             <TextBlock
+                                Margin="5,0,0,0"
                                 VerticalAlignment="Center"
                                 FontSize="40"
                                 FontWeight="Bold"
-                                Foreground="White"
                                 Text="FSimMan" />
                             <TextBlock
                                 Margin="5,25,5,0"
                                 VerticalAlignment="Center"
+                                FontSize="12"
                                 Foreground="Gray"
                                 Text="{Binding VersionText}" />
                             <ui:ImageButton

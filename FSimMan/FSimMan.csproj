@@ -8,6 +8,10 @@
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <RootNamespace>OliverFida.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <ApplicationIcon>UI\Resources\Images\Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +32,8 @@
     <None Remove="UI\Resources\Images\Gear.png" />
     <None Remove="UI\Resources\Images\Home.png" />
     <None Remove="UI\Resources\Images\Info.png" />
+    <None Remove="UI\Resources\Images\Logo.ico" />
+    <None Remove="UI\Resources\Images\Logo.png" />
     <None Remove="UI\Resources\Images\Missing-Image.png" />
     <None Remove="UI\Resources\Images\Play.png" />
     <None Remove="UI\Resources\Images\Plus.png" />
@@ -38,12 +44,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="UI\Resources\Images\Logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BusyIndicators" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="UI\Resources\Images\ArrowLeft.png" />
     <Resource Include="UI\Resources\Images\Download.png" />
+    <Resource Include="UI\Resources\Images\Logo.ico" />
+    <Resource Include="UI\Resources\Images\Logo.png" />
     <Resource Include="UI\Resources\Images\Missing-Image.png" />
     <Resource Include="UI\Resources\Images\Plus.png" />
     <Resource Include="UI\Resources\Images\Question.png" />

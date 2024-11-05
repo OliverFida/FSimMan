@@ -33,9 +33,7 @@
             Grid.Column="2"
             Height="Auto"
             VerticalAlignment="Center"
-            FontFamily="Arial"
             FontSize="14"
-            Foreground="White"
             Text="{Binding WarningMessage}"
             TextWrapping="Wrap" />
     </Grid>

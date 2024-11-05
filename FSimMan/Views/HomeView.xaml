@@ -13,10 +13,12 @@
     mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
         <!--<StackPanel Orientation="Vertical">-->
-        <ui:Heading
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Text="Welcome!" />
+        <Grid Style="{StaticResource SectionStyle}">
+            <ui:Heading
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Text="Welcome!" />
+        </Grid>
         <!--</StackPanel>-->
     </ScrollViewer>
 </UserControl>
