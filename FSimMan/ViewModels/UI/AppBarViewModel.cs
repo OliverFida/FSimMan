@@ -87,12 +87,13 @@ namespace OliverFida.FSimMan.ViewModels.UI
         private static void DebugDelegate()
         {
 #if DEBUG
-            UiFunctions.ShowError("Test Error");
-            UiFunctions.ShowWarningOk("Test Warning");
-            UiFunctions.ShowWarningOkCancel("Test Warning");
-            UiFunctions.ShowInfoOk("Test Info");
-            UiFunctions.ShowInfoOkCancel("Test Info");
-            UiFunctions.ShowQuestion("Test Question");
+            string message = "Das ist ein wundervoller Text, der sicher nicht über das Maximum des DialogWindows hinüberragt.\r\n\r\nWirklich ein toller Text.\r\nKaum zu glauben.\r\nEin echtes Meisterwerk!";
+            UiFunctions.ShowError(message);
+            UiFunctions.ShowWarningOk(message);
+            UiFunctions.ShowWarningOkCancel(message);
+            UiFunctions.ShowInfoOk(message);
+            UiFunctions.ShowInfoOkCancel(message);
+            UiFunctions.ShowQuestion(message);
 #endif
         }
 
