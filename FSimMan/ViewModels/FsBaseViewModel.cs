@@ -5,6 +5,7 @@ using OliverFida.FSimMan.Config;
 using OliverFida.FSimMan.ImportExport;
 using OliverFida.FSimMan.UI;
 using OliverFida.FSimMan.ViewModels.Modpack;
+using System.IO;
 
 namespace OliverFida.FSimMan.ViewModels
 {
@@ -79,31 +80,40 @@ namespace OliverFida.FSimMan.ViewModels
         }
 
         public Command ImportModPackCommand { get; }
-        private void ImportModPackDelegate()
+        private async Task ImportModPackDelegate()
         {
-            try
+            await Task.Run(() =>
             {
-                OpenFileDialog fileDialog = new OpenFileDialog()
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                    Filter = "Modpack files (*.fsmmp)|*.fsmmp",
-                    Title = "Select modpack to import",
-                    DefaultExt = "fsmmp"
-                };
-                bool? result = fileDialog.ShowDialog();
-                if (result != true) return;
+                    Client.IsBusy = true;
+                    OpenFileDialog fileDialog = new OpenFileDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                        Filter = "Modpack files (*.fsmmp)|*.fsmmp",
+                        Title = "Select modpack to import",
+                        DefaultExt = "fsmmp"
+                    };
+                    bool? result = fileDialog.ShowDialog();
+                    if (result != true) return;
 
-                using (FsmmpFile fsmmpFile = new FsmmpFile(fileDialog.FileName))
-                {
-                    bool alreadyExists = Client.ImportCheckModPackExists(fsmmpFile);
-                    if (alreadyExists && !UiFunctions.ShowQuestion("A modpack with the same key already exists!\r\nWould you like to overwrite?")) return;
-                    Client.ImportModPack(fsmmpFile, alreadyExists);
+                    Client.BusyContent = $@"Importing ""{Path.GetFileName(fileDialog.FileName)}""...";
+                    using (FsmmpFile fsmmpFile = new FsmmpFile(fileDialog.FileName))
+                    {
+                        bool alreadyExists = Client.ImportCheckModPackExists(fsmmpFile);
+                        if (alreadyExists && !UiFunctions.ShowQuestion("A modpack with the same key already exists!\r\nWould you like to overwrite?")) return;
+                        Client.ImportModPack(fsmmpFile, alreadyExists);
+                    }
                 }
-            }
-            catch (OFException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                catch (OFException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+                finally
+                {
+                    Client.ResetBusyIndicator();
+                }
+            });
         }
 
         public Command PlayModpackCommand { get; }
