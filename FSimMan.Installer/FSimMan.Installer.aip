@@ -32,30 +32,46 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.SideBySideGuidComponent">
     <ROW Component="APPDIR" Value="{DA2088F1-A74E-47E8-BE1C-0074FCFA8BD7}"/>
-    <ROW Component="BusyIndicator.dll"/>
-    <ROW Component="FSimMan.BusinessObjects.dll"/>
-    <ROW Component="FSimMan.Logic.dll"/>
+    <ROW Component="BusyIndicator.dll" Value="{81C3A79A-6537-4E50-AE73-82625037BD76}"/>
+    <ROW Component="FSimMan.BusinessObjects.dll" Value="{197DA30D-2A3B-4A17-80F8-D9E8A64E470D}"/>
+    <ROW Component="FSimMan.Logic.dll" Value="{C43CE735-8551-4E88-BB04-DCF2584034C1}"/>
     <ROW Component="FSimMan.deps.json"/>
-    <ROW Component="FSimMan.dll"/>
+    <ROW Component="FSimMan.dll" Value="{008CD25E-5231-419C-9D08-9D3B79543B47}"/>
     <ROW Component="FSimMan.exe" Value="{9FEE62CD-B804-4E93-9244-4A35E35F7279}"/>
-    <ROW Component="Microsoft.Windows.SDK.NET.dll"/>
-    <ROW Component="OFBaseLib.dll"/>
+    <ROW Component="Microsoft.Windows.SDK.NET.dll" Value="{ADEBCECD-8228-469D-AE3B-86003D1E0E10}"/>
+    <ROW Component="OFBaseLib.dll" Value="{B949E60D-EDE9-4966-BD58-63A299746A8B}"/>
     <ROW Component="ProductInformation" Value="{80375C15-3DDC-49B0-B41E-71393905B7D9}"/>
     <ROW Component="SHORTCUTDIR" Value="{5253215A-951C-4138-90FB-C22B762CD37A}"/>
-    <ROW Component="WinRT.Runtime.dll"/>
+    <ROW Component="WinRT.Runtime.dll" Value="{E59D9EFB-7886-4CE8-A9B2-C32071907F3C}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="APPDIR" ComponentId="{DA2088F1-A74E-47E8-BE1C-0074FCFA8BD7}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="BusyIndicator.dll" ComponentId="{81C3A79A-6537-4E50-AE73-82625037BD76}" Directory_="APPDIR" Attributes="0" KeyPath="BusyIndicator.dll"/>
+    <ROW Component="FSimMan.BusinessObjects.dll" ComponentId="{197DA30D-2A3B-4A17-80F8-D9E8A64E470D}" Directory_="APPDIR" Attributes="0" KeyPath="FSimMan.BusinessObjects.dll"/>
+    <ROW Component="FSimMan.Logic.dll" ComponentId="{C43CE735-8551-4E88-BB04-DCF2584034C1}" Directory_="APPDIR" Attributes="0" KeyPath="FSimMan.Logic.dll"/>
+    <ROW Component="FSimMan.dll" ComponentId="{008CD25E-5231-419C-9D08-9D3B79543B47}" Directory_="APPDIR" Attributes="0" KeyPath="FSimMan.dll"/>
     <ROW Component="FSimMan.exe" ComponentId="{9FEE62CD-B804-4E93-9244-4A35E35F7279}" Directory_="APPDIR" Attributes="256" KeyPath="FSimMan.exe"/>
+    <ROW Component="FSimMan.runtimeconfig.json" ComponentId="{1D14C5C2-84B7-473D-BCD7-E235BD1CC612}" Directory_="APPDIR" Attributes="0" KeyPath="FSimMan.runtimeconfig.json" Type="0"/>
+    <ROW Component="Microsoft.Windows.SDK.NET.dll" ComponentId="{ADEBCECD-8228-469D-AE3B-86003D1E0E10}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Windows.SDK.NET.dll"/>
+    <ROW Component="OFBaseLib.dll" ComponentId="{B949E60D-EDE9-4966-BD58-63A299746A8B}" Directory_="APPDIR" Attributes="0" KeyPath="OFBaseLib.dll"/>
     <ROW Component="ProductInformation" ComponentId="{80375C15-3DDC-49B0-B41E-71393905B7D9}" Directory_="APPDIR" Attributes="260" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{5253215A-951C-4138-90FB-C22B762CD37A}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="WinRT.Runtime.dll" ComponentId="{E59D9EFB-7886-4CE8-A9B2-C32071907F3C}" Directory_="APPDIR" Attributes="0" KeyPath="WinRT.Runtime.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="FSimMan.exe" Component_="FSimMan.exe" FileName="FSimMan.exe" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\win-x64\FSimMan.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="FSimMan.exe" Component_="FSimMan.exe" FileName="FSimMan.exe" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\FSimMan.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="BusyIndicator.dll" Component_="BusyIndicator.dll" FileName="BUSYIN~1.DLL|BusyIndicator.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\BusyIndicator.dll" SelfReg="false"/>
+    <ROW File="FSimMan.BusinessObjects.dll" Component_="FSimMan.BusinessObjects.dll" FileName="FSIMMA~1.DLL|FSimMan.BusinessObjects.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\FSimMan.BusinessObjects.dll" SelfReg="false"/>
+    <ROW File="FSimMan.dll" Component_="FSimMan.dll" FileName="FSimMan.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\FSimMan.dll" SelfReg="false"/>
+    <ROW File="FSimMan.Logic.dll" Component_="FSimMan.Logic.dll" FileName="FSIMMA~2.DLL|FSimMan.Logic.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\FSimMan.Logic.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Windows.SDK.NET.dll" Component_="Microsoft.Windows.SDK.NET.dll" FileName="MICROS~1.DLL|Microsoft.Windows.SDK.NET.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\Microsoft.Windows.SDK.NET.dll" SelfReg="false"/>
+    <ROW File="OFBaseLib.dll" Component_="OFBaseLib.dll" FileName="OFBASE~1.DLL|OFBaseLib.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\OFBaseLib.dll" SelfReg="false"/>
+    <ROW File="WinRT.Runtime.dll" Component_="WinRT.Runtime.dll" FileName="WINRTR~1.DLL|WinRT.Runtime.dll" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\WinRT.Runtime.dll" SelfReg="false"/>
+    <ROW File="FSimMan.runtimeconfig.json" Component_="FSimMan.runtimeconfig.json" FileName="FSIMMA~1.JSO|FSimMan.runtimeconfig.json" Attributes="0" SourcePath="..\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\FSimMan.runtimeconfig.json" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.custcomp.MsiShortcutPropertyComponent">
     <ROW MsiShortcutProperty="FSimMan0" Shortcut_="FSimMan" PropertyKey="System.AppUserModel.PreventPinning" PropVariantValue="1"/>
@@ -133,6 +149,14 @@
     <ROW Feature_="MainFeature" Component_="ProductInformation"/>
     <ROW Feature_="MainFeature" Component_="FSimMan.exe"/>
     <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
+    <ROW Feature_="MainFeature" Component_="BusyIndicator.dll"/>
+    <ROW Feature_="MainFeature" Component_="FSimMan.BusinessObjects.dll"/>
+    <ROW Feature_="MainFeature" Component_="FSimMan.dll"/>
+    <ROW Feature_="MainFeature" Component_="FSimMan.Logic.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Windows.SDK.NET.dll"/>
+    <ROW Feature_="MainFeature" Component_="OFBaseLib.dll"/>
+    <ROW Feature_="MainFeature" Component_="WinRT.Runtime.dll"/>
+    <ROW Feature_="MainFeature" Component_="FSimMan.runtimeconfig.json"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="Logo.exe" SourcePath="..\FSimMan\UI\Resources\Images\Logo.ico" Index="0"/>
