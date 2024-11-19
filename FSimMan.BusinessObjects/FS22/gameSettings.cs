@@ -29,11 +29,11 @@ namespace OliverFida.FSimMan.FS22
 
         private gameSettingsModsDirectoryOverride modsDirectoryOverrideField;
 
-        private ushort defaultMultiplayerPortField;
+        private short defaultMultiplayerPortField;
 
-        private byte motorStopTimerDurationField;
+        private sbyte motorStopTimerDurationField;
 
-        private ushort horseAbandonTimerDurationField;
+        private short horseAbandonTimerDurationField;
 
         private bool invertYLookField;
 
@@ -53,7 +53,7 @@ namespace OliverFida.FSimMan.FS22
 
         private decimal steeringSensitivityField;
 
-        private byte inputHelpModeField;
+        private sbyte inputHelpModeField;
 
         private bool easyArmControlField;
 
@@ -63,7 +63,7 @@ namespace OliverFida.FSimMan.FS22
 
         private bool cameraTiltingField;
 
-        private byte frameLimitField;
+        private sbyte frameLimitField;
 
         private bool showAllModsField;
 
@@ -71,7 +71,7 @@ namespace OliverFida.FSimMan.FS22
 
         private gameSettingsPlayer playerField;
 
-        private byte mpLanguageField;
+        private sbyte mpLanguageField;
 
         private gameSettingsVolume volumeField;
 
@@ -105,15 +105,15 @@ namespace OliverFida.FSimMan.FS22
 
         private bool useWorldCameraField;
 
-        private byte ingameMapStateField;
+        private sbyte ingameMapStateField;
 
-        private byte ingameMapFiltersField;
+        private sbyte ingameMapFiltersField;
 
-        private byte directionChangeModeField;
+        private sbyte directionChangeModeField;
 
-        private byte gearShiftModeField;
+        private sbyte gearShiftModeField;
 
-        private byte hudSpeedGaugeField;
+        private sbyte hudSpeedGaugeField;
 
         private bool woodHarvesterAutoCutField;
 
@@ -121,17 +121,17 @@ namespace OliverFida.FSimMan.FS22
 
         private bool showMultiplayerNamesField;
 
-        private ushort ingameMapGrowthFilterField;
+        private short ingameMapGrowthFilterField;
 
-        private byte ingameMapSoilFilterField;
+        private sbyte ingameMapSoilFilterField;
 
         private object ingameMapFruitFilterField;
 
         private bool useColorblindModeField;
 
-        private byte maxNumMirrorsField;
+        private sbyte maxNumMirrorsField;
 
-        private byte lightsProfileField;
+        private sbyte lightsProfileField;
 
         private decimal fovYField;
 
@@ -151,7 +151,7 @@ namespace OliverFida.FSimMan.FS22
 
         private gameSettingsCreateGame createGameField;
 
-        private byte revisionField;
+        private sbyte revisionField;
 
         /// <remarks/>
         public gameSettingsModsDirectoryOverride modsDirectoryOverride
@@ -167,7 +167,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public ushort defaultMultiplayerPort
+        public short defaultMultiplayerPort
         {
             get
             {
@@ -180,7 +180,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte motorStopTimerDuration
+        public sbyte motorStopTimerDuration
         {
             get
             {
@@ -193,7 +193,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public ushort horseAbandonTimerDuration
+        public short horseAbandonTimerDuration
         {
             get
             {
@@ -323,7 +323,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte inputHelpMode
+        public sbyte inputHelpMode
         {
             get
             {
@@ -388,7 +388,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte frameLimit
+        public sbyte frameLimit
         {
             get
             {
@@ -440,7 +440,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte mpLanguage
+        public sbyte mpLanguage
         {
             get
             {
@@ -661,7 +661,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte ingameMapState
+        public sbyte ingameMapState
         {
             get
             {
@@ -674,7 +674,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte ingameMapFilters
+        public sbyte ingameMapFilters
         {
             get
             {
@@ -687,7 +687,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte directionChangeMode
+        public sbyte directionChangeMode
         {
             get
             {
@@ -700,7 +700,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte gearShiftMode
+        public sbyte gearShiftMode
         {
             get
             {
@@ -713,7 +713,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte hudSpeedGauge
+        public sbyte hudSpeedGauge
         {
             get
             {
@@ -765,7 +765,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public ushort ingameMapGrowthFilter
+        public short ingameMapGrowthFilter
         {
             get
             {
@@ -778,7 +778,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte ingameMapSoilFilter
+        public sbyte ingameMapSoilFilter
         {
             get
             {
@@ -817,7 +817,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte maxNumMirrors
+        public sbyte maxNumMirrors
         {
             get
             {
@@ -830,7 +830,7 @@ namespace OliverFida.FSimMan.FS22
         }
 
         /// <remarks/>
-        public byte lightsProfile
+        public sbyte lightsProfile
         {
             get
             {
@@ -961,7 +961,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte revision
+        public sbyte revision
         {
             get
             {
@@ -1192,13 +1192,13 @@ namespace OliverFida.FSimMan.FS22
     public partial class gameSettingsVoice
     {
 
-        private byte modeField;
+        private sbyte modeField;
 
-        private byte inputSensitivityField;
+        private sbyte inputSensitivityField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte mode
+        public sbyte mode
         {
             get
             {
@@ -1212,7 +1212,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte inputSensitivity
+        public sbyte inputSensitivity
         {
             get
             {
@@ -1234,7 +1234,7 @@ namespace OliverFida.FSimMan.FS22
     public partial class gameSettingsUnits
     {
 
-        private byte moneyField;
+        private sbyte moneyField;
 
         private bool milesField;
 
@@ -1243,7 +1243,7 @@ namespace OliverFida.FSimMan.FS22
         private bool acreField;
 
         /// <remarks/>
-        public byte money
+        public sbyte money
         {
             get
             {
@@ -1400,39 +1400,39 @@ namespace OliverFida.FSimMan.FS22
 
         private string beardConfigIdField;
 
-        private byte beardConfigColorField;
+        private sbyte beardConfigColorField;
 
         private string bottomConfigIdField;
 
-        private byte bottomConfigColorField;
+        private sbyte bottomConfigColorField;
 
         private string faceConfigIdField;
 
-        private byte faceConfigColorField;
+        private sbyte faceConfigColorField;
 
         private string footwearConfigIdField;
 
-        private byte footwearConfigColorField;
+        private sbyte footwearConfigColorField;
 
         private string glassesConfigIdField;
 
-        private byte glassesConfigColorField;
+        private sbyte glassesConfigColorField;
 
         private string hairStyleConfigIdField;
 
-        private byte hairStyleConfigColorField;
+        private sbyte hairStyleConfigColorField;
 
         private string headgearConfigIdField;
 
-        private byte headgearConfigColorField;
+        private sbyte headgearConfigColorField;
 
         private string mustacheConfigIdField;
 
-        private byte mustacheConfigColorField;
+        private sbyte mustacheConfigColorField;
 
         private string topConfigIdField;
 
-        private byte topConfigColorField;
+        private sbyte topConfigColorField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1464,7 +1464,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte beardConfigColor
+        public sbyte beardConfigColor
         {
             get
             {
@@ -1492,7 +1492,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte bottomConfigColor
+        public sbyte bottomConfigColor
         {
             get
             {
@@ -1520,7 +1520,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte faceConfigColor
+        public sbyte faceConfigColor
         {
             get
             {
@@ -1548,7 +1548,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte footwearConfigColor
+        public sbyte footwearConfigColor
         {
             get
             {
@@ -1576,7 +1576,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte glassesConfigColor
+        public sbyte glassesConfigColor
         {
             get
             {
@@ -1604,7 +1604,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte hairStyleConfigColor
+        public sbyte hairStyleConfigColor
         {
             get
             {
@@ -1632,7 +1632,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte headgearConfigColor
+        public sbyte headgearConfigColor
         {
             get
             {
@@ -1660,7 +1660,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte mustacheConfigColor
+        public sbyte mustacheConfigColor
         {
             get
             {
@@ -1688,7 +1688,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte topConfigColor
+        public sbyte topConfigColor
         {
             get
             {
@@ -1710,11 +1710,11 @@ namespace OliverFida.FSimMan.FS22
     public partial class gameSettingsLastCreatedLicensePlate
     {
 
-        private byte variationField;
+        private sbyte variationField;
 
-        private byte colorField;
+        private sbyte colorField;
 
-        private byte placementField;
+        private sbyte placementField;
 
         private string charactersField;
 
@@ -1722,7 +1722,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte variation
+        public sbyte variation
         {
             get
             {
@@ -1736,7 +1736,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte color
+        public sbyte color
         {
             get
             {
@@ -1750,7 +1750,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte placement
+        public sbyte placement
         {
             get
             {
@@ -1804,7 +1804,7 @@ namespace OliverFida.FSimMan.FS22
 
         private string nameField;
 
-        private ushort portField;
+        private short portField;
 
         private bool useUpnpField;
 
@@ -1814,9 +1814,9 @@ namespace OliverFida.FSimMan.FS22
 
         private bool allowCrossPlayField;
 
-        private byte capacityField;
+        private sbyte capacityField;
 
-        private byte bandwidthField;
+        private sbyte bandwidthField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1848,7 +1848,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ushort port
+        public short port
         {
             get
             {
@@ -1918,7 +1918,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte capacity
+        public sbyte capacity
         {
             get
             {
@@ -1932,7 +1932,7 @@ namespace OliverFida.FSimMan.FS22
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte bandwidth
+        public sbyte bandwidth
         {
             get
             {

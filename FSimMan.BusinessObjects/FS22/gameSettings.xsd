@@ -9,9 +9,9 @@
 						<xs:attribute name="directory" type="xs:string" use="required" />
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="defaultMultiplayerPort" type="xs:unsignedShort" />
-				<xs:element name="motorStopTimerDuration" type="xs:unsignedByte" />
-				<xs:element name="horseAbandonTimerDuration" type="xs:unsignedShort" />
+				<xs:element name="defaultMultiplayerPort" type="xs:short" />
+				<xs:element name="motorStopTimerDuration" type="xs:byte" />
+				<xs:element name="horseAbandonTimerDuration" type="xs:short" />
 				<xs:element name="invertYLook" type="xs:boolean" />
 				<xs:element name="isHeadTrackingEnabled" type="xs:boolean" />
 				<xs:element name="forceFeedback" type="xs:decimal" />
@@ -21,12 +21,12 @@
 				<xs:element name="realBeaconLightBrightness" type="xs:decimal" />
 				<xs:element name="steeringBackSpeed" type="xs:decimal" />
 				<xs:element name="steeringSensitivity" type="xs:decimal" />
-				<xs:element name="inputHelpMode" type="xs:unsignedByte" />
+				<xs:element name="inputHelpMode" type="xs:byte" />
 				<xs:element name="easyArmControl" type="xs:boolean" />
 				<xs:element name="gyroscopeSteering" type="xs:boolean" />
 				<xs:element name="hints" type="xs:boolean" />
 				<xs:element name="cameraTilting" type="xs:boolean" />
-				<xs:element name="frameLimit" type="xs:unsignedByte" />
+				<xs:element name="frameLimit" type="xs:byte" />
 				<xs:element name="showAllMods" type="xs:boolean" />
 				<xs:element name="onlinePresenceName" type="xs:string" />
 				<xs:element name="player">
@@ -34,7 +34,7 @@
 						<xs:attribute name="lastPlayerStyleMale" type="xs:boolean" use="required" />
 					</xs:complexType>
 				</xs:element>
-				<xs:element name="mpLanguage" type="xs:unsignedByte" />
+				<xs:element name="mpLanguage" type="xs:byte" />
 				<xs:element name="volume">
 					<xs:complexType>
 						<xs:sequence>
@@ -57,14 +57,14 @@
 				<xs:element name="radioVehicleOnly" type="xs:boolean" />
 				<xs:element name="voice">
 					<xs:complexType>
-						<xs:attribute name="mode" type="xs:unsignedByte" use="required" />
-						<xs:attribute name="inputSensitivity" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="mode" type="xs:byte" use="required" />
+						<xs:attribute name="inputSensitivity" type="xs:byte" use="required" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="units">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="money" type="xs:unsignedByte" />
+							<xs:element name="money" type="xs:byte" />
 							<xs:element name="miles" type="xs:boolean" />
 							<xs:element name="fahrenheit" type="xs:boolean" />
 							<xs:element name="acre" type="xs:boolean" />
@@ -81,20 +81,20 @@
 				<xs:element name="activeSuspensionCamera" type="xs:boolean" />
 				<xs:element name="cameraCheckCollision" type="xs:boolean" />
 				<xs:element name="useWorldCamera" type="xs:boolean" />
-				<xs:element name="ingameMapState" type="xs:unsignedByte" />
-				<xs:element name="ingameMapFilters" type="xs:unsignedByte" />
-				<xs:element name="directionChangeMode" type="xs:unsignedByte" />
-				<xs:element name="gearShiftMode" type="xs:unsignedByte" />
-				<xs:element name="hudSpeedGauge" type="xs:unsignedByte" />
+				<xs:element name="ingameMapState" type="xs:byte" />
+				<xs:element name="ingameMapFilters" type="xs:byte" />
+				<xs:element name="directionChangeMode" type="xs:byte" />
+				<xs:element name="gearShiftMode" type="xs:byte" />
+				<xs:element name="hudSpeedGauge" type="xs:byte" />
 				<xs:element name="woodHarvesterAutoCut" type="xs:boolean" />
 				<xs:element name="shownFreemodeWarning" type="xs:boolean" />
 				<xs:element name="showMultiplayerNames" type="xs:boolean" />
-				<xs:element name="ingameMapGrowthFilter" type="xs:unsignedShort" />
-				<xs:element name="ingameMapSoilFilter" type="xs:unsignedByte" />
+				<xs:element name="ingameMapGrowthFilter" type="xs:short" />
+				<xs:element name="ingameMapSoilFilter" type="xs:byte" />
 				<xs:element name="ingameMapFruitFilter" />
 				<xs:element name="useColorblindMode" type="xs:boolean" />
-				<xs:element name="maxNumMirrors" type="xs:unsignedByte" />
-				<xs:element name="lightsProfile" type="xs:unsignedByte" />
+				<xs:element name="maxNumMirrors" type="xs:byte" />
+				<xs:element name="lightsProfile" type="xs:byte" />
 				<xs:element name="fovY" type="xs:decimal" />
 				<xs:element name="uiScale" type="xs:decimal" />
 				<xs:element name="realBeaconLights" type="xs:boolean" />
@@ -121,30 +121,30 @@
 					<xs:complexType>
 						<xs:attribute name="filename" type="xs:string" use="required" />
 						<xs:attribute name="beardConfigId" type="xs:string" use="required" />
-						<xs:attribute name="beardConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="beardConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="bottomConfigId" type="xs:string" use="required" />
-						<xs:attribute name="bottomConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="bottomConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="faceConfigId" type="xs:string" use="required" />
-						<xs:attribute name="faceConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="faceConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="footwearConfigId" type="xs:string" use="required" />
-						<xs:attribute name="footwearConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="footwearConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="glassesConfigId" type="xs:string" use="required" />
-						<xs:attribute name="glassesConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="glassesConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="hairStyleConfigId" type="xs:string" use="required" />
-						<xs:attribute name="hairStyleConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="hairStyleConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="headgearConfigId" type="xs:string" use="required" />
-						<xs:attribute name="headgearConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="headgearConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="mustacheConfigId" type="xs:string" use="required" />
-						<xs:attribute name="mustacheConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="mustacheConfigColor" type="xs:byte" use="required" />
 						<xs:attribute name="topConfigId" type="xs:string" use="required" />
-						<xs:attribute name="topConfigColor" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="topConfigColor" type="xs:byte" use="required" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="lastCreatedLicensePlate">
 					<xs:complexType>
-						<xs:attribute name="variation" type="xs:unsignedByte" use="required" />
-						<xs:attribute name="color" type="xs:unsignedByte" use="required" />
-						<xs:attribute name="placement" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="variation" type="xs:byte" use="required" />
+						<xs:attribute name="color" type="xs:byte" use="required" />
+						<xs:attribute name="placement" type="xs:byte" use="required" />
 						<xs:attribute name="characters" type="xs:string" use="required" />
 						<xs:attribute name="configuration" type="xs:string" use="required" />
 					</xs:complexType>
@@ -154,17 +154,17 @@
 					<xs:complexType>
 						<xs:attribute name="password" type="xs:string" use="required" />
 						<xs:attribute name="name" type="xs:string" use="required" />
-						<xs:attribute name="port" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="port" type="xs:short" use="required" />
 						<xs:attribute name="useUpnp" type="xs:boolean" use="required" />
 						<xs:attribute name="autoAccept" type="xs:boolean" use="required" />
 						<xs:attribute name="allowOnlyFriends" type="xs:boolean" use="required" />
 						<xs:attribute name="allowCrossPlay" type="xs:boolean" use="required" />
-						<xs:attribute name="capacity" type="xs:unsignedByte" use="required" />
-						<xs:attribute name="bandwidth" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="capacity" type="xs:byte" use="required" />
+						<xs:attribute name="bandwidth" type="xs:byte" use="required" />
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="revision" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="revision" type="xs:byte" use="required" />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
