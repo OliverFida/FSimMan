@@ -30,6 +30,7 @@
     <None Remove="UI\Resources\Images\FS22.png" />
     <None Remove="UI\Resources\Images\FS25.png" />
     <None Remove="UI\Resources\Images\Gear.png" />
+    <None Remove="UI\Resources\Images\GitHub.png" />
     <None Remove="UI\Resources\Images\Home.png" />
     <None Remove="UI\Resources\Images\Info.png" />
     <None Remove="UI\Resources\Images\Logo.ico" />
@@ -38,6 +39,7 @@
     <None Remove="UI\Resources\Images\Play.png" />
     <None Remove="UI\Resources\Images\Plus.png" />
     <None Remove="UI\Resources\Images\Question.png" />
+    <None Remove="UI\Resources\Images\QuestionCircle.png" />
     <None Remove="UI\Resources\Images\Trash.png" />
     <None Remove="UI\Resources\Images\Warning.png" />
     <None Remove="UI\Resources\Images\X.png" />
@@ -54,11 +56,13 @@
   <ItemGroup>
     <Resource Include="UI\Resources\Images\ArrowLeft.png" />
     <Resource Include="UI\Resources\Images\Download.png" />
+    <Resource Include="UI\Resources\Images\GitHub.png" />
     <Resource Include="UI\Resources\Images\Logo.ico" />
     <Resource Include="UI\Resources\Images\Logo.png" />
     <Resource Include="UI\Resources\Images\Missing-Image.png" />
     <Resource Include="UI\Resources\Images\Plus.png" />
     <Resource Include="UI\Resources\Images\Question.png" />
+    <Resource Include="UI\Resources\Images\QuestionCircle.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +88,9 @@
 
   <ItemGroup>
     <Compile Update="Views\HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AboutView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\UI\DialogWindow\QuestionView.xaml.cs">

@@ -35,6 +35,21 @@ namespace OliverFida.FSimMan.ViewModels
             }
         }
 
+        private static AboutViewModel? _aboutViewModel;
+        public Command ShowAboutCommand { get; } = new Command(ShowAboutDelegate);
+        private static void ShowAboutDelegate()
+        {
+            try
+            {
+                _aboutViewModel = new AboutViewModel();
+                MainWindow.ViewModelSelector.SetActiveViewModel(_aboutViewModel);
+            }
+            catch (OFException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
         #region FS22
         public Command SelectFs22GamePathCommand { get; } = new Command(SelectFs22GamePathDelegate);
         private static void SelectFs22GamePathDelegate()

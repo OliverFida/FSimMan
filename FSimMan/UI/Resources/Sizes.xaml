@@ -5,5 +5,6 @@
     <core:Double x:Key="InputHeight">30</core:Double>
 
     <core:Double x:Key="TextFontSize">16</core:Double>
+    <core:Double x:Key="InputGroupFontSize">22</core:Double>
     <core:Double x:Key="SectionHeadingFontSize">26</core:Double>
 </ResourceDictionary>

@@ -16,7 +16,7 @@
         x:Key="InputGroupHeadingStyle"
         BasedOn="{StaticResource HeadingBaseStyle}"
         TargetType="{x:Type ui:Heading}">
-        <Setter Property="FontSize" Value="{StaticResource TextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource InputGroupFontSize}" />
         <Setter Property="Padding" Value="0" />
     </Style>
 </ResourceDictionary>
