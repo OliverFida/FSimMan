@@ -2,7 +2,6 @@
 using OliverFida.FSimMan.Client.ModPack;
 using OliverFida.FSimMan.Config.ModPack;
 using OliverFida.FSimMan.Exceptions.Fs;
-using OliverFida.FSimMan.FS22;
 using OliverFida.FSimMan.ImportExport;
 using System.Diagnostics;
 using System.Xml;
@@ -62,7 +61,7 @@ namespace OliverFida.FSimMan.Client
             // gameSettings.xml
             ReadGameSettings();
 
-            // TODO: SaveGames
+            // OFDO: SaveGames
             //{                
             //    string[] saveGamePaths = Directory.GetDirectories(CurrentApplication.AppSettings.Fs22DataPath).Where(d => d.Contains("savegame") && !d.Contains("savegameBackup")).ToArray();
             //    _saveGames = (from p in saveGamePaths select new Fs22SaveGame(p)).ToList();

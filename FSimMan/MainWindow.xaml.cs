@@ -2,6 +2,7 @@
 using OliverFida.FSimMan.Client;
 using OliverFida.FSimMan.UI;
 using OliverFida.FSimMan.ViewModels;
+using System.Windows;
 
 namespace OliverFida.FSimMan
 {
@@ -12,6 +13,7 @@ namespace OliverFida.FSimMan
             InitializeComponent();
             try
             {
+                Task.Run(InitializeAsync);
                 CurrentApplication.Initialize(AppSettingsClient.GetSettings());
             }
             catch (Exception ex)
@@ -20,6 +22,28 @@ namespace OliverFida.FSimMan
             }
 
             ViewModelSelector.SetActiveViewModel(HomeViewModel);
+        }
+
+        private async Task InitializeAsync()
+        {
+#if !DEBUG
+            await Application.Current.Dispatcher.BeginInvoke(AutoUpdateAsync);
+#endif
+        }
+
+        private async Task AutoUpdateAsync()
+        {
+            UpdateClient updateClient = UpdateClient.Instance;
+            bool isUpdateAvailable = await updateClient.GetUpdateAvailableAsync();
+
+            if (!isUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
+
+            if (!await updateClient.TryExecuteUpdateAsync())
+            {
+                UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
+                return;
+            }
+            Application.Current.Shutdown(0);
         }
 
         public static string AppTitle

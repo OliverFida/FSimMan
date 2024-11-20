@@ -15,6 +15,10 @@ namespace OliverFida.FSimMan
         }
 
         private static Version? _assemblyVersion = Assembly.GetEntryAssembly()!.GetName().Version;
+        public static Version? AssemblyVersion
+        {
+            get => _assemblyVersion;
+        }
         public static string AssemblyVersionText
         {
             get => $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
