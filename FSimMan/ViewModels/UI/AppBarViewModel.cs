@@ -21,29 +21,6 @@ namespace OliverFida.FSimMan.ViewModels.UI
             get => CurrentApplication.AssemblyVersionText;
         }
 
-
-        private static Fs22ViewModel? _fs22ViewModel;
-        private static Fs22ViewModel Fs22ViewModel
-        {
-            get
-            {
-                if (_fs22ViewModel != null) _fs22ViewModel.Client.RefreshModPacks();
-                if (_fs22ViewModel == null) _fs22ViewModel = new Fs22ViewModel();
-                return _fs22ViewModel;
-            }
-        }
-
-        private static Fs25ViewModel? _fs25ViewModel;
-        private static Fs25ViewModel Fs25ViewModel
-        {
-            get
-            {
-                if (_fs25ViewModel != null) _fs25ViewModel.Client.RefreshModPacks();
-                if (_fs25ViewModel == null) _fs25ViewModel = new Fs25ViewModel();
-                return _fs25ViewModel;
-            }
-        }
-
         public bool IsAppBarEnabled
         {
             get
@@ -120,6 +97,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
             }
         }
 
+        private static Fs22ViewModel? _fs22ViewModel;
         public bool IsFs22Selected
         {
             get
@@ -135,7 +113,8 @@ namespace OliverFida.FSimMan.ViewModels.UI
         {
             try
             {
-                MainWindow.ViewModelSelector.SetActiveViewModel(Fs22ViewModel);
+                _fs22ViewModel = new Fs22ViewModel();
+                MainWindow.ViewModelSelector.SetActiveViewModel(_fs22ViewModel);
             }
             catch (OFException ex)
             {
@@ -149,7 +128,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
             {
                 try
                 {
-                    Fs22ViewModel.Client.RunGame(null);
+                    _fs22ViewModel!.Client.RunGame(null);
                     GameRunningViewModel runningViewModel = new GameRunningViewModel(SupportedGame.Fs22);
                     MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
                 }
@@ -160,6 +139,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
             });
         }
 
+        private static Fs25ViewModel? _fs25ViewModel;
         public bool IsFs25Selected
         {
             get
@@ -175,7 +155,8 @@ namespace OliverFida.FSimMan.ViewModels.UI
         {
             try
             {
-                MainWindow.ViewModelSelector.SetActiveViewModel(Fs25ViewModel);
+                _fs25ViewModel = new Fs25ViewModel();
+                MainWindow.ViewModelSelector.SetActiveViewModel(_fs25ViewModel);
             }
             catch (OFException ex)
             {
@@ -189,7 +170,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
             {
                 try
                 {
-                    Fs25ViewModel.Client.RunGame(null);
+                    _fs25ViewModel!.Client.RunGame(null);
                     GameRunningViewModel runningViewModel = new GameRunningViewModel(SupportedGame.Fs25);
                     MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
                 }

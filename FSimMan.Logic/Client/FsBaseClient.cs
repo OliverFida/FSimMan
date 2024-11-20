@@ -30,7 +30,9 @@ namespace OliverFida.FSimMan.Client
                 }
             }
         }
+
         private gameSettings? _gameSettings;
+        public gameSettings? GameSettings { get => _gameSettings; }
 
         private FsEdition _fsEdition;
         public FsEdition FsEdition
@@ -173,6 +175,12 @@ namespace OliverFida.FSimMan.Client
         private void ReadGameSettings()
         {
             gameSettings? gameSettings;
+            if (!File.Exists(GameSettingsFilePath))
+            {
+                SetProperty(ref _gameSettings, null, nameof(GameSettings));
+                return;
+            }
+
             using (XmlReader reader = XmlReader.Create(GameSettingsFilePath))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(gameSettings));
@@ -180,7 +188,7 @@ namespace OliverFida.FSimMan.Client
             }
             if (gameSettings == null) throw new InvalidFsFileException(FILE_NAME_GAMESETTINGS);
 
-            _gameSettings = gameSettings;
+            SetProperty(ref _gameSettings, gameSettings, nameof(GameSettings));
         }
 
         private void StoreGameSettings()

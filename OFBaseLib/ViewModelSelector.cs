@@ -20,8 +20,7 @@ namespace OliverFida.Base
 
         public void SetActiveViewModel(ViewModelBase viewModel)
         {
-            if (_viewModels.Contains(viewModel)) _viewModels.Remove(viewModel);
-            _viewModels.Add(viewModel);
+            if (!_viewModels.Contains(viewModel)) _viewModels.Add(viewModel);
 
             _activeViewModel = viewModel;
             OnPropertyChanged(nameof(ActiveViewModel));

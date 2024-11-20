@@ -126,6 +126,10 @@ namespace OliverFida.FSimMan.ViewModels
                 }
             });
         }
+        public bool IsPlayModpackEnabled
+        {
+            get => Client.GameSettings is not null;
+        }
 
         public Command EditModpackCommand { get; }
         private void EditModpackDelegate()

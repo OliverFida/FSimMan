@@ -85,6 +85,7 @@
                 Command="{Binding DataContext.PlayModpackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 CommandParameter="{Binding}"
                 ImageSource="/UI/Resources/Images/Play.png"
+                IsEnabled="{Binding DataContext.IsPlayModpackEnabled, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Style="{StaticResource SquareImageButtonStyle}" />
             <ui:ImageButton
                 Margin="0,0,5,0"
