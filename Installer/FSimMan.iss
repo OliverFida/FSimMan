@@ -18,10 +18,9 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 UninstallDisplayName={#AppName}
 UninstallDisplayIcon={app}\{#AppExeName},0
-ChangesAssociations=yes
+;ChangesAssociations=yes
 DisableProgramGroupPage=yes
 PrivilegesRequired=admin
-;PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\Oliver Fida\Desktop\FSimMan
 OutputBaseFilename={#AppName}-v{#AppVersion}
 SetupIconFile=X:\Oliver Fida\FSimMan\FSimMan\UI\Resources\Images\Logo.ico
@@ -33,16 +32,17 @@ WizardStyle=modern
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 
 [Files]
-Source: "X:\Oliver Fida\FSimMan\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "X:\Oliver Fida\FSimMan\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "X:\Oliver Fida\FSimMan\FSimMan\bin\Release\net8.0-windows10.0.22000.0\publish\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "publish\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "publish\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "publish\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "publish\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
 
-[Registry]
-Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpExt}\OpenWithProgids"; ValueType: string; ValueName: "{#AssocFsmmpKey}"; ValueData: ""; Flags: uninsdeletevalue
-Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpKey}"; ValueType: string; ValueName: ""; ValueData: "{#AssocFsmmpName}"; Flags: uninsdeletevalue
-Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#AppExeName},0"; Flags: uninsdeletevalue
-Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#AppExeName}"" ""%1"""; Flags: uninsdeletevalue
-Root: HKLM; Subkey: "Software\Classes\Applications\{#AppExeName}\SupportedTypes"; ValueType: string; ValueName: "{#AssocFsmmpExt}"; ValueData: ""; Flags: uninsdeletevalue
+;[Registry]
+;Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpExt}\OpenWithProgids"; ValueType: string; ValueName: "{#AssocFsmmpKey}"; ValueData: ""; Flags: uninsdeletevalue
+;Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpKey}"; ValueType: string; ValueName: ""; ValueData: "{#AssocFsmmpName}"; Flags: uninsdeletevalue
+;Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#AppExeName},0"; Flags: uninsdeletevalue
+;Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#AppExeName}"" ""%1"""; Flags: uninsdeletevalue
+;Root: HKLM; Subkey: "Software\Classes\Applications\{#AppExeName}\SupportedTypes"; ValueType: string; ValueName: "{#AssocFsmmpExt}"; ValueData: ""; Flags: uninsdeletevalue
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
