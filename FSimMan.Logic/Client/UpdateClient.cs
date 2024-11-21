@@ -48,7 +48,12 @@ namespace OliverFida.FSimMan.Client
             if (assets.Length != 1) return false;
 
             string downloadedFilePath = await DownloadFileAsync(assets[0].DownloadUrl, assets[0].Name);
-            Process.Start(new ProcessStartInfo(downloadedFilePath));
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = downloadedFilePath,
+                UseShellExecute = true,
+                Verb = "runas"
+            });
 
             return true;
         }
