@@ -1,4 +1,5 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Client;
+using OF.Base.Objects;
 using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.GitHub;
 using System.Diagnostics;

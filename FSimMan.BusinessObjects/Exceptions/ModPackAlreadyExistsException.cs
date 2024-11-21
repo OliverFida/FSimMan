@@ -1,8 +1,8 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 
 namespace OliverFida.FSimMan.Exceptions
 {
-    public class ModPackAlreadyExistsException : OFException
+    public class ModPackAlreadyExistsException : OfException
     {
         public ModPackAlreadyExistsException() : base($"Modpack already exists!") { }
     }

@@ -74,7 +74,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FSimMan.BusinessObjects\FSimMan.BusinessObjects.csproj" />
     <ProjectReference Include="..\FSimMan.Logic\FSimMan.Logic.csproj" />
-    <ProjectReference Include="..\OFBaseLib\OFBaseLib.csproj" />
+    <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
   </ItemGroup>
 
   <ItemGroup>

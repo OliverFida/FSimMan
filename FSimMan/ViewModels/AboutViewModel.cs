@@ -1,4 +1,5 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
+using OF.Base.ViewModel;
 using System.Diagnostics;
 
 namespace OliverFida.FSimMan.ViewModels

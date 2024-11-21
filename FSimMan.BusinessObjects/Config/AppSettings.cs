@@ -1,8 +1,8 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 
 namespace OliverFida.FSimMan.Config
 {
-    public class AppSettings : ObjectBase
+    public class AppSettings : BindingObject
     {
         #region Application
         internal ApplicationMode _applicationMode = ApplicationMode.User;

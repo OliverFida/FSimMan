@@ -1,4 +1,4 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.Exceptions.Fs;
 using OliverFida.FSimMan.FS22.Mod;
@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
-    public class ModPack : EditableObjectBase
+    public class ModPack : EditableObject
     {
         #region Properties
         internal FsEdition _fsEdition;

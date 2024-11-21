@@ -1,10 +1,10 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
-    public class Mod : EditableObjectBase
+    public class Mod : EditableObject
     {
-        internal ModPack _parent;
+        internal ModPack? _parent;
 
         internal string _title = "New mod";
         public string Title
@@ -43,7 +43,7 @@ namespace OliverFida.FSimMan.Config.ModPack
         }
         public string? FullImageSource
         {
-            get => !string.IsNullOrWhiteSpace(_imageSource) ? Path.Combine(_parent.ModIconsDirectoryPath, _imageSource!) : null;
+            get => !string.IsNullOrWhiteSpace(_imageSource) ? Path.Combine(_parent?.ModIconsDirectoryPath ?? "", _imageSource!) : null;
         }
 
         internal string _fileName;
@@ -52,7 +52,7 @@ namespace OliverFida.FSimMan.Config.ModPack
             get => _fileName;
         }
 
-        public Mod(ModPack parent, string title, string fileName)
+        public Mod(ModPack? parent, string title, string fileName)
         {
             _parent = parent;
             _title = title;

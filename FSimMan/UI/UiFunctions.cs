@@ -1,4 +1,5 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
+using OF.Base.ViewModel;
 using OliverFida.FSimMan.ViewModels.UI.DialogWindow;
 
 namespace OliverFida.FSimMan.UI
@@ -33,7 +34,7 @@ namespace OliverFida.FSimMan.UI
             ShowError($"An unexpected error has occurred:{Environment.NewLine}{ex.Message}");
         }
 
-        internal static void ShowError(OFException ex)
+        internal static void ShowError(OfException ex)
         {
             ShowError(ex.Message);
         }

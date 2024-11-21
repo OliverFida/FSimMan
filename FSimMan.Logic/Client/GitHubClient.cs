@@ -1,4 +1,4 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Client;
 using OliverFida.FSimMan.GitHub;
 using System.Text.Json;
 

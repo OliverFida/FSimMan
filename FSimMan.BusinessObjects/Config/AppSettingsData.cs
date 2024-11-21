@@ -1,10 +1,10 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.Config
 {
     [XmlRoot("AppSettings")]
-    public class AppSettingsData : DataObjectBase<AppSettings>
+    public class AppSettingsData : DataObject<AppSettings>
     {
         public ApplicationMode ApplicationMode;
 

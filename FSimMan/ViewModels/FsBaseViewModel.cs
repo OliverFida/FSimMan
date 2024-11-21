@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using OliverFida.Base;
+using OF.Base.Objects;
 using OliverFida.FSimMan.Client;
 using OliverFida.FSimMan.Config;
 using OliverFida.FSimMan.ImportExport;
@@ -72,7 +72,7 @@ namespace OliverFida.FSimMan.ViewModels
                 EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack, EditMode.New);
                 MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -100,7 +100,7 @@ namespace OliverFida.FSimMan.ViewModels
                     Client.ImportModPack(fsmmpFile, alreadyExists);
                 }
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -120,7 +120,7 @@ namespace OliverFida.FSimMan.ViewModels
                     GameRunningViewModel runningViewModel = new GameRunningViewModel(Game);
                     MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
                 }
-                catch (OFException ex)
+                catch (OfException ex)
                 {
                     UiFunctions.ShowError(ex);
                 }
@@ -142,7 +142,7 @@ namespace OliverFida.FSimMan.ViewModels
                 EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack);
                 MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -175,7 +175,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                 Client.ExportModPack(modPack, fileDialog.FileName);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -193,7 +193,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                 Client.DeleteModPack(modPack);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

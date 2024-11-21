@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OFBaseLib\OFBaseLib.csproj" />
+    <Folder Include="FS22\Mod\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FS22\Mod\" />
+    <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
   </ItemGroup>
 
 </Project>

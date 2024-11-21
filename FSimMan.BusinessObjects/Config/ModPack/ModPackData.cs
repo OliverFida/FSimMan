@@ -1,10 +1,10 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
     [XmlRoot("ModPack")]
-    public class ModPackData : DataObjectBase<ModPack>
+    public class ModPackData : DataObject<ModPack>
     {
         [XmlElement(IsNullable = false)]
         public FsEdition FsEdition;

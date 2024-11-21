@@ -1,9 +1,9 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
-    public class ModData : ParentedDataObjectBase<Mod>
+    public class ModData : ParentedDataObject<Mod>
     {
         public string Title = string.Empty;
 
@@ -24,9 +24,9 @@ namespace OliverFida.FSimMan.Config.ModPack
         [XmlElement(IsNullable = false)]
         public string FileName = string.Empty;
 
-        public override Mod FromData(object parent)
+        public override Mod FromData(object? parent)
         {
-            Mod temp = new Mod((ModPack)parent, Title, FileName)
+            Mod temp = new Mod((ModPack?)parent, Title, FileName)
             {
                 _version = Version,
                 _author = Author,

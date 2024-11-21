@@ -1,8 +1,8 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 
 namespace OliverFida.FSimMan.Exceptions.Config
 {
-    public class InvalidConfigFileException : OFException
+    public class InvalidConfigFileException : OfException
     {
         public InvalidConfigFileException(string fileName) : base($"Invalid config file: \"{fileName}\"") { }
     }

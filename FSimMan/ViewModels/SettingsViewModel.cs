@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
-using OliverFida.Base;
+using OF.Base.Objects;
+using OF.Base.ViewModel;
 using OliverFida.FSimMan.Client;
 using OliverFida.FSimMan.Config;
 using OliverFida.FSimMan.UI;
@@ -29,7 +30,7 @@ namespace OliverFida.FSimMan.ViewModels
                 if (CurrentApplication.AppSettings == null) return;
                 AppSettingsClient.StoreSettings(CurrentApplication.AppSettings);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -44,7 +45,7 @@ namespace OliverFida.FSimMan.ViewModels
                 _aboutViewModel = new AboutViewModel();
                 MainWindow.ViewModelSelector.SetActiveViewModel(_aboutViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -68,7 +69,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                 CurrentApplication.AppSettings.Fs22GamePath = dialog.FolderName;
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -91,7 +92,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                 CurrentApplication.AppSettings.Fs22DataPath = dialog.FolderName;
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -116,7 +117,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                 CurrentApplication.AppSettings.Fs25GamePath = dialog.FolderName;
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -139,7 +140,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                 CurrentApplication.AppSettings.Fs25DataPath = dialog.FolderName;
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

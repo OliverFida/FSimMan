@@ -1,4 +1,5 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Client;
+using OF.Base.ViewModel;
 using OliverFida.FSimMan.Client;
 using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.UI;
@@ -48,6 +49,8 @@ namespace OliverFida.FSimMan
         {
 #if !DEBUG
             await Application.Current.Dispatcher.BeginInvoke(AutoUpdateAsync);
+#else
+            await Task.Delay(100);
 #endif
         }
 

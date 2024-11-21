@@ -1,8 +1,8 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 
 namespace OliverFida.FSimMan.Exceptions.Fs
 {
-    public class InvalidFsFileException : OFException
+    public class InvalidFsFileException : OfException
     {
         public InvalidFsFileException(string fileName) : base($"Invalid FarmingSim file: \"{fileName}\"") { }
     }

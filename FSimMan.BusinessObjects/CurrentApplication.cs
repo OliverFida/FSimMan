@@ -29,9 +29,10 @@ namespace OliverFida.FSimMan
             {
 #if DEBUG
                 return $"{_appTitleBase} (development)";
-#endif
+#else
                 if (_assemblyVersion != null) return $"{_appTitleBase} {AssemblyVersionText}";
                 return _appTitleBase;
+#endif
             }
         }
 

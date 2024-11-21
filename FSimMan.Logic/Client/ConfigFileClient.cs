@@ -1,4 +1,4 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using OliverFida.FSimMan.Exceptions.Config;
 using System.Xml;
 using System.Xml.Serialization;
@@ -8,7 +8,7 @@ namespace OliverFida.FSimMan.Client
     internal static class ConfigFileClient
     {
         #region Methods INTERNAL
-        internal static T DeserializeFile<T>(string fileName) where T : DataObjectBase
+        internal static T DeserializeFile<T>(string fileName) where T : DataObject
         {
             T? data;
             try
@@ -27,7 +27,7 @@ namespace OliverFida.FSimMan.Client
                     }
                 }
             }
-            catch (Exception ex) when (ex is not OFException)
+            catch (Exception ex) when (ex is not OfException)
             {
                 return Activator.CreateInstance<T>();
             }
@@ -36,7 +36,7 @@ namespace OliverFida.FSimMan.Client
             return data;
         }
 
-        internal static T Deserialize<T>(Stream stream, string fileName) where T : DataObjectBase
+        internal static T Deserialize<T>(Stream stream, string fileName) where T : DataObject
         {
             T? data;
             try
@@ -55,7 +55,7 @@ namespace OliverFida.FSimMan.Client
                     }
                 }
             }
-            catch (Exception ex) when (ex is not OFException)
+            catch (Exception ex) when (ex is not OfException)
             {
                 return Activator.CreateInstance<T>();
             }
@@ -64,7 +64,7 @@ namespace OliverFida.FSimMan.Client
             return data;
         }
 
-        internal static void SerializeFile<T>(string fileName, T data) where T : DataObjectBase
+        internal static void SerializeFile<T>(string fileName, T data) where T : DataObject
         {
             FileStream fileStream = File.Create(ResolveFilePath(fileName));
 
@@ -74,7 +74,7 @@ namespace OliverFida.FSimMan.Client
             fileStream.Close();
         }
 
-        internal static void Serialize<T>(ref Stream stream, T data) where T : DataObjectBase
+        internal static void Serialize<T>(ref Stream stream, T data) where T : DataObject
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             serializer.Serialize(stream, data);

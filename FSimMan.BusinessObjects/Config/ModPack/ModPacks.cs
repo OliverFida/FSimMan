@@ -1,9 +1,9 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using OliverFida.FSimMan.Exceptions;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
-    public class ModPacks : EditableObjectBase
+    public class ModPacks : EditableObject
     {
         internal List<ModPack> _list = new List<ModPack>();
         public List<ModPack> List

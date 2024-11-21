@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
-using OliverFida.Base;
+using OF.Base.Objects;
+using OF.Base.ViewModel;
 using OliverFida.FSimMan.Client;
 using OliverFida.FSimMan.Client.ModPack;
 using OliverFida.FSimMan.UI;
@@ -44,7 +45,7 @@ namespace OliverFida.FSimMan.ViewModels.Modpack
                 _fsClient.RefreshModPacks();
                 MainWindow.ViewModelSelector.CloseCurrentViewModel();
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -57,7 +58,7 @@ namespace OliverFida.FSimMan.ViewModels.Modpack
             {
                 Client.StoreModPack();
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -81,7 +82,7 @@ namespace OliverFida.FSimMan.ViewModels.Modpack
 
                 Client.ModPack.AddMods(fileDialog.FileNames);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -99,7 +100,7 @@ namespace OliverFida.FSimMan.ViewModels.Modpack
 
                 Client.ModPack.DeleteMod(mod);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

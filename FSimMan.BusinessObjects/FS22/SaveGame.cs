@@ -1,4 +1,4 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using OliverFida.FSimMan.Exceptions.Fs;
 using OliverFida.FSimMan.FS22.SaveGame;
 using System.Xml;
@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.FS22
 {
-    public class Fs22SaveGame : ObjectBase
+    public class Fs22SaveGame : BindingObject
     {
         private const string FILE_NAME_CAREER_SAVEGAME = "careerSavegame.xml";
         private const string FILE_NAME_FARMS = "farms.xml";

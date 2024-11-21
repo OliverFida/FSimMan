@@ -1,10 +1,10 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
 using System.Xml.Serialization;
 
 namespace OliverFida.FSimMan.Config.ModPack
 {
     [XmlRoot("ModPacks")]
-    public class ModPacksData : DataObjectBase<ModPacks>
+    public class ModPacksData : DataObject<ModPacks>
     {
         [XmlArray(nameof(List), IsNullable = false)]
         [XmlArrayItem("ModPack")]

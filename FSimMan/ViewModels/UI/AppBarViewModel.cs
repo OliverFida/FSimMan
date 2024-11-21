@@ -1,4 +1,5 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.Objects;
+using OF.Base.ViewModel;
 using OliverFida.FSimMan.Config;
 using OliverFida.FSimMan.UI;
 using OliverFida.FSimMan.ViewModels.Modpack;
@@ -97,7 +98,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
         {
             get
             {
-                ViewModelBase? vm = MainWindow.ViewModelSelector.ActiveViewModel;
+                IViewModel? vm = MainWindow.ViewModelSelector.ActiveViewModel;
                 if (vm == null) return false;
 
                 return vm.GetType().Equals(typeof(HomeViewModel));
@@ -110,7 +111,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
             {
                 MainWindow.ViewModelSelector.SetActiveViewModel(MainWindow.HomeViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -121,7 +122,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
         {
             get
             {
-                ViewModelBase? vm = MainWindow.ViewModelSelector.ActiveViewModel;
+                IViewModel? vm = MainWindow.ViewModelSelector.ActiveViewModel;
                 if (vm == null) return false;
 
                 return vm.GetType().Equals(typeof(Fs22ViewModel));
@@ -135,7 +136,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
                 _fs22ViewModel = new Fs22ViewModel();
                 MainWindow.ViewModelSelector.SetActiveViewModel(_fs22ViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -151,7 +152,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
                     GameRunningViewModel runningViewModel = new GameRunningViewModel(SupportedGame.Fs22);
                     MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
                 }
-                catch (OFException ex)
+                catch (OfException ex)
                 {
                     UiFunctions.ShowError(ex);
                 }
@@ -163,7 +164,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
         {
             get
             {
-                ViewModelBase? vm = MainWindow.ViewModelSelector.ActiveViewModel;
+                IViewModel? vm = MainWindow.ViewModelSelector.ActiveViewModel;
                 if (vm == null) return false;
 
                 return vm.GetType().Equals(typeof(Fs25ViewModel));
@@ -177,7 +178,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
                 _fs25ViewModel = new Fs25ViewModel();
                 MainWindow.ViewModelSelector.SetActiveViewModel(_fs25ViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -193,7 +194,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
                     GameRunningViewModel runningViewModel = new GameRunningViewModel(SupportedGame.Fs25);
                     MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
                 }
-                catch (OFException ex)
+                catch (OfException ex)
                 {
                     UiFunctions.ShowError(ex);
                 }
@@ -204,7 +205,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
         {
             get
             {
-                ViewModelBase? vm = MainWindow.ViewModelSelector.ActiveViewModel;
+                IViewModel? vm = MainWindow.ViewModelSelector.ActiveViewModel;
                 if (vm == null) return false;
 
                 return vm.GetType().Equals(typeof(SettingsViewModel));
@@ -217,7 +218,7 @@ namespace OliverFida.FSimMan.ViewModels.UI
             {
                 MainWindow.ViewModelSelector.SetActiveViewModel(MainWindow.SettingsViewModel);
             }
-            catch (OFException ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

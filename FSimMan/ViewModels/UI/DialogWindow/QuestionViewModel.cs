@@ -1,4 +1,4 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.ViewModel;
 
 namespace OliverFida.FSimMan.ViewModels.UI.DialogWindow
 {

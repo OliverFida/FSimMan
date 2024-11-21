@@ -1,4 +1,4 @@
-﻿using OliverFida.Base;
+﻿using OF.Base.ViewModel;
 using System.Windows;
 
 namespace OliverFida.FSimMan.UI
