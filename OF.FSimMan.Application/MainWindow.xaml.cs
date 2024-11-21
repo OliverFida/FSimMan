@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using OF.FSimMan.ViewModel;
+using System.Windows;
 
 namespace OF.FSimMan
 {
@@ -10,6 +11,7 @@ namespace OF.FSimMan
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

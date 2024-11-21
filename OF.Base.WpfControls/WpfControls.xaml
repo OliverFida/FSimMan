@@ -8,6 +8,7 @@
         <ResourceDictionary Source="Brushes.xaml" />
         <ResourceDictionary Source="Sizes.xaml" />
         <ResourceDictionary Source="Style\BusyIndicatorStyle.xaml" />
+        <ResourceDictionary Source="Style\MainWindowStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
 

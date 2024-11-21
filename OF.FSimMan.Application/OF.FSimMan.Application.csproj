@@ -23,4 +23,8 @@
     <ProjectReference Include="..\OF.FSimMan.Views\OF.FSimMan.Views.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Resources\Logo22.ico" />
+  </ItemGroup>
+
 </Project>
