@@ -34,9 +34,17 @@ namespace OliverFida.FSimMan.ViewModels.UI
             }
         }
 
+        public bool IsUpdateAvailable
+        {
+            get => CurrentApplication.IsUpdateAvailable;
+        }
+
         public AppBarViewModel()
         {
             MainWindow.ViewModelSelector.ActiveViewModelChangedEvent += HandleActiveViewModelChanged;
+            CurrentApplication.IsUpdateAvailableChanged += HandleIsUpdateAvailableChanged;
+
+            UpdateCommand = new Command(this, async target => await ((AppBarViewModel)target).UpdateDelegate());
         }
 
         private void HandleActiveViewModelChanged(object? sender, ActiveViewModelChangedEventArgs e)
@@ -47,6 +55,17 @@ namespace OliverFida.FSimMan.ViewModels.UI
             OnPropertyChanged(nameof(IsSettingsSelected));
 
             OnPropertyChanged(nameof(IsAppBarEnabled));
+        }
+
+        private void HandleIsUpdateAvailableChanged(object? sender, EventArgs e)
+        {
+            OnPropertyChanged(nameof(IsUpdateAvailable));
+        }
+
+        public Command UpdateCommand { get; }
+        private async Task UpdateDelegate()
+        {
+            await MainWindow.ExecuteUpdate();
         }
 
         public bool IsDebugVisible

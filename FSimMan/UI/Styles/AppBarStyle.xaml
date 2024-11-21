@@ -35,13 +35,20 @@
                                 FontWeight="Bold"
                                 Text="FSimMan" />
                             <TextBlock
-                                Margin="5,25,5,0"
+                                Margin="5,25,0,0"
                                 VerticalAlignment="Center"
                                 FontSize="12"
                                 Foreground="Gray"
                                 Text="{Binding VersionText}" />
                             <ui:ImageButton
+                                Margin="5,0,0,0"
+                                Command="{Binding UpdateCommand}"
+                                Content="Install Update"
+                                ImageSource="/UI/Resources/Images/Download.png"
+                                Visibility="{Binding IsUpdateAvailable, Converter={StaticResource BooleanVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ui:ImageButton
                                 x:Name="DebugButton"
+                                Margin="5,0,0,0"
                                 Command="{Binding DebugCommand}"
                                 ImageSource="/UI/Resources/Images/Debug.png"
                                 Style="{StaticResource AppBarImageButtonBaseStyle}"

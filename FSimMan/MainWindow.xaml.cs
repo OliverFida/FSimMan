@@ -1,5 +1,6 @@
 ﻿using OliverFida.Base;
 using OliverFida.FSimMan.Client;
+using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.UI;
 using OliverFida.FSimMan.ViewModels;
 using System.Windows;
@@ -8,6 +9,8 @@ namespace OliverFida.FSimMan
 {
     public partial class MainWindow : UI.Window
     {
+        public static UpdateClient UpdateClient { get => UpdateClient.Instance; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -24,6 +27,23 @@ namespace OliverFida.FSimMan
             ViewModelSelector.SetActiveViewModel(HomeViewModel);
         }
 
+        public static async Task ExecuteUpdate()
+        {
+            try
+            {
+                if (!await UpdateClient.TryExecuteUpdateAsync())
+                {
+                    UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
+                    return;
+                }
+                Application.Current.Shutdown(0);
+            }
+            catch (UpdateCanceledException ex)
+            {
+                UiFunctions.ShowInfoOk(ex.Message);
+            }
+        }
+
         private async Task InitializeAsync()
         {
 #if !DEBUG
@@ -33,17 +53,11 @@ namespace OliverFida.FSimMan
 
         private async Task AutoUpdateAsync()
         {
-            UpdateClient updateClient = UpdateClient.Instance;
-            bool isUpdateAvailable = await updateClient.GetUpdateAvailableAsync();
+            CurrentApplication.IsUpdateAvailable = await UpdateClient.GetUpdateAvailableAsync();
 
-            if (!isUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
+            if (!CurrentApplication.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
 
-            if (!await updateClient.TryExecuteUpdateAsync())
-            {
-                UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
-                return;
-            }
-            Application.Current.Shutdown(0);
+            await ExecuteUpdate();
         }
 
         public static string AppTitle

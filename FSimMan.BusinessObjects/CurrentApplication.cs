@@ -35,6 +35,18 @@ namespace OliverFida.FSimMan
             }
         }
 
+        public static event EventHandler? IsUpdateAvailableChanged;
+        private static bool _isUpdateAvailable = false;
+        public static bool IsUpdateAvailable
+        {
+            get => _isUpdateAvailable;
+            set
+            {
+                _isUpdateAvailable = value;
+                IsUpdateAvailableChanged?.Invoke(null, new EventArgs());
+            }
+        }
+
         public static string CONFIG_PATH
         {
             get

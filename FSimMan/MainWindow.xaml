@@ -12,18 +12,20 @@
     d:DesignWidth="900"
     Style="{StaticResource WindowStyle}"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <ui:BusyIndicator BusyContent="{Binding UpdateClient.BusyContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsBusy="{Binding UpdateClient.IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <ui:AppBar Grid.Row="0" />
-        <ContentControl
-            Grid.Row="1"
-            Margin="5"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-    </Grid>
+            <ui:AppBar Grid.Row="0" />
+            <ContentControl
+                Grid.Row="1"
+                Margin="5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </ui:BusyIndicator>
 </ui:Window>

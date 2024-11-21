@@ -1,4 +1,5 @@
 ﻿using OliverFida.Base;
+using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.GitHub;
 using System.Diagnostics;
 
@@ -24,38 +25,67 @@ namespace OliverFida.FSimMan.Client
         #region Methods PUBLIC
         public async Task<bool> GetUpdateAvailableAsync()
         {
-            _latestRelease = null;
-            if (CurrentApplication.AssemblyVersion is null) return false;
+            try
+            {
+                IsBusy = true;
+                BusyContent = "Checking for updates...";
 
-            GitHubReleaseData[]? releases = await _gitHubClient.TryGetReleasesAsync();
-            if (releases is null || releases.Length == 0) return false;
+                _latestRelease = null;
+                if (CurrentApplication.AssemblyVersion is null) return false;
 
-            _latestRelease = (from r in releases orderby r.TagName descending select r).First();
-            (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
+                GitHubReleaseData[]? releases = await _gitHubClient.TryGetReleasesAsync();
+                if (releases is null || releases.Length == 0) return false;
 
-            if (versionParts.major > CurrentApplication.AssemblyVersion.Major ||
-                versionParts.minor > CurrentApplication.AssemblyVersion.Minor ||
-                versionParts.build > CurrentApplication.AssemblyVersion.Build) return true;
+                _latestRelease = (from r in releases orderby r.TagName descending select r).First();
+                (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
 
-            return false;
+                if (versionParts.major > CurrentApplication.AssemblyVersion.Major ||
+                    versionParts.minor > CurrentApplication.AssemblyVersion.Minor ||
+                    versionParts.build > CurrentApplication.AssemblyVersion.Build) return true;
+
+                return false;
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
         }
 
         public async Task<bool> TryExecuteUpdateAsync()
         {
-            if (_latestRelease is null) return false;
-
-            GitHubReleaseAssetData[] assets = GetValidReleaseAssets();
-            if (assets.Length != 1) return false;
-
-            string downloadedFilePath = await DownloadFileAsync(assets[0].DownloadUrl, assets[0].Name);
-            Process.Start(new ProcessStartInfo
+            try
             {
-                FileName = downloadedFilePath,
-                UseShellExecute = true,
-                Verb = "runas"
-            });
+                IsBusy = true;
+                BusyContent = "Downloading update...";
 
-            return true;
+                if (_latestRelease is null) return false;
+
+                GitHubReleaseAssetData[] assets = GetValidReleaseAssets();
+                if (assets.Length != 1) return false;
+
+                string downloadedFilePath = await DownloadFileAsync(assets[0].DownloadUrl, assets[0].Name);
+
+                BusyContent = "Starting update...";
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = downloadedFilePath,
+                        UseShellExecute = true,
+                        Verb = "runas"
+                    });
+                }
+                catch
+                {
+                    throw new UpdateCanceledException();
+                }
+
+                return true;
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
         }
         #endregion
 
