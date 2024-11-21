@@ -5,9 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:OF.FSimMan"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    d:DataContext="{d:DesignInstance Type={x:Type local:MainWindow}}"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
     mc:Ignorable="d">
-    <Grid />
+    <of:BusyIndicator IsBusy="True">
+        <Grid />
+    </of:BusyIndicator>
 </Window>

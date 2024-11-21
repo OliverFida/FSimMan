@@ -1,5 +1,4 @@
-﻿using OF.Base.Client;
-using OF.Base.ViewModel;
+﻿using OF.Base.ViewModel;
 using OliverFida.FSimMan.Client;
 using OliverFida.FSimMan.Exceptions;
 using OliverFida.FSimMan.UI;
