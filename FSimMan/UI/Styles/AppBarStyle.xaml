@@ -27,7 +27,7 @@
                             <Image
                                 Width="70"
                                 Height="70"
-                                Source="/UI/Resources/Images/Logo.png" />
+                                Source="/UI/Resources/Images/Logo22.png" />
                             <TextBlock
                                 Margin="5,0,0,0"
                                 VerticalAlignment="Center"
