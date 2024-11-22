@@ -4,4 +4,6 @@
     xmlns:local="clr-namespace:OF.Base.Wpf.Converter">
 
     <local:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
+    <local:DivideDoubleByTwoConverter x:Key="DivideDoubleByTwoConverter" />
+    <local:StringImageSourceConverter x:Key="StringImageSourceConverter" />
 </ResourceDictionary>

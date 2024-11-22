@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
-    Title="{Binding WindowTitle}"
+    Title="{Binding CurrentApplication.WindowTitle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
     d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
     d:DesignHeight="500"
     d:DesignWidth="900"

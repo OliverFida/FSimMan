@@ -2,7 +2,7 @@
 
 namespace OF.Base.ViewModel
 {
-    public interface IViewModel : IBindingObject
+    public interface IViewModel : IBindingObject, IInitializeable
     {
 
     }

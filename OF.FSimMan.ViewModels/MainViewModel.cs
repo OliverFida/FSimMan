@@ -1,18 +1,58 @@
 ﻿using OF.Base.ViewModel;
+using OF.FSimMan.Client.Management;
+using OliverFida.FSimMan.Exceptions;
 
 namespace OF.FSimMan.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
         #region Properties
-        public static string WindowTitle
+        public static CurrentApplication CurrentApplication {  get => CurrentApplication.Instance; }
+
+        public static ViewModelSelector ViewModelSelector { get; } = new ViewModelSelector();
+        #endregion
+
+        #region Initialize
+        public override async Task InitializeAsync()
         {
-            get => "FSimMan"; // OFDO
+            await base.InitializeAsync();
+
+            // OFDO: TryCatch
+            // OFDO: ViewModelSelector.SetActiveViewModel(HomeViewModel);
+            await AutoUpdateAsync();
         }
         #endregion
 
-        #region Constructor
-        public MainViewModel() : base() { }
+        #region Methods PUBLIC
+        public static async Task ExecuteUpdate()
+        {
+            try
+            {
+                UpdateClient updateClient = UpdateClient.Instance;
+                if (!await updateClient.TryExecuteUpdateAsync())
+                {
+                    // OFDO: UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
+                    return;
+                }
+                // OFDO: Application.Current.Shutdown(0);
+            }
+            catch (UpdateCanceledException ex)
+            {
+                // OFDO: UiFunctions.ShowInfoOk(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private async Task AutoUpdateAsync()
+        {
+            UpdateClient updateClient = UpdateClient.Instance;
+            await updateClient.CheckUpdateAvailableAsync();
+
+            // OFDO: if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
+
+            //await ExecuteUpdate();
+        }
         #endregion
     }
 }
