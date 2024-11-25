@@ -14,9 +14,6 @@ namespace OF.FSimMan
         #endregion
 
         #region Properties
-        // OFDO: AppSettings
-        //public static AppSettings? AppSettings { get; private set; }
-
         private static readonly Version? _assemblyVersion = Assembly.GetEntryAssembly()!.GetName().Version;
         public static Version? AssemblyVersion
         {
@@ -88,7 +85,6 @@ namespace OF.FSimMan
 #if DEBUG
             ReleaseFeatures.InitializeDebugValues();
 #endif
-            // OFDO: AppSettings = 
         }
         #endregion
     }

@@ -92,11 +92,11 @@ namespace OF.FSimMan.Client.Management
             _latestRelease = (from r in releases orderby r.TagName descending select r).First();
             (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
 
-            if (versionParts.major > CurrentApplication.AssemblyVersion.Major ||
-                versionParts.minor > CurrentApplication.AssemblyVersion.Minor ||
-                versionParts.build > CurrentApplication.AssemblyVersion.Build) return true;
+            if (versionParts.major < CurrentApplication.AssemblyVersion.Major) return false;
+            if (versionParts.minor < CurrentApplication.AssemblyVersion.Minor) return false;
+            if (versionParts.build < CurrentApplication.AssemblyVersion.Build) return false;
 
-            return false;
+            return true;
         }
 
         private (int major, int minor, int build) GetVersionParts(string versionString)

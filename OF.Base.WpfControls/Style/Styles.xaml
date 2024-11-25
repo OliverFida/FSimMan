@@ -6,6 +6,7 @@
         <ResourceDictionary Source="HeadingStyle.xaml" />
         <ResourceDictionary Source="ButtonStyle.xaml" />
         <ResourceDictionary Source="ImageButtonStyle.xaml" />
+        <ResourceDictionary Source="AppBarImageButtonStyle.xaml" />
         <ResourceDictionary Source="AppBarStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

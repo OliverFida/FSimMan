@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
+	  <ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
 	</ItemGroup>
 
 </Project>

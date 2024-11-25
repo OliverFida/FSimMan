@@ -13,16 +13,16 @@
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <!--OFDO: <of:ImageButton
+                <of:ImageButton
                     Margin="0,0,5,0"
                     Command="{Binding SaveSettingsCommand}"
                     Content="Save Settings"
-                    ImageSource="/UI/Resources/Images/Download.png" />
+                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png" />
                 <of:ImageButton
                     Margin="0,0,5,0"
                     Command="{Binding ShowAboutCommand}"
                     Content="About FSimMan"
-                    ImageSource="/UI/Resources/Images/Question.png" />-->
+                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Question.png" />
             </StackPanel>
 
             <Grid Style="{StaticResource SectionStyle}">
@@ -68,12 +68,12 @@
                         <!--OFDO: <of:TextBox
                             Width="500"
                             IsReadOnly="True"
-                            Text="{Binding AppSettings.Fs22GamePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding AppSettings.Fs22GamePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />-->
                         <of:Button
                             Margin="5,0,0,0"
                             Command="{Binding SelectFs22GamePathCommand}"
                             Content="..."
-                            Style="{StaticResource SquareButtonStyle}" />-->
+                            Style="{StaticResource SquareButtonStyle}" />
                     </StackPanel>
                 </StackPanel>
 
@@ -83,12 +83,12 @@
                         <!--OFDO: <of:TextBox
                             Width="500"
                             IsReadOnly="True"
-                            Text="{Binding AppSettings.Fs22DataPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding AppSettings.Fs22DataPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />-->
                         <of:Button
                             Margin="5,0,0,0"
                             Command="{Binding SelectFs22DataPathCommand}"
                             Content="..."
-                            Style="{StaticResource SquareButtonStyle}" />-->
+                            Style="{StaticResource SquareButtonStyle}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -109,12 +109,12 @@
                             <!--OFDO: <of:TextBox
                                 Width="500"
                                 IsReadOnly="True"
-                                Text="{Binding AppSettings.Fs25GamePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding AppSettings.Fs25GamePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />-->
                             <of:Button
                                 Margin="5,0,0,0"
                                 Command="{Binding SelectFs25GamePathCommand}"
                                 Content="..."
-                                Style="{StaticResource SquareButtonStyle}" />-->
+                                Style="{StaticResource SquareButtonStyle}" />
                         </StackPanel>
                     </StackPanel>
 
@@ -124,12 +124,12 @@
                             <!--OFDO: <of:TextBox
                                 Width="500"
                                 IsReadOnly="True"
-                                Text="{Binding AppSettings.Fs25DataPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding AppSettings.Fs25DataPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />-->
                             <of:Button
                                 Margin="5,0,0,0"
                                 Command="{Binding SelectFs25DataPathCommand}"
                                 Content="..."
-                                Style="{StaticResource SquareButtonStyle}" />-->
+                                Style="{StaticResource SquareButtonStyle}" />
                         </StackPanel>
                     </StackPanel>
                 </Grid>

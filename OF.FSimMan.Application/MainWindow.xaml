@@ -11,7 +11,7 @@
     d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
     d:DesignHeight="500"
     d:DesignWidth="900"
-    Icon="/Resources/Logo22.ico"
+    Icon="pack://application:,,,/OF.FSimMan.Resources;component/Logos/Logo22.ico"
     Style="{StaticResource MainWindowStyle}"
     mc:Ignorable="d">
     <of:BusyIndicator>
@@ -21,19 +21,13 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--<ui:AppBar Grid.Row="0" IsEnabled="False" />-->
-            <StackPanel Grid.Row="1" Orientation="Vertical">
-                <ContentControl
-                    Grid.Row="1"
-                    Padding="5"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                <of:ImageButton
-                    Content="Test 1"
-                    ImageSource="/Resources/Logo22.ico"
-                    Style="{StaticResource W150ImageButtonStyle}" />
-            </StackPanel>
+            <ui:AppBar Grid.Row="0" IsEnabled="{Binding IsAppBarEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <ContentControl
+                Grid.Row="1"
+                Padding="5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </of:BusyIndicator>
 </Window>
