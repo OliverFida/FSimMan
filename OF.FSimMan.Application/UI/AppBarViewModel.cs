@@ -184,7 +184,7 @@ namespace OF.FSimMan.UI
         #region Constructor
         public AppBarViewModel() : base(true)
         {
-            MainViewModel.ViewModelSelector.ActiveViewModelChangedEvent += HandleActiveViewModelChanged;
+            MainViewModel.ViewModelSelector.PropertyChanged += HandleActiveViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;
 
             UpdateCommand = new Command(this, async target => await ((AppBarViewModel)target).UpdateDelegate());
@@ -192,14 +192,16 @@ namespace OF.FSimMan.UI
         #endregion
 
         #region Methods PRIVATE
-        private void HandleActiveViewModelChanged(object? sender, ActiveViewModelChangedEventArgs e)
+        private void HandleActiveViewModelChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName != nameof(MainViewModel.ViewModelSelector.CurrentViewModel)) return;
+
             OnPropertyChanged(nameof(IsAppBarEnabled));
 
-            // OFDO: OnPropertyChanged(nameof(IsHomeSelected));
-            //OnPropertyChanged(nameof(IsFs22Selected));
-            //OnPropertyChanged(nameof(IsFs25Selected));
-            //OnPropertyChanged(nameof(IsSettingsSelected));
+            OnPropertyChanged(nameof(IsHomeSelected));
+            OnPropertyChanged(nameof(IsFs22Selected));
+            OnPropertyChanged(nameof(IsFs25Selected));
+            OnPropertyChanged(nameof(IsSettingsSelected));
         }
 
         private void HandleIsUpdateAvailableChanged(object? sender, PropertyChangedEventArgs e)

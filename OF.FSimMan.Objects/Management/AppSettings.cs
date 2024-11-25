@@ -6,6 +6,12 @@ namespace OF.FSimMan.Management
     {
         #region Application
         internal ApplicationMode _applicationMode = ApplicationMode.User;
+        public ApplicationMode ApplicationMode
+        {
+            get => _applicationMode;
+            set => SetProperty(ref _applicationMode, value);
+        }
+
         public bool IsApplicationModeCreator => _applicationMode == ApplicationMode.Creator;
 
         private List<ApplicationMode>? _applicationModeValues;

@@ -1,6 +1,4 @@
-﻿using OF.FSimMan.Client.Game;
-
-namespace OF.FSimMan.Client.FarmingSim
+﻿namespace OF.FSimMan.Client.Game.Fs
 {
     public abstract class FsClientBase : GameClientBase
     {

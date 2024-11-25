@@ -1,4 +1,4 @@
-﻿namespace OF.FSimMan.Client.FarmingSim
+﻿namespace OF.FSimMan.Client.Game.Fs
 {
     public class Fs22Client : FsClientBase
     {

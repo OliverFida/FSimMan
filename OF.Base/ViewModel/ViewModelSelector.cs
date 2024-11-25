@@ -12,11 +12,8 @@ namespace OF.Base.ViewModel
         public IViewModel? CurrentViewModel
         {
             get => _currentViewModel;
+            private set => SetProperty(ref _currentViewModel, value);
         }
-        #endregion
-
-        #region Events
-        public event EventHandler<ActiveViewModelChangedEventArgs>? ActiveViewModelChangedEvent = null;
         #endregion
 
         #region Constructor
@@ -26,7 +23,12 @@ namespace OF.Base.ViewModel
         #region Methods PUBLIC
         public void OpenViewModel(IViewModel viewModel)
         {
-            ExecuteOpenViewModel(viewModel);
+            OpenViewModel(viewModel, true);
+        }
+
+        public void OpenViewModel(IViewModel viewModel, bool triggerAutoclose)
+        {
+            ExecuteOpenViewModel(viewModel, triggerAutoclose);
         }
 
         public void CloseCurrentViewModel()
@@ -38,30 +40,45 @@ namespace OF.Base.ViewModel
 
         public void CloseViewModel(IViewModel viewModel)
         {
-            if (viewModel.IsPersistant || !_openViewModels.Contains(viewModel)) return;
-
-            // Remove from known
-            _openViewModels.Remove(viewModel);
-
-            // Reopen last
-            ExecuteOpenViewModel(_openViewModels.LastOrDefault());
+            CloseViewModel(viewModel, true);
         }
         #endregion
 
         #region Methods PRIVATE
-        public void ExecuteOpenViewModel(IViewModel? viewModel)
+        private void ExecuteOpenViewModel(IViewModel? viewModel, bool triggerAutoclose)
         {
             // Already open
             if (viewModel == CurrentViewModel) return;
 
             // Close current
-            if (CurrentViewModel is not null && !CurrentViewModel.IsPersistant) CloseCurrentViewModel();
+            if (triggerAutoclose) ExecuteAutoclose();
 
             // Check if unknown
-            if (viewModel is not null && !_openViewModels.Contains(viewModel)) _openViewModels.Add(viewModel);
+            if (viewModel is not null && !OpenViewModels.Contains(viewModel)) _openViewModels.Add(viewModel);
 
             // Set current
-            SetProperty(ref _currentViewModel, viewModel, nameof(CurrentViewModel));
+            CurrentViewModel = viewModel;
+        }
+
+        private void CloseViewModel(IViewModel viewModel, bool triggerOpenLast)
+        {
+            if (viewModel.IsPersistant || !OpenViewModels.Contains(viewModel)) return;
+
+            // Remove from known
+            _openViewModels.Remove(viewModel);
+
+            // Reopen last
+            if (triggerOpenLast) ExecuteOpenViewModel(OpenViewModels.LastOrDefault(), false);
+        }
+
+        private void ExecuteAutoclose()
+        {
+            List<IViewModel> obsoleteViewModels = (from vm in OpenViewModels where !vm.IsPersistant && vm.IsAutocloseable select vm).ToList();
+
+            foreach (IViewModel viewModel in obsoleteViewModels)
+            {
+                CloseViewModel(viewModel, false);
+            }
         }
         #endregion
     }

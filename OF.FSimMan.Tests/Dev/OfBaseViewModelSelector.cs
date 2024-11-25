@@ -56,10 +56,15 @@ namespace OF.FSimMan.Tests.Dev
             Assert.AreEqual(3, vms.OpenViewModels.Count);
             Assert.AreEqual(svm, vms.CurrentViewModel);
 
-            // Reopen persistant VM => autocloses autocloseable VM
-            vms.OpenViewModel(mvm);
-            Assert.AreEqual(2, vms.OpenViewModels.Count);
+            // Reopen persistant VM without triggerAutoclose
+            vms.OpenViewModel(mvm, false);
+            Assert.AreEqual(3, vms.OpenViewModels.Count);
             Assert.AreEqual(mvm, vms.CurrentViewModel);
+
+            // Reopen persistant VM2 => autocloses autocloseable VM
+            vms.OpenViewModel(hvm);
+            Assert.AreEqual(2, vms.OpenViewModels.Count);
+            Assert.AreEqual(hvm, vms.CurrentViewModel);
         }
     }
 }

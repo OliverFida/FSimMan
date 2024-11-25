@@ -2,7 +2,7 @@
 
 namespace OF.FSimMan.Client.Game
 {
-    public abstract class GameClientBase : ClientBase
+    public abstract class GameClientBase : ClientBase, IGameClient
     {
         private FSimMan.Management.Game _game;
 

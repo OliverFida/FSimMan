@@ -7,8 +7,6 @@ namespace OF.Base.ViewModel
         public ReadOnlyObservableCollection<IViewModel> OpenViewModels { get; }
         public IViewModel? CurrentViewModel { get; }
 
-        public event EventHandler<ActiveViewModelChangedEventArgs>? ActiveViewModelChangedEvent;
-
         public void OpenViewModel(IViewModel viewModel);
         public void CloseViewModel(IViewModel viewModel);
         public void CloseCurrentViewModel();
