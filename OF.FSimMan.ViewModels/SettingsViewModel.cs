@@ -33,19 +33,17 @@ namespace OF.FSimMan.ViewModel
             }
         }
 
-        //private static AboutViewModel? _aboutViewModel;
         public Command ShowAboutCommand { get; } = new Command(ShowAboutDelegate);
         private static void ShowAboutDelegate()
         {
-            //try
-            //{
-            //    _aboutViewModel = new AboutViewModel();
-            //    MainWindow.ViewModelSelector.SetActiveViewModel(_aboutViewModel);
-            //}
-            //catch (OfException ex)
-            //{
-            //    UiFunctions.ShowError(ex);
-            //}
+            try
+            {
+                MainViewModel.ViewModelSelector.OpenViewModel(new AboutViewModel());
+            }
+            catch (OfException ex)
+            {
+                // OFDO: UiFunctions.ShowError(ex);
+            }
         }
 
         #region FS22

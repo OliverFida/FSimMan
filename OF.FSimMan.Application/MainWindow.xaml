@@ -24,7 +24,7 @@
             <ui:AppBar Grid.Row="0" IsEnabled="{Binding IsAppBarEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             <ContentControl
                 Grid.Row="1"
-                Padding="5"
+                Margin="5"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Content="{Binding ViewModelSelector.CurrentViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
