@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using OF.Base.Objects;
 using OF.Base.ViewModel;
+using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 
@@ -32,7 +33,7 @@ namespace OF.FSimMan.ViewModel
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
 
@@ -45,7 +46,7 @@ namespace OF.FSimMan.ViewModel
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
 
@@ -72,7 +73,7 @@ namespace OF.FSimMan.ViewModel
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
             finally
             {
@@ -101,7 +102,7 @@ namespace OF.FSimMan.ViewModel
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
             finally
             {
@@ -132,7 +133,7 @@ namespace OF.FSimMan.ViewModel
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
             finally
             {
@@ -161,7 +162,7 @@ namespace OF.FSimMan.ViewModel
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
             finally
             {

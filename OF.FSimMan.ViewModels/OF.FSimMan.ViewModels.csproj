@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
     <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
     <ProjectReference Include="..\OF.FSimMan.Clients\OF.FSimMan.Clients.csproj" />
   </ItemGroup>

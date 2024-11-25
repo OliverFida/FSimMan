@@ -2,6 +2,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="BusyIndicatorStyle.xaml" />
         <ResourceDictionary Source="MainWindowStyle.xaml" />
+        <ResourceDictionary Source="DialogWindowStyle.xaml" />
         <ResourceDictionary Source="SectionStyle.xaml" />
         <ResourceDictionary Source="HeadingStyle.xaml" />
         <ResourceDictionary Source="ButtonStyle.xaml" />
@@ -9,6 +10,7 @@
         <ResourceDictionary Source="ComboBoxStyle.xaml" />
         <ResourceDictionary Source="CheckBoxStyle.xaml" />
         <ResourceDictionary Source="TextBoxStyle.xaml" />
+        <ResourceDictionary Source="DataGridStyle.xaml" />
         <ResourceDictionary Source="AppBarImageButtonStyle.xaml" />
         <ResourceDictionary Source="AppBarStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>

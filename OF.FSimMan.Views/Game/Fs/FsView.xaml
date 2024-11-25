@@ -41,7 +41,7 @@
                     Visibility="{Binding IsModPackHubVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
 
-            <!-- OFDO: <of:DataGrid
+            <of:DataGrid
                 Grid.Row="1"
                 Margin="0,5,0,0"
                 VerticalAlignment="Stretch"
@@ -61,7 +61,7 @@
                         CellTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}"
                         Header="Controls" />
                 </of:DataGrid.Columns>
-            </of:DataGrid>-->
+            </of:DataGrid>
         </Grid>
     </of:BusyIndicator>
 </UserControl>

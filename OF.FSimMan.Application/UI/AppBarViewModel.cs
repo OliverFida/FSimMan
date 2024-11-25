@@ -1,5 +1,6 @@
 ﻿using OF.Base.Objects;
 using OF.Base.ViewModel;
+using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.ViewModel;
@@ -57,7 +58,7 @@ namespace OF.FSimMan.UI
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
         public bool IsHomeSelected
@@ -81,7 +82,7 @@ namespace OF.FSimMan.UI
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
         public Command RunFs22DefaultCommand { get; } = new Command(RunFs22DefaultDelegate);
@@ -97,7 +98,7 @@ namespace OF.FSimMan.UI
                 }
                 catch (OfException ex)
                 {
-                    // OFDO: UiFunctions.ShowError(ex);
+                    UiFunctions.ShowError(ex);
                 }
             });
         }
@@ -122,7 +123,7 @@ namespace OF.FSimMan.UI
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
         public Command RunFs25DefaultCommand { get; } = new Command(RunFs25DefaultDelegate);
@@ -138,7 +139,7 @@ namespace OF.FSimMan.UI
                 }
                 catch (OfException ex)
                 {
-                    // OFDO: UiFunctions.ShowError(ex);
+                    UiFunctions.ShowError(ex);
                 }
             });
         }
@@ -166,7 +167,7 @@ namespace OF.FSimMan.UI
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
         public bool IsSettingsSelected
@@ -217,13 +218,13 @@ namespace OF.FSimMan.UI
         private static void DebugDelegate()
         {
 #if DEBUG
-            //string message = "Das ist ein wundervoller Text, der sicher nicht über das Maximum des DialogWindows hinüberragt.\r\n\r\nWirklich ein toller Text.\r\nKaum zu glauben.\r\nEin echtes Meisterwerk!";
-            // OFDO: UiFunctions.ShowError(message);
-            //UiFunctions.ShowWarningOk(message);
-            //UiFunctions.ShowWarningOkCancel(message);
-            //UiFunctions.ShowInfoOk(message);
-            //UiFunctions.ShowInfoOkCancel(message);
-            //UiFunctions.ShowQuestion(message);
+            string message = "Das ist ein wundervoller Text, der sicher nicht über das Maximum des DialogWindows hinüberragt.\r\n\r\nWirklich ein toller Text.\r\nKaum zu glauben.\r\nEin echtes Meisterwerk!";
+            UiFunctions.ShowError(message);
+            UiFunctions.ShowWarningOk(message);
+            UiFunctions.ShowWarningOkCancel(message);
+            UiFunctions.ShowInfoOk(message);
+            UiFunctions.ShowInfoOkCancel(message);
+            UiFunctions.ShowQuestion(message);
 #endif
         }
         public bool IsDebugVisible

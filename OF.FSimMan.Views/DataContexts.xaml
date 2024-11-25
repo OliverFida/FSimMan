@@ -4,7 +4,26 @@
     xmlns:view="clr-namespace:OF.FSimMan.View"
     xmlns:viewGameFs="clr-namespace:OF.FSimMan.View.Game.Fs"
     xmlns:viewModel="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
-    xmlns:viewModelGameFs="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels">
+    xmlns:viewModelGameFs="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
+    xmlns:viewModelUiFunctions="clr-namespace:OF.Base.Wpf.UiFunctions;assembly=OF.Base.WpfControls"
+    xmlns:viewUiFunctions="clr-namespace:OF.FSimMan.View.UiFunctions">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Style/Styles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate DataType="{x:Type viewModelUiFunctions:ErrorViewModel}">
+        <viewUiFunctions:ErrorView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelUiFunctions:WarningViewModel}">
+        <viewUiFunctions:WarningView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelUiFunctions:InfoViewModel}">
+        <viewUiFunctions:InfoView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelUiFunctions:QuestionViewModel}">
+        <viewUiFunctions:QuestionView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
         <view:HomeView />
     </DataTemplate>

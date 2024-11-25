@@ -1,4 +1,5 @@
 ﻿using OF.Base.ViewModel;
+using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OliverFida.FSimMan.Exceptions;
 
@@ -35,14 +36,14 @@ namespace OF.FSimMan.ViewModel
                 UpdateClient updateClient = UpdateClient.Instance;
                 if (!await updateClient.TryExecuteUpdateAsync())
                 {
-                    // OFDO: UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
+                    UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
                     return;
                 }
                 // OFDO: Application.Current.Shutdown(0);
             }
             catch (UpdateCanceledException ex)
             {
-                // OFDO: UiFunctions.ShowInfoOk(ex.Message);
+                UiFunctions.ShowInfoOk(ex.Message);
             }
         }
         #endregion
@@ -53,9 +54,9 @@ namespace OF.FSimMan.ViewModel
             UpdateClient updateClient = UpdateClient.Instance;
             await updateClient.CheckUpdateAvailableAsync();
 
-            // OFDO: if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
+            if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
 
-            //await ExecuteUpdate();
+            await ExecuteUpdate();
         }
         #endregion
     }

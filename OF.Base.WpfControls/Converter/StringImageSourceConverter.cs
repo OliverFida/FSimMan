@@ -16,7 +16,6 @@ namespace OF.Base.Wpf.Converter
                 string sourceString = (string)value;
 
                 if (string.IsNullOrWhiteSpace(sourceString)) return fallbackImage;
-                //return new BitmapImage(new Uri(sourceString, UriKind.RelativeOrAbsolute));
 
                 BitmapImage bitmapImage = new BitmapImage();
                 using (FileStream fs = File.OpenRead(sourceString))

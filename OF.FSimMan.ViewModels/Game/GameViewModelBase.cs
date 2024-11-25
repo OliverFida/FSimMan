@@ -1,5 +1,7 @@
-﻿using OF.Base.Objects;
+﻿using Microsoft.Win32;
+using OF.Base.Objects;
 using OF.Base.ViewModel;
+using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
@@ -33,7 +35,7 @@ namespace OF.FSimMan.ViewModel.Game
             }
             catch (OfException ex)
             {
-                // OFDO: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
 
@@ -42,17 +44,19 @@ namespace OF.FSimMan.ViewModel.Game
         {
             try
             {
-                // OFDO: OpenFileDialog fileDialog = new OpenFileDialog()
-                //{
-                //    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                //    Filter = "Modpack files (*.fsmmp)|*.fsmmp",
-                //    Title = "Select modpack to import",
-                //    DefaultExt = "fsmmp"
-                //};
-                //bool? result = fileDialog.ShowDialog();
-                //if (result != true) return;
+                throw new NotImplementedException();
 
-                //using (FsmmpFile fsmmpFile = new FsmmpFile(fileDialog.FileName))
+                OpenFileDialog fileDialog = new OpenFileDialog()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    Filter = "Modpack files (*.fsmmp)|*.fsmmp",
+                    Title = "Select modpack to import",
+                    DefaultExt = "fsmmp"
+                };
+                bool? result = fileDialog.ShowDialog();
+                if (result != true) return;
+
+                // OFDO: using (FsmmpFile fsmmpFile = new FsmmpFile(fileDialog.FileName))
                 //{
                 //    bool alreadyExists = Client.ImportCheckModPackExists(fsmmpFile);
                 //    if (alreadyExists && !UiFunctions.ShowQuestion("A modpack with the same key already exists!\r\nWould you like to overwrite?")) return;
@@ -61,7 +65,7 @@ namespace OF.FSimMan.ViewModel.Game
             }
             catch (OfException ex)
             {
-                // OFOD: UiFunctions.ShowError(ex);
+                UiFunctions.ShowError(ex);
             }
         }
         #endregion
