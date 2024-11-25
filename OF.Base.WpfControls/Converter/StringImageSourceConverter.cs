@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace OF.Base.Wpf.Converter
 {
-    class StringImageSourceConverter : IValueConverter
+    public class StringImageSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

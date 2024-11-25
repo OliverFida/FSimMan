@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:ui="clr-namespace:OF.FSimMan.UI"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
     Title="{Binding CurrentApplication.WindowTitle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
     d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
@@ -20,13 +21,19 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--<AppBar Grid.Row="0" />-->
-            <ContentControl
-                Grid.Row="1"
-                Padding="5"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <!--<ui:AppBar Grid.Row="0" IsEnabled="False" />-->
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <ContentControl
+                    Grid.Row="1"
+                    Padding="5"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <of:ImageButton
+                    Content="Test 1"
+                    ImageSource="/Resources/Logo22.ico"
+                    Style="{StaticResource W150ImageButtonStyle}" />
+            </StackPanel>
         </Grid>
     </of:BusyIndicator>
 </Window>

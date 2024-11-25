@@ -4,5 +4,8 @@
         <ResourceDictionary Source="MainWindowStyle.xaml" />
         <ResourceDictionary Source="SectionStyle.xaml" />
         <ResourceDictionary Source="HeadingStyle.xaml" />
+        <ResourceDictionary Source="ButtonStyle.xaml" />
+        <ResourceDictionary Source="ImageButtonStyle.xaml" />
+        <ResourceDictionary Source="AppBarStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
