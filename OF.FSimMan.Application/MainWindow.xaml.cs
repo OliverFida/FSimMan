@@ -11,7 +11,14 @@ namespace OF.FSimMan
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = MainViewModel.Instance;
+
+            MainViewModel.Instance.UpdateCompleteEvent += HandleUpdateCompleteEvent;
+        }
+
+        private void HandleUpdateCompleteEvent(object? sender, EventArgs e)
+        {
+            Application.Current.Shutdown(0);
         }
     }
 }

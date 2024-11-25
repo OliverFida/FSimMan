@@ -42,7 +42,7 @@ namespace OF.FSimMan.UI
         public Command UpdateCommand { get; }
         private async Task UpdateDelegate()
         {
-            await MainViewModel.ExecuteUpdate();
+            await MainViewModel.Instance.ExecuteUpdate();
         }
         public bool IsUpdateAvailable
         {

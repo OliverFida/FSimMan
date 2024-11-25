@@ -9,7 +9,7 @@ namespace OF.FSimMan.Management
         public ApplicationMode ApplicationMode
         {
             get => _applicationMode;
-            set => SetProperty(ref _applicationMode, value);
+            set { if (SetProperty(ref _applicationMode, value)) OnTriggerStoreEvent(); }
         }
 
         public bool IsApplicationModeCreator => _applicationMode == ApplicationMode.Creator;
@@ -95,10 +95,22 @@ namespace OF.FSimMan.Management
         }
         #endregion
 
+        #region Events
+        public event EventHandler? TriggerStoreEvent;
+        #endregion
+
+        #region Methods PRIVATE
         private void UpdateVisiblility()
         {
             OnPropertyChanged(nameof(IsFs22Visible));
             OnPropertyChanged(nameof(IsFs25Visible));
+            OnTriggerStoreEvent();
         }
+
+        private void OnTriggerStoreEvent()
+        {
+            TriggerStoreEvent?.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
     }
 }

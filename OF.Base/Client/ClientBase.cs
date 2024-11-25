@@ -19,8 +19,10 @@ namespace OF.Base.Client
         public virtual async Task InitializeAsync()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
+            IsBusy = true;
             IsInitialized = true;
             InitializeComplete?.Invoke(this, EventArgs.Empty);
+            ResetBusyIndicator();
         }
     }
 }

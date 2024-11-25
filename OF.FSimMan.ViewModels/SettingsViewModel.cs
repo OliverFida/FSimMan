@@ -9,6 +9,7 @@ namespace OF.FSimMan.ViewModel
 {
     public class SettingsViewModel : ViewModelBase
     {
+        #region Properties
         public static bool IsFs25Visible
         {
             get => ReleaseFeatures.GameFs25;
@@ -23,7 +24,9 @@ namespace OF.FSimMan.ViewModel
                 return SettingsClient.Instance.AppSettings;
             }
         }
+        #endregion
 
+        #region Commands
         public Command SaveSettingsCommand { get; } = new Command(SaveSettingsDelegate);
         private static void SaveSettingsDelegate()
         {
@@ -69,7 +72,6 @@ namespace OF.FSimMan.ViewModel
                 if (dialog.ShowDialog() != true) return;
 
                 SettingsClient.Instance.AppSettings.Fs22GamePath = dialog.FolderName;
-                // OFDO: AutoStore
             }
             catch (OfException ex)
             {
@@ -168,6 +170,21 @@ namespace OF.FSimMan.ViewModel
             {
                 SettingsClient.Instance.ResetBusyIndicator();
             }
+        }
+        #endregion
+        #endregion
+
+        #region Constructor
+        public SettingsViewModel()
+        {
+            AppSettings.TriggerStoreEvent += HandleTriggerStoreEvent;
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private void HandleTriggerStoreEvent(object? sender, EventArgs e)
+        {
+            SettingsClient.Instance.StoreSettings();
         }
         #endregion
     }

@@ -61,7 +61,7 @@ namespace OliverFida.FSimMan.Client
             // gameSettings.xml
             ReadGameSettings();
 
-            // OFDO: SaveGames
+            // OFDOL: SaveGames
             //{                
             //    string[] saveGamePaths = Directory.GetDirectories(CurrentApplication.AppSettings.Fs22DataPath).Where(d => d.Contains("savegame") && !d.Contains("savegameBackup")).ToArray();
             //    _saveGames = (from p in saveGamePaths select new Fs22SaveGame(p)).ToList();

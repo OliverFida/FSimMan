@@ -1,35 +1,48 @@
-﻿using OF.Base.ViewModel;
+﻿using OF.Base.Objects;
+using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OliverFida.FSimMan.Exceptions;
 
 namespace OF.FSimMan.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, ISingleton<MainViewModel>
     {
         #region Properties
-        public static CurrentApplication CurrentApplication { get => CurrentApplication.Instance; }
+        public CurrentApplication CurrentApplication { get => CurrentApplication.Instance; }
 
         public static ViewModelSelector ViewModelSelector { get; } = new ViewModelSelector();
 
         public static HomeViewModel HomeViewModel { get; } = new HomeViewModel();
         #endregion
 
+        #region Events
+        public event EventHandler? UpdateCompleteEvent;
+        #endregion
+
         #region Constructor & Initialize
-        public MainViewModel() : base(true) { }
+        private MainViewModel() : base(true) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
 
-            // OFDO: TryCatch
-            ViewModelSelector.OpenViewModel(HomeViewModel);
-            await AutoUpdateAsync();
+            try
+            {
+                ViewModelSelector.OpenViewModel(HomeViewModel);
+#if !DEBUG
+                await AutoUpdateAsync();
+#endif
+            }
+            catch (Exception ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
         }
         #endregion
 
         #region Methods PUBLIC
-        public static async Task ExecuteUpdate()
+        public async Task ExecuteUpdate()
         {
             try
             {
@@ -39,7 +52,8 @@ namespace OF.FSimMan.ViewModel
                     UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
                     return;
                 }
-                // OFDO: Application.Current.Shutdown(0);
+
+                UpdateCompleteEvent?.Invoke(this, EventArgs.Empty);
             }
             catch (UpdateCanceledException ex)
             {
@@ -58,6 +72,11 @@ namespace OF.FSimMan.ViewModel
 
             await ExecuteUpdate();
         }
+        #endregion
+
+        #region ISingleton
+        private static readonly MainViewModel _instance = new MainViewModel();
+        public static MainViewModel Instance => _instance;
         #endregion
     }
 }
