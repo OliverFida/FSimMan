@@ -70,7 +70,7 @@ namespace OliverFida.FSimMan.ViewModels
                 if (modPack == null) return;
 
                 EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack, EditMode.New);
-                MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
+                MainWindow.ViewModelSelector.OpenViewModel(editViewModel);
             }
             catch (OfException ex)
             {
@@ -118,7 +118,7 @@ namespace OliverFida.FSimMan.ViewModels
 
                     Client.RunGame(modPack);
                     GameRunningViewModel runningViewModel = new GameRunningViewModel(Game);
-                    MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
+                    MainWindow.ViewModelSelector.OpenViewModel(runningViewModel);
                 }
                 catch (OfException ex)
                 {
@@ -140,7 +140,7 @@ namespace OliverFida.FSimMan.ViewModels
                 Config.ModPack.ModPack modPack = (Config.ModPack.ModPack)EditModpackCommand.Parameter;
 
                 EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack);
-                MainWindow.ViewModelSelector.SetActiveViewModel(editViewModel);
+                MainWindow.ViewModelSelector.OpenViewModel(editViewModel);
             }
             catch (OfException ex)
             {

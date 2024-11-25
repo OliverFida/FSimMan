@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
+    <ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

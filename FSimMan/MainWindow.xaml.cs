@@ -24,7 +24,7 @@ namespace OliverFida.FSimMan
                 UiFunctions.ShowError(ex);
             }
 
-            ViewModelSelector.SetActiveViewModel(HomeViewModel);
+            ViewModelSelector.OpenViewModel(HomeViewModel);
         }
 
         public static async Task ExecuteUpdate()

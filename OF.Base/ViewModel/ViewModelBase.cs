@@ -4,13 +4,30 @@ namespace OF.Base.ViewModel
 {
     public abstract class ViewModelBase : BindingObject, IViewModel
     {
-        public ViewModelBase() : this(true) { }
+        #region Properties
+        private readonly bool _isPersistant;
+        public bool IsPersistant => _isPersistant;
 
-        public ViewModelBase(bool doInitialize) : base()
+        private readonly bool _isAutocloseable;
+        public bool IsAutocloseable => _isAutocloseable;
+        #endregion
+
+        #region Constructor
+        public ViewModelBase() : this(false) { }
+
+        public ViewModelBase(bool isPersistant) : this(isPersistant, true) { }
+
+        public ViewModelBase(bool isPersistant, bool isAutocloseable) : this(true, isPersistant, isAutocloseable) { }
+
+        public ViewModelBase(bool doInitialize, bool isPersistant, bool isAutocloseable) : base()
         {
+            _isPersistant = isPersistant;
+            _isAutocloseable = isAutocloseable;
             if (doInitialize) Task.Run(InitializeAsync);
         }
+        #endregion
 
+        #region IInitializeable
         public bool IsInitialized { get; private set; } = false;
 
         public event EventHandler? InitializeComplete;
@@ -22,5 +39,6 @@ namespace OF.Base.ViewModel
             IsInitialized = true;
             InitializeComplete?.Invoke(this, EventArgs.Empty);
         }
+        #endregion
     }
 }

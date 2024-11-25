@@ -24,7 +24,7 @@ namespace OF.FSimMan.UI
         {
             get
             {
-                Type? viewModelType = MainViewModel.ViewModelSelector.ActiveViewModel?.GetType();
+                Type? viewModelType = MainViewModel.ViewModelSelector.CurrentViewModel?.GetType();
                 // OFDO: if(viewModelType == null ||
                 //    viewModelType == typeof(EditMod)) {
 
@@ -49,7 +49,7 @@ namespace OF.FSimMan.UI
         {
             try
             {
-                MainViewModel.ViewModelSelector.SetActiveViewModel(MainViewModel.HomeViewModel);
+                MainViewModel.ViewModelSelector.OpenViewModel(MainViewModel.HomeViewModel);
             }
             catch (OfException ex)
             {
@@ -60,7 +60,7 @@ namespace OF.FSimMan.UI
         {
             get
             {
-                IViewModel? vm = MainViewModel.ViewModelSelector.ActiveViewModel;
+                IViewModel? vm = MainViewModel.ViewModelSelector.CurrentViewModel;
                 if (vm == null) return false;
 
                 return vm.GetType().Equals(typeof(HomeViewModel));
@@ -160,7 +160,7 @@ namespace OF.FSimMan.UI
         {
             try
             {
-                // OFDO: MainWindow.ViewModelSelector.SetActiveViewModel(MainWindow.SettingsViewModel);
+                MainViewModel.ViewModelSelector.OpenViewModel(new SettingsViewModel());
             }
             catch (OfException ex)
             {
@@ -181,7 +181,7 @@ namespace OF.FSimMan.UI
         #endregion
 
         #region Constructor
-        public AppBarViewModel()
+        public AppBarViewModel() : base(true)
         {
             MainViewModel.ViewModelSelector.ActiveViewModelChangedEvent += HandleActiveViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;

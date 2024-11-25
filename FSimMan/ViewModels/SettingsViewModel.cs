@@ -43,7 +43,7 @@ namespace OliverFida.FSimMan.ViewModels
             try
             {
                 _aboutViewModel = new AboutViewModel();
-                MainWindow.ViewModelSelector.SetActiveViewModel(_aboutViewModel);
+                MainWindow.ViewModelSelector.OpenViewModel(_aboutViewModel);
             }
             catch (OfException ex)
             {

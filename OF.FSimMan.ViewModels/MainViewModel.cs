@@ -10,16 +10,19 @@ namespace OF.FSimMan.ViewModel
         public static CurrentApplication CurrentApplication { get => CurrentApplication.Instance; }
 
         public static ViewModelSelector ViewModelSelector { get; } = new ViewModelSelector();
+
         public static HomeViewModel HomeViewModel { get; } = new HomeViewModel();
         #endregion
 
-        #region Initialize
+        #region Constructor & Initialize
+        public MainViewModel() : base(true) { }
+
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
 
             // OFDO: TryCatch
-            ViewModelSelector.SetActiveViewModel(HomeViewModel);
+            ViewModelSelector.OpenViewModel(HomeViewModel);
             await AutoUpdateAsync();
         }
         #endregion
