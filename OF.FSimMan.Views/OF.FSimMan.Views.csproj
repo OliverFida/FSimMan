@@ -17,4 +17,10 @@
     <ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

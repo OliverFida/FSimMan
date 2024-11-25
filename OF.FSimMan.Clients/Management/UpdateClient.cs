@@ -29,7 +29,17 @@ namespace OF.FSimMan.Client.Management
         #region Methods PUBLIC
         public async Task CheckUpdateAvailableAsync()
         {
-            IsUpdateAvailable = await GetUpdateAvailableAsync();
+            try
+            {
+                IsBusy = true;
+                BusyContent = "Checking for updates...";
+
+                IsUpdateAvailable = await GetUpdateAvailableAsync();
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
         }
 
         public async Task<bool> TryExecuteUpdateAsync()
@@ -73,30 +83,20 @@ namespace OF.FSimMan.Client.Management
         #region Methods PRIVATE
         private async Task<bool> GetUpdateAvailableAsync()
         {
-            try
-            {
-                IsBusy = true;
-                BusyContent = "Checking for updates...";
+            _latestRelease = null;
+            if (CurrentApplication.AssemblyVersion is null) return false;
 
-                _latestRelease = null;
-                if (CurrentApplication.AssemblyVersion is null) return false;
+            GitHubReleaseData[]? releases = await _gitHubClient.TryGetReleasesAsync();
+            if (releases is null || releases.Length == 0) return false;
 
-                GitHubReleaseData[]? releases = await _gitHubClient.TryGetReleasesAsync();
-                if (releases is null || releases.Length == 0) return false;
+            _latestRelease = (from r in releases orderby r.TagName descending select r).First();
+            (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
 
-                _latestRelease = (from r in releases orderby r.TagName descending select r).First();
-                (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
+            if (versionParts.major > CurrentApplication.AssemblyVersion.Major ||
+                versionParts.minor > CurrentApplication.AssemblyVersion.Minor ||
+                versionParts.build > CurrentApplication.AssemblyVersion.Build) return true;
 
-                if (versionParts.major > CurrentApplication.AssemblyVersion.Major ||
-                    versionParts.minor > CurrentApplication.AssemblyVersion.Minor ||
-                    versionParts.build > CurrentApplication.AssemblyVersion.Build) return true;
-
-                return false;
-            }
-            finally
-            {
-                ResetBusyIndicator();
-            }
+            return false;
         }
 
         private (int major, int minor, int build) GetVersionParts(string versionString)

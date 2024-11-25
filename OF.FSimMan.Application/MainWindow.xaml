@@ -25,7 +25,8 @@
                 Grid.Row="1"
                 Padding="5"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" />
+                VerticalAlignment="Stretch"
+                Content="{Binding ViewModelSelector.ActiveViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </of:BusyIndicator>
 </Window>

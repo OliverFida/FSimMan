@@ -7,9 +7,10 @@ namespace OF.FSimMan.ViewModel
     public class MainViewModel : ViewModelBase
     {
         #region Properties
-        public static CurrentApplication CurrentApplication {  get => CurrentApplication.Instance; }
+        public static CurrentApplication CurrentApplication { get => CurrentApplication.Instance; }
 
         public static ViewModelSelector ViewModelSelector { get; } = new ViewModelSelector();
+        public static HomeViewModel HomeViewModel { get; } = new HomeViewModel();
         #endregion
 
         #region Initialize
@@ -18,7 +19,7 @@ namespace OF.FSimMan.ViewModel
             await base.InitializeAsync();
 
             // OFDO: TryCatch
-            // OFDO: ViewModelSelector.SetActiveViewModel(HomeViewModel);
+            ViewModelSelector.SetActiveViewModel(HomeViewModel);
             await AutoUpdateAsync();
         }
         #endregion
