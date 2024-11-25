@@ -1,11 +1,9 @@
-﻿using OF.FSimMan.Management;
-
-namespace OF.FSimMan.Client.FarmingSim
+﻿namespace OF.FSimMan.Client.FarmingSim
 {
     public class Fs25Client : FsClientBase
     {
         #region Constructor
-        public Fs25Client() : base(Game.FarmingSim25) { }
+        public Fs25Client() : base(FSimMan.Management.Game.FarmingSim25) { }
         #endregion
         // OFDO
     }

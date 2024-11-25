@@ -25,7 +25,7 @@ namespace OF.FSimMan.Management
         public bool IsFs22Active
         {
             get => _isFs22Active;
-            set { if(SetProperty(ref _isFs22Active, value)) UpdateVisiblility(); }
+            set { if (SetProperty(ref _isFs22Active, value)) UpdateVisiblility(); }
         }
 
         internal string _fs22GamePath = string.Empty;

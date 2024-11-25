@@ -1,11 +1,10 @@
 ﻿using OF.Base.Client;
-using OF.FSimMan.Management;
 
-namespace OF.FSimMan.Client.Base
+namespace OF.FSimMan.Client.Game
 {
     public abstract class GameClientBase : ClientBase
     {
-        private Game _game;
+        private FSimMan.Management.Game _game;
 
         #region Properties
         private string _installDirectoryPath = string.Empty;
@@ -22,7 +21,7 @@ namespace OF.FSimMan.Client.Base
         #endregion
 
         #region Constructor
-        public GameClientBase(Game game)
+        public GameClientBase(FSimMan.Management.Game game)
         {
             _game = game;
         }

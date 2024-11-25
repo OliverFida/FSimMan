@@ -3,6 +3,7 @@ using OF.Base.ViewModel;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.ViewModel;
+using OF.FSimMan.ViewModel.Game.Fs;
 using System.ComponentModel;
 
 namespace OF.FSimMan.UI
@@ -31,6 +32,9 @@ namespace OF.FSimMan.UI
                 return true;
             }
         }
+
+        public static Fs22ViewModel? Fs22ViewModel { get; private set; }
+        public static Fs25ViewModel? Fs25ViewModel { get; private set; }
         #endregion
 
         #region Commands
@@ -72,8 +76,8 @@ namespace OF.FSimMan.UI
         {
             try
             {
-                // OFDO: _fs22ViewModel = new Fs22ViewModel();
-                //MainViewModel.ViewModelSelector.SetActiveViewModel(_fs22ViewModel);
+                Fs22ViewModel = new Fs22ViewModel();
+                MainViewModel.ViewModelSelector.OpenViewModel(Fs22ViewModel!);
             }
             catch (OfException ex)
             {
@@ -101,11 +105,10 @@ namespace OF.FSimMan.UI
         {
             get
             {
-                // OFDO: IViewModel? vm = MainViewModel.ViewModelSelector.ActiveViewModel;
-                //if (vm == null) return false;
+                IViewModel? vm = MainViewModel.ViewModelSelector.CurrentViewModel;
+                if (vm == null) return false;
 
-                //return vm.GetType().Equals(typeof(Fs22ViewModel));
-                return false;
+                return vm.GetType().Equals(typeof(Fs22ViewModel));
             }
         }
 
@@ -114,8 +117,8 @@ namespace OF.FSimMan.UI
         {
             try
             {
-                // OFDO: _fs25ViewModel = new Fs25ViewModel();
-                //MainWindow.ViewModelSelector.SetActiveViewModel(_fs25ViewModel);
+                Fs25ViewModel = new Fs25ViewModel();
+                MainViewModel.ViewModelSelector.OpenViewModel(Fs25ViewModel!);
             }
             catch (OfException ex)
             {
@@ -147,11 +150,10 @@ namespace OF.FSimMan.UI
         {
             get
             {
-                // OFDO: IViewModel? vm = MainWindow.ViewModelSelector.ActiveViewModel;
-                //if (vm == null) return false;
+                IViewModel? vm = MainViewModel.ViewModelSelector.CurrentViewModel;
+                if (vm == null) return false;
 
-                //return vm.GetType().Equals(typeof(Fs25ViewModel));
-                return false;
+                return vm.GetType().Equals(typeof(Fs25ViewModel));
             }
         }
 
@@ -171,11 +173,10 @@ namespace OF.FSimMan.UI
         {
             get
             {
-                // OFDO: IViewModel? vm = MainWindow.ViewModelSelector.ActiveViewModel;
-                //if (vm == null) return false;
+                IViewModel? vm = MainViewModel.ViewModelSelector.CurrentViewModel;
+                if (vm == null) return false;
 
-                //return vm.GetType().Equals(typeof(SettingsViewModel));
-                return false;
+                return vm.GetType().Equals(typeof(SettingsViewModel));
             }
         }
         #endregion

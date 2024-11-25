@@ -2,7 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="clr-namespace:OF.FSimMan.View"
-    xmlns:viewModel="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels">
+    xmlns:viewGameFs="clr-namespace:OF.FSimMan.View.Game.Fs"
+    xmlns:viewModel="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
+    xmlns:viewModelGameFs="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels">
     <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
         <view:HomeView />
     </DataTemplate>
@@ -11,5 +13,11 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
         <view:AboutView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelGameFs:Fs22ViewModel}">
+        <viewGameFs:FsView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelGameFs:Fs25ViewModel}">
+        <viewGameFs:FsView />
     </DataTemplate>
 </ResourceDictionary>
