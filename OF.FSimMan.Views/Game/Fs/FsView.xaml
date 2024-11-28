@@ -45,7 +45,7 @@
                 Grid.Row="1"
                 Margin="0,5,0,0"
                 VerticalAlignment="Stretch"
-                ItemsSource="{Binding Client.ConfigModPacks.List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Client.ModPacks.List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource ModpacksDataGridStyle}">
                 <of:DataGrid.Columns>
                     <DataGridTemplateColumn

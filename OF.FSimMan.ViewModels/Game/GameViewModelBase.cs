@@ -4,33 +4,29 @@ using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.Game;
 using OF.FSimMan.Management;
 
 namespace OF.FSimMan.ViewModel.Game
 {
-    public abstract class GameViewModelBase : ViewModelBase
+    public abstract class GameViewModelBase : BusyViewModelBase
     {
         #region Properties
-        protected IGameClient _client;
-        public IGameClient Client
-        {
-            get => _client;
-        }
-
         public static AppSettings AppSettings { get => SettingsClient.Instance.AppSettings; }
         public static bool IsModPackImportExportVisible { get => ReleaseFeatures.ModPackImportExport; }
         #endregion
 
         #region Commands
         public Command NewModPackCommand { get; }
-        private void NewModPackDelegate()
+        protected abstract void NewModPackDelegate();
+        private void NewModPackDelegatee()
         {
             try
             {
-                // OFDO: Config.ModPack.ModPack? modPack = Client.BeginNewModPack();
+                // OFDO: ModPack? modPack = ((IGameClient)Client).BeginNewModPack();
                 //if (modPack == null) return;
 
-                //EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack, EditMode.New);
+                //EditModPackViewModelBase editViewModel = new EditModPackViewModelBase(Client, modPack, EditMode.New);
                 //MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
             }
             catch (OfException ex)
@@ -44,8 +40,6 @@ namespace OF.FSimMan.ViewModel.Game
         {
             try
             {
-                throw new NotImplementedException();
-
                 OpenFileDialog fileDialog = new OpenFileDialog()
                 {
                     InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
@@ -68,15 +62,107 @@ namespace OF.FSimMan.ViewModel.Game
                 UiFunctions.ShowError(ex);
             }
         }
+
+        public Command PlayModpackCommand { get; }
+        private void PlayModpackDelegate()
+        {
+            try
+            {
+                if (PlayModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)PlayModpackCommand.Parameter;
+
+                // OFDO: Client.RunGame(modPack);
+                //GameRunningViewModel runningViewModel = new GameRunningViewModel(Game);
+                //MainViewModel.ViewModelSelector.OpenViewModel(runningViewModel);
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+        public virtual bool IsPlayModpackEnabled
+        {
+            get => true;
+        }
+
+        public Command EditModpackCommand { get; }
+        private void EditModpackDelegate()
+        {
+            try
+            {
+                if (EditModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)EditModpackCommand.Parameter;
+
+                // OFDO: EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack);
+                //MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        public Command ExportModpackCommand { get; }
+        private void ExportModpackDelegate()
+        {
+            try
+            {
+                if (ExportModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)ExportModpackCommand.Parameter;
+
+                if (!UiFunctions.ShowWarningOkCancel("FSimMan is exporting ALL you mods!\r\nPlease be aware to not act against copyright and distribution laws!\r\nFSimMan and it's developers are NOT responsible for any violations!")) return;
+
+                string fileName = $"{((IGameClient)Client).Game.ToString().ToLower()}_{modPack.Title.Replace(" ", "")}";
+                if (!string.IsNullOrWhiteSpace(modPack.Version)) fileName += $"_v{modPack.Version}";
+                fileName += ".fsmmp";
+
+                SaveFileDialog fileDialog = new SaveFileDialog()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    Filter = "Modpack files (*.fsmmp)|*.fsmmp",
+                    Title = "Save modpack",
+                    DefaultExt = "fsmmp",
+                    FileName = fileName
+                };
+                bool? result = fileDialog.ShowDialog();
+                if (result != true) return;
+
+                // OFDO: Client.ExportModPack(modPack, fileDialog.FileName);
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        public Command DeleteModpackCommand { get; }
+        private void DeleteModpackDelegate()
+        {
+            try
+            {
+                if (DeleteModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)DeleteModpackCommand.Parameter;
+
+                if (!UiFunctions.ShowQuestion($@"Are you sure you want to delete the modpack ""{modPack.Title}""?")) return;
+
+                ((IGameClient)Client).DeleteModPack(modPack);
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
         #endregion
 
         #region Constructor
-        public GameViewModelBase(IGameClient client)
+        public GameViewModelBase(IGameClient client) : base(client)
         {
-            _client = client;
-
-            NewModPackCommand = new Command(this, target => ((GameViewModelBase)target).NewModPackDelegate());
-            ImportModPackCommand = new Command(this, target => ((GameViewModelBase)target).ImportModPackDelegate());
+            NewModPackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).NewModPackDelegate));
+            ImportModPackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ImportModPackDelegate));
+            PlayModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).PlayModpackDelegate));
+            EditModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).EditModpackDelegate));
+            ExportModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ExportModpackDelegate));
+            DeleteModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).DeleteModpackDelegate));
         }
         #endregion
     }

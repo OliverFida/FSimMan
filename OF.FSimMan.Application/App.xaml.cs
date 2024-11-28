@@ -11,6 +11,8 @@ namespace OF.FSimMan
     {
         public App()
         {
+            UiFunctions.Dispatcher = Dispatcher;
+
             AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
             HandleException(args.ExceptionObject as Exception, "AppDomain.CurrentDomain.UnhandledException");
 

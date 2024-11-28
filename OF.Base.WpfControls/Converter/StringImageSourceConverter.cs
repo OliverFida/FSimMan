@@ -9,7 +9,7 @@ namespace OF.Base.Wpf.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BitmapImage fallbackImage = new BitmapImage(new Uri("/UI/Resources/Images/Missing-Image.png", UriKind.Relative));
+            BitmapImage fallbackImage = new BitmapImage(new Uri("pack://application:,,,/OF.FSimMan.Resources;component/Icons/Missing-Image.png", UriKind.RelativeOrAbsolute));
 
             try
             {

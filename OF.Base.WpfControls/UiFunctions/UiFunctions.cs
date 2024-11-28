@@ -1,10 +1,15 @@
 ﻿using OF.Base.Objects;
 using OF.Base.ViewModel;
+using System.Windows.Threading;
 
 namespace OF.Base.Wpf.UiFunctions
 {
     public static class UiFunctions
     {
+        #region Properties
+        public static Dispatcher Dispatcher { get; set; } = Dispatcher.CurrentDispatcher;
+        #endregion
+
         #region Methods PUBLIC
         public static bool ShowQuestion(string question)
         {
@@ -49,31 +54,35 @@ namespace OF.Base.Wpf.UiFunctions
         #region Methods PRIVATE
         private static bool ShowDialogWindow(ViewModelBase viewModel, DialogWindowButtonLayout buttons, string title)
         {
-            DialogWindow window = new DialogWindow(viewModel, buttons);
-            window.Title = title;
-
-
             bool isNotCanceledResult = false;
-            EventHandler<DialogWindowClosingEventArgs> onCloseHandler = (sender, e) =>
+            Action action = () =>
             {
-                switch (e.Button)
-                {
-                    case DialogWindowButton.Cancel:
-                    case DialogWindowButton.No:
-                        isNotCanceledResult = false;
-                        break;
-                    case DialogWindowButton.Ok:
-                    case DialogWindowButton.Yes:
-                        isNotCanceledResult = true;
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-            };
-            window.ViewModel.DialogWindowClosing += onCloseHandler;
-            window.ShowDialog();
-            window.ViewModel.DialogWindowClosing -= onCloseHandler;
+                DialogWindow window = new DialogWindow(viewModel, buttons);
+                window.Title = title;
 
+
+                EventHandler<DialogWindowClosingEventArgs> onCloseHandler = (sender, e) =>
+                {
+                    switch (e.Button)
+                    {
+                        case DialogWindowButton.Cancel:
+                        case DialogWindowButton.No:
+                            isNotCanceledResult = false;
+                            break;
+                        case DialogWindowButton.Ok:
+                        case DialogWindowButton.Yes:
+                            isNotCanceledResult = true;
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                };
+                window.ViewModel.DialogWindowClosing += onCloseHandler;
+                window.ShowDialog();
+                window.ViewModel.DialogWindowClosing -= onCloseHandler;
+            };
+
+            Dispatcher.Invoke(action);
             return isNotCanceledResult;
         }
         #endregion

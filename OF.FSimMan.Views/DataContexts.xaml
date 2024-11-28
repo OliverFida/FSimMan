@@ -33,10 +33,18 @@
     <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
         <view:AboutView />
     </DataTemplate>
+
     <DataTemplate DataType="{x:Type viewModelGameFs:Fs22ViewModel}">
         <viewGameFs:FsView />
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModelGameFs:Fs25ViewModel}">
         <viewGameFs:FsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModelGameFs:Fs22EditModPackViewModel}">
+        <viewGameFs:FsEditModpackView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelGameFs:Fs25EditModPackViewModel}">
+        <viewGameFs:FsEditModpackView />
     </DataTemplate>
 </ResourceDictionary>
