@@ -1,4 +1,5 @@
-﻿using OF.Base.Wpf.UiFunctions;
+﻿using OF.Base.Objects;
+using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Game;
 
@@ -11,12 +12,27 @@ namespace OF.FSimMan.ViewModel.Game.Fs
         {
             try
             {
-                ModPack? modPack = new ModPack(Management.Game.FarmingSim25);
-
-                Fs25EditModPackViewModel editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.New);
+                ModPack modPack = new ModPack(Management.Game.FarmingSim25);
+                Fs25EditModPackViewModel editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.New, modPack);
                 MainViewModel.ViewModelSelector.OpenViewModel(editModPackViewModel);
             }
             catch (Exception ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        protected override void EditModpackDelegate()
+        {
+            try
+            {
+                if (EditModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)EditModpackCommand.Parameter;
+
+                Fs25EditModPackViewModel editViewModel = new Fs25EditModPackViewModel(Management.EditMode.Edit, modPack);
+                MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
+            }
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

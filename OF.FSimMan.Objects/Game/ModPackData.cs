@@ -23,8 +23,8 @@ namespace OF.FSimMan.Game
 
         public string? ImageSource = null;
 
-        //[XmlArray(nameof(Mods), IsNullable = true)]
-        //public ModData[] Mods = [];
+        [XmlArray(nameof(Mods), IsNullable = true)]
+        public ModData[] Mods = [];
 
         public override ModPack FromData()
         {
@@ -39,11 +39,10 @@ namespace OF.FSimMan.Game
                 _imageSource = ImageSource,
             };
 
-            //foreach (ModData mod in Mods)
-            //{
-            //    // OFDO: temp._mods.Add(mod.FromData(temp));
-            //    temp._mods.Add(mod.FromData());
-            //}
+            foreach (ModData mod in Mods)
+            {
+                temp._mods.Add(mod.FromData(temp));
+            }
 
             return temp;
         }
@@ -58,16 +57,16 @@ namespace OF.FSimMan.Game
             Description = value._description;
             ImageSource = value._imageSource;
 
-            //{
-            //    List<ModData> temp = new List<ModData>();
-            //    foreach (Mod mod in value.Mods)
-            //    {
-            //        ModData data = new ModData();
-            //        data.ToData(mod);
-            //        temp.Add(data);
-            //    }
-            //    Mods = temp.ToArray();
-            //}
+            {
+                List<ModData> temp = new List<ModData>();
+                foreach (Mod mod in value.Mods)
+                {
+                    ModData data = new ModData();
+                    data.ToData(mod);
+                    temp.Add(data);
+                }
+                Mods = temp.ToArray();
+            }
         }
     }
 }

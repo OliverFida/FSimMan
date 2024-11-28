@@ -19,21 +19,6 @@ namespace OF.FSimMan.ViewModel.Game
         #region Commands
         public Command NewModPackCommand { get; }
         protected abstract void NewModPackDelegate();
-        private void NewModPackDelegatee()
-        {
-            try
-            {
-                // OFDO: ModPack? modPack = ((IGameClient)Client).BeginNewModPack();
-                //if (modPack == null) return;
-
-                //EditModPackViewModelBase editViewModel = new EditModPackViewModelBase(Client, modPack, EditMode.New);
-                //MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
-        }
 
         public Command ImportModPackCommand { get; }
         private void ImportModPackDelegate()
@@ -86,21 +71,7 @@ namespace OF.FSimMan.ViewModel.Game
         }
 
         public Command EditModpackCommand { get; }
-        private void EditModpackDelegate()
-        {
-            try
-            {
-                if (EditModpackCommand.Parameter == null) return;
-                ModPack modPack = (ModPack)EditModpackCommand.Parameter;
-
-                // OFDO: EditModpackViewModel editViewModel = new EditModpackViewModel(Client, modPack);
-                //MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
-        }
+        protected abstract void EditModpackDelegate();
 
         public Command ExportModpackCommand { get; }
         private void ExportModpackDelegate()

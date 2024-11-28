@@ -91,7 +91,7 @@
                             ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Plus.png"
                             Style="{StaticResource W150ImageButtonStyle}" />
                     </StackPanel>
-                    <!-- OFDO: <ui:DataGrid
+                    <ui:DataGrid
                         Margin="0,5,0,0"
                         ItemsSource="{Binding Client.ModPack.Mods, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource ModsDataGridStyle}">
@@ -109,7 +109,7 @@
                                 CellTemplate="{StaticResource ModsDataGridControlsDataTemplate}"
                                 Header="Controls" />
                         </ui:DataGrid.Columns>
-                    </ui:DataGrid>-->
+                    </ui:DataGrid>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

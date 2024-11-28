@@ -5,13 +5,13 @@ namespace OF.FSimMan.Game
     public class ModPack : EditableBindingObject
     {
         #region Properties
+        internal Management.Game _game;
+
         internal Guid _guid = Guid.NewGuid();
         public Guid Guid
         {
             get => _guid;
         }
-
-        internal FSimMan.Management.Game _game;
 
         internal string _title = "New modpack";
         public string Title
@@ -38,7 +38,7 @@ namespace OF.FSimMan.Game
             set => SetProperty(ref _author, value);
         }
 
-        internal string? _description = string.Empty;
+        internal string? _description;
         public string? Description
         {
             get => _description;
@@ -52,12 +52,32 @@ namespace OF.FSimMan.Game
             set => SetProperty(ref _imageSource, value);
         }
 
-        //internal EditableObservableCollection<Mod> _mods = new EditableObservableCollection<Mod>();
-        //public EditableObservableCollection<Mod> Mods
-        //{
-        //    get => _mods;
-        //    private set => SetProperty(ref _mods, value);
-        //}
+        internal EditableObservableCollection<Mod> _mods = new EditableObservableCollection<Mod>();
+        public EditableObservableCollection<Mod> Mods
+        {
+            get => _mods;
+            private set => SetProperty(ref _mods, value);
+        }
+
+        private string _modPackDirectoryPath
+        {
+            get => Path.Combine(CurrentApplication.MODPACKS_PATH, _game.ToString(), Guid.ToString());
+        }
+
+        public string ModsDirectoryPath
+        {
+            get => Path.Combine(_modPackDirectoryPath, "mods");
+        }
+
+        private string _modsTempDirectoryPath
+        {
+            get => Path.Combine(_modPackDirectoryPath, "modsTemp");
+        }
+
+        public string ModIconsDirectoryPath
+        {
+            get => Path.Combine(_modPackDirectoryPath, "modIcons");
+        }
         #endregion
 
         #region Constructor
