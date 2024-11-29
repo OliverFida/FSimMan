@@ -10,9 +10,6 @@ namespace OF.FSimMan.Management
         [XmlElement(IsNullable = false)]
         public ApplicationMode ApplicationMode = ApplicationMode.None;
 
-        [XmlElement(IsNullable = false)]
-        public string LastSelectedView = string.Empty;
-
         // FarmingSim 22
         public bool IsFs22Active = false;
 
@@ -32,7 +29,6 @@ namespace OF.FSimMan.Management
             AppSettings temp = new AppSettings
             {
                 _applicationMode = ApplicationMode,
-                _lastSelectedView = LastSelectedView,
                 _isFs22Active = IsFs22Active,
                 _fs22GamePath = Fs22GamePath,
                 _fs22DataPath = Fs22DataPath,
@@ -49,7 +45,6 @@ namespace OF.FSimMan.Management
         public override void ToData(AppSettings value)
         {
             ApplicationMode = value._applicationMode;
-            LastSelectedView = value.LastSelectedView;
             IsFs22Active = value.IsFs22Active;
             Fs22GamePath = value.Fs22GamePath;
             Fs22DataPath = value.Fs22DataPath;

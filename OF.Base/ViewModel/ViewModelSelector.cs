@@ -12,12 +12,8 @@ namespace OF.Base.ViewModel
         public IViewModel? CurrentViewModel
         {
             get => _currentViewModel;
-            private set { if (SetProperty(ref _currentViewModel, value)) CurrentViewModelChanged?.Invoke(this, EventArgs.Empty); }
+            private set => SetProperty(ref _currentViewModel, value);
         }
-        #endregion
-
-        #region Events
-        public event EventHandler? CurrentViewModelChanged;
         #endregion
 
         #region Constructor

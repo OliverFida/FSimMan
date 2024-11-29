@@ -19,6 +19,7 @@
     <Resource Include="Icons\Error.png" />
     <Resource Include="Icons\Gear.png" />
     <Resource Include="Icons\GitHub.png" />
+    <Resource Include="Icons\Home.png" />
     <Resource Include="Icons\Info.png" />
     <Resource Include="Icons\Missing-Image.png" />
     <Resource Include="Icons\Play.png" />
