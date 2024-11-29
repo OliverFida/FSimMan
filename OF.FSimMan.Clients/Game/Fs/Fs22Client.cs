@@ -51,7 +51,6 @@ namespace OF.FSimMan.Client.Game.Fs
 
             FileSerializationHelper.SerializeFile<gameSettings>(GameSettingsFilePath, (gameSettings)_gameSettings);
         }
-
         #endregion
     }
 }

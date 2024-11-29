@@ -1,4 +1,5 @@
 ﻿using OF.Base.Client;
+using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
@@ -212,6 +213,12 @@ namespace OF.FSimMan.Client.Game
             {
                 Thread.Sleep(1000);
             }
+        }
+
+        public void ExportModPack(ModPack modPack, string filePath)
+        {
+            FsmmpImportExportClient client = new FsmmpImportExportClient();
+            client.Export(filePath, modPack);
         }
         #endregion
 

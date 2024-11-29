@@ -38,6 +38,7 @@ namespace OF.FSimMan.Game
 
         public override void ToData(Mod value)
         {
+            FileName = value.FileName;
             Title = value.Title;
             Version = value.Version;
             Author = value.Author;

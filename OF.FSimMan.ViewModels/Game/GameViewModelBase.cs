@@ -100,7 +100,7 @@ namespace OF.FSimMan.ViewModel.Game
                 bool? result = fileDialog.ShowDialog();
                 if (result != true) return;
 
-                // OFDO: Client.ExportModPack(modPack, fileDialog.FileName);
+                ((IGameClient)Client).ExportModPack(modPack, fileDialog.FileName);
             }
             catch (OfException ex)
             {
