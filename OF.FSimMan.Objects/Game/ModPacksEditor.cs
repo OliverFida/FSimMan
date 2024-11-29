@@ -10,7 +10,8 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PUBLIC
-        public void AddModPack(ModPack modPack)
+        public void AddModPack(ModPack modPack) => AddModPack(modPack, false);
+        public void AddModPack(ModPack modPack, bool ignoreAlreadyExisting)
         {
             ObjectToEdit.BeginEdit();
 

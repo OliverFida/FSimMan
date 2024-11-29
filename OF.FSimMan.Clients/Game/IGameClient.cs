@@ -21,5 +21,7 @@ namespace OF.FSimMan.Client.Game
         public void StopGame();
         public void WaitForGameState(GameState gameState, bool isGameRunning);
         public void ExportModPack(ModPack modPack, string filePath);
+        public bool GetModPackExists(string filePath);
+        public void ImportModPack(string filePath, bool importAsNew);
     }
 }

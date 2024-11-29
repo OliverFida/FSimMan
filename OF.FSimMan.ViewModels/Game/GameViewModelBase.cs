@@ -37,12 +37,12 @@ namespace OF.FSimMan.ViewModel.Game
                 bool? result = fileDialog.ShowDialog();
                 if (result != true) return;
 
-                // OFDO: using (FsmmpFile fsmmpFile = new FsmmpFile(fileDialog.FileName))
-                //{
-                //    bool alreadyExists = Client.ImportCheckModPackExists(fsmmpFile);
-                //    if (alreadyExists && !UiFunctions.ShowQuestion("A modpack with the same key already exists!\r\nWould you like to overwrite?")) return;
-                //    Client.ImportModPack(fsmmpFile, alreadyExists);
-                //}
+                IGameClient client = (IGameClient)Client;
+                bool importAsNew = false;
+                bool alreadyExists = client.GetModPackExists(fileDialog.FileName);
+
+                if (alreadyExists) importAsNew = !UiFunctions.ShowQuestion("A modpack with the same key already exists!\r\nWould you like to overwrite?");
+                client.ImportModPack(fileDialog.FileName, importAsNew);
             }
             catch (OfException ex)
             {

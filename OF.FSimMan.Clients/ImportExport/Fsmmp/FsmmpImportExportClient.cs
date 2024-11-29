@@ -1,5 +1,7 @@
 ﻿using OF.Base.Client;
 using OF.FSimMan.Game;
+using OF.FSimMan.Game.Exceptions;
+using OF.FSimMan.ImportExport.Fsmmp.Exceptions;
 using OF.FSimMan.Utility;
 using System.IO.Compression;
 
@@ -13,8 +15,6 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
             try
             {
                 IsBusy = true;
-
-                string archiveFileName = Path.GetFileName(targetFilePath);
 
                 ModPackData modPackData = new ModPackData();
                 modPackData.ToData(modPack);
@@ -34,9 +34,43 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
             }
         }
 
-        public void Import(string sourceFilePath)
+        public static Guid GetModPackGuid(string sourceFilePath)
         {
+            string sourceFileName = Path.GetFileName(sourceFilePath);
+            if (!File.Exists(sourceFilePath)) throw new InvalidModPackFileException(sourceFileName);
 
+            ZipArchive archive = ZipFile.OpenRead(sourceFilePath);
+
+            ModPackData modPackData = ReadModPackInfo(ref archive, sourceFileName);
+            return modPackData.Guid;
+        }
+
+        public ModPack Import(string sourceFilePath, bool importAsNew)
+        {
+            try
+            {
+                IsBusy = true;
+
+                string sourceFileName = Path.GetFileName(sourceFilePath);
+                if (!File.Exists(sourceFilePath)) throw new InvalidModPackFileException(sourceFileName);
+
+                ZipArchive archive = ZipFile.OpenRead(sourceFilePath);
+
+                ModPackData modPackData = ReadModPackInfo(ref archive, sourceFileName);
+                if (importAsNew) modPackData.Guid = Guid.NewGuid();
+
+                ModPack modPack = modPackData.FromData();
+                ReadModPackData(ref archive, modPack);
+
+                ModPackEditor modPackEditor = new ModPackEditor(modPack);
+                modPackEditor.CheckIntegrity();
+                archive.Dispose();
+                return modPack;
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
         }
         #endregion
 
@@ -63,6 +97,41 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
                 {
                     string targetModIconFilePath = $@"modIcons\{mod.ImageSource}";
                     archive.CreateEntryFromFile(sourceModIconFilePath, targetModIconFilePath);
+                }
+            }
+        }
+
+        private static ModPackData ReadModPackInfo(ref ZipArchive archive, string archiveFileName)
+        {
+            ZipArchiveEntry? entry = archive.GetEntry("modPack.xml");
+            if (entry is null) throw new InvalidModPackFileException(archiveFileName);
+
+            Stream entryStream = entry.Open();
+            return FileSerializationHelper.Deserialize<ModPackData>(ref entryStream);
+        }
+
+        private void ReadModPackData(ref ZipArchive archive, ModPack modPack)
+        {
+            foreach(Mod mod in modPack.Mods)
+            {
+                {
+                    string sourceModFilePath = $@"mods\{mod.FileName}";
+                    ZipArchiveEntry? entry = archive.GetEntry(sourceModFilePath);
+                    if (entry is null) throw new InvalidModFileException(mod.FileName);
+
+                    string targetModFilePath = Path.Combine(modPack.ModsDirectoryPath, mod.FileName);
+                    entry.ExtractToFile(targetModFilePath, true);
+                }
+
+                if (!string.IsNullOrWhiteSpace(mod.ImageSource))
+                {
+                    string sourceModIconFilePath = $@"modIcons\{mod.ImageSource}";
+                    ZipArchiveEntry? entry = archive.GetEntry(sourceModIconFilePath);
+                    if (entry is not null)
+                    {
+                        string targetModIconFilePath = mod.FullImageSource!;
+                        entry.ExtractToFile(targetModIconFilePath, true);
+                    }
                 }
             }
         }

@@ -220,6 +220,23 @@ namespace OF.FSimMan.Client.Game
             FsmmpImportExportClient client = new FsmmpImportExportClient();
             client.Export(filePath, modPack);
         }
+
+        public bool GetModPackExists(string filePath)
+        {
+            Guid importGuid = FsmmpImportExportClient.GetModPackGuid(filePath);
+            ModPack? matchingModPack = (from p in ModPacks.List where p.Guid.ToString().Equals(importGuid.ToString()) select p).SingleOrDefault();
+
+            return matchingModPack is not null;
+        }
+
+        public void ImportModPack(string filePath, bool importAsNew)
+        {
+            FsmmpImportExportClient client = new FsmmpImportExportClient();
+            ModPack importedModPack = client.Import(filePath, importAsNew);
+            _modPacksEditor!.AddModPack(importedModPack, !importAsNew);
+            StoreModPacks();
+            RefreshModPacks();
+        }
         #endregion
 
         #region Methods INTERNAL
