@@ -3,6 +3,7 @@ using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OliverFida.FSimMan.Exceptions;
+using System.Reflection;
 
 namespace OF.FSimMan.ViewModel
 {
@@ -29,7 +30,8 @@ namespace OF.FSimMan.ViewModel
 
             try
             {
-                ViewModelSelector.OpenViewModel(HomeViewModel);
+                SettingsClient.Instance.AppSettings.TriggerStoreEvent += HandleAppSettingsTriggerStoreEvent;
+                OpenLastView();
 #if !DEBUG
                 await AutoUpdateAsync();
 #endif
@@ -71,6 +73,42 @@ namespace OF.FSimMan.ViewModel
             if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
 
             await ExecuteUpdate();
+        }
+
+        private void OpenLastView()
+        {
+            ViewModelSelector.CurrentViewModelChanged += HandleCurrentViewModelChanged;
+            string lastSelectedView = SettingsClient.Instance.AppSettings.LastSelectedView;
+            if (!string.IsNullOrWhiteSpace(lastSelectedView))
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                Type? lastType = assembly.GetType(lastSelectedView);
+                if (lastType is not null)
+                {
+                    IViewModel? viewModel = (IViewModel?)Activator.CreateInstance(lastType);
+                    if (viewModel is not null) ViewModelSelector.OpenViewModel(viewModel);
+                    return;
+                }
+            }
+            ViewModelSelector.OpenViewModel(HomeViewModel);
+            // OFDO: OpenAvailableView();
+        }
+
+        // OFDO: private void OpenAvailableView()
+        //{
+        //    if (SettingsClient.Instance.AppSettings.IsFs25Active) ViewModelSelector.OpenViewModel(new Fs25ViewModel());
+        //    else if (SettingsClient.Instance.AppSettings.IsFs22Active) ViewModelSelector.OpenViewModel(new Fs22ViewModel());
+        //    else ViewModelSelector.OpenViewModel(new SettingsViewModel());
+        //}
+
+        private void HandleCurrentViewModelChanged(object? sender, EventArgs e)
+        {
+            if (ViewModelSelector.CurrentViewModel is not null) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
+        }
+
+        private void HandleAppSettingsTriggerStoreEvent(object? sender, EventArgs e)
+        {
+            SettingsClient.Instance.StoreSettings();
         }
         #endregion
 
