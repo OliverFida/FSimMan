@@ -9,7 +9,7 @@ namespace OF.FSimMan.Client.Game
         public ModPacks ModPacks { get; }
 
         public void RefreshModPacks(bool doControlBusyIndicator = true);
-        public void CreateNewModPack();
+        public ModPack GetNewModPack();
         public void DeleteModPack(ModPack modPack);
     }
 }

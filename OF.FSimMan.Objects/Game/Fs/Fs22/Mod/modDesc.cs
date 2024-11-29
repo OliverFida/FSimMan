@@ -15,7 +15,7 @@ using System.Xml.Serialization;
 // 
 
 
-namespace OliverFida.FSimMan.FS22.Mod
+namespace OF.FSimMan.Game.Fs.Fs22.Mod
 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]

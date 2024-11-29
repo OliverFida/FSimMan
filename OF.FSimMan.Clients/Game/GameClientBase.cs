@@ -20,18 +20,7 @@ namespace OF.FSimMan.Client.Game
 
         private string _modPacksFileName
         {
-            get
-            {
-                switch (_game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        return "modPacksFs22.xml";
-                    case FSimMan.Management.Game.FarmingSim25:
-                        return "modPacksFs25.xml";
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
+            get => $"modPacks{_game.ToString()}.xml";
         }
 
         private ModPacksEditor? _modPacksEditor;
@@ -80,9 +69,20 @@ namespace OF.FSimMan.Client.Game
             }
         }
 
-        public void CreateNewModPack()
+        public ModPack GetNewModPack()
         {
-            // OFDO
+            try
+            {
+                IsBusy = true;
+
+                ModPack newModPack = new ModPack(_game);
+                _modPacksEditor!.AddModPack(newModPack);
+                return newModPack;
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
         }
 
         public void DeleteModPack(ModPack modPack)
@@ -102,8 +102,8 @@ namespace OF.FSimMan.Client.Game
         }
         #endregion
 
-        #region Methods PRIVATE
-        private void StoreModPacks()
+        #region Methods INTERNAL
+        internal void StoreModPacks()
         {
             ModPacksData data = new ModPacksData();
             data.ToData(ModPacks);

@@ -58,7 +58,8 @@ namespace OF.Base.ViewModel
             set => Client.IsBusy = value;
         }
 
-        public string BusyContent {
+        public string BusyContent
+        {
             get => Client.BusyContent;
             set => Client.BusyContent = value;
         }

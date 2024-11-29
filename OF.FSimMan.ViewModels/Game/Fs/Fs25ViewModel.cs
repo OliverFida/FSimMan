@@ -13,7 +13,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
             try
             {
                 ModPack modPack = new ModPack(Management.Game.FarmingSim25);
-                Fs25EditModPackViewModel editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.New, modPack);
+                Fs25EditModPackViewModel editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.New, modPack, (Fs25Client)Client);
                 MainViewModel.ViewModelSelector.OpenViewModel(editModPackViewModel);
             }
             catch (Exception ex)
@@ -29,7 +29,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
                 if (EditModpackCommand.Parameter == null) return;
                 ModPack modPack = (ModPack)EditModpackCommand.Parameter;
 
-                Fs25EditModPackViewModel editViewModel = new Fs25EditModPackViewModel(Management.EditMode.Edit, modPack);
+                Fs25EditModPackViewModel editViewModel = new Fs25EditModPackViewModel(Management.EditMode.Edit, modPack, (Fs25Client)Client);
                 MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
             }
             catch (OfException ex)

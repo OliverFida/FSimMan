@@ -14,6 +14,8 @@ namespace OF.FSimMan.ViewModel.Game
         #region Properties
         public static AppSettings AppSettings { get => SettingsClient.Instance.AppSettings; }
         public static bool IsModPackImportExportVisible { get => ReleaseFeatures.ModPackImportExport; }
+
+        protected EditModPackViewModelBase? _editModPackViewModel;
         #endregion
 
         #region Commands

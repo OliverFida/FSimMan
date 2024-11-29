@@ -6,5 +6,7 @@ namespace OF.Base.ViewModel
     {
         public bool IsPersistant { get; }
         public bool IsAutocloseable { get; }
+
+        public event EventHandler? ViewModelClosedEvent;
     }
 }

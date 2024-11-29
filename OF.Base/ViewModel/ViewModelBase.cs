@@ -12,6 +12,14 @@ namespace OF.Base.ViewModel
         public bool IsAutocloseable => _isAutocloseable;
         #endregion
 
+        #region Events
+        public event EventHandler? ViewModelClosedEvent;
+        protected void InvokeViewModelClosedEvent()
+        {
+            ViewModelClosedEvent?.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
+
         #region Constructor
         public ViewModelBase() : this(false) { }
 
