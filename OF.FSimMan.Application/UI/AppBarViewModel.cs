@@ -4,6 +4,7 @@ using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.ViewModel;
+using OF.FSimMan.ViewModel.Game;
 using OF.FSimMan.ViewModel.Game.Fs;
 using System.ComponentModel;
 
@@ -27,8 +28,9 @@ namespace OF.FSimMan.UI
             get
             {
                 Type? viewModelType = MainViewModel.ViewModelSelector.CurrentViewModel?.GetType();
-                // OFDO: if(viewModelType == null ||
-                //    viewModelType == typeof(EditMod)) {
+                if (viewModelType == null ||
+                    viewModelType.IsAssignableTo(typeof(EditModPackViewModelBase)) ||
+                    viewModelType == typeof(GameRunningViewModel)) return false;
 
                 return true;
             }
@@ -88,13 +90,15 @@ namespace OF.FSimMan.UI
         public Command RunFs22DefaultCommand { get; } = new Command(RunFs22DefaultDelegate);
         private static async void RunFs22DefaultDelegate()
         {
+            if (Fs22ViewModel is null || !Fs22ViewModel.IsInitialized) return;
+
             await Task.Run(() =>
             {
                 try
                 {
-                    // OFDO: _fs22ViewModel!.Client.RunGame(null);
-                    //GameRunningViewModel runningViewModel = new GameRunningViewModel(SupportedGame.Fs22);
-                    //MainViewModel.ViewModelSelector.SetActiveViewModel(runningViewModel);
+                    Fs22ViewModel.RunGameOnClientInitializeComplete(null);
+                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs22ViewModel);
+                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {
@@ -129,13 +133,15 @@ namespace OF.FSimMan.UI
         public Command RunFs25DefaultCommand { get; } = new Command(RunFs25DefaultDelegate);
         private static async void RunFs25DefaultDelegate()
         {
+            if (Fs25ViewModel is null || !Fs25ViewModel.IsInitialized) return;
+
             await Task.Run(() =>
             {
                 try
                 {
-                    // OFDO: _fs25ViewModel!.Client.RunGame(null);
-                    //GameRunningViewModel runningViewModel = new GameRunningViewModel(SupportedGame.Fs25);
-                    //MainWindow.ViewModelSelector.SetActiveViewModel(runningViewModel);
+                    Fs25ViewModel.RunGameOnClientInitializeComplete(null);
+                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs25ViewModel);
+                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {

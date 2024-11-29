@@ -138,5 +138,30 @@ namespace OF.FSimMan.ViewModel.Game
             DeleteModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).DeleteModpackDelegate));
         }
         #endregion
+
+        #region Methods PUBLIC
+        public void RunGameOnClientInitializeComplete(ModPack? modPack)
+        {
+            IGameClient client = (IGameClient)Client;
+            client.SelectedModPack = modPack;
+
+            if (Client.IsInitialized)
+            {
+                client.RunGame();
+            }
+            else
+            {
+                Client.InitializeComplete += HandleClientInizializeCompleteRunGame;
+            }
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private void HandleClientInizializeCompleteRunGame(object? sender, EventArgs e)
+        {
+            Client.InitializeComplete -= HandleClientInizializeCompleteRunGame;
+            ((IGameClient)Client).RunGame();
+        }
+        #endregion
     }
 }

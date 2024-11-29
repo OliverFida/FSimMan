@@ -1,6 +1,9 @@
 ﻿using OF.Base.Client;
+using OF.FSimMan.Client.Management;
 using OF.FSimMan.Client.Utility;
 using OF.FSimMan.Game;
+using OF.FSimMan.Management;
+using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Game
 {
@@ -24,10 +27,58 @@ namespace OF.FSimMan.Client.Game
         }
 
         private ModPacksEditor? _modPacksEditor;
+
+        private ModPack? _selectedModPack;
+        public ModPack? SelectedModPack
+        {
+            get => _selectedModPack;
+            set => SetProperty(ref _selectedModPack, value);
+        }
+
+        private string _processName
+        {
+            get
+            {
+                switch (Game)
+                {
+                    case FSimMan.Management.Game.FarmingSim22:
+                        return "FarmingSimulator2022Game";
+                    case FSimMan.Management.Game.FarmingSim25:
+                        return "FarmingSimulator2025Game";
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+        }
+        private bool _isGameRunning = false;
+        public bool IsGameRunning
+        {
+            get
+            {
+                bool stateBefore = _isGameRunning;
+                if (SetProperty(ref _isGameRunning, Process.GetProcessesByName(_processName).Length > 0))
+                {
+                    InvokeGameStateChanged();
+                    if (stateBefore == true && _isGameRunning == false && GameState == GameState.Started) GameState = GameState.SelfStopped;
+                }
+                return _isGameRunning;
+            }
+        }
+
+        private GameState _gameState = GameState.Stopped;
+        public GameState GameState
+        {
+            get => _gameState;
+            private set { if (SetProperty(ref _gameState, value)) InvokeGameStateChanged(); }
+        }
+        #endregion
+
+        #region Events
+        public event EventHandler? GameStateChanged;
         #endregion
 
         #region Constructor & Initialize
-        public GameClientBase(FSimMan.Management.Game game)
+        public GameClientBase(FSimMan.Management.Game game) : base()
         {
             _game = game;
         }
@@ -45,7 +96,7 @@ namespace OF.FSimMan.Client.Game
                 ResetBusyIndicator();
             }
 
-            return Task.CompletedTask;
+            return base.InitializeAsync();
         }
         #endregion
 
@@ -100,6 +151,47 @@ namespace OF.FSimMan.Client.Game
                 ResetBusyIndicator();
             }
         }
+
+        public void RunGame()
+        {
+            try
+            {
+                IsBusy = true;
+
+                GameState = GameState.Started;
+                SetGameModFolder();
+                ExecuteGameExe();
+                WaitForGameState(GameState.Started, true);
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
+        }
+
+        public void StopGame()
+        {
+            try
+            {
+                IsBusy = true;
+
+                GameState = GameState.Stopped;
+                KillGameProcess();
+                WaitForGameState(GameState.Stopped, false);
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
+        }
+
+        public void WaitForGameState(GameState gameState, bool isGameRunning)
+        {
+            while (GameState != gameState | IsGameRunning != isGameRunning)
+            {
+                Thread.Sleep(1000);
+            }
+        }
         #endregion
 
         #region Methods INTERNAL
@@ -109,6 +201,41 @@ namespace OF.FSimMan.Client.Game
             data.ToData(ModPacks);
 
             FileSerializationHelper.SerializeConfigFile(_modPacksFileName, data);
+        }
+        #endregion
+
+        #region Methods PROTECTED
+        protected abstract void SetGameModFolder();
+        #endregion
+
+        #region Methods PRIVATE
+        private void InvokeGameStateChanged()
+        {
+            GameStateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ExecuteGameExe()
+        {
+            string exePath;
+            switch (Game)
+            {
+                case FSimMan.Management.Game.FarmingSim22:
+                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.Fs22GamePath, "FarmingSimulator2022.exe");
+                    break;
+                case FSimMan.Management.Game.FarmingSim25:
+                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.Fs22GamePath, "FarmingSimulator2025.exe");
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+            Process.Start(exePath);
+        }
+
+        private void KillGameProcess()
+        {
+            Process[] processes = Process.GetProcessesByName(_processName);
+            processes[0].Kill(true);
         }
         #endregion
     }

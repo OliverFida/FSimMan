@@ -33,6 +33,9 @@
     <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
         <view:AboutView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModel:GameRunningViewModel}">
+        <view:GameRunningView />
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelGameFs:Fs22ViewModel}">
         <viewGameFs:FsView />
