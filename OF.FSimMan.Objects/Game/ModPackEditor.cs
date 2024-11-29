@@ -58,7 +58,7 @@ namespace OF.FSimMan.Game
             if (!File.Exists(filePath)) return;
 
             FileInfo fileInfo = new FileInfo(filePath);
-            modDesc? modDescription = null;
+            modDesc modDescription;
             string? iconFileName = null;
 
             using (ZipArchive archive = ZipFile.OpenRead(filePath))
@@ -68,14 +68,11 @@ namespace OF.FSimMan.Game
                     ZipArchiveEntry? entry = archive.GetEntry("modDesc.xml");
                     if (entry is null) throw new InvalidModFileException(fileInfo.Name);
 
-                    // OFDO: FileSerializationHelper.Deserialize<modDesc>()
-                    using (Stream stream = entry.Open())
-                    using (XmlReader reader = XmlReader.Create(stream))
-                    {
-                        XmlSerializer serializer = new XmlSerializer(typeof(modDesc));
-                        modDescription = (modDesc?)serializer.Deserialize(reader);
-                    }
-                    if (modDescription is null) throw new InvalidModFileException(fileInfo.Name);
+                    Stream stream = entry.Open();
+                    modDescription = FileSerializationHelper.Deserialize<modDesc>(ref stream);
+                    stream.Dispose();
+
+                    if (modDescription.title is null) throw new InvalidModFileException(fileInfo.Name);
                 }
 
                 // icon.dds

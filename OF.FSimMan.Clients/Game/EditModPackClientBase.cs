@@ -34,7 +34,6 @@ namespace OF.FSimMan.Client.Game
         public void CancelEdit()
         {
             _modPackEditor.CancelEdit();
-            // OFDO
         }
 
         public void AddMods(string[] filePaths)
