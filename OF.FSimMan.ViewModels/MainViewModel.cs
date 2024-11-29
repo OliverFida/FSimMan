@@ -103,7 +103,7 @@ namespace OF.FSimMan.ViewModel
 
         private void HandleCurrentViewModelChanged(object? sender, EventArgs e)
         {
-            if (ViewModelSelector.CurrentViewModel is not null) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
+            if (ViewModelSelector.CurrentViewModel is not null && ViewModelSelector.CurrentViewModel.IsAutocloseable) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
         }
 
         private void HandleAppSettingsTriggerStoreEvent(object? sender, EventArgs e)
