@@ -51,29 +51,6 @@ namespace OF.FSimMan.UI
             get => UpdateClient.Instance.IsUpdateAvailable;
         }
 
-        public Command HomeCommand { get; } = new Command(HomeDelegate);
-        private static void HomeDelegate()
-        {
-            try
-            {
-                MainViewModel.ViewModelSelector.OpenViewModel(MainViewModel.HomeViewModel);
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
-        }
-        public bool IsHomeSelected
-        {
-            get
-            {
-                IViewModel? vm = MainViewModel.ViewModelSelector.CurrentViewModel;
-                if (vm == null) return false;
-
-                return vm.GetType().Equals(typeof(HomeViewModel));
-            }
-        }
-
         public Command SelectFs22Command { get; } = new Command(SelectFs22Delegate);
         private static void SelectFs22Delegate()
         {
@@ -191,7 +168,7 @@ namespace OF.FSimMan.UI
         #region Constructor
         public AppBarViewModel() : base(true)
         {
-            MainViewModel.ViewModelSelector.PropertyChanged += HandleActiveViewModelChanged;
+            MainViewModel.ViewModelSelector.CurrentViewModelChanged += HandleCurrentViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;
 
             UpdateCommand = new Command(this, async target => await ((AppBarViewModel)target).UpdateDelegate());
@@ -199,13 +176,10 @@ namespace OF.FSimMan.UI
         #endregion
 
         #region Methods PRIVATE
-        private void HandleActiveViewModelChanged(object? sender, PropertyChangedEventArgs e)
+        private void HandleCurrentViewModelChanged(object? sender, EventArgs e)
         {
-            if (e.PropertyName != nameof(MainViewModel.ViewModelSelector.CurrentViewModel)) return;
-
             OnPropertyChanged(nameof(IsAppBarEnabled));
 
-            OnPropertyChanged(nameof(IsHomeSelected));
             OnPropertyChanged(nameof(IsFs22Selected));
             OnPropertyChanged(nameof(IsFs25Selected));
             OnPropertyChanged(nameof(IsSettingsSelected));

@@ -173,19 +173,5 @@ namespace OF.FSimMan.ViewModel
         }
         #endregion
         #endregion
-
-        #region Constructor
-        public SettingsViewModel()
-        {
-            AppSettings.TriggerStoreEvent += HandleTriggerStoreEvent;
-        }
-        #endregion
-
-        #region Methods PRIVATE
-        private void HandleTriggerStoreEvent(object? sender, EventArgs e)
-        {
-            SettingsClient.Instance.StoreSettings();
-        }
-        #endregion
     }
 }

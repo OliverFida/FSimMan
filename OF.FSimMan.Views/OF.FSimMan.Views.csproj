@@ -21,9 +21,6 @@
     <Compile Update="AboutView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="HomeView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UiFunctions\InfoView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

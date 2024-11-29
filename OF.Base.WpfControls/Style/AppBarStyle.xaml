@@ -66,12 +66,6 @@
                             Margin="5,0,5,0"
                             Orientation="Horizontal">
                             <root:ImageButton
-                                x:Name="HomeButton"
-                                Command="{Binding HomeCommand}"
-                                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Home.png"
-                                IsSelected="{Binding IsHomeSelected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource AppBarImageButtonBaseStyle}" />
-                            <root:ImageButton
                                 x:Name="Fs22Button"
                                 Margin="5,0,0,0"
                                 Command="{Binding SelectFs22Command}"

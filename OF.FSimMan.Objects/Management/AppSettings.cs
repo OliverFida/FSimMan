@@ -24,6 +24,13 @@ namespace OF.FSimMan.Management
             }
             set => SetProperty(ref _applicationModeValues, value);
         }
+
+        internal string _lastSelectedView = string.Empty;
+        public string LastSelectedView
+        {
+            get => _lastSelectedView;
+            set { if (SetProperty(ref _lastSelectedView, value)) OnTriggerStoreEvent(); }
+        }
         #endregion
 
         #region FarmingSim 22
