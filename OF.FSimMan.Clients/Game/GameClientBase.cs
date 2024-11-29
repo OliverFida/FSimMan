@@ -1,8 +1,8 @@
 ﻿using OF.Base.Client;
 using OF.FSimMan.Client.Management;
-using OF.FSimMan.Client.Utility;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
+using OF.FSimMan.Utility;
 using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Game
@@ -11,6 +11,26 @@ namespace OF.FSimMan.Client.Game
     {
 
         #region Properties
+        private const string FILE_NAME_GAMESETTINGS = "gameSettings.xml";
+
+        protected string GameSettingsFilePath
+        {
+            get
+            {
+                switch (_game)
+                {
+                    case FSimMan.Management.Game.FarmingSim22:
+                        return Path.Combine(SettingsClient.Instance.AppSettings.Fs22DataPath, FILE_NAME_GAMESETTINGS);
+                    case FSimMan.Management.Game.FarmingSim25:
+                        return Path.Combine(SettingsClient.Instance.AppSettings.Fs25DataPath, FILE_NAME_GAMESETTINGS);
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+        }
+
+        protected IGameSettings? _gameSettings;
+
         private readonly FSimMan.Management.Game _game;
         public FSimMan.Management.Game Game => _game;
 
@@ -83,12 +103,13 @@ namespace OF.FSimMan.Client.Game
             _game = game;
         }
 
-        public override Task InitializeAsync()
+        public override async Task InitializeAsync()
         {
             try
             {
                 IsBusy = true;
 
+                ReadGameSettings();
                 RefreshModPacks(false);
             }
             finally
@@ -96,7 +117,7 @@ namespace OF.FSimMan.Client.Game
                 ResetBusyIndicator();
             }
 
-            return base.InitializeAsync();
+            await base.InitializeAsync();
         }
         #endregion
 
@@ -205,7 +226,9 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Methods PROTECTED
+        protected abstract void ReadGameSettings();
         protected abstract void SetGameModFolder();
+        protected abstract void StoreGameSettings();
         #endregion
 
         #region Methods PRIVATE

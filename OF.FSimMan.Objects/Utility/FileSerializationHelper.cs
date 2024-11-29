@@ -3,9 +3,9 @@ using OF.FSimMan.Management.Exceptions;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace OF.FSimMan.Client.Utility
+namespace OF.FSimMan.Utility
 {
-    internal static class FileSerializationHelper
+    public static class FileSerializationHelper
     {
         public static T DeserializeConfigFile<T>(string fileName) where T : DataObject
         {
@@ -45,7 +45,7 @@ namespace OF.FSimMan.Client.Utility
         public static void SerializeConfigFile<T>(string fileName, T data) where T : DataObject
         {
             string filePath = GetConfigFilePath(fileName);
-            SerializeFile<T>(filePath, data);
+            SerializeFile(filePath, data);
         }
 
         public static void SerializeFile<T>(string filePath, T data) where T : DataObject

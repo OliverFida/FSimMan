@@ -1,6 +1,7 @@
 ﻿using OF.Base.Objects;
 using OF.FSimMan.Game.Exceptions;
 using OF.FSimMan.Game.Fs.Fs22.Mod;
+using OF.FSimMan.Utility;
 using System.IO.Compression;
 using System.Xml;
 using System.Xml.Serialization;
@@ -55,6 +56,7 @@ namespace OF.FSimMan.Game
                     ZipArchiveEntry? entry = archive.GetEntry("modDesc.xml");
                     if (entry is null) throw new InvalidModFileException(fileInfo.Name);
 
+                    // OFDO: FileSerializationHelper.Deserialize<modDesc>()
                     using (Stream stream = entry.Open())
                     using (XmlReader reader = XmlReader.Create(stream))
                     {

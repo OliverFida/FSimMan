@@ -1,7 +1,7 @@
 ﻿using OF.Base.Client;
 using OF.Base.Objects;
-using OF.FSimMan.Client.Utility;
 using OF.FSimMan.Management;
+using OF.FSimMan.Utility;
 
 namespace OF.FSimMan.Client.Management
 {

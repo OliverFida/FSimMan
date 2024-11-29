@@ -5,6 +5,22 @@
         #region Constructor
         public Fs25Client() : base(FSimMan.Management.Game.FarmingSim25) { }
         #endregion
-        // OFDO
+
+        #region Methods PROTECTED
+        protected override void ReadGameSettings()
+        {
+            // OFDO
+        }
+
+        protected override void SetGameModFolder()
+        {
+            // OFDO
+        }
+
+        protected override void StoreGameSettings()
+        {
+            // OFDO
+        }
+        #endregion
     }
 }
