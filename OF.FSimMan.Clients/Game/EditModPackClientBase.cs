@@ -27,7 +27,6 @@ namespace OF.FSimMan.Client.Game
         public void StoreModPack()
         {
             _modPackEditor.EndEdit();
-            _modPackEditor.CheckIntegrity(true);
             _gameClient.StoreModPacks();
             _modPackEditor.BeginEdit();
         }
@@ -35,6 +34,7 @@ namespace OF.FSimMan.Client.Game
         public void CancelEdit()
         {
             _modPackEditor.CancelEdit();
+            // OFDO
         }
 
         public void AddMods(string[] filePaths)

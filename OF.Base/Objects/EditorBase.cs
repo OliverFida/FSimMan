@@ -15,17 +15,17 @@
         #endregion
 
         #region Methods PUBLIC
-        public void BeginEdit()
+        public virtual void BeginEdit()
         {
             _objectToEdit.BeginEdit();
         }
 
-        public void CancelEdit()
+        public virtual void CancelEdit()
         {
             _objectToEdit.CancelEdit();
         }
 
-        public void EndEdit()
+        public virtual void EndEdit()
         {
             _objectToEdit.EndEdit();
         }

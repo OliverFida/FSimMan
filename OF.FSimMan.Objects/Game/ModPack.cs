@@ -79,7 +79,7 @@ namespace OF.FSimMan.Game
             }
         }
 
-        private string _modsTempDirectoryPath
+        public string ModsTempDirectoryPath
         {
             get
             {

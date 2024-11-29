@@ -18,6 +18,18 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PUBLIC
+        public override void CancelEdit()
+        {
+            base.CancelEdit();
+            CheckIntegrity(true);
+        }
+
+        public override void EndEdit()
+        {
+            base.EndEdit();
+            CheckIntegrity(true);
+        }
+
         public void AddMods(string[] filePaths)
         {
             foreach (string filePath in filePaths)
@@ -99,7 +111,58 @@ namespace OF.FSimMan.Game
 
         private void CheckModsIntegrity(bool final)
         {
-            // OFDO
+            string[] modFilePaths = Directory.GetFiles(ObjectToEdit.ModsDirectoryPath);
+            string[] tempFilePaths = Directory.GetFiles(ObjectToEdit.ModsTempDirectoryPath);
+
+            if (final)
+            {
+                // All files in mods directory?
+                foreach (Mod mod in ObjectToEdit.Mods)
+                {
+                    string? matchingFile = (from p in modFilePaths where p.ToLower().EndsWith(mod.FileName.ToLower()) select p).SingleOrDefault();
+                    if (matchingFile is not null) continue; // Is in mods
+
+                    matchingFile = (from p in tempFilePaths where p.ToLower().EndsWith(mod.FileName.ToLower()) select p).SingleOrDefault();
+                    if (matchingFile is null) throw new MissingModFileException(mod.FileName); // Is not in tempMods
+
+                    // Is in tempMods
+                    FileInfo fileInfo = new FileInfo(matchingFile);
+                    string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
+
+                    File.Move(matchingFile, targetFilePath);
+                }
+                
+                // No deprecated files in mods directory?
+                foreach (string filePath in modFilePaths)
+                {
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    Mod? matchingMod = (from m in ObjectToEdit.Mods where m.FileName.ToLower().Equals(fileInfo.Name.ToLower()) select m).SingleOrDefault();
+
+                    if (matchingMod is null) File.Delete(fileInfo.FullName); // deprecated mod
+                }
+
+                // Clearing temp directory
+                tempFilePaths = Directory.GetFiles(ObjectToEdit.ModsTempDirectoryPath);
+                foreach (string filePath in tempFilePaths)
+                {
+                    File.Delete(filePath);
+                }
+            }
+            else
+            {
+                // No deleted mods in mods directory?
+                foreach (string filePath in modFilePaths)
+                {
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    Mod? matchingMod = (from m in ObjectToEdit.Mods where m.FileName.ToLower().Equals(fileInfo.Name.ToLower()) select m).SingleOrDefault();
+
+                    if (matchingMod is null)
+                    {
+                        string targetFilePath = Path.Combine(ObjectToEdit.ModsTempDirectoryPath, fileInfo.Name);
+                        File.Move(fileInfo.FullName, targetFilePath);
+                    }
+                }
+            }
         }
         #endregion
     }
