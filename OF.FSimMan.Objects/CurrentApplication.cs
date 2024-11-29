@@ -50,7 +50,9 @@ namespace OF.FSimMan
 #if DEBUG
                 temp = Path.Combine(temp, "_debug");
 #endif
-                return Path.Combine(temp, "config");
+                temp = Path.Combine(temp, "config");
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
             }
         }
 
@@ -62,7 +64,9 @@ namespace OF.FSimMan
 #if DEBUG
                 temp = Path.Combine(temp, "_debug");
 #endif
-                return Path.Combine(temp, "modPacks");
+                temp = Path.Combine(temp, "modPacks");
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
             }
         }
 
@@ -74,7 +78,9 @@ namespace OF.FSimMan
 #if DEBUG
                 temp = Path.Combine(temp, "_debug");
 #endif
-                return Path.Combine(temp, "temp");
+                temp = Path.Combine(temp, "temp");
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
             }
         }
         #endregion

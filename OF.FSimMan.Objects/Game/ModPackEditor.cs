@@ -74,7 +74,6 @@ namespace OF.FSimMan.Game
                     {
                         iconFileName = $"icon_{Path.GetFileNameWithoutExtension(fileInfo.FullName)}.dds";
                         string iconFilePath = Path.Combine(ObjectToEdit.ModIconsDirectoryPath, iconFileName);
-                        if (!Directory.Exists(ObjectToEdit.ModIconsDirectoryPath)) Directory.CreateDirectory(ObjectToEdit.ModIconsDirectoryPath);
                         entry.ExtractToFile(iconFilePath, true);
                     }
                 }
@@ -93,7 +92,6 @@ namespace OF.FSimMan.Game
 
             // Mod file copying
             string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
-            if (!Directory.Exists(ObjectToEdit.ModsDirectoryPath)) Directory.CreateDirectory(ObjectToEdit.ModsDirectoryPath);
             File.Copy(fileInfo.FullName, targetFilePath, true);
 
             ObjectToEdit._mods.Add(newMod);

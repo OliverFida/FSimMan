@@ -66,7 +66,6 @@ namespace OF.FSimMan.Utility
 
         public static string GetConfigFilePath(string fileName)
         {
-            if (!Directory.Exists(CurrentApplication.CONFIG_PATH)) Directory.CreateDirectory(CurrentApplication.CONFIG_PATH);
             return Path.Combine(CurrentApplication.CONFIG_PATH, fileName);
         }
     }

@@ -61,22 +61,42 @@ namespace OF.FSimMan.Game
 
         private string _modPackDirectoryPath
         {
-            get => Path.Combine(CurrentApplication.MODPACKS_PATH, _game.ToString(), Guid.ToString());
+            get
+            {
+                string temp = Path.Combine(CurrentApplication.MODPACKS_PATH, _game.ToString(), Guid.ToString());
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
         }
 
         public string ModsDirectoryPath
         {
-            get => Path.Combine(_modPackDirectoryPath, "mods");
+            get
+            {
+                string temp = Path.Combine(_modPackDirectoryPath, "mods");
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
         }
 
         private string _modsTempDirectoryPath
         {
-            get => Path.Combine(_modPackDirectoryPath, "modsTemp");
+            get
+            {
+                string temp = Path.Combine(_modPackDirectoryPath, "modsTemp");
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
         }
 
         public string ModIconsDirectoryPath
         {
-            get => Path.Combine(_modPackDirectoryPath, "modIcons");
+            get
+            {
+                string temp = Path.Combine(_modPackDirectoryPath, "modIcons");
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
         }
         #endregion
 
