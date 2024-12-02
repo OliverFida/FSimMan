@@ -165,6 +165,7 @@ namespace OF.FSimMan.Client.Game
                 IsBusy = true;
 
                 _modPacksEditor!.RemoveModPack(modPack);
+                Directory.Delete(modPack.ModPackDirectoryPath, true);
                 StoreModPacks();
                 RefreshModPacks(false);
             }

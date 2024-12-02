@@ -59,7 +59,7 @@ namespace OF.FSimMan.Game
             private set => SetProperty(ref _mods, value);
         }
 
-        private string _modPackDirectoryPath
+        public string ModPackDirectoryPath
         {
             get
             {
@@ -73,7 +73,7 @@ namespace OF.FSimMan.Game
         {
             get
             {
-                string temp = Path.Combine(_modPackDirectoryPath, "mods");
+                string temp = Path.Combine(ModPackDirectoryPath, "mods");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
                 return temp;
             }
@@ -83,7 +83,7 @@ namespace OF.FSimMan.Game
         {
             get
             {
-                string temp = Path.Combine(_modPackDirectoryPath, "modsTemp");
+                string temp = Path.Combine(ModPackDirectoryPath, "modsTemp");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
                 return temp;
             }
@@ -93,7 +93,7 @@ namespace OF.FSimMan.Game
         {
             get
             {
-                string temp = Path.Combine(_modPackDirectoryPath, "modIcons");
+                string temp = Path.Combine(ModPackDirectoryPath, "modIcons");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
                 return temp;
             }
