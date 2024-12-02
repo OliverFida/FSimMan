@@ -18,7 +18,7 @@ namespace OF.FSimMan
 
         private void HandleUpdateCompleteEvent(object? sender, EventArgs e)
         {
-            Application.Current.Shutdown(0);
+            Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown(0));
         }
     }
 }
