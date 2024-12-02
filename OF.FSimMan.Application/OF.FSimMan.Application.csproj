@@ -10,7 +10,7 @@
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <Title>FSimMan</Title>
     <Authors>Oliver Fida</Authors>
-    <AssemblyVersion>0.2.1</AssemblyVersion>
+    <AssemblyVersion>0.2.2</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
 	<Version>$(AssemblyVersion)</Version>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
