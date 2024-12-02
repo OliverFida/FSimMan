@@ -14,7 +14,12 @@
     <FileVersion>$(AssemblyVersion)</FileVersion>
 	<Version>$(AssemblyVersion)</Version>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>UI\Logo22.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="UI\Logo22.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
