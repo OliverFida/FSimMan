@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="BgGrayBrush" Color="{StaticResource BgGrayColor}" />
+    <SolidColorBrush x:Key="TitleBarGrayBrush" Color="{StaticResource TitleBarGrayColor}" />
+    <SolidColorBrush x:Key="TitleBarButtonGrayBrush" Color="{StaticResource TitleBarButtonGrayColor}" />
+    <SolidColorBrush x:Key="TitleBarButtonBlueBrush" Color="{StaticResource TitleBarButtonBlueColor}" />
+    <SolidColorBrush x:Key="BlackoutBrush" Color="{StaticResource BlackoutColor}" />
+</ResourceDictionary>

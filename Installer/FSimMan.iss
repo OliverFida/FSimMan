@@ -1,6 +1,6 @@
 #define AppName "FSimMan"
-#define AppExeName AppName + ".exe"
-#define AppVersion "0.1.1"
+#define AppExeName "OF." + AppName + ".exe"
+#define AppVersion "0.2.0"
 #define AppPublisher "Oliver Fida"
 
 #define AssocFsmmpName AppName + " Modpack"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 PrivilegesRequired=admin
 OutputDir=C:\Users\Oliver Fida\Desktop\FSimMan
 OutputBaseFilename={#AppName}-v{#AppVersion}
-SetupIconFile=X:\Oliver Fida\FSimMan\FSimMan\UI\Resources\Images\Logo22.ico
+SetupIconFile=X:\Oliver Fida\FSimMan\OF.FSimMan.Resources\Logos\Logo22.ico
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern

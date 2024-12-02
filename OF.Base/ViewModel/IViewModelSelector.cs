@@ -1,12 +1,13 @@
-﻿namespace OF.Base.ViewModel
+﻿using System.Collections.ObjectModel;
+
+namespace OF.Base.ViewModel
 {
     public interface IViewModelSelector : IViewModel
     {
-        public IViewModel? ActiveViewModel { get; }
+        public ReadOnlyObservableCollection<IViewModel> OpenViewModels { get; }
+        public IViewModel? CurrentViewModel { get; }
 
-        public event EventHandler<ActiveViewModelChangedEventArgs>? ActiveViewModelChangedEvent;
-
-        public void SetActiveViewModel(IViewModel viewModel);
+        public void OpenViewModel(IViewModel viewModel);
         public void CloseViewModel(IViewModel viewModel);
         public void CloseCurrentViewModel();
     }

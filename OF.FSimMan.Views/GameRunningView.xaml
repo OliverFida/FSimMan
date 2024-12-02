@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="OF.FSimMan.View.GameRunningView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:GameRunningViewModel}}"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+            <of:Heading HorizontalAlignment="Center" Text="{Binding GameStatusText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Image
+                Width="100"
+                Height="100"
+                Margin="0,20"
+                Source="{Binding GameImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <of:Heading
+                HorizontalAlignment="Center"
+                Style="{StaticResource InputGroupHeadingStyle}"
+                Text="{Binding GameName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <of:ImageButton
+                Margin="0,20,0,0"
+                Command="{Binding CloseGameCommand}"
+                Content="Close Game"
+                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/X.png"
+                IsEnabled="{Binding IsCloseGameEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

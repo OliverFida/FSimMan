@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<UseWPF>true</UseWPF>
+	<Nullable>enable</Nullable>
+	<RootNamespace>OF.FSimMan</RootNamespace>
+	<PackageId>$(AssemblyName)</PackageId>
+	<Authors>Oliver Fida</Authors>
+	<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\ArrowLeft.png" />
+    <Resource Include="Icons\Check.png" />
+    <Resource Include="Icons\Debug.png" />
+    <Resource Include="Icons\Download.png" />
+    <Resource Include="Icons\Error.png" />
+    <Resource Include="Icons\Gear.png" />
+    <Resource Include="Icons\GitHub.png" />
+    <Resource Include="Icons\Home.png" />
+    <Resource Include="Icons\Info.png" />
+    <Resource Include="Icons\Missing-Image.png" />
+    <Resource Include="Icons\Play.png" />
+    <Resource Include="Icons\Plus.png" />
+    <Resource Include="Icons\Question.png" />
+    <Resource Include="Icons\QuestionCircle.png" />
+    <Resource Include="Icons\Trash.png" />
+    <Resource Include="Icons\Warning.png" />
+    <Resource Include="Icons\X.png" />
+    <Resource Include="Logos\FS22.png" />
+    <Resource Include="Logos\FS25.png" />
+    <Resource Include="Logos\Logo22.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Logos\Logo22.png" />
+    <Resource Include="Logos\Logo25.ico" />
+    <Resource Include="Logos\Logo25.png" />
+  </ItemGroup>
+
+</Project>

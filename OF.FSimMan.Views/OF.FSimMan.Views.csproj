@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<UseWPF>true</UseWPF>
+	<Nullable>enable</Nullable>
+	<RootNamespace>OF.FSimMan.View</RootNamespace>
+	<PackageId>$(AssemblyName)</PackageId>
+	<Authors>Oliver Fida</Authors>
+	<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
+    <ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
+    <ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AboutView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UiFunctions\InfoView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UiFunctions\QuestionView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UiFunctions\WarningView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

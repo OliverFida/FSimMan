@@ -1,0 +1,18 @@
+﻿<Application
+    x:Class="OF.FSimMan.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:OF.FSimMan"
+    xmlns:ui="clr-namespace:OF.FSimMan.UI"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/OF.Base.WpfControls;component/WpfControls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OF.FSimMan.Views;component/DataContexts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style BasedOn="{StaticResource AppBarBaseStyle}" TargetType="{x:Type ui:AppBar}" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

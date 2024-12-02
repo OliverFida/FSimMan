@@ -1,8 +1,0 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:OliverFida.FSimMan.UI.Converter">
-    <converter:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
-    <converter:DivideDoubleByTwoConverter x:Key="DivideDoubleByTwoConverter" />
-    <converter:StringImageSourceConverter x:Key="StringImageSourceConverter" />
-</ResourceDictionary>

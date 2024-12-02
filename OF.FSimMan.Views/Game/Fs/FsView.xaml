@@ -1,0 +1,67 @@
+﻿<UserControl
+    x:Class="OF.FSimMan.View.Game.Fs.FsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:FsViewModelBase}}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <of:BusyIndicator BusyContent="{Binding Client.BusyContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsBusy="{Binding Client.IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+        <Grid Style="{StaticResource SectionStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <of:Heading HorizontalAlignment="Left" Text="Modpacks" />
+                <of:ImageButton
+                    Margin="5,0,0,5"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding NewModPackCommand}"
+                    Content="Create new"
+                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Plus.png"
+                    Visibility="{Binding AppSettings.IsApplicationModeCreator, Converter={StaticResource BooleanVisibilityConverter}}" />
+                <of:ImageButton
+                    Margin="5,0,0,5"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding ImportModPackCommand}"
+                    Content="Import"
+                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png"
+                    Visibility="{Binding IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
+                <of:ImageButton
+                    Margin="5,0,0,5"
+                    VerticalAlignment="Bottom"
+                    Content="Get from Hub"
+                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png"
+                    Visibility="{Binding IsModPackHubVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
+            </StackPanel>
+
+            <of:DataGrid
+                Grid.Row="1"
+                Margin="0,5,0,0"
+                VerticalAlignment="Stretch"
+                ItemsSource="{Binding Client.ModPacks.List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource ModpacksDataGridStyle}">
+                <of:DataGrid.Columns>
+                    <DataGridTemplateColumn
+                        MinWidth="150"
+                        CellTemplate="{StaticResource ModpacksDataGridModpackDataTemplate}"
+                        Header="Modpack" />
+                    <DataGridTemplateColumn
+                        Width="*"
+                        CellTemplate="{StaticResource ModpacksDataGridDescriptionDataTemplate}"
+                        Header="Description" />
+                    <DataGridTemplateColumn
+                        MinWidth="150"
+                        CellTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}"
+                        Header="Controls" />
+                </of:DataGrid.Columns>
+            </of:DataGrid>
+        </Grid>
+    </of:BusyIndicator>
+</UserControl>

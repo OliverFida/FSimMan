@@ -2,7 +2,7 @@
 
 namespace OF.Base.Client
 {
-    public interface IClient : IBusyIndicatorManager
+    public interface IClient : IBusyIndicatorManager, IInitializeable
     {
 
     }
