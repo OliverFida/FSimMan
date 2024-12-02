@@ -49,6 +49,7 @@ namespace OF.FSimMan.Game
         public void CheckIntegrity(bool final)
         {
             CheckModsIntegrity(final);
+            CheckModIconsIntegrity(final);
         }
         #endregion
 
@@ -159,6 +160,22 @@ namespace OF.FSimMan.Game
                         File.Move(fileInfo.FullName, targetFilePath);
                     }
                 }
+            }
+        }
+
+        private void CheckModIconsIntegrity(bool final)
+        {
+            if (!final) return;
+
+            string[] iconFilePaths = Directory.GetFiles(ObjectToEdit.ModIconsDirectoryPath);
+
+            // No deprecated files in icons directory?
+            foreach (string filePath in iconFilePaths)
+            {
+                FileInfo fileInfo = new FileInfo(filePath);
+                Mod? matchingMod = (from m in ObjectToEdit.Mods where m.FileName.ToLower().Replace(".zip", "").Equals(fileInfo.Name.ToLower().Replace("icon_", "").Replace(".dds", "")) select m).SingleOrDefault();
+
+                if (matchingMod is null) File.Delete(fileInfo.FullName); // deprecated icon
             }
         }
         #endregion
