@@ -112,7 +112,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
         private void ReadModPackData(ref ZipArchive archive, ModPack modPack)
         {
-            foreach(Mod mod in modPack.Mods)
+            foreach (Mod mod in modPack.Mods)
             {
                 {
                     string sourceModFilePath = $@"mods\{mod.FileName}";

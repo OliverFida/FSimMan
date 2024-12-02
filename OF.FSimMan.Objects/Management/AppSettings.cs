@@ -1,15 +1,15 @@
-﻿using OF.Base.Objects;
+﻿using OF.FSimMan.Management.Games;
 
 namespace OF.FSimMan.Management
 {
-    public class AppSettings : BindingObject
+    public class AppSettings : AppSettingsBase
     {
         #region Application
         internal ApplicationMode _applicationMode = ApplicationMode.User;
         public ApplicationMode ApplicationMode
         {
             get => _applicationMode;
-            set { if (SetProperty(ref _applicationMode, value)) OnTriggerStoreEvent(); }
+            set { if (SetProperty(ref _applicationMode, value)) InvokeSettingsChanged(); }
         }
 
         public bool IsApplicationModeCreator => _applicationMode == ApplicationMode.Creator;
@@ -29,94 +29,22 @@ namespace OF.FSimMan.Management
         public string LastSelectedView
         {
             get => _lastSelectedView;
-            set { if (SetProperty(ref _lastSelectedView, value)) OnTriggerStoreEvent(); }
+            set { if (SetProperty(ref _lastSelectedView, value)) InvokeSettingsChanged(); }
         }
         #endregion
 
-        #region FarmingSim 22
-        internal bool _isFs22Active = false;
-        public bool IsFs22Active
-        {
-            get => _isFs22Active;
-            set { if (SetProperty(ref _isFs22Active, value)) UpdateVisiblility(); }
-        }
+        #region Games
+        internal readonly List<AppSettingsGameBase> _games = new List<AppSettingsGameBase>();
+        public List<AppSettingsGameBase> Games => _games;
 
-        internal string _fs22GamePath = string.Empty;
-        public string Fs22GamePath
+        public T GetGameSettings<T>() where T : AppSettingsGameBase
         {
-            get => _fs22GamePath;
-            set
-            {
-                if (SetProperty(ref _fs22GamePath, value)) UpdateVisiblility();
-            }
-        }
+            T? matchingSettings = Games.OfType<T>().SingleOrDefault();
+            if (matchingSettings is not null) return matchingSettings;
 
-        internal string _fs22DataPath = string.Empty;
-        public string Fs22DataPath
-        {
-            get => _fs22DataPath;
-            set
-            {
-                if (SetProperty(ref _fs22DataPath, value)) UpdateVisiblility();
-            }
-        }
-
-        public bool IsFs22Visible
-        {
-            get => IsFs22Active && !string.IsNullOrWhiteSpace(Fs22GamePath) && !string.IsNullOrWhiteSpace(Fs22DataPath);
-        }
-        #endregion
-
-        #region FarmingSim 25
-        internal bool _isFs25Active = false;
-        public bool IsFs25Active
-        {
-            get => _isFs25Active;
-            set
-            { if (SetProperty(ref _isFs25Active, value)) UpdateVisiblility(); }
-        }
-
-        internal string _fs25GamePath = string.Empty;
-        public string Fs25GamePath
-        {
-            get => _fs25GamePath;
-            set
-            {
-                if (SetProperty(ref _fs25GamePath, value)) UpdateVisiblility();
-            }
-        }
-
-        internal string _fs25DataPath = string.Empty;
-        public string Fs25DataPath
-        {
-            get => _fs25DataPath;
-            set
-            {
-                if (SetProperty(ref _fs25DataPath, value)) UpdateVisiblility();
-            }
-        }
-
-        public bool IsFs25Visible
-        {
-            get => IsFs25Active && !string.IsNullOrWhiteSpace(Fs25GamePath) && !string.IsNullOrWhiteSpace(Fs25DataPath);
-        }
-        #endregion
-
-        #region Events
-        public event EventHandler? TriggerStoreEvent;
-        #endregion
-
-        #region Methods PRIVATE
-        private void UpdateVisiblility()
-        {
-            OnPropertyChanged(nameof(IsFs22Visible));
-            OnPropertyChanged(nameof(IsFs25Visible));
-            OnTriggerStoreEvent();
-        }
-
-        private void OnTriggerStoreEvent()
-        {
-            TriggerStoreEvent?.Invoke(this, EventArgs.Empty);
+            T temp = Activator.CreateInstance<T>();
+            Games.Add(temp);
+            return temp;
         }
         #endregion
     }

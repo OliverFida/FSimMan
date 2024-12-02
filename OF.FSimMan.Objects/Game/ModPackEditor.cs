@@ -3,8 +3,6 @@ using OF.FSimMan.Game.Exceptions;
 using OF.FSimMan.Game.Fs.Fs22.Mod;
 using OF.FSimMan.Utility;
 using System.IO.Compression;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace OF.FSimMan.Game
 {
@@ -35,9 +33,9 @@ namespace OF.FSimMan.Game
             // OFDOL: object modsLock = new object();
             //Parallel.ForEach(filePaths, filePath =>
             //{
-                //AddMod(filePath, modsLock);
+            //AddMod(filePath, modsLock);
             //});
-            foreach(string filePath in filePaths)
+            foreach (string filePath in filePaths)
             {
                 AddMod(filePath);
             }

@@ -16,7 +16,7 @@
             <TabItem Header="Application" IsSelected="True">
                 <vmSettings:ApplicationViewModel />
             </TabItem>
-            <TabItem Header="Farming Simulator 22" Visibility="{Binding AppSettings.IsFs22Active, Converter={StaticResource BooleanVisibilityConverter}}">
+            <TabItem Header="Farming Simulator 22" Visibility="{Binding GameSettingsFs22.IsEnabled, Converter={StaticResource BooleanVisibilityConverter}}">
                 <vmSettings:Fs22ViewModel />
             </TabItem>
             <TabItem Header="Farming Simulator 25" Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}">

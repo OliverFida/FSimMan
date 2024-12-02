@@ -3,13 +3,14 @@ using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
+using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.ViewModel.Game.Fs
 {
     public class Fs25ViewModel : FsViewModelBase
     {
         #region Properties
-        public override bool IsOpenable => SettingsClient.Instance.AppSettings.IsFs25Visible;
+        public override bool IsOpenable => SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().IsFullyConfigured;
         #endregion
 
         #region Commands

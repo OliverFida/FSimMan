@@ -3,6 +3,7 @@ using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel;
 using OF.FSimMan.ViewModel.Game;
 using OF.FSimMan.ViewModel.Game.Fs;
@@ -21,6 +22,16 @@ namespace OF.FSimMan.UI
         public AppSettings? AppSettings
         {
             get => SettingsClient.Instance.AppSettings;
+        }
+
+        public AppSettingsGameFs22? GameSettingsFs22
+        {
+            get => AppSettings?.GetGameSettings<AppSettingsGameFs22>();
+        }
+
+        public AppSettingsGameFs25? GameSettingsFs25
+        {
+            get => AppSettings?.GetGameSettings<AppSettingsGameFs25>();
         }
 
         public bool IsAppBarEnabled

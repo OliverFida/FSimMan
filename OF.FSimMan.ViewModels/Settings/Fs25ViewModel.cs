@@ -4,6 +4,7 @@ using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.ViewModel.Settings
 {
@@ -11,6 +12,11 @@ namespace OF.FSimMan.ViewModel.Settings
     {
         #region Properties
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
+
+        public AppSettingsGameFs25? GameSettingsFs25
+        {
+            get => AppSettings?.GetGameSettings<AppSettingsGameFs25>();
+        }
         #endregion
 
         #region Commands
@@ -27,7 +33,7 @@ namespace OF.FSimMan.ViewModel.Settings
                 };
                 if (dialog.ShowDialog() != true) return;
 
-                ((SettingsClient)Client).AppSettings.Fs25GamePath = dialog.FolderName;
+                ((SettingsClient)Client).AppSettings.GetGameSettings<AppSettingsGameFs25>().ExeDirectoryPath = dialog.FolderName;
             }
             catch (OfException ex)
             {
@@ -48,7 +54,7 @@ namespace OF.FSimMan.ViewModel.Settings
                 };
                 if (dialog.ShowDialog() != true) return;
 
-                ((SettingsClient)Client).AppSettings.Fs25DataPath = dialog.FolderName;
+                ((SettingsClient)Client).AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath = dialog.FolderName;
             }
             catch (OfException ex)
             {

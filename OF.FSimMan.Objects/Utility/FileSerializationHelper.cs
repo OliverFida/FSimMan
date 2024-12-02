@@ -1,6 +1,5 @@
 ﻿using OF.Base.Objects;
 using OF.FSimMan.Management.Exceptions;
-using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -57,7 +56,7 @@ namespace OF.FSimMan.Utility
                     {
                         data = serializer.Deserialize(reader) as T;
                     }
-                    catch(InvalidOperationException ex) when (ex.InnerException is XmlException)
+                    catch (InvalidOperationException ex) when (ex.InnerException is XmlException)
                     {
                         throw new InvalidStreamException();
                     }

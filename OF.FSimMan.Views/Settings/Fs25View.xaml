@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Settings;assembly=OF.FSimMan.ViewModels"
-    d:DataContext="{d:DesignInstance Type={x:Type vm:ApplicationViewModel}}"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:Fs25ViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -22,7 +22,7 @@
                 <of:TextBox
                     Width="500"
                     IsReadOnly="True"
-                    Text="{Binding AppSettings.Fs25GamePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding GameSettingsFs25.ExeDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <of:Button
                     Margin="5,0,0,0"
                     Command="{Binding SelectFs25GamePathCommand}"
@@ -37,7 +37,7 @@
                 <of:TextBox
                     Width="500"
                     IsReadOnly="True"
-                    Text="{Binding AppSettings.Fs25DataPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding GameSettingsFs25.DataDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <of:Button
                     Margin="5,0,0,0"
                     Command="{Binding SelectFs25DataPathCommand}"

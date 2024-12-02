@@ -79,7 +79,7 @@
                                 ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Logos/FS22.png"
                                 IsSelected="{Binding IsFs22Selected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource AppBarImageButtonBaseStyle}"
-                                Visibility="{Binding AppSettings.IsFs22Visible, Converter={StaticResource BooleanVisibilityConverter}}" />
+                                Visibility="{Binding GameSettingsFs22.IsFullyConfigured, Converter={StaticResource BooleanVisibilityConverter}}" />
                             <Grid Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}">
                                 <root:ImageButton
                                     x:Name="Fs25Button"
@@ -89,7 +89,7 @@
                                     ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Logos/FS25.png"
                                     IsSelected="{Binding IsFs25Selected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource AppBarImageButtonBaseStyle}"
-                                    Visibility="{Binding AppSettings.IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}" />
+                                    Visibility="{Binding GameSettingsFs25.IsFullyConfigured, Converter={StaticResource BooleanVisibilityConverter}}" />
                             </Grid>
                             <root:ImageButton
                                 x:Name="SettingsButton"

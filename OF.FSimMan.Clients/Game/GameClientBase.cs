@@ -3,6 +3,7 @@ using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.Utility;
 using System.Diagnostics;
 
@@ -21,9 +22,9 @@ namespace OF.FSimMan.Client.Game
                 switch (_game)
                 {
                     case FSimMan.Management.Game.FarmingSim22:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.Fs22DataPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     case FSimMan.Management.Game.FarmingSim25:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.Fs25DataPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     default:
                         throw new NotImplementedException();
                 }
@@ -268,10 +269,10 @@ namespace OF.FSimMan.Client.Game
             switch (Game)
             {
                 case FSimMan.Management.Game.FarmingSim22:
-                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.Fs22GamePath, "FarmingSimulator2022.exe");
+                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().ExeDirectoryPath, "FarmingSimulator2022.exe");
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
-                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.Fs22GamePath, "FarmingSimulator2025.exe");
+                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().ExeDirectoryPath, "FarmingSimulator2025.exe");
                     break;
                 default:
                     throw new NotImplementedException();

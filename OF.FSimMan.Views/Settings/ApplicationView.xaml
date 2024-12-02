@@ -26,11 +26,11 @@
             Margin="0,10,0,0"
             Orientation="Vertical">
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Games" />
-            <of:CheckBox Content="Farming Simulator 22" IsChecked="{Binding AppSettings.IsFs22Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <of:CheckBox Content="Farming Simulator 22" IsChecked="{Binding GameSettingsFs22.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <of:CheckBox
                 Margin="0,5,0,0"
                 Content="Farming Simulator 25"
-                IsChecked="{Binding AppSettings.IsFs25Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsChecked="{Binding GameSettingsFs25.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}" />
         </StackPanel>
     </Grid>
