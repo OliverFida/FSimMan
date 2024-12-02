@@ -1,17 +1,19 @@
 ﻿using Microsoft.Win32;
 using OF.Base.Objects;
-using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
+using OF.FSimMan.ViewModel.Base;
 
 namespace OF.FSimMan.ViewModel.Game
 {
-    public abstract class GameViewModelBase : BusyViewModelBase
+    public abstract class GameViewModelBase : RememberableBusyViewModelBase
     {
         #region Properties
+        public abstract bool IsOpenable { get; }
+
         public static AppSettings AppSettings { get => SettingsClient.Instance.AppSettings; }
         public static bool IsModPackImportExportVisible { get => ReleaseFeatures.ModPackImportExport; }
 
@@ -130,10 +132,10 @@ namespace OF.FSimMan.ViewModel.Game
         #region Constructor
         public GameViewModelBase(IGameClient client) : base(client)
         {
-            NewModPackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).NewModPackDelegate));
+            NewModPackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).NewModPackDelegate)));
             ImportModPackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ImportModPackDelegate));
             PlayModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).PlayModpackDelegate));
-            EditModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).EditModpackDelegate));
+            EditModpackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).EditModpackDelegate)));
             ExportModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ExportModpackDelegate));
             DeleteModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).DeleteModpackDelegate));
         }

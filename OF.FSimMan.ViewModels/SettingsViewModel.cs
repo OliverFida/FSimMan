@@ -1,13 +1,13 @@
 ﻿using Microsoft.Win32;
 using OF.Base.Objects;
-using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
+using OF.FSimMan.ViewModel.Base;
 
 namespace OF.FSimMan.ViewModel
 {
-    public class SettingsViewModel : ViewModelBase
+    public class SettingsViewModel : RememberableViewModelBase
     {
         #region Properties
         public static bool IsFs25Visible

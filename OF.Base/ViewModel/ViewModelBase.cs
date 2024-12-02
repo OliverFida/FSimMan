@@ -10,6 +10,13 @@ namespace OF.Base.ViewModel
 
         private readonly bool _isAutocloseable;
         public bool IsAutocloseable => _isAutocloseable;
+
+        private bool _preventAutoclose;
+        public bool PreventAutoclose
+        {
+            get => _preventAutoclose;
+            private set => SetProperty(ref _preventAutoclose, value);
+        }
         #endregion
 
         #region Events
@@ -32,6 +39,21 @@ namespace OF.Base.ViewModel
             _isPersistant = isPersistant;
             _isAutocloseable = isAutocloseable;
             if (doInitialize) Task.Run(InitializeAsync);
+        }
+        #endregion
+
+        #region Methods PUBLIC
+        public void ExecutePreventAutoclose(Action action)
+        {
+            try
+            {
+                PreventAutoclose = true;
+                action.Invoke();
+            }
+            finally
+            {
+                PreventAutoclose = false;
+            }
         }
         #endregion
 

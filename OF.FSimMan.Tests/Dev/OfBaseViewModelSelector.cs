@@ -1,5 +1,4 @@
 ﻿using OF.Base.ViewModel;
-using OF.FSimMan.ViewModel;
 
 namespace OF.FSimMan.Tests.Dev
 {
@@ -13,58 +12,73 @@ namespace OF.FSimMan.Tests.Dev
             Assert.AreEqual(0, vms.OpenViewModels.Count);
             Assert.AreEqual(null, vms.CurrentViewModel);
 
-            // Open persistant VM
-            MainViewModel mvm = new MainViewModel();
-            vms.OpenViewModel(mvm);
+            // Open new pvm
+            PersistantViewModel pvm = new PersistantViewModel();
+            vms.OpenViewModel(pvm);
             Assert.AreEqual(1, vms.OpenViewModels.Count);
-            Assert.AreEqual(mvm, vms.CurrentViewModel);
+            Assert.AreEqual(pvm, vms.CurrentViewModel);
 
-            // Close current (persistant) VM
+            // Try close pvm
+            vms.CloseViewModel(pvm);
+            Assert.AreEqual(1, vms.OpenViewModels.Count);
+            Assert.AreEqual(pvm, vms.CurrentViewModel);
+
+            // Open new nvm
+            NonPersistantViewModel nvm = new NonPersistantViewModel();
+            vms.OpenViewModel(nvm);
+            Assert.AreEqual(2, vms.OpenViewModels.Count);
+            Assert.AreEqual(nvm, vms.CurrentViewModel);
+
+            // Close nvm | Current
             vms.CloseCurrentViewModel();
             Assert.AreEqual(1, vms.OpenViewModels.Count);
-            Assert.AreEqual(mvm, vms.CurrentViewModel);
+            Assert.AreEqual(pvm, vms.CurrentViewModel);
 
-            // Open persistant VM2
-            HomeViewModel hvm = new HomeViewModel();
-            vms.OpenViewModel(hvm);
+            // Open nvm
+            vms.OpenViewModel(nvm);
             Assert.AreEqual(2, vms.OpenViewModels.Count);
-            Assert.AreEqual(hvm, vms.CurrentViewModel);
+            Assert.AreEqual(nvm, vms.CurrentViewModel);
 
-            // Close persistant VM2
-            vms.CloseViewModel(hvm);
-            Assert.AreEqual(2, vms.OpenViewModels.Count);
-            Assert.AreEqual(hvm, vms.CurrentViewModel);
-
-            // Reopen persistant VM
-            vms.OpenViewModel(mvm);
-            Assert.AreEqual(2, vms.OpenViewModels.Count);
-            Assert.AreEqual(mvm, vms.CurrentViewModel);
-
-            // Open autocloseable VM
-            SettingsViewModel svm = new SettingsViewModel();
-            vms.OpenViewModel(svm);
+            // Open new avm
+            AutocloseableViewModel avm = new AutocloseableViewModel();
+            vms.OpenViewModel(avm);
             Assert.AreEqual(3, vms.OpenViewModels.Count);
-            Assert.AreEqual(svm, vms.CurrentViewModel);
+            Assert.AreEqual(avm, vms.CurrentViewModel);
 
-            // Close autocloseable VM
-            vms.CloseCurrentViewModel();
+            // Reopen nvm
+            vms.OpenViewModel(nvm);
             Assert.AreEqual(2, vms.OpenViewModels.Count);
-            Assert.AreEqual(hvm, vms.CurrentViewModel);
+            Assert.AreEqual(nvm, vms.CurrentViewModel);
 
-            // Open autocloseable VM
-            vms.OpenViewModel(svm);
+            // Reopen avm
+            vms.OpenViewModel(avm);
             Assert.AreEqual(3, vms.OpenViewModels.Count);
-            Assert.AreEqual(svm, vms.CurrentViewModel);
+            Assert.AreEqual(avm, vms.CurrentViewModel);
 
-            // Reopen persistant VM without triggerAutoclose
-            vms.OpenViewModel(mvm, false);
+            // Try close avm through autoclose
+            avm.ExecutePreventAutoclose(() => vms.OpenViewModel(nvm));
             Assert.AreEqual(3, vms.OpenViewModels.Count);
-            Assert.AreEqual(mvm, vms.CurrentViewModel);
+            Assert.AreEqual(nvm, vms.CurrentViewModel);
 
-            // Reopen persistant VM2 => autocloses autocloseable VM
-            vms.OpenViewModel(hvm);
+            // Close avm through autoclose
+            vms.OpenViewModel(pvm);
             Assert.AreEqual(2, vms.OpenViewModels.Count);
-            Assert.AreEqual(hvm, vms.CurrentViewModel);
+            Assert.AreEqual(pvm, vms.CurrentViewModel);
+        }
+
+        private class PersistantViewModel : ViewModelBase
+        {
+            public PersistantViewModel() : base(true) { }
+        }
+
+        private class NonPersistantViewModel : ViewModelBase
+        {
+            public NonPersistantViewModel() : base(false, false) { }
+        }
+
+        private class AutocloseableViewModel : ViewModelBase
+        {
+            public AutocloseableViewModel() : base(false, true) { }
         }
     }
 }

@@ -2,6 +2,8 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.ViewModel.Base;
+using OF.FSimMan.ViewModel.Game;
 using OliverFida.FSimMan.Exceptions;
 using System.Reflection;
 
@@ -103,9 +105,12 @@ namespace OF.FSimMan.ViewModel
 
         private void HandleCurrentViewModelChanged(object? sender, EventArgs e)
         {
-#if !DEBUG
-            if (ViewModelSelector.CurrentViewModel is not null && ViewModelSelector.CurrentViewModel.IsAutocloseable) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
-#endif
+            if (ViewModelSelector.CurrentViewModel == null) return;
+
+            if (ViewModelSelector.CurrentViewModel.GetType().IsAssignableTo(typeof(GameViewModelBase)) &&
+                !((GameViewModelBase)ViewModelSelector.CurrentViewModel).IsOpenable) ViewModelSelector.OpenViewModel(HomeViewModel);
+
+            if (ViewModelSelector.CurrentViewModel.GetType().IsAssignableTo(typeof(IRememberableViewModel))) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
         }
 
         private void HandleAppSettingsTriggerStoreEvent(object? sender, EventArgs e)
