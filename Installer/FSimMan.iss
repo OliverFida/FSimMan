@@ -1,6 +1,6 @@
 #define AppName "FSimMan"
 #define AppExeName "OF." + AppName + ".exe"
-#define AppVersion "0.2.0"
+#define AppVersion "0.2.1"
 #define AppPublisher "Oliver Fida"
 
 #define AssocFsmmpName AppName + " Modpack"
