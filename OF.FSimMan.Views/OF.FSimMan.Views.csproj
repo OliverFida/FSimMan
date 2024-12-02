@@ -18,10 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AboutView.xaml.cs">
+    <Compile Update="Settings\AboutView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Settings\Fs25View.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Settings\Fs22View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UiFunctions\InfoView.xaml.cs">

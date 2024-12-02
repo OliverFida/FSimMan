@@ -6,6 +6,6 @@
     <SolidColorBrush x:Key="BgGrayBrush" Color="{StaticResource BgGrayColor}" />
     <SolidColorBrush x:Key="TitleBarGrayBrush" Color="{StaticResource TitleBarGrayColor}" />
     <SolidColorBrush x:Key="TitleBarButtonGrayBrush" Color="{StaticResource TitleBarButtonGrayColor}" />
-    <SolidColorBrush x:Key="TitleBarButtonBlueBrush" Color="{StaticResource TitleBarButtonBlueColor}" />
+    <SolidColorBrush x:Key="TitleBarButtonHighlightBrush" Color="{StaticResource TitleBarButtonHighlightColor}" />
     <SolidColorBrush x:Key="BlackoutBrush" Color="{StaticResource BlackoutColor}" />
 </ResourceDictionary>

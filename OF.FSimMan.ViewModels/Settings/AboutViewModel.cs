@@ -2,7 +2,7 @@
 using OF.Base.ViewModel;
 using System.Diagnostics;
 
-namespace OF.FSimMan.ViewModel
+namespace OF.FSimMan.ViewModel.Settings
 {
     public class AboutViewModel : ViewModelBase
     {

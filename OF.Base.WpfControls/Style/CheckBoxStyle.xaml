@@ -28,7 +28,7 @@
                     </StackPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="CheckBoxBox" Property="Background" Value="{StaticResource TitleBarButtonBlueBrush}" />
+                            <Setter TargetName="CheckBoxBox" Property="Background" Value="{StaticResource TitleBarButtonHighlightBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

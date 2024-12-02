@@ -13,5 +13,6 @@
         <ResourceDictionary Source="DataGridStyle.xaml" />
         <ResourceDictionary Source="AppBarImageButtonStyle.xaml" />
         <ResourceDictionary Source="AppBarStyle.xaml" />
+        <ResourceDictionary Source="TabControlStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

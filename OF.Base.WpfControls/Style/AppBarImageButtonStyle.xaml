@@ -25,7 +25,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="ButtonBody" Property="Background" Value="{StaticResource TitleBarButtonBlueBrush}" />
+                            <Setter TargetName="ButtonBody" Property="Background" Value="{StaticResource TitleBarButtonHighlightBrush}" />
                         </DataTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.4" />

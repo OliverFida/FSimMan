@@ -44,7 +44,7 @@
                             <Setter Property="Opacity" Value="0.4" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource TitleBarButtonBlueBrush}" />
+                            <Setter Property="Background" Value="{StaticResource TitleBarButtonHighlightBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
