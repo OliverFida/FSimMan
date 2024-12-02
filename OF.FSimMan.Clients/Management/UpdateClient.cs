@@ -94,7 +94,7 @@ namespace OF.FSimMan.Client.Management
 
             if (versionParts.major < CurrentApplication.AssemblyVersion.Major) return false;
             if (versionParts.minor < CurrentApplication.AssemblyVersion.Minor) return false;
-            if (versionParts.build < CurrentApplication.AssemblyVersion.Build) return false;
+            if (versionParts.build <= CurrentApplication.AssemblyVersion.Build) return false;
 
             return true;
         }
