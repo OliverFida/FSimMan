@@ -1,4 +1,5 @@
 ﻿using OF.Base.Objects;
+using System.Collections.Concurrent;
 using System.Xml.Serialization;
 
 namespace OF.FSimMan.Game
@@ -58,13 +59,13 @@ namespace OF.FSimMan.Game
             ImageSource = value._imageSource;
 
             {
-                List<ModData> temp = new List<ModData>();
-                foreach (Mod mod in value.Mods)
+                ConcurrentBag<ModData> temp = new ConcurrentBag<ModData>();
+                Parallel.ForEach(value.Mods, mod =>
                 {
                     ModData data = new ModData();
                     data.ToData(mod);
                     temp.Add(data);
-                }
+                });
                 Mods = temp.ToArray();
             }
         }

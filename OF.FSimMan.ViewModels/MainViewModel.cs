@@ -103,14 +103,16 @@ namespace OF.FSimMan.ViewModel
 
         private void HandleCurrentViewModelChanged(object? sender, EventArgs e)
         {
+#if !DEBUG
             if (ViewModelSelector.CurrentViewModel is not null && ViewModelSelector.CurrentViewModel.IsAutocloseable) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
+#endif
         }
 
         private void HandleAppSettingsTriggerStoreEvent(object? sender, EventArgs e)
         {
             SettingsClient.Instance.StoreSettings();
         }
-        #endregion
+#endregion
 
         #region ISingleton
         private static readonly MainViewModel _instance = new MainViewModel();

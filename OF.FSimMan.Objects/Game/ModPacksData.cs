@@ -1,4 +1,5 @@
 ﻿using OF.Base.Objects;
+using System.Collections.Concurrent;
 using System.Xml.Serialization;
 
 namespace OF.FSimMan.Game
@@ -19,13 +20,13 @@ namespace OF.FSimMan.Game
 
         public override void ToData(ModPacks value)
         {
-            List<ModPackData> temp = new List<ModPackData>();
-            foreach (ModPack modPack in value.List)
+            ConcurrentBag<ModPackData> temp = new ConcurrentBag<ModPackData>();
+            Parallel.ForEach(value.List, modPack =>
             {
                 ModPackData data = new ModPackData();
                 data.ToData(modPack);
                 temp.Add(data);
-            }
+            });
             List = temp.ToArray();
         }
     }

@@ -32,7 +32,12 @@ namespace OF.FSimMan.Game
 
         public void AddMods(string[] filePaths)
         {
-            foreach (string filePath in filePaths)
+            // OFDOL: object modsLock = new object();
+            //Parallel.ForEach(filePaths, filePath =>
+            //{
+                //AddMod(filePath, modsLock);
+            //});
+            foreach(string filePath in filePaths)
             {
                 AddMod(filePath);
             }
@@ -54,6 +59,7 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PRIVATE
+        // OFDOL: private void AddMod(string filePath, object lockObject)
         private void AddMod(string filePath)
         {
             if (!File.Exists(filePath)) return;
@@ -104,6 +110,10 @@ namespace OF.FSimMan.Game
             string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
             File.Copy(fileInfo.FullName, targetFilePath, true);
 
+            // OFDOL: lock (lockObject)
+            //{
+            //    ObjectToEdit._mods.Add(newMod);
+            //}
             ObjectToEdit._mods.Add(newMod);
         }
 
@@ -115,10 +125,10 @@ namespace OF.FSimMan.Game
             if (final)
             {
                 // All files in mods directory?
-                foreach (Mod mod in ObjectToEdit.Mods)
+                Parallel.ForEach(ObjectToEdit.Mods, mod =>
                 {
                     string? matchingFile = (from p in modFilePaths where p.ToLower().EndsWith(mod.FileName.ToLower()) select p).SingleOrDefault();
-                    if (matchingFile is not null) continue; // Is in mods
+                    if (matchingFile is not null) return; // Is in mods
 
                     matchingFile = (from p in tempFilePaths where p.ToLower().EndsWith(mod.FileName.ToLower()) select p).SingleOrDefault();
                     if (matchingFile is null) throw new MissingModFileException(mod.FileName); // Is not in tempMods
@@ -128,28 +138,28 @@ namespace OF.FSimMan.Game
                     string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
 
                     File.Move(matchingFile, targetFilePath);
-                }
-                
+                });
+
                 // No deprecated files in mods directory?
-                foreach (string filePath in modFilePaths)
+                Parallel.ForEach(modFilePaths, filePath =>
                 {
                     FileInfo fileInfo = new FileInfo(filePath);
                     Mod? matchingMod = (from m in ObjectToEdit.Mods where m.FileName.ToLower().Equals(fileInfo.Name.ToLower()) select m).SingleOrDefault();
 
                     if (matchingMod is null) File.Delete(fileInfo.FullName); // deprecated mod
-                }
+                });
 
                 // Clearing temp directory
                 tempFilePaths = Directory.GetFiles(ObjectToEdit.ModsTempDirectoryPath);
-                foreach (string filePath in tempFilePaths)
+                Parallel.ForEach(tempFilePaths, filePath =>
                 {
                     File.Delete(filePath);
-                }
+                });
             }
             else
             {
                 // No deleted mods in mods directory?
-                foreach (string filePath in modFilePaths)
+                Parallel.ForEach(modFilePaths, filePath =>
                 {
                     FileInfo fileInfo = new FileInfo(filePath);
                     Mod? matchingMod = (from m in ObjectToEdit.Mods where m.FileName.ToLower().Equals(fileInfo.Name.ToLower()) select m).SingleOrDefault();
@@ -159,7 +169,7 @@ namespace OF.FSimMan.Game
                         string targetFilePath = Path.Combine(ObjectToEdit.ModsTempDirectoryPath, fileInfo.Name);
                         File.Move(fileInfo.FullName, targetFilePath);
                     }
-                }
+                });
             }
         }
 
@@ -170,13 +180,13 @@ namespace OF.FSimMan.Game
             string[] iconFilePaths = Directory.GetFiles(ObjectToEdit.ModIconsDirectoryPath);
 
             // No deprecated files in icons directory?
-            foreach (string filePath in iconFilePaths)
+            Parallel.ForEach(iconFilePaths, filePath =>
             {
                 FileInfo fileInfo = new FileInfo(filePath);
                 Mod? matchingMod = (from m in ObjectToEdit.Mods where m.FileName.ToLower().Replace(".zip", "").Equals(fileInfo.Name.ToLower().Replace("icon_", "").Replace(".dds", "")) select m).SingleOrDefault();
 
                 if (matchingMod is null) File.Delete(fileInfo.FullName); // deprecated icon
-            }
+            });
         }
         #endregion
     }
