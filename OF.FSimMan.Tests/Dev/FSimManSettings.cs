@@ -16,9 +16,9 @@ namespace OF.FSimMan.Tests.Dev
 
             AppSettingsData data = new AppSettingsData();
             data.ToData(appSettings);
-            Assert.AreEqual(data.ApplicationMode, appSettingsData.ApplicationMode);
-            Assert.AreEqual(data.LastSelectedView, appSettingsData.LastSelectedView);
-            Assert.AreEqual(data.Games.Count(), appSettingsData.Games.Count());
+            Assert.AreEqual(appSettingsData.ApplicationMode, data.ApplicationMode);
+            Assert.AreEqual(appSettingsData.LastSelectedView, data.LastSelectedView);
+            Assert.AreEqual(appSettingsData.Games.Count(), data.Games.Count());
             for (int i = 0; i < appSettingsData.Games.Count(); i++)
             {
                 switch (appSettingsData.Games[i])

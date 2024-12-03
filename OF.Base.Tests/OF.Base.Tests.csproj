@@ -1,0 +1,23 @@
+<Project Sdk="MSTest.Sdk/3.6.1">
+
+  <PropertyGroup>
+	<TargetFramework>net8.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<RootNamespace>OF.Base.Tests</RootNamespace>
+	<PackageId>$(AssemblyName)</PackageId>
+	<Nullable>enable</Nullable>
+	<Authors>Oliver Fida</Authors>
+	<LangVersion>latest</LangVersion>
+	<UseVsTest>true</UseVsTest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Client\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
+  </ItemGroup>
+
+</Project>
