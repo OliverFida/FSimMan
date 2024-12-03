@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
@@ -44,6 +45,30 @@
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
             </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Start Arguments" />
+            <of:CheckBox
+                Margin="0"
+                Content="Skip Intros"
+                IsChecked="{Binding GameSettingsFs25.StartArguments.SkipIntros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <!--<of:CheckBox
+                Margin="0,5,0,0"
+                Content="Disable Frame Limit"
+                IsChecked="{Binding GameSettingsFs25.StartArguments.DisableFrameLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+            <of:CheckBox
+                Margin="0,5,0,0"
+                Content="Enable Cheats"
+                IsChecked="{Binding GameSettingsFs25.StartArguments.EnableCheats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <!--<of:CheckBox
+                Margin="0,5,0,0"
+                Content="Enable Script Debugging"
+                IsChecked="{Binding GameSettingsFs25.StartArguments.EnableScriptDebug, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+            <!--<of:CheckBox
+                Margin="0,5,0,0"
+                Content="Disable Shader Compiler"
+                IsChecked="{Binding GameSettingsFs25.StartArguments.DisableShaderCompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
         </StackPanel>
     </Grid>
 </UserControl>

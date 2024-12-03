@@ -11,6 +11,12 @@
             set { if (SetProperty(ref _dataDirectoryPath, value)) InvokeSettingsChanged(); }
         }
 
+        internal AppSettingsGameFsStartArguments _startArguments = new AppSettingsGameFsStartArguments();
+        public AppSettingsGameFsStartArguments StartArguments
+        {
+            get => _startArguments;
+        }
+
         public override bool IsFullyConfigured
         {
             get

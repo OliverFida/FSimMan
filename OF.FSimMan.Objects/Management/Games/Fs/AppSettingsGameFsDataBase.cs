@@ -12,10 +12,14 @@ namespace OF.FSimMan.Management.Games.Fs
         [XmlElement(IsNullable = false)]
         public string DataDirectoryPath = string.Empty;
 
+        [XmlElement(IsNullable = false)]
+        public AppSettingsGameFsStartArgumentsData StartArguments = new AppSettingsGameFsStartArgumentsData();
+
         public override T FromData()
         {
             T temp = base.FromData();
-            temp.DataDirectoryPath = DataDirectoryPath;
+            temp._dataDirectoryPath = DataDirectoryPath;
+            temp._startArguments = StartArguments.FromData();
             return temp;
         }
 
@@ -23,6 +27,9 @@ namespace OF.FSimMan.Management.Games.Fs
         {
             base.ToData(value);
             DataDirectoryPath = value.DataDirectoryPath;
+            AppSettingsGameFsStartArgumentsData startArguments = new AppSettingsGameFsStartArgumentsData();
+            startArguments.ToData(value.StartArguments);
+            StartArguments = startArguments;
         }
     }
 }

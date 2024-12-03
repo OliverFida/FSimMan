@@ -266,19 +266,29 @@ namespace OF.FSimMan.Client.Game
         private void ExecuteGameExe()
         {
             string exePath;
+            string? args;
+
             switch (Game)
             {
                 case FSimMan.Management.Game.FarmingSim22:
-                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().ExeDirectoryPath, "FarmingSimulator2022.exe");
+                    {
+                        AppSettingsGameFs22 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>();
+                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2022.exe");
+                        args = gameSettings.StartArguments.GetArgumentsString();
+                    }
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
-                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().ExeDirectoryPath, "FarmingSimulator2025.exe");
+                    {
+                        AppSettingsGameFs25 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2025.exe");
+                        args = gameSettings.StartArguments.GetArgumentsString();
+                    }
                     break;
                 default:
                     throw new NotImplementedException();
             }
 
-            Process.Start(exePath);
+            Process.Start(exePath, args ?? string.Empty);
         }
 
         private void KillGameProcess()

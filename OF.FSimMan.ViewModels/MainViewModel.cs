@@ -2,6 +2,7 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
 using OliverFida.FSimMan.Exceptions;
@@ -32,7 +33,7 @@ namespace OF.FSimMan.ViewModel
 
             try
             {
-                SettingsClient.Instance.AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
+                SetEventHandlers();
                 OpenLastView();
 #if !DEBUG
                 await AutoUpdateAsync();
@@ -67,6 +68,18 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Methods PRIVATE
+        private void SetEventHandlers()
+        {
+            SettingsClient.Instance.AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
+
+            SettingsClient.Instance.AppSettings.Games.ForEach(game =>
+            {
+                game.StoreTrigger += HandleAppSettingsStoreTrigger;
+
+                if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).StartArguments.StoreTrigger += HandleAppSettingsStoreTrigger;
+            });
+        }
+
         private async Task AutoUpdateAsync()
         {
             UpdateClient updateClient = UpdateClient.Instance;
