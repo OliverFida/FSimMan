@@ -2,7 +2,7 @@
 
 namespace OF.FSimMan.Management.Games.Fs
 {
-    [XmlType("GameFs25")]
+    [XmlType("FarmingSim25")]
     public class AppSettingsGameFs25Data : AppSettingsGameFsDataBase<AppSettingsGameFs25>
     {
 

@@ -29,6 +29,12 @@
                     Command="{Binding SelectFs25GamePathCommand}"
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
+                <of:ImageButton
+                    Margin="5,0,0,0"
+                    Click="DebugSelectExeDirectoryPathButton_Click"
+                    ImageSource="{StaticResource BugIcon}"
+                    Style="{StaticResource SquareImageButtonStyle}"
+                    Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
         </StackPanel>
 
@@ -44,6 +50,12 @@
                     Command="{Binding SelectFs25DataPathCommand}"
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
+                <of:ImageButton
+                    Margin="5,0,0,0"
+                    Click="DebugSelectDataDirectoryPathButton_Click"
+                    ImageSource="{StaticResource BugIcon}"
+                    Style="{StaticResource SquareImageButtonStyle}"
+                    Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
         </StackPanel>
 

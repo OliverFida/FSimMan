@@ -148,7 +148,7 @@ namespace OF.FSimMan.ViewModel.Game
             RefreshModPacksCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).RefreshModPacksDelegate)));
             NewModPackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).NewModPackDelegate)));
             ImportModPackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ImportModPackDelegate));
-            PlayModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).PlayModpackDelegate));
+            PlayModpackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).PlayModpackDelegate)));
             EditModpackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).EditModpackDelegate)));
             ExportModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ExportModpackDelegate));
             DeleteModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).DeleteModpackDelegate));

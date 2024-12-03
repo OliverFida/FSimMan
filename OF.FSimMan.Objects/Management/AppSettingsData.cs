@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 
 namespace OF.FSimMan.Management
 {
+    [XmlRoot("AppSettings")]
     [XmlInclude(typeof(AppSettingsGameFs22Data))]
     [XmlInclude(typeof(AppSettingsGameFs25Data))]
     public class AppSettingsData : AppSettingsDataBase<AppSettings>
@@ -16,6 +17,7 @@ namespace OF.FSimMan.Management
         public string LastSelectedView = string.Empty;
 
         [XmlArray(nameof(Games), IsNullable = true)]
+        [XmlArrayItem("GameSettings")]
         public AppSettingsGameDataBase[] Games = [];
 
         public override AppSettings FromData()

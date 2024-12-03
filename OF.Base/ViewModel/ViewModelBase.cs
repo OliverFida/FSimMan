@@ -5,6 +5,18 @@ namespace OF.Base.ViewModel
     public abstract class ViewModelBase : BindingObject, IViewModel
     {
         #region Properties
+        public bool IsDebug
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
         private readonly bool _isPersistant;
         public bool IsPersistant => _isPersistant;
 

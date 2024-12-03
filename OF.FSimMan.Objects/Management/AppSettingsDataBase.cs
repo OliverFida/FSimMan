@@ -8,9 +8,9 @@ namespace OF.FSimMan.Management
         protected AppSettingsDataBase() { }
     }
 
-    [XmlRoot("AppSettings")]
     public abstract class AppSettingsDataBase<T> : DataObject<T>
     {
-
+        [XmlElement(IsNullable = false)]
+        public string ApplicationVersion = CurrentApplication.AssemblyVersionText.Replace("v", "");
     }
 }
