@@ -20,7 +20,7 @@
                     HorizontalAlignment="Left"
                     Command="{Binding OpenGitHubCommand}"
                     Content="GitHub"
-                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/GitHub.png"
+                    ImageSource="{StaticResource GitHubIcon}"
                     Style="{StaticResource W150ImageButtonStyle}" />
             </StackPanel>
         </Grid>

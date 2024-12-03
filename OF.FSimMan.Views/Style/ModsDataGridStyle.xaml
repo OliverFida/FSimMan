@@ -70,7 +70,7 @@
                 Margin="0,0,5,0"
                 Command="{Binding DataContext.RemoveModCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 CommandParameter="{Binding}"
-                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Trash.png"
+                ImageSource="{StaticResource TrashIcon}"
                 Style="{StaticResource SquareImageButtonStyle}" />
         </StackPanel>
     </DataTemplate>

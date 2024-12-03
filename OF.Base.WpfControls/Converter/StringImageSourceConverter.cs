@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.IO;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace OF.Base.Wpf.Converter
@@ -9,7 +11,7 @@ namespace OF.Base.Wpf.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            BitmapImage fallbackImage = new BitmapImage(new Uri("pack://application:,,,/OF.FSimMan.Resources;component/Icons/Missing-Image.png", UriKind.RelativeOrAbsolute));
+            DrawingImage fallbackImage = (DrawingImage)Application.Current.Resources["ImageIcon"];
 
             try
             {

@@ -49,13 +49,13 @@
                                 Margin="5,0,0,0"
                                 Command="{Binding UpdateCommand}"
                                 Content="Install Update"
-                                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png"
+                                ImageSource="{StaticResource DownloadIcon}"
                                 Visibility="{Binding IsUpdateAvailable, Converter={StaticResource BooleanVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                             <root:ImageButton
                                 x:Name="DebugButton"
                                 Margin="5,0,0,0"
                                 Command="{Binding DebugCommand}"
-                                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Debug.png"
+                                ImageSource="{StaticResource BugIcon}"
                                 Style="{StaticResource AppBarImageButtonBaseStyle}"
                                 Visibility="{Binding IsDebugVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
                         </StackPanel>
@@ -68,7 +68,7 @@
                             <root:ImageButton
                                 x:Name="HomeButton"
                                 Command="{Binding HomeCommand}"
-                                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Home.png"
+                                ImageSource="{StaticResource HouseIcon}"
                                 IsSelected="{Binding IsHomeSelected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource AppBarImageButtonBaseStyle}" />
                             <root:ImageButton
@@ -95,7 +95,7 @@
                                 x:Name="SettingsButton"
                                 Margin="5,0,0,0"
                                 Command="{Binding SettingsCommand}"
-                                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Gear.png"
+                                ImageSource="{StaticResource GearIcon}"
                                 IsSelected="{Binding IsSettingsSelected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource AppBarImageButtonBaseStyle}" />
                         </StackPanel>

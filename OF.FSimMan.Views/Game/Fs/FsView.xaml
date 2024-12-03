@@ -24,20 +24,20 @@
                     VerticalAlignment="Bottom"
                     Command="{Binding NewModPackCommand}"
                     Content="Create new"
-                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Plus.png"
+                    ImageSource="{StaticResource PlusIcon}"
                     Visibility="{Binding AppSettings.IsApplicationModeCreator, Converter={StaticResource BooleanVisibilityConverter}}" />
                 <of:ImageButton
                     Margin="5,0,0,5"
                     VerticalAlignment="Bottom"
                     Command="{Binding ImportModPackCommand}"
                     Content="Import"
-                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png"
+                    ImageSource="{StaticResource FileImportIcon}"
                     Visibility="{Binding IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
                 <of:ImageButton
                     Margin="5,0,0,5"
                     VerticalAlignment="Bottom"
                     Content="Get from Hub"
-                    ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png"
+                    ImageSource="{StaticResource DownloadIcon}"
                     Visibility="{Binding IsModPackHubVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
 

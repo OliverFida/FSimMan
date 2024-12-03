@@ -32,7 +32,7 @@
                 Margin="5,0,0,0"
                 Command="{Binding CancelCommand}"
                 Content="Cancel"
-                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/X.png"
+                ImageSource="{StaticResource XIcon}"
                 Style="{StaticResource W150ImageButtonStyle}"
                 Visibility="{Binding IsCancelVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
             <root:ImageButton
@@ -40,7 +40,7 @@
                 Margin="5,0,0,0"
                 Command="{Binding OkCommand}"
                 Content="OK"
-                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Check.png"
+                ImageSource="{StaticResource CheckIcon}"
                 Style="{StaticResource W150ImageButtonStyle}"
                 Visibility="{Binding IsOkVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
             <root:ImageButton
@@ -48,7 +48,7 @@
                 Margin="5,0,0,0"
                 Command="{Binding YesCommand}"
                 Content="Yes"
-                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Check.png"
+                ImageSource="{StaticResource CheckIcon}"
                 Style="{StaticResource W150ImageButtonStyle}"
                 Visibility="{Binding IsYesVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
             <root:ImageButton
@@ -56,7 +56,7 @@
                 Margin="5,0,0,0"
                 Command="{Binding NoCommand}"
                 Content="No"
-                ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/X.png"
+                ImageSource="{StaticResource XIcon}"
                 Style="{StaticResource W150ImageButtonStyle}"
                 Visibility="{Binding IsNoVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
         </StackPanel>
