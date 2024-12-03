@@ -11,30 +11,40 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <of:BusyIndicator BusyContent="{Binding Client.BusyContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsBusy="{Binding Client.IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-        <Grid Style="{StaticResource SectionStyle}">
+        <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <of:Heading HorizontalAlignment="Left" Text="Modpacks" />
+            <of:Heading
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                Text="Modpacks" />
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <of:ImageButton
-                    Margin="5,0,0,5"
+                    VerticalAlignment="Bottom"
+                    Margin="0"
+                    Command="{Binding RefreshModPacksCommand}"
+                    Content="Refresh"
+                    ImageSource="{StaticResource RefreshIcon}" />
+                <of:ImageButton
+                    Margin="5,0,0,0"
                     VerticalAlignment="Bottom"
                     Command="{Binding NewModPackCommand}"
                     Content="Create new"
                     ImageSource="{StaticResource PlusIcon}"
                     Visibility="{Binding AppSettings.IsApplicationModeCreator, Converter={StaticResource BooleanVisibilityConverter}}" />
                 <of:ImageButton
-                    Margin="5,0,0,5"
+                    Margin="5,0,0,0"
                     VerticalAlignment="Bottom"
                     Command="{Binding ImportModPackCommand}"
                     Content="Import"
                     ImageSource="{StaticResource FileImportIcon}"
                     Visibility="{Binding IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
                 <of:ImageButton
-                    Margin="5,0,0,5"
+                    Margin="5,0,0,0"
                     VerticalAlignment="Bottom"
                     Content="Get from Hub"
                     ImageSource="{StaticResource DownloadIcon}"
@@ -42,7 +52,7 @@
             </StackPanel>
 
             <of:DataGrid
-                Grid.Row="1"
+                Grid.Row="2"
                 Margin="0,5,0,0"
                 VerticalAlignment="Stretch"
                 ItemsSource="{Binding Client.ModPacks.List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
