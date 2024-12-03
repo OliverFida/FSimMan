@@ -158,6 +158,14 @@ namespace OF.FSimMan.ViewModel.Game
         }
         #endregion
 
+        #region Methods PROTECTED
+        protected void HandleEditModPackViewModelClosedEvent(object? sender, EventArgs e)
+        {
+            ((IGameClient)Client).RefreshModPacks();
+            _editModPackViewModel!.ViewModelClosedEvent -= HandleEditModPackViewModelClosedEvent;
+        }
+        #endregion
+
         #region Methods PRIVATE
         private void HandleClientInizializeCompleteRunGame(object? sender, EventArgs e)
         {

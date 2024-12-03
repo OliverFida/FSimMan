@@ -16,22 +16,9 @@ namespace OF.FSimMan.Game
             ObjectToEdit.BeginEdit();
 
             ModPack? existingModPack = (from p in ObjectToEdit.List where p.Guid.Equals(modPack.Guid) select p).SingleOrDefault();
-            if (existingModPack is not null) throw new ModPackAlreadyExistsException();
+            if (!ignoreAlreadyExisting && existingModPack is not null) throw new ModPackAlreadyExistsException();
 
-            ObjectToEdit._list.Add(modPack);
-
-            ObjectToEdit.EndEdit();
-            OnPropertyChanged(nameof(ObjectToEdit.List));
-        }
-
-        public void UpdateModPack(ModPack modPack)
-        {
-            ObjectToEdit.BeginEdit();
-
-            ModPack? existingModPack = (from p in ObjectToEdit.List where p.Guid.Equals(modPack.Guid) select p).SingleOrDefault();
-            if (existingModPack is null) throw new ModPackNotExistingException();
-
-            ObjectToEdit._list.Remove(existingModPack);
+            if (ignoreAlreadyExisting && existingModPack is not null) ObjectToEdit._list.Remove(existingModPack);
             ObjectToEdit._list.Add(modPack);
 
             ObjectToEdit.EndEdit();

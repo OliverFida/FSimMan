@@ -87,7 +87,7 @@ namespace OF.FSimMan.ViewModel
                     client.StopGame();
                     MainViewModel.ViewModelSelector.CloseCurrentViewModel();
                 }
-                catch (Exception ex)
+                catch (OfException ex)
                 {
                     UiFunctions.ShowError(ex);
                 }

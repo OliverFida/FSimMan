@@ -63,6 +63,8 @@ namespace OF.FSimMan.Game
             if (!File.Exists(filePath)) return;
 
             FileInfo fileInfo = new FileInfo(filePath);
+            CheckModIsMatchingGame(fileInfo);
+
             modDesc modDescription;
             string? iconFileName = null;
 
@@ -113,6 +115,25 @@ namespace OF.FSimMan.Game
             //    ObjectToEdit._mods.Add(newMod);
             //}
             ObjectToEdit._mods.Add(newMod);
+        }
+
+        private void CheckModIsMatchingGame(FileInfo fileInfo)
+        {
+            string fileName = fileInfo.Name.ToLower();
+
+            switch (ObjectToEdit._game)
+            {
+                case Management.Game.FarmingSim22:
+                    if (fileName.StartsWith("fs22")) return;
+                    break;
+                case Management.Game.FarmingSim25:
+                    if (fileName.StartsWith("fs25")) return;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+            throw new InvalidModFileException(fileInfo.Name);
         }
 
         private void CheckModsIntegrity(bool final)

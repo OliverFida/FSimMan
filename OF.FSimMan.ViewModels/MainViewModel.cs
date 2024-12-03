@@ -38,7 +38,7 @@ namespace OF.FSimMan.ViewModel
                 await AutoUpdateAsync();
 #endif
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

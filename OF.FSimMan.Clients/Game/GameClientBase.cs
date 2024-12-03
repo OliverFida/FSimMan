@@ -219,7 +219,7 @@ namespace OF.FSimMan.Client.Game
 
         public void ExportModPack(ModPack modPack, string filePath)
         {
-            FsmmpImportExportClient client = new FsmmpImportExportClient();
+            FsmmpImportExportClient client = new FsmmpImportExportClient(Game);
             client.Export(filePath, modPack);
         }
 
@@ -233,7 +233,7 @@ namespace OF.FSimMan.Client.Game
 
         public void ImportModPack(string filePath, bool importAsNew)
         {
-            FsmmpImportExportClient client = new FsmmpImportExportClient();
+            FsmmpImportExportClient client = new FsmmpImportExportClient(Game);
             ModPack importedModPack = client.Import(filePath, importAsNew);
             _modPacksEditor!.AddModPack(importedModPack, !importAsNew);
             StoreModPacks();
@@ -284,6 +284,8 @@ namespace OF.FSimMan.Client.Game
         private void KillGameProcess()
         {
             Process[] processes = Process.GetProcessesByName(_processName);
+            if (processes.Length == 0) return;
+
             processes[0].Kill(true);
         }
         #endregion

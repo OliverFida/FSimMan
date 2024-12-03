@@ -32,7 +32,7 @@ namespace OF.FSimMan.ViewModel.Game
                 MainViewModel.ViewModelSelector.CloseCurrentViewModel();
                 InvokeViewModelClosedEvent();
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -46,7 +46,7 @@ namespace OF.FSimMan.ViewModel.Game
                 ((EditModPackClientBase)Client).StoreModPack();
                 _editMode = EditMode.Edit;
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -70,7 +70,7 @@ namespace OF.FSimMan.ViewModel.Game
 
                 Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).AddMods(fileDialog.FileNames));
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -88,7 +88,7 @@ namespace OF.FSimMan.ViewModel.Game
 
                 Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).RemoveMod(mod));
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }

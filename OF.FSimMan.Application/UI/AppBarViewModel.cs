@@ -103,10 +103,11 @@ namespace OF.FSimMan.UI
         {
             if (Fs22ViewModel is null || !Fs22ViewModel.IsInitialized) return;
 
-            await Task.Run(() =>
+            await Task.Run(() => Fs22ViewModel.ExecutePreventAutoclose(() =>
             {
                 try
                 {
+
                     Fs22ViewModel.RunGameOnClientInitializeComplete(null);
                     GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs22ViewModel);
                     MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
@@ -115,7 +116,7 @@ namespace OF.FSimMan.UI
                 {
                     UiFunctions.ShowError(ex);
                 }
-            });
+            }));
         }
         public bool IsFs22Selected
         {
@@ -146,7 +147,7 @@ namespace OF.FSimMan.UI
         {
             if (Fs25ViewModel is null || !Fs25ViewModel.IsInitialized) return;
 
-            await Task.Run(() =>
+            await Task.Run(() => Fs25ViewModel.ExecutePreventAutoclose(() =>
             {
                 try
                 {
@@ -158,7 +159,7 @@ namespace OF.FSimMan.UI
                 {
                     UiFunctions.ShowError(ex);
                 }
-            });
+            }));
         }
         public static bool IsFs25Visible
         {

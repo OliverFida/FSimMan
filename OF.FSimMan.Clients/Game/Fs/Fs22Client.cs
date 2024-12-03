@@ -49,7 +49,7 @@ namespace OF.FSimMan.Client.Game.Fs
         {
             if (_gameSettings is null) return;
 
-            FileSerializationHelper.SerializeFile<gameSettings>(GameSettingsFilePath, (gameSettings)_gameSettings);
+            FileSerializationHelper.SerializeFile(GameSettingsFilePath, (gameSettings)_gameSettings);
         }
         #endregion
     }

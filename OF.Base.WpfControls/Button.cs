@@ -13,14 +13,6 @@ namespace OF.Base.Wpf
             set { SetValue(CommandDoubleClickProperty, value); }
         }
         public static readonly DependencyProperty CommandDoubleClickProperty = DependencyProperty.Register(nameof(CommandDoubleClick), typeof(Command), typeof(Button));
-        private void OnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (CommandDoubleClick?.CanExecute(null) == true)
-            {
-                CommandDoubleClick.Execute(null);
-                e.Handled = true;
-            }
-        }
 
         public bool IsSelected
         {
@@ -33,7 +25,18 @@ namespace OF.Base.Wpf
         #region Constructor
         public Button()
         {
-            PreviewMouseDoubleClick += OnPreviewMouseDoubleClick;
+            MouseDoubleClick += OnMouseDoubleClick;
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (CommandDoubleClick?.CanExecute(null) == true)
+            {
+                CommandDoubleClick.Execute(null);
+                e.Handled = true;
+            }
         }
         #endregion
     }
