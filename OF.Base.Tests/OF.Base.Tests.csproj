@@ -16,8 +16,4 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
-  </ItemGroup>
-
 </Project>
