@@ -8,7 +8,7 @@
 #define AssocFsmmpKey StringChange(AssocFsmmpName, " ", "") + AssocFsmmpExt
 
 #define BuildDirectory ""
-#define BinDirectory BuildDirectory + "\bin"
+#define BinDirectory ""
 
 [Setup]
 AppId={{1370E40A-AD93-4EE6-9784-C343811282C7}
