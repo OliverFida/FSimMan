@@ -2,7 +2,7 @@
 
 namespace OF.FSimMan.Game
 {
-    public class Mod : EditableBindingObject
+    public class Mod : EditableObject
     {
         internal ModPack _parent;
 
