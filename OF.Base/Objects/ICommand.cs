@@ -3,6 +3,5 @@
     public interface ICommand : IBindingObject, System.Windows.Input.ICommand
     {
         public object? Parameter { get; }
-        public bool Enabled { get; }
     }
 }

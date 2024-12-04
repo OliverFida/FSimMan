@@ -7,7 +7,7 @@ namespace OF.Base.Tests.Objects
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class BindingObject
+    public class BindingObjectTests
     {
         [TestMethod]
         public void BindingObject_Self()

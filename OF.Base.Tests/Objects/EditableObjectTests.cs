@@ -4,11 +4,18 @@ using System.Diagnostics.CodeAnalysis;
 namespace OF.Base.Tests.Objects
 {
     [TestClass]
-    [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class EditableObject
+    public class EditableObjectTests
     {
         [TestMethod]
+        [TestCategory("ci")]
+        public void EditableObject_AllTests()
+        {
+            EditableObject_OnlySelf();
+            EditableObject_WithObject();
+            EditableObject_WithObservableCollection();
+        }
+
         public void EditableObject_OnlySelf()
         {
             AnyEditableObject obj = new AnyEditableObject();

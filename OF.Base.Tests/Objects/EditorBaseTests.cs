@@ -6,7 +6,7 @@ namespace OF.Base.Tests.Objects
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class EditorBase
+    public class EditorBaseTests
     {
         [TestMethod]
         public void EditorBase_Self()

@@ -5,10 +5,10 @@ namespace OF.Base.Tests.Objects
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class BusyIndicatorManager
+    public class ParentedDataObjectTests
     {
         [TestMethod]
-        public void BusyIndicatorManager_Self()
+        public void ParentedDataObject_Self()
         {
             // OFDO
         }

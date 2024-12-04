@@ -7,12 +7,6 @@
         private object? _parameter = null;
         public object? Parameter { get => _parameter; }
 
-        private bool _enabled = true;
-        public bool Enabled
-        {
-            get => _enabled;
-        }
-
         #region Constructor
         public Command(Action action)
         {
@@ -30,7 +24,7 @@
 
         public bool CanExecute(object? parameter)
         {
-            return Enabled;
+            return true;
         }
 
         public void Execute(object? parameter)
