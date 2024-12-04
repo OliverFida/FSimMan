@@ -16,4 +16,10 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="OF.Base">
+      <HintPath>..\OF.Base\bin\Debug\net8.0\OF.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
