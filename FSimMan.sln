@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OF.FSimMan.Tests", "OF.FSim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OF.Base.Tests", "OF.Base.Tests\OF.Base.Tests.csproj", "{BCEEF532-2961-46BF-9AC7-7F43D97801D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1924EAD-C886-4D2D-B708-ADC58ABA49E2}"
+	ProjectSection(SolutionItems) = preProject
+		Installer\FSimMan.iss = Installer\FSimMan.iss
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
