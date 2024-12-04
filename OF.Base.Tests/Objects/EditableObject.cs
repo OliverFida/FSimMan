@@ -1,13 +1,15 @@
 ﻿using OF.Base.Tests.TestUtility;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OF.Base.Tests.Objects
 {
     [TestClass]
     [TestCategory("ci")]
+    [ExcludeFromCodeCoverage]
     public class EditableObject
     {
         [TestMethod]
-        public void Test_OnlySelf()
+        public void EditableObject_OnlySelf()
         {
             AnyEditableObject obj = new AnyEditableObject();
             Assert.AreEqual("Test message for TestString", obj.TestString);
@@ -31,7 +33,7 @@ namespace OF.Base.Tests.Objects
         }
 
         [TestMethod]
-        public void Test_WithObject()
+        public void EditableObject_WithObject()
         {
             EditableObjectWithChild obj = new EditableObjectWithChild();
 
@@ -48,7 +50,7 @@ namespace OF.Base.Tests.Objects
         }
 
         [TestMethod]
-        public void Test_WithObservableCollection()
+        public void EditableObject_WithObservableCollection()
         {
             // OFDO
         }

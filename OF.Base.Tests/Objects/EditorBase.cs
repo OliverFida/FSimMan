@@ -1,13 +1,15 @@
 ﻿using OF.Base.Tests.TestUtility;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OF.Base.Tests.Objects
 {
     [TestClass]
     [TestCategory("ci")]
+    [ExcludeFromCodeCoverage]
     public class EditorBase
     {
         [TestMethod]
-        public void Test()
+        public void EditorBase_Self()
         {
             AnyEditableObject orgObj = new AnyEditableObject();
             AnyEditor editor = new AnyEditor();
