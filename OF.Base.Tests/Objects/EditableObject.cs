@@ -3,6 +3,7 @@
 namespace OF.Base.Tests.Objects
 {
     [TestClass]
+    [TestCategory("ci")]
     public class EditableObject
     {
         [TestMethod]
