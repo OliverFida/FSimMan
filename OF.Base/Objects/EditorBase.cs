@@ -14,18 +14,18 @@
         }
         #endregion
 
-        #region Methods PUBLIC
-        public virtual void BeginEdit()
+        #region Methods PROTECTED
+        protected virtual void BeginEdit()
         {
             _objectToEdit.BeginEdit();
         }
 
-        public virtual void CancelEdit()
+        protected virtual void CancelEdit()
         {
             _objectToEdit.CancelEdit();
         }
 
-        public virtual void EndEdit()
+        protected virtual void EndEdit()
         {
             _objectToEdit.EndEdit();
         }

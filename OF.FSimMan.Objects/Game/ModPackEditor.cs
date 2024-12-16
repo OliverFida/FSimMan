@@ -16,17 +16,9 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PUBLIC
-        public override void CancelEdit()
-        {
-            base.CancelEdit();
-            CheckIntegrity(true);
-        }
-
-        public override void EndEdit()
-        {
-            base.EndEdit();
-            CheckIntegrity(true);
-        }
+        public void TriggerBeginEdit() => BeginEdit();
+        public void TriggerCancelEdit() => CancelEdit();
+        public void TriggerEndEdit() => EndEdit();
 
         public void AddMods(string[] filePaths)
         {
@@ -53,6 +45,20 @@ namespace OF.FSimMan.Game
         {
             CheckModsIntegrity(final);
             CheckModIconsIntegrity(final);
+        }
+        #endregion
+
+        #region Methods PROTECTED
+        protected override void CancelEdit()
+        {
+            base.CancelEdit();
+            CheckIntegrity(true);
+        }
+
+        protected override void EndEdit()
+        {
+            base.EndEdit();
+            CheckIntegrity(true);
         }
         #endregion
 

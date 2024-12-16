@@ -130,7 +130,7 @@ namespace OF.FSimMan.Client.Game
             {
                 if (doControlBusyIndicator) IsBusy = true;
 
-                _modPacksEditor?.CancelEdit();
+                _modPacksEditor?.TriggerCancelEdit();
 
                 ModPacksData data = FileSerializationHelper.DeserializeConfigFile<ModPacksData>(_modPacksFileName);
                 ModPacks = data.FromData();
