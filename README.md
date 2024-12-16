@@ -12,11 +12,17 @@ Current and upcoming features are:
 
 |Feature|Description|Status|
 |---|---|---|
-|Defining & Playing Modpacks|Define modpacks and add all the mods you want to be inside. Then you can select, what modpack you want to play. Only the mods of the selected modpack will be loaded into the game.|**RELEASED**|
-|Exporting & Importing Modpacks||*IN PROGRESS*|
+|Defining & Playing Modpacks|Define modpacks and add all the mods you want to be inside.<br/>Then you can select, what modpack you want to play.<br/>Only the mods of the selected modpack will be loaded into the game.|**RELEASED**|
+|Start Arguments|Start game with arguments.|**RELEASED**|
+|Exporting & Importing Modpacks|Importing and exporting complete modpacks.<br/>*Currently available in a simple form. Will be extended later.*|**RELEASED**|
+|Farming Simulator 25 Support||**RELEASED**|
 |Modpack Linked Savegames|See only the savegames, you've created with the currently playing modpack.|PLANNED|
 |Input Profiles||PLANNED|
 |32-bit Support|Run FSimMan on 32-bit based systems|PLANNED|
+|MacOS Support|Run FSimMan on MacOS based systems|PLANNED|
+|Multi-Language-Support||PLANNED|
+|Discord Rich Presence||PLANNED|
+|Convert Default Mods Folder|Convert your default mods folder into a modpack on first start.|PLANNED|
 
 ## Installing FSimMan
 
@@ -46,7 +52,7 @@ Current and upcoming features are:
 
 Currently, contributing is not yet planned through.
 
-If you still want to contribute code, you can create requests anyways.
+If you still want to contribute code, you can create requests anyways.<br/>
 I will then decide on the requests, without any official guidelines.
 
 ### Credits
