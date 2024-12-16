@@ -21,7 +21,7 @@ namespace OF.Base.Tests.Objects
             Assert.AreEqual(null, ex.InnerException);
 
             InvalidOperationException iex = new InvalidOperationException();
-            ex = new OfException(exceptionMessage,iex);
+            ex = new OfException(exceptionMessage, iex);
             Assert.AreEqual(exceptionMessage, ex.Message);
             Assert.AreEqual(iex, ex.InnerException);
         }

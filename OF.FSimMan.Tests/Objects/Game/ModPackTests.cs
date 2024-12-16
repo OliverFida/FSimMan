@@ -8,7 +8,7 @@ namespace OF.FSimMan.Tests.Objects.Game
     [ExcludeFromCodeCoverage]
     public class ModPackTests
     {
-        private static readonly Management.Game _game = Management.Game.FarmingSim22;
+        private static readonly FSimMan.Management.Game _game = FSimMan.Management.Game.FarmingSim22;
 
         [TestMethod]
         public void ModPack_New()
@@ -16,7 +16,7 @@ namespace OF.FSimMan.Tests.Objects.Game
             ModPackData mpd = new ModPackData();
             ModPack pack = mpd.FromData();
             Guid guid = pack.Guid;
-            string modPackDirectoryPath = Path.Combine(CurrentApplication.MODPACKS_PATH, Management.Game.None.ToString(), guid.ToString());
+            string modPackDirectoryPath = Path.Combine(CurrentApplication.MODPACKS_PATH, FSimMan.Management.Game.None.ToString(), guid.ToString());
             string modsDirectoryPath = Path.Combine(modPackDirectoryPath, "mods");
             string modsTempDirectoryPath = Path.Combine(modPackDirectoryPath, "modsTemp");
             string modIconsDirectoryPath = Path.Combine(modPackDirectoryPath, "modIcons");

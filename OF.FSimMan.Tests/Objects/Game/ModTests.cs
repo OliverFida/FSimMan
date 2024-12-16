@@ -12,7 +12,7 @@ namespace OF.FSimMan.Tests.Objects.Game
         public void Mod_Self()
         {
             // Unnamed mod
-            ModPack pack = new ModPack(Management.Game.FarmingSim22);
+            ModPack pack = new ModPack(FSimMan.Management.Game.FarmingSim22);
 
             ModData data = new ModData();
             Mod mod = data.FromData();

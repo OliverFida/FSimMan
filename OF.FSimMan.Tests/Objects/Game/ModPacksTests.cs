@@ -8,7 +8,7 @@ namespace OF.FSimMan.Tests.Objects.Game
     [ExcludeFromCodeCoverage]
     public class ModPacksTests
     {
-        private static readonly Management.Game _game = Management.Game.FarmingSim22;
+        private static readonly FSimMan.Management.Game _game = FSimMan.Management.Game.FarmingSim22;
 
         [TestMethod]
         public void ModPacks_Self()

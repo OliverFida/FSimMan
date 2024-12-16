@@ -48,6 +48,7 @@ namespace OF.FSimMan.Utility
             T? data;
             try
             {
+                stream.Position = 0;
                 using (XmlReader reader = XmlReader.Create(stream))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(T));
