@@ -7,7 +7,7 @@ namespace OF.FSimMan.Tests.Objects.Utility
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class FileSerializationHelperTests
+    public class FileSerializationHelperTests : FSimManTestsBase
     {
         private readonly string _testFileName = "temp.txt";
 

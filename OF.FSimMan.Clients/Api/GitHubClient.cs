@@ -1,9 +1,11 @@
 ﻿using OF.Base.Client;
 using OF.FSimMan.Api.GitHub;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
 namespace OF.FSimMan.Client.Api
 {
+    [ExcludeFromCodeCoverage]
     public class GitHubClient : ClientBase
     {
         private const string _githubUrl = "https://api.github.com";

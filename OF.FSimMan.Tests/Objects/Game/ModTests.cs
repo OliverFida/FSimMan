@@ -6,7 +6,7 @@ namespace OF.FSimMan.Tests.Objects.Game
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class ModTests
+    public class ModTests : FSimManTestsBase
     {
         [TestMethod]
         public void Mod_Self()

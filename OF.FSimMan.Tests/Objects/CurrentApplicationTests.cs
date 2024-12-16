@@ -5,7 +5,7 @@ namespace OF.FSimMan.Tests.Objects
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class CurrentApplicationTests
+    public class CurrentApplicationTests : FSimManTestsBase
     {
         [TestMethod]
         public void CurrentApplication_Self()

@@ -14,6 +14,10 @@ namespace OF.FSimMan
         #endregion
 
         #region Properties
+#if DEBUG
+        public static LaunchMode LaunchMode = LaunchMode.Default;
+#endif
+
         private static readonly Version? _assemblyVersion = Assembly.GetEntryAssembly()!.GetName().Version;
         public static Version? AssemblyVersion
         {
@@ -48,7 +52,14 @@ namespace OF.FSimMan
             {
                 string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Oliver Fida", "FSimMan");
 #if DEBUG
-                temp = Path.Combine(temp, "_debug");
+                string debugSuffix = string.Empty;
+                switch (LaunchMode)
+                {
+                    case LaunchMode.UnitTests:
+                        debugSuffix = "-ut";
+                        break;
+                }
+                temp = Path.Combine(temp, $"_debug{debugSuffix}");
 #endif
                 temp = Path.Combine(temp, "config");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
@@ -62,7 +73,14 @@ namespace OF.FSimMan
             {
                 string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Oliver Fida", "FSimMan");
 #if DEBUG
-                temp = Path.Combine(temp, "_debug");
+                string debugSuffix = string.Empty;
+                switch (LaunchMode)
+                {
+                    case LaunchMode.UnitTests:
+                        debugSuffix = "-ut";
+                        break;
+                }
+                temp = Path.Combine(temp, $"_debug{debugSuffix}");
 #endif
                 temp = Path.Combine(temp, "modPacks");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
@@ -76,7 +94,14 @@ namespace OF.FSimMan
             {
                 string temp = Path.Combine($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}Low", "Oliver Fida", "FSimMan");
 #if DEBUG
-                temp = Path.Combine(temp, "_debug");
+                string debugSuffix = string.Empty;
+                switch (LaunchMode)
+                {
+                    case LaunchMode.UnitTests:
+                        debugSuffix = "-ut";
+                        break;
+                }
+                temp = Path.Combine(temp, $"_debug{debugSuffix}");
 #endif
                 temp = Path.Combine(temp, "temp");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);

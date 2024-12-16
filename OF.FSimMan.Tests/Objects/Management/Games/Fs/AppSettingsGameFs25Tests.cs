@@ -6,7 +6,7 @@ namespace OF.FSimMan.Tests.Objects.Management
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class AppSettingsGameFs25Tests
+    public class AppSettingsGameFs25Tests : FSimManTestsBase
     {
         [TestMethod]
         public void AppSettingsGameFs25_Self()

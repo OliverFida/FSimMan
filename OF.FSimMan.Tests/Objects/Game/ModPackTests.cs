@@ -6,7 +6,7 @@ namespace OF.FSimMan.Tests.Objects.Game
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class ModPackTests
+    public class ModPackTests : FSimManTestsBase
     {
         private static readonly FSimMan.Management.Game _game = FSimMan.Management.Game.FarmingSim22;
 

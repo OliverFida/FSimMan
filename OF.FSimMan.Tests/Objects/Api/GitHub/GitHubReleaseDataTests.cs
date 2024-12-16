@@ -6,7 +6,7 @@ namespace OF.FSimMan.Tests.Objects.Api.GitHub
     [TestClass]
     [TestCategory("ci")]
     [ExcludeFromCodeCoverage]
-    public class GitHubReleaseDataTests
+    public class GitHubReleaseDataTests : FSimManTestsBase
     {
         [TestMethod]
         public void GitHubReleaseData_Self()
