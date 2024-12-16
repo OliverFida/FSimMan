@@ -16,14 +16,14 @@ namespace OF.Base.Tests.Objects
             Assert.AreEqual(orgObj.TestString, editor.ObjectToEdit.TestString);
 
             string message = "First message";
-            editor.BeginEdit();
+            editor.TriggerBeginEdit();
             editor.ObjectToEdit.TestString = message;
-            editor.CancelEdit();
+            editor.TriggerCancelEdit();
             Assert.AreEqual(orgObj.TestString, editor.ObjectToEdit.TestString);
 
-            editor.BeginEdit();
+            editor.TriggerBeginEdit();
             editor.ObjectToEdit.TestString = message;
-            editor.EndEdit();
+            editor.TriggerEndEdit();
             Assert.AreEqual(message, editor.ObjectToEdit.TestString);
         }
     }

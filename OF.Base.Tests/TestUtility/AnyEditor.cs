@@ -8,5 +8,9 @@ namespace OF.Base.Tests.TestUtility
         {
 
         }
+
+        public void TriggerBeginEdit() => BeginEdit();
+        public void TriggerCancelEdit() => CancelEdit();
+        public void TriggerEndEdit() => EndEdit();
     }
 }
