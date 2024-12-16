@@ -59,7 +59,7 @@ namespace OF.Base.Tests.Objects
         [TestMethod]
         public void EditableObject_WithObservableCollection()
         {
-            // OFDO
+            // OFDO: EditableObject_WithObservableCollection
         }
     }
 }

@@ -10,7 +10,7 @@ namespace OF.Base.Tests.Objects
         [TestMethod]
         public void EditableObservableCollection_Self()
         {
-            // OFDO
+            // OFDO: EditableObservableCollection_Self
         }
     }
 }

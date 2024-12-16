@@ -1,31 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-    <AssemblyName>OF.FSimMan</AssemblyName>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
-    <Title>FSimMan</Title>
-    <Authors>Oliver Fida</Authors>
-    <AssemblyVersion>0.2.2</AssemblyVersion>
-    <FileVersion>$(AssemblyVersion)</FileVersion>
-	<Version>$(AssemblyVersion)</Version>
-    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>UI\Logo22.ico</ApplicationIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<AssemblyName>OF.FSimMan</AssemblyName>
+		<RootNamespace>$(AssemblyName)</RootNamespace>
+		<Title>FSimMan</Title>
+		<Authors>Oliver Fida</Authors>
+		<AssemblyVersion>0.2.2</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
+		<Version>$(AssemblyVersion)</Version>
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+		<ApplicationIcon>UI\Logo22.ico</ApplicationIcon>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="UI\Logo22.ico" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="UI\Logo22.ico" />
+		<Content Include="..\LICENSE.md">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
-    <ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
-    <ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
-    <ProjectReference Include="..\OF.FSimMan.Views\OF.FSimMan.Views.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
+		<ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
+		<ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
+		<ProjectReference Include="..\OF.FSimMan.Views\OF.FSimMan.Views.csproj" />
+	</ItemGroup>
 
 </Project>
