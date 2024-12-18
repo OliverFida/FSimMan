@@ -5,7 +5,7 @@
         public static bool ApplicationModeCreator { get; private set; } = true;
         public static bool ModPackImportExport { get; private set; } = true;
         public static bool GiantsModPackHub { get; private set; } = false;
-        public static bool GameFs25 { get; private set; } = false;
+        public static bool GameFs25 { get; private set; } = true;
 
 #if DEBUG
         public static void InitializeDebugValues()
