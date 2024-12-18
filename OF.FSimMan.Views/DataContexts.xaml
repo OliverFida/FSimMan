@@ -5,9 +5,12 @@
     xmlns:viewGameFs="clr-namespace:OF.FSimMan.View.Game.Fs"
     xmlns:viewModel="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelGameFs="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
+    xmlns:viewModelSettings="clr-namespace:OF.FSimMan.ViewModel.Settings;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelUiFunctions="clr-namespace:OF.Base.Wpf.UiFunctions;assembly=OF.Base.WpfControls"
+    xmlns:viewSettings="clr-namespace:OF.FSimMan.View.Settings"
     xmlns:viewUiFunctions="clr-namespace:OF.FSimMan.View.UiFunctions">
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/OF.FSimMan.Resources;component/Icons.xaml" />
         <ResourceDictionary Source="Style/Styles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -30,11 +33,21 @@
     <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
         <view:SettingsView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
-        <view:AboutView />
-    </DataTemplate>
     <DataTemplate DataType="{x:Type viewModel:GameRunningViewModel}">
         <view:GameRunningView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModelSettings:ApplicationViewModel}">
+        <viewSettings:ApplicationView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelSettings:AboutViewModel}">
+        <viewSettings:AboutView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelSettings:Fs22ViewModel}">
+        <viewSettings:Fs22View />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelSettings:Fs25ViewModel}">
+        <viewSettings:Fs25View />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelGameFs:Fs22ViewModel}">

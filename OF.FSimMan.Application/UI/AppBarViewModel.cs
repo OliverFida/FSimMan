@@ -3,6 +3,7 @@ using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel;
 using OF.FSimMan.ViewModel.Game;
 using OF.FSimMan.ViewModel.Game.Fs;
@@ -21,6 +22,16 @@ namespace OF.FSimMan.UI
         public AppSettings? AppSettings
         {
             get => SettingsClient.Instance.AppSettings;
+        }
+
+        public AppSettingsGameFs22? GameSettingsFs22
+        {
+            get => AppSettings?.GetGameSettings<AppSettingsGameFs22>();
+        }
+
+        public AppSettingsGameFs25? GameSettingsFs25
+        {
+            get => AppSettings?.GetGameSettings<AppSettingsGameFs25>();
         }
 
         public bool IsAppBarEnabled
@@ -92,10 +103,11 @@ namespace OF.FSimMan.UI
         {
             if (Fs22ViewModel is null || !Fs22ViewModel.IsInitialized) return;
 
-            await Task.Run(() =>
+            await Task.Run(() => Fs22ViewModel.ExecutePreventAutoclose(() =>
             {
                 try
                 {
+
                     Fs22ViewModel.RunGameOnClientInitializeComplete(null);
                     GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs22ViewModel);
                     MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
@@ -104,7 +116,7 @@ namespace OF.FSimMan.UI
                 {
                     UiFunctions.ShowError(ex);
                 }
-            });
+            }));
         }
         public bool IsFs22Selected
         {
@@ -135,7 +147,7 @@ namespace OF.FSimMan.UI
         {
             if (Fs25ViewModel is null || !Fs25ViewModel.IsInitialized) return;
 
-            await Task.Run(() =>
+            await Task.Run(() => Fs25ViewModel.ExecutePreventAutoclose(() =>
             {
                 try
                 {
@@ -147,7 +159,7 @@ namespace OF.FSimMan.UI
                 {
                     UiFunctions.ShowError(ex);
                 }
-            });
+            }));
         }
         public static bool IsFs25Visible
         {

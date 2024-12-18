@@ -1,4 +1,8 @@
-﻿namespace OF.FSimMan.Client.Game.Fs
+﻿using OF.FSimMan.Game.Exceptions;
+using OF.FSimMan.Game.Fs.Fs25;
+using OF.FSimMan.Utility;
+
+namespace OF.FSimMan.Client.Game.Fs
 {
     public class Fs25Client : FsClientBase
     {
@@ -9,17 +13,43 @@
         #region Methods PROTECTED
         protected override void ReadGameSettings()
         {
-            // OFDO
+            if (!File.Exists(GameSettingsFilePath))
+            {
+                SetProperty(ref _gameSettings, null);
+                return;
+            }
+
+            gameSettings gameSettings = FileSerializationHelper.DeserializeFile<gameSettings>(GameSettingsFilePath);
+            if (gameSettings.volume is null) throw new InvalidGameSettingsFileException();
+
+            SetProperty(ref _gameSettings, gameSettings);
         }
 
         protected override void SetGameModFolder()
         {
-            // OFDO
+            if (_gameSettings is null) return;
+
+            gameSettingsModsDirectoryOverride directoryOverride = new gameSettingsModsDirectoryOverride();
+            if (SelectedModPack is null)
+            {
+                directoryOverride.active = false;
+                directoryOverride.directory = string.Empty;
+            }
+            else
+            {
+                directoryOverride.active = true;
+                directoryOverride.directory = SelectedModPack.ModsDirectoryPath;
+            }
+
+            ((gameSettings)_gameSettings).modsDirectoryOverride = directoryOverride;
+            StoreGameSettings();
         }
 
         protected override void StoreGameSettings()
         {
-            // OFDO
+            if (_gameSettings is null) return;
+
+            FileSerializationHelper.SerializeFile(GameSettingsFilePath, (gameSettings)_gameSettings);
         }
         #endregion
     }

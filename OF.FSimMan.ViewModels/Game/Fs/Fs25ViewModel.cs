@@ -1,15 +1,17 @@
 ﻿using OF.Base.Objects;
 using OF.Base.Wpf.UiFunctions;
+using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
+using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.ViewModel.Game.Fs
 {
     public class Fs25ViewModel : FsViewModelBase
     {
         #region Properties
-        public override bool IsOpenable => SettingsClient.Instance.AppSettings.IsFs25Visible;
+        public override bool IsOpenable => SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().IsFullyConfigured;
         #endregion
 
         #region Commands
@@ -17,11 +19,13 @@ namespace OF.FSimMan.ViewModel.Game.Fs
         {
             try
             {
-                ModPack modPack = new ModPack(Management.Game.FarmingSim25);
-                Fs25EditModPackViewModel editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.New, modPack, (Fs25Client)Client);
-                MainViewModel.ViewModelSelector.OpenViewModel(editModPackViewModel);
+                ModPack modPack = ((IGameClient)Client).GetNewModPack();
+                _editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.New, modPack, (Fs25Client)Client);
+
+                _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
+                MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -34,8 +38,10 @@ namespace OF.FSimMan.ViewModel.Game.Fs
                 if (EditModpackCommand.Parameter == null) return;
                 ModPack modPack = (ModPack)EditModpackCommand.Parameter;
 
-                Fs25EditModPackViewModel editViewModel = new Fs25EditModPackViewModel(Management.EditMode.Edit, modPack, (Fs25Client)Client);
-                MainViewModel.ViewModelSelector.OpenViewModel(editViewModel);
+                _editModPackViewModel = new Fs25EditModPackViewModel(Management.EditMode.Edit, modPack, (Fs25Client)Client);
+
+                _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
+                MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
             }
             catch (OfException ex)
             {

@@ -2,7 +2,7 @@
 
 namespace OF.FSimMan.Game
 {
-    public class ModPack : EditableBindingObject
+    public class ModPack : EditableObject
     {
         #region Properties
         internal Management.Game _game;

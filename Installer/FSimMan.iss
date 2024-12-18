@@ -1,11 +1,14 @@
 #define AppName "FSimMan"
 #define AppExeName "OF." + AppName + ".exe"
-#define AppVersion "0.2.2"
+#define AppVersion "0.0.0"
 #define AppPublisher "Oliver Fida"
 
 #define AssocFsmmpName AppName + " Modpack"
 #define AssocFsmmpExt ".fsmmp"
 #define AssocFsmmpKey StringChange(AssocFsmmpName, " ", "") + AssocFsmmpExt
+
+#define BuildDirectory ""
+#define BinDirectory ""
 
 [Setup]
 AppId={{1370E40A-AD93-4EE6-9784-C343811282C7}
@@ -21,9 +24,9 @@ UninstallDisplayIcon={app}\{#AppExeName},0
 ;ChangesAssociations=yes
 DisableProgramGroupPage=yes
 PrivilegesRequired=admin
-OutputDir=C:\Users\Oliver Fida\Desktop\FSimMan
+OutputDir={#BuildDirectory}
 OutputBaseFilename={#AppName}-v{#AppVersion}
-SetupIconFile=X:\Oliver Fida\FSimMan\OF.FSimMan.Resources\Logos\Logo22.ico
+SetupIconFile=..\OF.FSimMan.Resources\Logos\Logo22.ico
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
@@ -32,10 +35,10 @@ WizardStyle=modern
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 
 [Files]
-Source: "publish\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "publish\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "publish\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "publish\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDirectory}\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDirectory}\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDirectory}\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDirectory}\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
 
 ;[Registry]
 ;Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpExt}\OpenWithProgids"; ValueType: string; ValueName: "{#AssocFsmmpKey}"; ValueData: ""; Flags: uninsdeletevalue

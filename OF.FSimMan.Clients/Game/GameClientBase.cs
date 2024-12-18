@@ -3,6 +3,7 @@ using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.Utility;
 using System.Diagnostics;
 
@@ -21,9 +22,9 @@ namespace OF.FSimMan.Client.Game
                 switch (_game)
                 {
                     case FSimMan.Management.Game.FarmingSim22:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.Fs22DataPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     case FSimMan.Management.Game.FarmingSim25:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.Fs25DataPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     default:
                         throw new NotImplementedException();
                 }
@@ -129,7 +130,7 @@ namespace OF.FSimMan.Client.Game
             {
                 if (doControlBusyIndicator) IsBusy = true;
 
-                _modPacksEditor?.CancelEdit();
+                _modPacksEditor?.TriggerCancelEdit();
 
                 ModPacksData data = FileSerializationHelper.DeserializeConfigFile<ModPacksData>(_modPacksFileName);
                 ModPacks = data.FromData();
@@ -218,7 +219,7 @@ namespace OF.FSimMan.Client.Game
 
         public void ExportModPack(ModPack modPack, string filePath)
         {
-            FsmmpImportExportClient client = new FsmmpImportExportClient();
+            FsmmpImportExportClient client = new FsmmpImportExportClient(Game);
             client.Export(filePath, modPack);
         }
 
@@ -232,7 +233,7 @@ namespace OF.FSimMan.Client.Game
 
         public void ImportModPack(string filePath, bool importAsNew)
         {
-            FsmmpImportExportClient client = new FsmmpImportExportClient();
+            FsmmpImportExportClient client = new FsmmpImportExportClient(Game);
             ModPack importedModPack = client.Import(filePath, importAsNew);
             _modPacksEditor!.AddModPack(importedModPack, !importAsNew);
             StoreModPacks();
@@ -265,24 +266,36 @@ namespace OF.FSimMan.Client.Game
         private void ExecuteGameExe()
         {
             string exePath;
+            string? args;
+
             switch (Game)
             {
                 case FSimMan.Management.Game.FarmingSim22:
-                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.Fs22GamePath, "FarmingSimulator2022.exe");
+                    {
+                        AppSettingsGameFs22 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>();
+                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2022.exe");
+                        args = gameSettings.StartArguments.GetArgumentsString();
+                    }
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
-                    exePath = Path.Combine(SettingsClient.Instance.AppSettings.Fs22GamePath, "FarmingSimulator2025.exe");
+                    {
+                        AppSettingsGameFs25 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2025.exe");
+                        args = gameSettings.StartArguments.GetArgumentsString();
+                    }
                     break;
                 default:
                     throw new NotImplementedException();
             }
 
-            Process.Start(exePath);
+            Process.Start(exePath, args ?? string.Empty);
         }
 
         private void KillGameProcess()
         {
             Process[] processes = Process.GetProcessesByName(_processName);
+            if (processes.Length == 0) return;
+
             processes[0].Kill(true);
         }
         #endregion

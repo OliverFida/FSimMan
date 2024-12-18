@@ -24,7 +24,7 @@
         <Image
             Grid.Row="1"
             Grid.Column="0"
-            Source="pack://application:,,,/OF.FSimMan.Resources;component/Icons/QuestionCircle.png" />
+            Source="{StaticResource CircleQuestionIcon}" />
         <TextBlock
             Grid.Row="0"
             Grid.RowSpan="3"

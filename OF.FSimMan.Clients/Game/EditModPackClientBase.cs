@@ -26,14 +26,14 @@ namespace OF.FSimMan.Client.Game
         #region Methods PUBLIC
         public void StoreModPack()
         {
-            _modPackEditor.EndEdit();
+            _modPackEditor.TriggerEndEdit();
             _gameClient.StoreModPacks();
-            _modPackEditor.BeginEdit();
+            _modPackEditor.TriggerBeginEdit();
         }
 
         public void CancelEdit()
         {
-            _modPackEditor.CancelEdit();
+            _modPackEditor.TriggerCancelEdit();
         }
 
         public void AddMods(string[] filePaths)

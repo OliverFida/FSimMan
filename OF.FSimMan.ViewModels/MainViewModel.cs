@@ -2,6 +2,7 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
 using OliverFida.FSimMan.Exceptions;
@@ -32,13 +33,13 @@ namespace OF.FSimMan.ViewModel
 
             try
             {
-                SettingsClient.Instance.AppSettings.TriggerStoreEvent += HandleAppSettingsTriggerStoreEvent;
+                SetEventHandlers();
                 OpenLastView();
 #if !DEBUG
                 await AutoUpdateAsync();
 #endif
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -67,6 +68,18 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Methods PRIVATE
+        private void SetEventHandlers()
+        {
+            SettingsClient.Instance.AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
+
+            SettingsClient.Instance.AppSettings.Games.ForEach(game =>
+            {
+                game.StoreTrigger += HandleAppSettingsStoreTrigger;
+
+                if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).StartArguments.StoreTrigger += HandleAppSettingsStoreTrigger;
+            });
+        }
+
         private async Task AutoUpdateAsync()
         {
             UpdateClient updateClient = UpdateClient.Instance;
@@ -113,11 +126,11 @@ namespace OF.FSimMan.ViewModel
             if (ViewModelSelector.CurrentViewModel.GetType().IsAssignableTo(typeof(IRememberableViewModel))) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
         }
 
-        private void HandleAppSettingsTriggerStoreEvent(object? sender, EventArgs e)
+        private void HandleAppSettingsStoreTrigger(object? sender, EventArgs e)
         {
             SettingsClient.Instance.StoreSettings();
         }
-#endregion
+        #endregion
 
         #region ISingleton
         private static readonly MainViewModel _instance = new MainViewModel();

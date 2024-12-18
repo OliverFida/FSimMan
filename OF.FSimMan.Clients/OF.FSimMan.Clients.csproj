@@ -10,7 +10,6 @@
   </PropertyGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\OF.Base\OF.Base.csproj" />
     <ProjectReference Include="..\OF.FSimMan.Objects\OF.FSimMan.Objects.csproj" />
   </ItemGroup>
 

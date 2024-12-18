@@ -9,6 +9,17 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 {
     public class FsmmpImportExportClient : ClientBase, IImportExportClient<ModPack>
     {
+        #region Properties
+        private readonly FSimMan.Management.Game _game;
+        #endregion
+
+        #region Constructor
+        public FsmmpImportExportClient(FSimMan.Management.Game game)
+        {
+            _game = game;
+        }
+        #endregion
+
         #region Methods PUBLIC
         public void Export(string targetFilePath, ModPack modPack)
         {
@@ -57,6 +68,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
                 ZipArchive archive = ZipFile.OpenRead(sourceFilePath);
 
                 ModPackData modPackData = ReadModPackInfo(ref archive, sourceFileName);
+                if (!modPackData.Game.Equals(_game)) throw new InvalidModPackFileException(sourceFileName);
                 if (importAsNew) modPackData.Guid = Guid.NewGuid();
 
                 ModPack modPack = modPackData.FromData();
@@ -112,7 +124,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
         private void ReadModPackData(ref ZipArchive archive, ModPack modPack)
         {
-            foreach(Mod mod in modPack.Mods)
+            foreach (Mod mod in modPack.Mods)
             {
                 {
                     string sourceModFilePath = $@"mods\{mod.FileName}";

@@ -10,42 +10,49 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PUBLIC
+        public void TriggerBeginEdit() => BeginEdit();
+        public void TriggerCancelEdit() => CancelEdit();
+        public void TriggerEndEdit() => EndEdit();
+
         public void AddModPack(ModPack modPack) => AddModPack(modPack, false);
         public void AddModPack(ModPack modPack, bool ignoreAlreadyExisting)
         {
-            ObjectToEdit.BeginEdit();
+            try
+            {
+                BeginEdit();
 
-            ModPack? existingModPack = (from p in ObjectToEdit.List where p.Guid.Equals(modPack.Guid) select p).SingleOrDefault();
-            if (existingModPack is not null) throw new ModPackAlreadyExistsException();
+                ModPack? existingModPack = (from p in ObjectToEdit.List where p.Guid.Equals(modPack.Guid) select p).SingleOrDefault();
+                if (!ignoreAlreadyExisting && existingModPack is not null) throw new ModPackAlreadyExistsException();
 
-            ObjectToEdit._list.Add(modPack);
+                if (ignoreAlreadyExisting && existingModPack is not null) ObjectToEdit._list.Remove(existingModPack);
+                ObjectToEdit._list.Add(modPack);
 
-            ObjectToEdit.EndEdit();
-            OnPropertyChanged(nameof(ObjectToEdit.List));
-        }
-
-        public void UpdateModPack(ModPack modPack)
-        {
-            ObjectToEdit.BeginEdit();
-
-            ModPack? existingModPack = (from p in ObjectToEdit.List where p.Guid.Equals(modPack.Guid) select p).SingleOrDefault();
-            if (existingModPack is null) throw new ModPackNotExistingException();
-
-            ObjectToEdit._list.Remove(existingModPack);
-            ObjectToEdit._list.Add(modPack);
-
-            ObjectToEdit.EndEdit();
-            OnPropertyChanged(nameof(ObjectToEdit.List));
+                EndEdit();
+                OnPropertyChanged(nameof(ObjectToEdit.List));
+            }
+            catch
+            {
+                CancelEdit();
+                throw;
+            }
         }
 
         public void RemoveModPack(ModPack modPack)
         {
-            ObjectToEdit.BeginEdit();
+            try
+            {
+                BeginEdit();
 
-            ObjectToEdit._list.Remove(modPack);
+                ObjectToEdit._list.Remove(modPack);
 
-            ObjectToEdit.EndEdit();
-            OnPropertyChanged(nameof(ObjectToEdit.List));
+                EndEdit();
+                OnPropertyChanged(nameof(ObjectToEdit.List));
+            }
+            catch
+            {
+                CancelEdit();
+                throw;
+            }
         }
         #endregion
     }

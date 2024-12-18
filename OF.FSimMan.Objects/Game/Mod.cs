@@ -2,7 +2,7 @@
 
 namespace OF.FSimMan.Game
 {
-    public class Mod : EditableBindingObject
+    public class Mod : EditableObject
     {
         internal ModPack _parent;
 
@@ -50,7 +50,7 @@ namespace OF.FSimMan.Game
         }
         public string? FullImageSource
         {
-            get => !string.IsNullOrWhiteSpace(_imageSource) ? Path.Combine(_parent?.ModIconsDirectoryPath ?? "", _imageSource!) : null;
+            get => !string.IsNullOrWhiteSpace(_imageSource) ? Path.Combine(_parent.ModIconsDirectoryPath, _imageSource!) : null;
         }
         #endregion
 

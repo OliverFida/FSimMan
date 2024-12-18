@@ -19,14 +19,14 @@
                         HorizontalAlignment="Left"
                         Command="{Binding ExitCommand}"
                         Content="Back"
-                        ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/ArrowLeft.png"
+                        ImageSource="{StaticResource ArrowLeftIcon}"
                         Style="{StaticResource W150ImageButtonStyle}" />
                     <ui:ImageButton
                         Margin="5,0,0,0"
                         HorizontalAlignment="Left"
                         Command="{Binding SaveCommand}"
                         Content="Save"
-                        ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Download.png"
+                        ImageSource="{StaticResource FloppyDiskIcon}"
                         Style="{StaticResource W150ImageButtonStyle}" />
                 </StackPanel>
 
@@ -88,7 +88,7 @@
                         <ui:ImageButton
                             Command="{Binding AddModCommand}"
                             Content="Add mod"
-                            ImageSource="pack://application:,,,/OF.FSimMan.Resources;component/Icons/Plus.png"
+                            ImageSource="{StaticResource PlusIcon}"
                             Style="{StaticResource W150ImageButtonStyle}" />
                     </StackPanel>
                     <ui:DataGrid

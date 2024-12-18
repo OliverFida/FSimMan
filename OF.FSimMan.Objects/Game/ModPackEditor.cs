@@ -3,8 +3,6 @@ using OF.FSimMan.Game.Exceptions;
 using OF.FSimMan.Game.Fs.Fs22.Mod;
 using OF.FSimMan.Utility;
 using System.IO.Compression;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace OF.FSimMan.Game
 {
@@ -18,26 +16,18 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PUBLIC
-        public override void CancelEdit()
-        {
-            base.CancelEdit();
-            CheckIntegrity(true);
-        }
-
-        public override void EndEdit()
-        {
-            base.EndEdit();
-            CheckIntegrity(true);
-        }
+        public void TriggerBeginEdit() => BeginEdit();
+        public void TriggerCancelEdit() => CancelEdit();
+        public void TriggerEndEdit() => EndEdit();
 
         public void AddMods(string[] filePaths)
         {
             // OFDOL: object modsLock = new object();
             //Parallel.ForEach(filePaths, filePath =>
             //{
-                //AddMod(filePath, modsLock);
+            //AddMod(filePath, modsLock);
             //});
-            foreach(string filePath in filePaths)
+            foreach (string filePath in filePaths)
             {
                 AddMod(filePath);
             }
@@ -58,6 +48,20 @@ namespace OF.FSimMan.Game
         }
         #endregion
 
+        #region Methods PROTECTED
+        protected override void CancelEdit()
+        {
+            base.CancelEdit();
+            CheckIntegrity(true);
+        }
+
+        protected override void EndEdit()
+        {
+            base.EndEdit();
+            CheckIntegrity(true);
+        }
+        #endregion
+
         #region Methods PRIVATE
         // OFDOL: private void AddMod(string filePath, object lockObject)
         private void AddMod(string filePath)
@@ -65,6 +69,8 @@ namespace OF.FSimMan.Game
             if (!File.Exists(filePath)) return;
 
             FileInfo fileInfo = new FileInfo(filePath);
+            CheckModIsMatchingGame(fileInfo);
+
             modDesc modDescription;
             string? iconFileName = null;
 
@@ -115,6 +121,25 @@ namespace OF.FSimMan.Game
             //    ObjectToEdit._mods.Add(newMod);
             //}
             ObjectToEdit._mods.Add(newMod);
+        }
+
+        private void CheckModIsMatchingGame(FileInfo fileInfo)
+        {
+            string fileName = fileInfo.Name.ToLower();
+
+            switch (ObjectToEdit._game)
+            {
+                case Management.Game.FarmingSim22:
+                    if (fileName.StartsWith("fs22")) return;
+                    break;
+                case Management.Game.FarmingSim25:
+                    if (fileName.StartsWith("fs25")) return;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+            throw new InvalidModFileException(fileInfo.Name);
         }
 
         private void CheckModsIntegrity(bool final)

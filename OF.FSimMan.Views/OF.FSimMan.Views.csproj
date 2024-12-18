@@ -12,16 +12,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OF.Base.WpfControls\OF.Base.WpfControls.csproj" />
     <ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
     <ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AboutView.xaml.cs">
+    <Compile Update="Settings\AboutView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Settings\Fs25View.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Settings\Fs22View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UiFunctions\InfoView.xaml.cs">

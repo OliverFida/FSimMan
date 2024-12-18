@@ -21,6 +21,19 @@ namespace OF.FSimMan.ViewModel.Game
         #endregion
 
         #region Commands
+        public Command RefreshModPacksCommand { get; }
+        private void RefreshModPacksDelegate()
+        {
+            try
+            {
+                ((IGameClient)Client).RefreshModPacks();
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
         public Command NewModPackCommand { get; }
         protected abstract void NewModPackDelegate();
 
@@ -132,9 +145,10 @@ namespace OF.FSimMan.ViewModel.Game
         #region Constructor
         public GameViewModelBase(IGameClient client) : base(client)
         {
+            RefreshModPacksCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).RefreshModPacksDelegate)));
             NewModPackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).NewModPackDelegate)));
             ImportModPackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ImportModPackDelegate));
-            PlayModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).PlayModpackDelegate));
+            PlayModpackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).PlayModpackDelegate)));
             EditModpackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).EditModpackDelegate)));
             ExportModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).ExportModpackDelegate));
             DeleteModpackCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).DeleteModpackDelegate));
@@ -155,6 +169,14 @@ namespace OF.FSimMan.ViewModel.Game
             {
                 Client.InitializeComplete += HandleClientInizializeCompleteRunGame;
             }
+        }
+        #endregion
+
+        #region Methods PROTECTED
+        protected void HandleEditModPackViewModelClosedEvent(object? sender, EventArgs e)
+        {
+            ((IGameClient)Client).RefreshModPacks();
+            _editModPackViewModel!.ViewModelClosedEvent -= HandleEditModPackViewModelClosedEvent;
         }
         #endregion
 

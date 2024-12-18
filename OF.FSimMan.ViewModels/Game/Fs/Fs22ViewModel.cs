@@ -4,13 +4,14 @@ using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
+using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.ViewModel.Game.Fs
 {
     public class Fs22ViewModel : FsViewModelBase
     {
         #region Properties
-        public override bool IsOpenable => SettingsClient.Instance.AppSettings.IsFs22Visible;
+        public override bool IsOpenable => SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().IsFullyConfigured;
         #endregion
 
         #region Commands
@@ -24,7 +25,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
                 _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
                 MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
             }
-            catch (Exception ex)
+            catch (OfException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -51,14 +52,6 @@ namespace OF.FSimMan.ViewModel.Game.Fs
 
         #region Constructor
         public Fs22ViewModel() : base(new Fs22Client()) { }
-        #endregion
-
-        #region Methods PRIVATE
-        private void HandleEditModPackViewModelClosedEvent(object? sender, EventArgs e)
-        {
-            ((Fs22Client)Client).RefreshModPacks();
-            _editModPackViewModel!.ViewModelClosedEvent -= HandleEditModPackViewModelClosedEvent;
-        }
         #endregion
     }
 }
