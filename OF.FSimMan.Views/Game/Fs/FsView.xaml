@@ -24,8 +24,8 @@
                 Text="Modpacks" />
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <of:ImageButton
-                    VerticalAlignment="Bottom"
                     Margin="0"
+                    VerticalAlignment="Bottom"
                     Command="{Binding RefreshModPacksCommand}"
                     Content="Refresh"
                     ImageSource="{StaticResource RefreshIcon}" />
