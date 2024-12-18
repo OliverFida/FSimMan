@@ -123,7 +123,7 @@ public partial class gameSettings : DataObject, IGameSettings {
     
     private ushort ingameMapSoilFilterField;
     
-    private ushort ingameMapHotspotFilterField;
+    private uint ingameMapHotspotFilterField;
     
     private object ingameMapFruitFilterField;
     
@@ -642,7 +642,7 @@ public partial class gameSettings : DataObject, IGameSettings {
     }
     
     /// <remarks/>
-    public ushort ingameMapHotspotFilter {
+    public uint ingameMapHotspotFilter {
         get {
             return this.ingameMapHotspotFilterField;
         }

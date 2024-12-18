@@ -1,212 +1,212 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="gameSettings">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="modsDirectoryOverride">
-					<xs:complexType>
-						<xs:attribute name="active" type="xs:boolean" use="required" />
-						<xs:attribute name="directory" type="xs:string" use="required" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="defaultMultiplayerPort" type="xs:unsignedShort" />
-				<xs:element name="motorStopTimerDuration" type="xs:unsignedShort" />
-				<xs:element name="horseAbandonTimerDuration" type="xs:unsignedShort" />
-				<xs:element name="invertYLook" type="xs:boolean" />
-				<xs:element name="isHeadTrackingEnabled" type="xs:boolean" />
-				<xs:element name="forceFeedback" type="xs:decimal" />
-				<xs:element name="isGamepadEnabled" type="xs:boolean" />
-				<xs:element name="cameraSensitivity" type="xs:decimal" />
-				<xs:element name="vehicleArmSensitivity" type="xs:decimal" />
-				<xs:element name="realBeaconLightBrightness" type="xs:decimal" />
-				<xs:element name="steeringBackSpeed" type="xs:decimal" />
-				<xs:element name="steeringSensitivity" type="xs:decimal" />
-				<xs:element name="inputHelpMode" type="xs:unsignedShort" />
-				<xs:element name="easyArmControl" type="xs:boolean" />
-				<xs:element name="gyroscopeSteering" type="xs:boolean" />
-				<xs:element name="hints" type="xs:boolean" />
-				<xs:element name="cameraTilting" type="xs:boolean" />
-				<xs:element name="frameLimit" type="xs:unsignedShort" />
-				<xs:element name="showAllMods" type="xs:boolean" />
-				<xs:element name="onlinePresenceName" type="xs:string" />
-				<xs:element name="player">
-					<xs:complexType>
-						<xs:attribute name="lastPlayerStyleMale" type="xs:boolean" use="required" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="mpLanguage" type="xs:unsignedShort" />
-				<xs:element name="volume">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="music" type="xs:decimal" />
-							<xs:element name="vehicle" type="xs:decimal" />
-							<xs:element name="environment" type="xs:decimal" />
-							<xs:element name="character" type="xs:decimal" />
-							<xs:element name="radio" type="xs:decimal" />
-							<xs:element name="gui" type="xs:decimal" />
-							<xs:element name="noFocus" type="xs:decimal" />
-							<xs:element name="voice" type="xs:decimal" />
-							<xs:element name="voiceInput" type="xs:decimal" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="soundPlayer">
-					<xs:complexType>
-						<xs:attribute name="allowStreams" type="xs:boolean" use="required" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="radioIsActive" type="xs:boolean" />
-				<xs:element name="radioVehicleOnly" type="xs:boolean" />
-				<xs:element name="voice">
-					<xs:complexType>
-						<xs:attribute name="mode" type="xs:unsignedShort" use="required" />
-						<xs:attribute name="inputSensitivity" type="xs:unsignedShort" use="required" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="units">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="money" type="xs:unsignedShort" />
-							<xs:element name="miles" type="xs:boolean" />
-							<xs:element name="fahrenheit" type="xs:boolean" />
-							<xs:element name="acre" type="xs:boolean" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="isTrainTabbable" type="xs:boolean" />
-				<xs:element name="showTriggerMarker" type="xs:boolean" />
-				<xs:element name="showHelpTrigger" type="xs:boolean" />
-				<xs:element name="showFieldInfo" type="xs:boolean" />
-				<xs:element name="showHelpIcons" type="xs:boolean" />
-				<xs:element name="showHelpMenu" type="xs:boolean" />
-				<xs:element name="resetCamera" type="xs:boolean" />
-				<xs:element name="activeSuspensionCamera" type="xs:boolean" />
-				<xs:element name="cameraCheckCollision" type="xs:boolean" />
-				<xs:element name="useWorldCamera" type="xs:boolean" />
-				<xs:element name="ingameMapState" type="xs:string" />
-				<xs:element name="ingameMapFilters" type="xs:unsignedShort" />
-				<xs:element name="directionChangeMode" type="xs:unsignedShort" />
-				<xs:element name="gearShiftMode" type="xs:unsignedShort" />
-				<xs:element name="hudSpeedGauge" type="xs:unsignedShort" />
-				<xs:element name="woodHarvesterAutoCut" type="xs:boolean" />
-				<xs:element name="shownFreemodeWarning" type="xs:boolean" />
-				<xs:element name="showMultiplayerNames" type="xs:boolean" />
-				<xs:element name="ingameMapGrowthFilter" type="xs:unsignedShort" />
-				<xs:element name="ingameMapSoilFilter" type="xs:unsignedShort" />
-				<xs:element name="ingameMapHotspotFilter" type="xs:unsignedShort" />
-				<xs:element name="ingameMapFruitFilter" />
-				<xs:element name="useColorblindMode" type="xs:boolean" />
-				<xs:element name="maxNumMirrors" type="xs:unsignedShort" />
-				<xs:element name="lightsProfile" type="xs:unsignedShort" />
-				<xs:element name="fovY">
-					<xs:complexType>
-						<xs:simpleContent>
-							<xs:extension base="xs:decimal">
-								<xs:attribute name="playerFirstPerson" type="xs:decimal" use="required" />
-								<xs:attribute name="playerThirdPerson" type="xs:decimal" use="required" />
-							</xs:extension>
-						</xs:simpleContent>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="uiScale" type="xs:decimal" />
-				<xs:element name="realBeaconLights" type="xs:boolean" />
-				<xs:element name="cameraBobbing" type="xs:boolean" />
-				<xs:element name="steeringAssistLines" type="xs:boolean" />
-				<xs:element name="lastPlayerStyle">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="facegear">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="onepiece">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="bottom">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="face">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="top">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="gloves">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="headgear">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="glasses">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="footwear">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="hairStyle">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="beard">
-								<xs:complexType>
-									<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="name" type="xs:string" use="required" />
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute name="filename" type="xs:string" use="required" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="lastCreatedLicensePlate">
-					<xs:complexType>
-						<xs:attribute name="variation" type="xs:unsignedShort" use="required" />
-						<xs:attribute name="color" type="xs:unsignedShort" use="required" />
-						<xs:attribute name="placement" type="xs:unsignedShort" use="required" />
-						<xs:attribute name="characters" type="xs:string" use="required" />
-						<xs:attribute name="configuration" type="xs:string" use="required" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="joinGame">
-					<xs:complexType>
-						<xs:attribute name="includePasswordProtected" type="xs:boolean" use="required" />
-						<xs:attribute name="includeFullGames" type="xs:boolean" use="required" />
-						<xs:attribute name="onlyWithAllModsAvailable" type="xs:boolean" use="required" />
-						<xs:attribute name="serverName" type="xs:string" use="required" />
-						<xs:attribute name="mapId" type="xs:string" use="required" />
-						<xs:attribute name="language" type="xs:unsignedShort" use="required" />
-						<xs:attribute name="capacity" type="xs:unsignedShort" use="required" />
-						<xs:attribute name="allowCrossPlay" type="xs:boolean" use="required" />
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute name="revision" type="xs:unsignedShort" use="required" />
-		</xs:complexType>
-	</xs:element>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xsd:element name="gameSettings">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="modsDirectoryOverride">
+					<xsd:complexType>
+						<xsd:attribute name="active" type="xsd:boolean" use="required" />
+						<xsd:attribute name="directory" type="xsd:string" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="defaultMultiplayerPort" type="xsd:unsignedShort" />
+				<xsd:element name="motorStopTimerDuration" type="xsd:unsignedShort" />
+				<xsd:element name="horseAbandonTimerDuration" type="xsd:unsignedShort" />
+				<xsd:element name="invertYLook" type="xsd:boolean" />
+				<xsd:element name="isHeadTrackingEnabled" type="xsd:boolean" />
+				<xsd:element name="forceFeedback" type="xsd:decimal" />
+				<xsd:element name="isGamepadEnabled" type="xsd:boolean" />
+				<xsd:element name="cameraSensitivity" type="xsd:decimal" />
+				<xsd:element name="vehicleArmSensitivity" type="xsd:decimal" />
+				<xsd:element name="realBeaconLightBrightness" type="xsd:decimal" />
+				<xsd:element name="steeringBackSpeed" type="xsd:decimal" />
+				<xsd:element name="steeringSensitivity" type="xsd:decimal" />
+				<xsd:element name="inputHelpMode" type="xsd:unsignedShort" />
+				<xsd:element name="easyArmControl" type="xsd:boolean" />
+				<xsd:element name="gyroscopeSteering" type="xsd:boolean" />
+				<xsd:element name="hints" type="xsd:boolean" />
+				<xsd:element name="cameraTilting" type="xsd:boolean" />
+				<xsd:element name="frameLimit" type="xsd:unsignedShort" />
+				<xsd:element name="showAllMods" type="xsd:boolean" />
+				<xsd:element name="onlinePresenceName" type="xsd:string" />
+				<xsd:element name="player">
+					<xsd:complexType>
+						<xsd:attribute name="lastPlayerStyleMale" type="xsd:boolean" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="mpLanguage" type="xsd:unsignedShort" />
+				<xsd:element name="volume">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="music" type="xsd:decimal" />
+							<xsd:element name="vehicle" type="xsd:decimal" />
+							<xsd:element name="environment" type="xsd:decimal" />
+							<xsd:element name="character" type="xsd:decimal" />
+							<xsd:element name="radio" type="xsd:decimal" />
+							<xsd:element name="gui" type="xsd:decimal" />
+							<xsd:element name="noFocus" type="xsd:decimal" />
+							<xsd:element name="voice" type="xsd:decimal" />
+							<xsd:element name="voiceInput" type="xsd:decimal" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="soundPlayer">
+					<xsd:complexType>
+						<xsd:attribute name="allowStreams" type="xsd:boolean" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="radioIsActive" type="xsd:boolean" />
+				<xsd:element name="radioVehicleOnly" type="xsd:boolean" />
+				<xsd:element name="voice">
+					<xsd:complexType>
+						<xsd:attribute name="mode" type="xsd:unsignedShort" use="required" />
+						<xsd:attribute name="inputSensitivity" type="xsd:unsignedShort" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="units">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="money" type="xsd:unsignedShort" />
+							<xsd:element name="miles" type="xsd:boolean" />
+							<xsd:element name="fahrenheit" type="xsd:boolean" />
+							<xsd:element name="acre" type="xsd:boolean" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="isTrainTabbable" type="xsd:boolean" />
+				<xsd:element name="showTriggerMarker" type="xsd:boolean" />
+				<xsd:element name="showHelpTrigger" type="xsd:boolean" />
+				<xsd:element name="showFieldInfo" type="xsd:boolean" />
+				<xsd:element name="showHelpIcons" type="xsd:boolean" />
+				<xsd:element name="showHelpMenu" type="xsd:boolean" />
+				<xsd:element name="resetCamera" type="xsd:boolean" />
+				<xsd:element name="activeSuspensionCamera" type="xsd:boolean" />
+				<xsd:element name="cameraCheckCollision" type="xsd:boolean" />
+				<xsd:element name="useWorldCamera" type="xsd:boolean" />
+				<xsd:element name="ingameMapState" type="xsd:string" />
+				<xsd:element name="ingameMapFilters" type="xsd:unsignedShort" />
+				<xsd:element name="directionChangeMode" type="xsd:unsignedShort" />
+				<xsd:element name="gearShiftMode" type="xsd:unsignedShort" />
+				<xsd:element name="hudSpeedGauge" type="xsd:unsignedShort" />
+				<xsd:element name="woodHarvesterAutoCut" type="xsd:boolean" />
+				<xsd:element name="shownFreemodeWarning" type="xsd:boolean" />
+				<xsd:element name="showMultiplayerNames" type="xsd:boolean" />
+				<xsd:element name="ingameMapGrowthFilter" type="xsd:unsignedShort" />
+				<xsd:element name="ingameMapSoilFilter" type="xsd:unsignedShort" />
+				<xsd:element name="ingameMapHotspotFilter" type="xsd:unsignedInt" />
+				<xsd:element name="ingameMapFruitFilter" />
+				<xsd:element name="useColorblindMode" type="xsd:boolean" />
+				<xsd:element name="maxNumMirrors" type="xsd:unsignedShort" />
+				<xsd:element name="lightsProfile" type="xsd:unsignedShort" />
+				<xsd:element name="fovY">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="playerFirstPerson" type="xsd:decimal" use="required" />
+								<xsd:attribute name="playerThirdPerson" type="xsd:decimal" use="required" />
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="uiScale" type="xsd:decimal" />
+				<xsd:element name="realBeaconLights" type="xsd:boolean" />
+				<xsd:element name="cameraBobbing" type="xsd:boolean" />
+				<xsd:element name="steeringAssistLines" type="xsd:boolean" />
+				<xsd:element name="lastPlayerStyle">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="facegear">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="onepiece">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="bottom">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="face">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="top">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="gloves">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="headgear">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="glasses">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="footwear">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="hairStyle">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="beard">
+								<xsd:complexType>
+									<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+									<xsd:attribute name="name" type="xsd:string" use="required" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="filename" type="xsd:string" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="lastCreatedLicensePlate">
+					<xsd:complexType>
+						<xsd:attribute name="variation" type="xsd:unsignedShort" use="required" />
+						<xsd:attribute name="color" type="xsd:unsignedShort" use="required" />
+						<xsd:attribute name="placement" type="xsd:unsignedShort" use="required" />
+						<xsd:attribute name="characters" type="xsd:string" use="required" />
+						<xsd:attribute name="configuration" type="xsd:string" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="joinGame">
+					<xsd:complexType>
+						<xsd:attribute name="includePasswordProtected" type="xsd:boolean" use="required" />
+						<xsd:attribute name="includeFullGames" type="xsd:boolean" use="required" />
+						<xsd:attribute name="onlyWithAllModsAvailable" type="xsd:boolean" use="required" />
+						<xsd:attribute name="serverName" type="xsd:string" use="required" />
+						<xsd:attribute name="mapId" type="xsd:string" use="required" />
+						<xsd:attribute name="language" type="xsd:unsignedShort" use="required" />
+						<xsd:attribute name="capacity" type="xsd:unsignedShort" use="required" />
+						<xsd:attribute name="allowCrossPlay" type="xsd:boolean" use="required" />
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="revision" type="xsd:unsignedShort" use="required" />
+		</xsd:complexType>
+	</xsd:element>
 </xs:schema>
