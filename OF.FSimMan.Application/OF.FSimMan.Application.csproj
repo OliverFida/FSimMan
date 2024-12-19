@@ -14,11 +14,10 @@
 		<FileVersion>$(AssemblyVersion)</FileVersion>
 		<Version>$(AssemblyVersion)</Version>
 		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-		<ApplicationIcon>UI\Logo22.ico</ApplicationIcon>
+		<ApplicationIcon>UI\Logo25.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="UI\Logo22.ico" />
 		<Content Include="..\LICENSE.md">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -28,6 +27,10 @@
 		<ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
 		<ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
 		<ProjectReference Include="..\OF.FSimMan.Views\OF.FSimMan.Views.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="UI\Logo25.ico" />
 	</ItemGroup>
 
 </Project>
