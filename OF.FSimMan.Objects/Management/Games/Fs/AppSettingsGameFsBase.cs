@@ -27,5 +27,17 @@
             }
         }
         #endregion
+
+        #region Methods INTERNAL
+        internal void UpdateHandlers()
+        {
+            StartArguments.StoreTrigger -= HandleStartArgumentsStoreTrigger;
+            StartArguments.StoreTrigger += HandleStartArgumentsStoreTrigger;
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private void HandleStartArgumentsStoreTrigger(object? sender, EventArgs e) => InvokeSettingsChanged();
+        #endregion
     }
 }

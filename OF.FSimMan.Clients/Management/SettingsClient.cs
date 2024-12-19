@@ -22,7 +22,10 @@ namespace OF.FSimMan.Client.Management
         #endregion
 
         #region Constructor
-        private SettingsClient() { }
+        private SettingsClient()
+        {
+            AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
+        }
         #endregion
 
         #region Methods PUBLIC
@@ -44,6 +47,11 @@ namespace OF.FSimMan.Client.Management
         #endregion
 
         #region Methods PRIVATE
+        private void HandleAppSettingsStoreTrigger(object? sender, EventArgs e)
+        {
+            StoreSettings();
+        }
+
         private void ReadSettings()
         {
             try
@@ -56,6 +64,7 @@ namespace OF.FSimMan.Client.Management
                 if (!ReleaseFeatures.ApplicationModeCreator) temp.ApplicationModeValues = temp.ApplicationModeValues.Where(x => !x.Equals(ApplicationMode.Creator)).ToList();
 
                 _appSettings = temp;
+                AppSettings.UpdateHandlers();
                 StoreSettings(false);
             }
             finally

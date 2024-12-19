@@ -33,7 +33,6 @@ namespace OF.FSimMan.ViewModel
 
             try
             {
-                SetEventHandlers();
                 OpenLastView();
 #if !DEBUG
                 await AutoUpdateAsync();
@@ -68,18 +67,6 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Methods PRIVATE
-        private void SetEventHandlers()
-        {
-            SettingsClient.Instance.AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
-
-            SettingsClient.Instance.AppSettings.Games.ForEach(game =>
-            {
-                game.StoreTrigger += HandleAppSettingsStoreTrigger;
-
-                if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).StartArguments.StoreTrigger += HandleAppSettingsStoreTrigger;
-            });
-        }
-
         private async Task AutoUpdateAsync()
         {
             UpdateClient updateClient = UpdateClient.Instance;
@@ -124,11 +111,6 @@ namespace OF.FSimMan.ViewModel
                 !((GameViewModelBase)ViewModelSelector.CurrentViewModel).IsOpenable) ViewModelSelector.OpenViewModel(HomeViewModel);
 
             if (ViewModelSelector.CurrentViewModel.GetType().IsAssignableTo(typeof(IRememberableViewModel))) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
-        }
-
-        private void HandleAppSettingsStoreTrigger(object? sender, EventArgs e)
-        {
-            SettingsClient.Instance.StoreSettings();
         }
         #endregion
 

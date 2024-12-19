@@ -1,4 +1,5 @@
 ﻿using OF.FSimMan.Management.Games;
+using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.Management
 {
@@ -46,6 +47,22 @@ namespace OF.FSimMan.Management
             Games.Add(temp);
             return temp;
         }
+        #endregion
+
+        #region Methods PUBLIC
+        public void UpdateHandlers()
+        {
+            foreach (var game in Games)
+            {
+                game.StoreTrigger -= HandleGameStoreTrigger;
+                game.StoreTrigger += HandleGameStoreTrigger;
+                if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).UpdateHandlers();
+            }
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private void HandleGameStoreTrigger(object? sender, EventArgs e) => InvokeSettingsChanged();
         #endregion
     }
 }
