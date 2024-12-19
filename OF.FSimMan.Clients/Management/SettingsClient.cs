@@ -2,6 +2,7 @@
 using OF.Base.Objects;
 using OF.FSimMan.Management;
 using OF.FSimMan.Utility;
+using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Management
 {
@@ -41,13 +42,14 @@ namespace OF.FSimMan.Client.Management
             }
             finally
             {
+                AppSettings.UpdateHandlers();
                 if (doControlBusyIndicator) ResetBusyIndicator();
             }
         }
         #endregion
 
         #region Methods PRIVATE
-        private void HandleAppSettingsStoreTrigger(object? sender, EventArgs e)
+        private void HandleAppSettingsStoreTrigger(object? sender, AppSettingsStoreTriggerEventArgs e)
         {
             StoreSettings();
         }
@@ -58,17 +60,18 @@ namespace OF.FSimMan.Client.Management
             {
                 IsBusy = true;
 
+
                 AppSettingsData data = FileSerializationHelper.DeserializeConfigFile<AppSettingsData>(_fileName);
                 AppSettings temp = data.FromData();
 
                 if (!ReleaseFeatures.ApplicationModeCreator) temp.ApplicationModeValues = temp.ApplicationModeValues.Where(x => !x.Equals(ApplicationMode.Creator)).ToList();
 
                 _appSettings = temp;
-                AppSettings.UpdateHandlers();
                 StoreSettings(false);
             }
             finally
             {
+                AppSettings.UpdateHandlers();
                 ResetBusyIndicator();
             }
         }

@@ -24,7 +24,7 @@ namespace OF.FSimMan.Tests.Objects.Management
             Assert.AreEqual(0, s.Games.Count);
 
             bool eventTriggered = false;
-            EventHandler eH = (object? sender, EventArgs e) =>
+            EventHandler<AppSettingsStoreTriggerEventArgs> eH = (object? sender, AppSettingsStoreTriggerEventArgs e) =>
             {
                 eventTriggered = true;
             };

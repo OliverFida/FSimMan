@@ -8,21 +8,21 @@
         public bool SkipIntros
         {
             get => _skipIntros;
-            set { if (SetProperty(ref _skipIntros, value)) InvokeSettingsChanged(); }
+            set => SetProperty(ref _skipIntros, value);
         }
 
         internal bool _disableFrameLimit = false;
         public bool DisableFrameLimit
         {
             get => _disableFrameLimit;
-            set { if (SetProperty(ref _disableFrameLimit, value)) InvokeSettingsChanged(); }
+            set => SetProperty(ref _disableFrameLimit, value);
         }
 
         internal bool _enableCheats = false;
         public bool EnableCheats
         {
             get => _enableCheats;
-            set { if (SetProperty(ref _enableCheats, value)) InvokeSettingsChanged(); }
+            set => SetProperty(ref _enableCheats, value);
         }
 
         public string GetArgumentsString()

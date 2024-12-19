@@ -1,4 +1,5 @@
-﻿using OF.FSimMan.Management.Games.Fs;
+﻿using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games.Fs;
 using System.Diagnostics.CodeAnalysis;
 
 namespace OF.FSimMan.Tests.Objects.Management
@@ -12,7 +13,7 @@ namespace OF.FSimMan.Tests.Objects.Management
         public void AppSettingsGameFs22_Self()
         {
             bool eventTriggered = false;
-            EventHandler eH = (object? sender, EventArgs e) =>
+            EventHandler<AppSettingsStoreTriggerEventArgs> eH = (object? sender, AppSettingsStoreTriggerEventArgs e) =>
             {
                 eventTriggered = true;
             };

@@ -23,10 +23,10 @@
                 <of:TextBox
                     Width="500"
                     IsReadOnly="True"
-                    Text="{Binding GameSettingsFs25.ExeDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding GameSettings.ExeDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <of:Button
                     Margin="5,0,0,0"
-                    Command="{Binding SelectFs25GamePathCommand}"
+                    Command="{Binding SelectGamePathCommand}"
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
                 <of:ImageButton
@@ -44,10 +44,10 @@
                 <of:TextBox
                     Width="500"
                     IsReadOnly="True"
-                    Text="{Binding GameSettingsFs25.DataDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding GameSettings.DataDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <of:Button
                     Margin="5,0,0,0"
-                    Command="{Binding SelectFs25DataPathCommand}"
+                    Command="{Binding SelectDataPathCommand}"
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
                 <of:ImageButton
@@ -64,23 +64,23 @@
             <of:CheckBox
                 Margin="0"
                 Content="Skip Intros"
-                IsChecked="{Binding GameSettingsFs25.StartArguments.SkipIntros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                IsChecked="{Binding GameSettings.StartArguments.SkipIntros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<of:CheckBox
                 Margin="0,5,0,0"
                 Content="Disable Frame Limit"
-                IsChecked="{Binding GameSettingsFs25.StartArguments.DisableFrameLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+                IsChecked="{Binding GameSettings.StartArguments.DisableFrameLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
             <of:CheckBox
                 Margin="0,5,0,0"
                 Content="Enable Cheats"
-                IsChecked="{Binding GameSettingsFs25.StartArguments.EnableCheats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                IsChecked="{Binding GameSettings.StartArguments.EnableCheats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<of:CheckBox
                 Margin="0,5,0,0"
                 Content="Enable Script Debugging"
-                IsChecked="{Binding GameSettingsFs25.StartArguments.EnableScriptDebug, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+                IsChecked="{Binding GameSettings.StartArguments.EnableScriptDebug, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
             <!--<of:CheckBox
                 Margin="0,5,0,0"
                 Content="Disable Shader Compiler"
-                IsChecked="{Binding GameSettingsFs25.StartArguments.DisableShaderCompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+                IsChecked="{Binding GameSettings.StartArguments.DisableShaderCompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
         </StackPanel>
     </Grid>
 </UserControl>

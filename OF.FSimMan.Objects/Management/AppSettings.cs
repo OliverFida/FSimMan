@@ -1,4 +1,5 @@
-﻿using OF.FSimMan.Management.Games;
+﻿using OF.FSimMan.Game;
+using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.Management
@@ -10,7 +11,7 @@ namespace OF.FSimMan.Management
         public ApplicationMode ApplicationMode
         {
             get => _applicationMode;
-            set { if (SetProperty(ref _applicationMode, value)) InvokeSettingsChanged(); }
+            set => SetProperty(ref _applicationMode, value);
         }
 
         public bool IsApplicationModeCreator => _applicationMode == ApplicationMode.Creator;
@@ -30,7 +31,7 @@ namespace OF.FSimMan.Management
         public string LastSelectedView
         {
             get => _lastSelectedView;
-            set { if (SetProperty(ref _lastSelectedView, value)) InvokeSettingsChanged(); }
+            set => SetProperty(ref _lastSelectedView, value);
         }
         #endregion
 
@@ -47,6 +48,23 @@ namespace OF.FSimMan.Management
             Games.Add(temp);
             return temp;
         }
+
+        public AppSettingsGameBase GetGameSettings(Game game)
+        {
+            switch (game)
+            {
+                case Game.FarmingSim22:
+                    return GetGameSettings<AppSettingsGameFs22>();
+                case Game.FarmingSim25:
+                    return GetGameSettings<AppSettingsGameFs25>();
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+        #endregion
+
+        #region Events
+        public event EventHandler<AppSettingsModPackAutogenerationNowPossibleEventArgs>? ModPackAutogenerationNowPossible;
         #endregion
 
         #region Methods PUBLIC
@@ -56,13 +74,19 @@ namespace OF.FSimMan.Management
             {
                 game.StoreTrigger -= HandleGameStoreTrigger;
                 game.StoreTrigger += HandleGameStoreTrigger;
+
+                game.ModPackAutogenerationNowPossible -= HandleGameModPackAutogenerationNowPossible; ;
+                game.ModPackAutogenerationNowPossible += HandleGameModPackAutogenerationNowPossible; ;
+
                 if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).UpdateHandlers();
             }
         }
         #endregion
 
         #region Methods PRIVATE
-        private void HandleGameStoreTrigger(object? sender, EventArgs e) => InvokeSettingsChanged();
+        private void HandleGameStoreTrigger(object? sender, AppSettingsStoreTriggerEventArgs e) => InvokeSettingsChanged(e);
+
+        private void HandleGameModPackAutogenerationNowPossible(object? sender, AppSettingsModPackAutogenerationNowPossibleEventArgs e) => ModPackAutogenerationNowPossible?.Invoke(sender, e);
         #endregion
     }
 }

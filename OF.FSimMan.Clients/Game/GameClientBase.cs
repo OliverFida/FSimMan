@@ -100,7 +100,7 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Constructor & Initialize
-        public GameClientBase(FSimMan.Management.Game game) : base()
+        public GameClientBase(FSimMan.Management.Game game, bool doInitialize = true) : base()
         {
             _game = game;
         }
@@ -238,6 +238,41 @@ namespace OF.FSimMan.Client.Game
             _modPacksEditor!.AddModPack(importedModPack, !importAsNew);
             StoreModPacks();
             RefreshModPacks();
+        }
+
+        public void AutoGenerateModPack(FileInfo[] modFileInfos)
+        {
+            try
+            {
+                IsBusy = true;
+
+                _modPacksEditor = new ModPacksEditor(ModPacks);
+                ModPack newModPack = new ModPack(_game)
+                {
+                    Title = "Default",
+                    Description = "Auto-imported modpack",
+                    Author = "FSimMan",
+                    Version = "1.0"
+                };
+
+                string[] modFilePaths = modFileInfos.Select(x => x.FullName).ToArray();
+
+                ModPackEditor modPackEditor = new ModPackEditor(newModPack);
+                modPackEditor.AddMods(modFilePaths);
+                modPackEditor.TriggerEndEdit();
+
+                _modPacksEditor.AddModPack(newModPack);
+                StoreModPacks();
+
+                Parallel.ForEach(modFileInfos, modFileInfo =>
+                {
+                    modFileInfo.Delete();
+                });
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
         }
         #endregion
 

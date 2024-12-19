@@ -3,29 +3,15 @@
     public abstract class AppSettingsGameFsBase : AppSettingsGameBase
     {
         #region Properties
-
-        internal string _dataDirectoryPath = string.Empty;
-        public string DataDirectoryPath
-        {
-            get => _dataDirectoryPath;
-            set { if (SetProperty(ref _dataDirectoryPath, value)) InvokeSettingsChanged(); }
-        }
-
         internal AppSettingsGameFsStartArguments _startArguments = new AppSettingsGameFsStartArguments();
         public AppSettingsGameFsStartArguments StartArguments
         {
             get => _startArguments;
         }
+        #endregion
 
-        public override bool IsFullyConfigured
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(DataDirectoryPath)) return false;
-
-                return base.IsFullyConfigured;
-            }
-        }
+        #region Constructor
+        public AppSettingsGameFsBase(Game game) : base (game) { }
         #endregion
 
         #region Methods INTERNAL
@@ -37,7 +23,7 @@
         #endregion
 
         #region Methods PRIVATE
-        private void HandleStartArgumentsStoreTrigger(object? sender, EventArgs e) => InvokeSettingsChanged();
+        private void HandleStartArgumentsStoreTrigger(object? sender, AppSettingsStoreTriggerEventArgs e) => InvokeSettingsChanged(e);
         #endregion
     }
 }
