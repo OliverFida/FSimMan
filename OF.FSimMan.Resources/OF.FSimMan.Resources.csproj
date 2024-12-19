@@ -13,12 +13,9 @@
 
   <ItemGroup>
     <Resource Include="Logos\FS22.png" />
-    <Resource Include="Logos\FS25.png" />
     <Resource Include="Logos\Logo22.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Logos\Logo22.png" />
+    <Resource Include="Logos\FS25.png" />
     <Resource Include="Logos\Logo25.ico" />
     <Resource Include="Logos\Logo25.png" />
   </ItemGroup>
