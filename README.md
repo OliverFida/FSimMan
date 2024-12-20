@@ -16,13 +16,13 @@ Current and upcoming features are:
 |Start Arguments|Start game with arguments.|**RELEASED**|
 |Exporting & Importing Modpacks|Importing and exporting complete modpacks.<br/>*Currently available in a simple form. Will be extended later.*|**RELEASED**|
 |Farming Simulator 25 Support||**RELEASED**|
+|Convert Default Mods Folder|Convert your default mods folder into a modpack on first configuration.|**RELEASED**|
 |Modpack Linked Savegames|See only the savegames, you've created with the currently playing modpack.|PLANNED|
 |Input Profiles||PLANNED|
 |32-bit Support|Run FSimMan on 32-bit based systems|PLANNED|
 |MacOS Support|Run FSimMan on MacOS based systems|PLANNED|
 |Multi-Language-Support||PLANNED|
 |Discord Rich Presence||PLANNED|
-|Convert Default Mods Folder|Convert your default mods folder into a modpack on first start.|PLANNED|
 
 ## Installing FSimMan
 
