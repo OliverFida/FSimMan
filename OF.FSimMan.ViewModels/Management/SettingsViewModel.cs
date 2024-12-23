@@ -4,7 +4,7 @@ using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 
-namespace OF.FSimMan.ViewModel
+namespace OF.FSimMan.ViewModel.Management
 {
     public class SettingsViewModel : RememberableBusyViewModelBase
     {

@@ -11,7 +11,7 @@
         #endregion
 
         #region Constructor
-        public AppSettingsGameFsBase(Game game) : base (game) { }
+        public AppSettingsGameFsBase(Game game) : base(game) { }
         #endregion
 
         #region Methods INTERNAL

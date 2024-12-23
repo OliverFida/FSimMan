@@ -11,12 +11,12 @@ using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 using System.IO;
 
-namespace OF.FSimMan.ViewModel.Settings
+namespace OF.FSimMan.ViewModel.Management.Settings
 {
     public abstract class GameViewModelBase : BusyViewModelBase
     {
         #region Properties
-        private Management.Game _game;
+        private FSimMan.Management.Game _game;
 
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
@@ -71,7 +71,7 @@ namespace OF.FSimMan.ViewModel.Settings
         #endregion
 
         #region Constructor
-        protected GameViewModelBase(Management.Game game, IClient client) : base(client)
+        protected GameViewModelBase(FSimMan.Management.Game game, IClient client) : base(client)
         {
             _game = game;
             SelectGamePathCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).SelectGamePathDelegate));
@@ -113,10 +113,10 @@ namespace OF.FSimMan.ViewModel.Settings
             GameClientBase client;
             switch (_game)
             {
-                case Management.Game.FarmingSim22:
+                case FSimMan.Management.Game.FarmingSim22:
                     client = new Fs22Client(false);
                     break;
-                case Management.Game.FarmingSim25:
+                case FSimMan.Management.Game.FarmingSim25:
                     client = new Fs25Client(false);
                     break;
                 default:

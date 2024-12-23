@@ -17,19 +17,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Settings\ChangeLogView.xaml.cs">
+    <Compile Update="Management\Settings\ChangeLogView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Settings\AboutView.xaml.cs">
+    <Compile Update="Management\Settings\AboutView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Settings\Fs25View.xaml.cs">
+    <Compile Update="Management\Settings\Fs25View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Settings\Fs22View.xaml.cs">
+    <Compile Update="Management\Settings\Fs22View.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UiFunctions\InfoView.xaml.cs">

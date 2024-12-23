@@ -20,7 +20,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
             try
             {
                 ModPack modPack = ((IGameClient)Client).GetNewModPack();
-                _editModPackViewModel = new Fs22EditModPackViewModel(Management.EditMode.New, modPack, (Fs22Client)Client);
+                _editModPackViewModel = new Fs22EditModPackViewModel(FSimMan.Management.EditMode.New, modPack, (Fs22Client)Client);
 
                 _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
                 MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
@@ -38,7 +38,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
                 if (EditModpackCommand.Parameter == null) return;
                 ModPack modPack = (ModPack)EditModpackCommand.Parameter;
 
-                _editModPackViewModel = new Fs22EditModPackViewModel(Management.EditMode.Edit, modPack, (Fs22Client)Client);
+                _editModPackViewModel = new Fs22EditModPackViewModel(FSimMan.Management.EditMode.Edit, modPack, (Fs22Client)Client);
 
                 _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
                 MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);

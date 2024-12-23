@@ -2,7 +2,6 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
-using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
 using OliverFida.FSimMan.Exceptions;

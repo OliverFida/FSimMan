@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base.WpfControls" Version="2024.12.19.850" />
+    <PackageReference Include="OF.Base.WpfControls" Version="2024.12.23.1314-MarkdownDisplay" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,14 +2,14 @@
 using OF.FSimMan.Management.Games.Fs;
 using System.Windows.Controls;
 
-namespace OF.FSimMan.View.Settings
+namespace OF.FSimMan.View.Management.Settings
 {
     /// <summary>
     /// Interaction logic for ApplicationView.xaml
     /// </summary>
-    public partial class Fs22View : UserControl
+    public partial class Fs25View : UserControl
     {
-        public Fs22View()
+        public Fs25View()
         {
             InitializeComponent();
         }
@@ -17,14 +17,14 @@ namespace OF.FSimMan.View.Settings
         private void DebugSelectExeDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
-            SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().ExeDirectoryPath = @"B:\Games\Giants\Farming Simulator 2022";
+            SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().ExeDirectoryPath = @"B:\Games\Giants\Farming Simulator 2025";
 #endif
         }
 
         private void DebugSelectDataDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
-            SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().DataDirectoryPath = @"C:\Users\Oliver Fida\Documents\My Games\FarmingSimulator2022";
+            SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath = @"C:\Users\Oliver Fida\Documents\My Games\FarmingSimulator2025";
 #endif
         }
     }

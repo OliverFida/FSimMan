@@ -43,9 +43,9 @@ namespace OF.FSimMan.ViewModel
             {
                 switch (((IGameClient)_gameViewModel.Client).Game)
                 {
-                    case Management.Game.FarmingSim22:
+                    case FSimMan.Management.Game.FarmingSim22:
                         return "Farming Simulator 22";
-                    case Management.Game.FarmingSim25:
+                    case FSimMan.Management.Game.FarmingSim25:
                         return "Farming Simulator 25";
                     default:
                         throw new NotImplementedException();
@@ -60,10 +60,10 @@ namespace OF.FSimMan.ViewModel
                 string path = "pack://application:,,,/OF.FSimMan.Resources;component/Logos/";
                 switch (((IGameClient)_gameViewModel.Client).Game)
                 {
-                    case Management.Game.FarmingSim22:
+                    case FSimMan.Management.Game.FarmingSim22:
                         path += "FS22.png";
                         break;
-                    case Management.Game.FarmingSim25:
+                    case FSimMan.Management.Game.FarmingSim25:
                         path += "FS25.png";
                         break;
                     default:

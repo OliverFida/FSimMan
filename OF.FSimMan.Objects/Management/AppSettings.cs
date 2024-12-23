@@ -1,5 +1,4 @@
-﻿using OF.FSimMan.Game;
-using OF.FSimMan.Management.Games;
+﻿using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.Management
