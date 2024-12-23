@@ -34,12 +34,26 @@ namespace OF.FSimMan.ViewModel
         }
         #endregion
 
+        #region Methods PUBLIC
+        public static void OpenChangeLog()
+        {
+            SettingsViewModel settingsViewModel = new SettingsViewModel();
+            MainViewModel.ViewModelSelector.OpenViewModel(settingsViewModel);
+            settingsViewModel.ShowChangeLog();
+        }
+        #endregion
+
         #region Methods PRIVATE
         private void AppSettingsChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName is null || !e.PropertyName.Equals(nameof(AppSettingsGameBase.IsEnabled))) return;
 
             OnPropertyChanged(nameof(IsFs25Visible));
+        }
+
+        private void ShowChangeLog()
+        {
+            // OFDOI
         }
         #endregion
     }

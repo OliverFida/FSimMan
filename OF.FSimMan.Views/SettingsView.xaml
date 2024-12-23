@@ -22,6 +22,9 @@
             <TabItem Header="Farming Simulator 25" Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}">
                 <vmSettings:Fs25ViewModel />
             </TabItem>
+            <TabItem Header="Change Log">
+                <vmSettings:ChangeLogViewModel />
+            </TabItem>
             <TabItem Header="About">
                 <vmSettings:AboutViewModel />
             </TabItem>

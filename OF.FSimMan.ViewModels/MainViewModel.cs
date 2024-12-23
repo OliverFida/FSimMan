@@ -37,6 +37,7 @@ namespace OF.FSimMan.ViewModel
 #if !DEBUG
                 await AutoUpdateAsync();
 #endif
+                await ShowChangelogAsync(); // OFDO: move isinde !DEBUG
             }
             catch (OfException ex)
             {
@@ -75,6 +76,14 @@ namespace OF.FSimMan.ViewModel
             if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
 
             await ExecuteUpdate();
+        }
+
+        private async Task ShowChangelogAsync()
+        {
+            UpdateClient updateClient = UpdateClient.Instance;
+            if (!await updateClient.GetShowChangelogAsync()) return;
+
+
         }
 
         private void OpenLastView()

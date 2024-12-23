@@ -43,6 +43,9 @@
     <DataTemplate DataType="{x:Type viewModelSettings:AboutViewModel}">
         <viewSettings:AboutView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelSettings:ChangeLogViewModel}">
+        <viewSettings:ChangeLogView />
+    </DataTemplate>
     <DataTemplate DataType="{x:Type viewModelSettings:Fs22ViewModel}">
         <viewSettings:Fs22View />
     </DataTemplate>

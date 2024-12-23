@@ -78,6 +78,13 @@ namespace OF.FSimMan.Client.Management
                 ResetBusyIndicator();
             }
         }
+
+        public async Task<bool> GetShowChangelogAsync()
+        {
+            await Task.Delay(250);
+            return true;
+            // OFDOI
+        }
         #endregion
 
         #region Methods PRIVATE
