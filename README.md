@@ -23,6 +23,10 @@ Current and upcoming features are:
 |MacOS Support|Run FSimMan on MacOS based systems|PLANNED|
 |Multi-Language-Support||PLANNED|
 |Discord Rich Presence||PLANNED|
+|ModSettigns per Modpack|Appart for your mods, also the settings for all your mods get stored for each modpack seperately.|PLANNED|
+|In-App Change Log||PLANNED|
+|Game Log Viewer||PLANNED|
+|DLC Management|Appart from your mods, also manage your DLCs per modpack.|PLANNED|
 
 ## Installing FSimMan
 
@@ -31,17 +35,17 @@ Current and upcoming features are:
 - x64 Processor
 - .NET Desktop Runtime 8
 
+### Via WinGet (Recommended)
+
+- Open a Terminal.
+- Run ```winget install OliverFida.FSimMan```
+- Click through the installer, if necessary.
+
 ### Via GitHub
 
 - Download the latest installer .exe-file from [GitHub Releases][releases-link].
 - Run the installer .exe-file.
 - Click through the installer.
-
-### Via WinGet
-
-- Open a Terminal.
-- Run "winget install OliverFida.FSimMan"
-- Click through the installer, if necessary.
 
 ### Portable
 
