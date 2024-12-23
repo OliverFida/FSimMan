@@ -143,7 +143,7 @@ namespace OF.FSimMan.ViewModel.Game
         #endregion
 
         #region Constructor
-        public GameViewModelBase(IGameClient client) : base(client)
+        public GameViewModelBase(string title, IGameClient client) : base(title, client)
         {
             RefreshModPacksCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).RefreshModPacksDelegate)));
             NewModPackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).NewModPackDelegate)));

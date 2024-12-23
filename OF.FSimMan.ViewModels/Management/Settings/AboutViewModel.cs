@@ -2,7 +2,7 @@
 using OF.Base.ViewModel;
 using System.Diagnostics;
 
-namespace OF.FSimMan.ViewModel.Settings
+namespace OF.FSimMan.ViewModel.Management.Settings
 {
     public class AboutViewModel : ViewModelBase
     {
@@ -22,6 +22,10 @@ namespace OF.FSimMan.ViewModel.Settings
                 UseShellExecute = true
             });
         }
+        #endregion
+
+        #region Constructor
+        public AboutViewModel() : base("About") { }
         #endregion
     }
 }

@@ -7,6 +7,7 @@ using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel;
 using OF.FSimMan.ViewModel.Game;
 using OF.FSimMan.ViewModel.Game.Fs;
+using OF.FSimMan.ViewModel.Management;
 using System.ComponentModel;
 
 namespace OF.FSimMan.UI
@@ -201,7 +202,7 @@ namespace OF.FSimMan.UI
         #endregion
 
         #region Constructor
-        public AppBarViewModel() : base(true)
+        public AppBarViewModel() : base("AppBar", true)
         {
             MainViewModel.ViewModelSelector.CurrentViewModelChanged += HandleCurrentViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;

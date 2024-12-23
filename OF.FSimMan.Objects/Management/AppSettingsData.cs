@@ -16,6 +16,9 @@ namespace OF.FSimMan.Management
         [XmlElement(IsNullable = false)]
         public string LastSelectedView = string.Empty;
 
+        [XmlElement(IsNullable = false)]
+        public string LastVersionChangelogDisplayed = string.Empty;
+
         [XmlArray(nameof(Games), IsNullable = true)]
         [XmlArrayItem("GameSettings")]
         public AppSettingsGameDataBase[] Games = [];
@@ -25,7 +28,8 @@ namespace OF.FSimMan.Management
             AppSettings temp = new AppSettings
             {
                 _applicationMode = ApplicationMode,
-                _lastSelectedView = LastSelectedView
+                _lastSelectedView = LastSelectedView,
+                _lastVersionChangelogDisplayed = LastVersionChangelogDisplayed
             };
 
             if (temp._applicationMode == ApplicationMode.None) temp._applicationMode = ApplicationMode.User;
@@ -54,6 +58,7 @@ namespace OF.FSimMan.Management
         {
             ApplicationMode = value._applicationMode;
             LastSelectedView = value.LastSelectedView;
+            LastVersionChangelogDisplayed = value.LastVersionChangelogDisplayed;
 
             ConcurrentBag<AppSettingsGameDataBase> temp = new ConcurrentBag<AppSettingsGameDataBase>();
             Parallel.ForEach(value.Games, game =>

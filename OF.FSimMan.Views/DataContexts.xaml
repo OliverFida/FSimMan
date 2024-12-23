@@ -3,11 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="clr-namespace:OF.FSimMan.View"
     xmlns:viewGameFs="clr-namespace:OF.FSimMan.View.Game.Fs"
+    xmlns:viewMngmnt="clr-namespace:OF.FSimMan.View.Management"
+    xmlns:viewMngmntSettings="clr-namespace:OF.FSimMan.View.Management.Settings"
     xmlns:viewModel="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelGameFs="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
-    xmlns:viewModelSettings="clr-namespace:OF.FSimMan.ViewModel.Settings;assembly=OF.FSimMan.ViewModels"
+    xmlns:viewModelMngmnt="clr-namespace:OF.FSimMan.ViewModel.Management;assembly=OF.FSimMan.ViewModels"
+    xmlns:viewModelMngmntSettings="clr-namespace:OF.FSimMan.ViewModel.Management.Settings;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelUiFunctions="clr-namespace:OF.Base.Wpf.UiFunctions;assembly=OF.Base.WpfControls"
-    xmlns:viewSettings="clr-namespace:OF.FSimMan.View.Settings"
     xmlns:viewUiFunctions="clr-namespace:OF.FSimMan.View.UiFunctions">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/OF.FSimMan.Resources;component/Icons.xaml" />
@@ -30,24 +32,28 @@
     <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
         <view:HomeView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
-        <view:SettingsView />
-    </DataTemplate>
     <DataTemplate DataType="{x:Type viewModel:GameRunningViewModel}">
         <view:GameRunningView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModelSettings:ApplicationViewModel}">
-        <viewSettings:ApplicationView />
+    <DataTemplate DataType="{x:Type viewModelMngmnt:SettingsViewModel}">
+        <viewMngmnt:SettingsView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewModelSettings:AboutViewModel}">
-        <viewSettings:AboutView />
+
+    <DataTemplate DataType="{x:Type viewModelMngmntSettings:ApplicationViewModel}">
+        <viewMngmntSettings:ApplicationView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewModelSettings:Fs22ViewModel}">
-        <viewSettings:Fs22View />
+    <DataTemplate DataType="{x:Type viewModelMngmntSettings:AboutViewModel}">
+        <viewMngmntSettings:AboutView />
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewModelSettings:Fs25ViewModel}">
-        <viewSettings:Fs25View />
+    <DataTemplate DataType="{x:Type viewModelMngmntSettings:ChangeLogViewModel}">
+        <viewMngmntSettings:ChangeLogView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelMngmntSettings:Fs22ViewModel}">
+        <viewMngmntSettings:Fs22View />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModelMngmntSettings:Fs25ViewModel}">
+        <viewMngmntSettings:Fs25View />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModelGameFs:Fs22ViewModel}">

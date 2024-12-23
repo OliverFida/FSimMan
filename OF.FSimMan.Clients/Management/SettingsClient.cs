@@ -2,7 +2,6 @@
 using OF.Base.Objects;
 using OF.FSimMan.Management;
 using OF.FSimMan.Utility;
-using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Management
 {

@@ -2,9 +2,9 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
-using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
+using OF.FSimMan.ViewModel.Management;
 using OliverFida.FSimMan.Exceptions;
 using System.Reflection;
 
@@ -25,7 +25,7 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Constructor & Initialize
-        private MainViewModel() : base(true) { }
+        private MainViewModel() : base("Main", true) { }
 
         public override async Task InitializeAsync()
         {
@@ -37,6 +37,7 @@ namespace OF.FSimMan.ViewModel
 #if !DEBUG
                 await AutoUpdateAsync();
 #endif
+                await ShowChangelogAsync(); // OFDOI: move isinde !DEBUG
             }
             catch (OfException ex)
             {
@@ -75,6 +76,14 @@ namespace OF.FSimMan.ViewModel
             if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
 
             await ExecuteUpdate();
+        }
+
+        private async Task ShowChangelogAsync()
+        {
+            UpdateClient updateClient = UpdateClient.Instance;
+            if (!await updateClient.GetShowChangelogAsync()) return;
+
+            SettingsViewModel.OpenChangeLog();
         }
 
         private void OpenLastView()

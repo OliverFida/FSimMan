@@ -1,10 +1,11 @@
-﻿using OF.FSimMan.Client.Management;
+﻿using OF.Base.ViewModel;
+using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 
-namespace OF.FSimMan.ViewModel
+namespace OF.FSimMan.ViewModel.Management
 {
     public class SettingsViewModel : RememberableBusyViewModelBase
     {
@@ -28,9 +29,19 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Constructor
-        public SettingsViewModel() : base(SettingsClient.Instance)
+        public SettingsViewModel() : base("Settings", SettingsClient.Instance)
         {
             ((SettingsClient)Client).AppSettings.GetGameSettings<AppSettingsGameFs25>().PropertyChanged += AppSettingsChanged;
+        }
+        #endregion
+
+        #region Methods PUBLIC
+        public static void OpenChangeLog()
+        {
+            SettingsViewModel settingsViewModel = new SettingsViewModel();
+            MainViewModel.ViewModelSelector.OpenViewModel(settingsViewModel);
+
+            //OFDOI: Show ChangeLogTab
         }
         #endregion
 

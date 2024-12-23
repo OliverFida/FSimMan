@@ -96,7 +96,7 @@ namespace OF.FSimMan.ViewModel.Game
         #endregion
 
         #region Constructor
-        public EditModPackViewModelBase(IClient client, EditMode editMode) : base(client)
+        public EditModPackViewModelBase(string title, IClient client, EditMode editMode) : base(title, client)
         {
             _editMode = editMode;
 

@@ -3,7 +3,7 @@ using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games.Fs;
 
-namespace OF.FSimMan.ViewModel.Settings
+namespace OF.FSimMan.ViewModel.Management.Settings
 {
     public class ApplicationViewModel : BusyViewModelBase
     {
@@ -27,7 +27,7 @@ namespace OF.FSimMan.ViewModel.Settings
         #endregion
 
         #region Constructor
-        public ApplicationViewModel() : base(SettingsClient.Instance) { }
+        public ApplicationViewModel() : base("Application", SettingsClient.Instance) { }
         #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using OF.FSimMan.Game;
-using OF.FSimMan.Management.Games;
+﻿using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.Management
@@ -32,6 +31,13 @@ namespace OF.FSimMan.Management
         {
             get => _lastSelectedView;
             set => SetProperty(ref _lastSelectedView, value);
+        }
+
+        internal string _lastVersionChangelogDisplayed = string.Empty;
+        public string LastVersionChangelogDisplayed
+        {
+            get => _lastVersionChangelogDisplayed;
+            set => SetProperty(ref _lastVersionChangelogDisplayed, value);
         }
         #endregion
 

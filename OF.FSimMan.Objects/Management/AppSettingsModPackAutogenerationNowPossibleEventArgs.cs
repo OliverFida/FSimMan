@@ -8,7 +8,8 @@
         #endregion
 
         #region Constructor
-        public AppSettingsModPackAutogenerationNowPossibleEventArgs(Game game) {
+        public AppSettingsModPackAutogenerationNowPossibleEventArgs(Game game)
+        {
             _game = game;
         }
         #endregion
