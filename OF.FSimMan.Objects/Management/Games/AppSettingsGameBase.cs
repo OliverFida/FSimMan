@@ -71,6 +71,11 @@ namespace OF.FSimMan.Management.Games
         }
         #endregion
 
+        #region Methods PUBLIC
+        public abstract void ValidateExeDirectoryPath(string path);
+        public abstract void ValidateDataDirectoryPath(string path);
+        #endregion
+
         #region Methods PROTECTED
         protected override bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {

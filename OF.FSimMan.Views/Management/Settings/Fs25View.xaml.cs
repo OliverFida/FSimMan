@@ -17,14 +17,20 @@ namespace OF.FSimMan.View.Management.Settings
         private void DebugSelectExeDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
-            SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().ExeDirectoryPath = @"B:\Games\Giants\Farming Simulator 2025";
+            string path = @"B:\Games\Giants\Farming Simulator 2025";
+            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            settings.ValidateExeDirectoryPath(path);
+            settings.ExeDirectoryPath = path;
 #endif
         }
 
         private void DebugSelectDataDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
-            SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath = @"C:\Users\Oliver Fida\Documents\My Games\FarmingSimulator2025";
+            string path = @"C:\Users\Oliver Fida\Documents\My Games\FarmingSimulator2025";
+            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            settings.ValidateDataDirectoryPath(path);
+            settings.DataDirectoryPath = path;
 #endif
         }
     }

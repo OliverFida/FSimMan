@@ -52,6 +52,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
                 };
                 if (dialog.ShowDialog() != true) return;
 
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateExeDirectoryPath(dialog.FolderName);
                 ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ExeDirectoryPath = dialog.FolderName;
             }
             catch (OfException ex)
@@ -73,7 +74,8 @@ namespace OF.FSimMan.ViewModel.Management.Settings
                 };
                 if (dialog.ShowDialog() != true) return;
 
-                ((AppSettingsGameFsBase)((SettingsClient)Client).AppSettings.GetGameSettings(_game)).DataDirectoryPath = dialog.FolderName;
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateDataDirectoryPath(dialog.FolderName);
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).DataDirectoryPath = dialog.FolderName;
             }
             catch (OfException ex)
             {
