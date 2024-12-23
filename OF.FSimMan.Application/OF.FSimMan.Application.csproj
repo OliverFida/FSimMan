@@ -28,6 +28,11 @@
 		<ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
 		<ProjectReference Include="..\OF.FSimMan.Views\OF.FSimMan.Views.csproj" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<None Update="nlog.config" CopyToOutputDirectory="Always" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 	  <Resource Include="UI\Logo25.ico" />

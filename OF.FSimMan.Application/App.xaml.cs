@@ -1,4 +1,5 @@
-﻿using OF.Base.Wpf.UiFunctions;
+﻿using NLog;
+using OF.Base.Wpf.UiFunctions;
 using System.Diagnostics;
 using System.Windows;
 
@@ -36,6 +37,7 @@ namespace OF.FSimMan
             UiFunctions.ShowError(exception);
 
 #if !DEBUG
+            NLog.LogManager.GetCurrentClassLogger().Error(exception);
             if (UiFunctions.ShowQuestion("Would you like to restart the application?")) RestartApplication();
 #endif
         }
@@ -48,6 +50,13 @@ namespace OF.FSimMan
 
             if (tryStart) Process.Start(processModule!.FileName);
             Current.Shutdown(0);
+        }
+
+        private void InitializeLogger()
+        {
+            NLog.LogManager.Setup().SetupSerialization(
+                setupBuilder => setupBuilder.RegisterValueFormatter(new BetterStack.Logs.NLog.ColorValueFormatter())
+            );
         }
     }
 }

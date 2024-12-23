@@ -2,6 +2,7 @@
 using OF.Base.Objects;
 using OF.FSimMan.Api.GitHub;
 using OF.FSimMan.Client.Api;
+using OF.FSimMan.Logging;
 using OliverFida.FSimMan.Exceptions;
 using System.Diagnostics;
 
@@ -65,6 +66,10 @@ namespace OF.FSimMan.Client.Management
                         UseShellExecute = true,
                         Verb = "runas"
                     });
+
+#if !DEBUG
+                    NLog.LogManager.GetCurrentClassLogger().Trace($"Updated application to {_latestRelease.TagName}", new LoggingAnalyticsData());
+#endif
                 }
                 catch
                 {

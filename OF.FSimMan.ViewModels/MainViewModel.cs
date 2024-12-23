@@ -2,6 +2,7 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.Logging;
 using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
@@ -54,6 +55,9 @@ namespace OF.FSimMan.ViewModel
                 if (!await updateClient.TryExecuteUpdateAsync())
                 {
                     UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
+#if !DEBUG
+                    NLog.LogManager.GetCurrentClassLogger().Error(new LoggingExceptionWithAnalyticsData("Update failed!"));
+#endif
                     return;
                 }
 
@@ -64,7 +68,7 @@ namespace OF.FSimMan.ViewModel
                 UiFunctions.ShowInfoOk(ex.Message);
             }
         }
-        #endregion
+#endregion
 
         #region Methods PRIVATE
         private async Task AutoUpdateAsync()
