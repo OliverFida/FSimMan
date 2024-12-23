@@ -23,5 +23,9 @@ namespace OF.FSimMan.ViewModel.Management.Settings
             });
         }
         #endregion
+
+        #region Constructor
+        public AboutViewModel() : base("About") { }
+        #endregion
     }
 }

@@ -202,7 +202,7 @@ namespace OF.FSimMan.UI
         #endregion
 
         #region Constructor
-        public AppBarViewModel() : base(true)
+        public AppBarViewModel() : base("AppBar", true)
         {
             MainViewModel.ViewModelSelector.CurrentViewModelChanged += HandleCurrentViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;

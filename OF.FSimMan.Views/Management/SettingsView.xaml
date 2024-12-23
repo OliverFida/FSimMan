@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:ofVm="clr-namespace:OF.Base.ViewModel;assembly=OF.Base"
+    xmlns:viewSettings="clr-namespace:OF.FSimMan.View.Management.Settings"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Management;assembly=OF.FSimMan.ViewModels"
     xmlns:vmSettings="clr-namespace:OF.FSimMan.ViewModel.Management.Settings;assembly=OF.FSimMan.ViewModels"
     d:DataContext="{d:DesignInstance Type={x:Type vm:SettingsViewModel}}"

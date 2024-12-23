@@ -27,7 +27,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         #endregion
 
         #region Constructor
-        public ApplicationViewModel() : base(SettingsClient.Instance) { }
+        public ApplicationViewModel() : base("Application", SettingsClient.Instance) { }
         #endregion
     }
 }

@@ -18,6 +18,18 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         #region Properties
         private FSimMan.Management.Game _game;
 
+        public override bool IsDebug
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
         public AppSettingsGameBase GameSettings
@@ -71,7 +83,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         #endregion
 
         #region Constructor
-        protected GameViewModelBase(FSimMan.Management.Game game, IClient client) : base(client)
+        protected GameViewModelBase(string title, FSimMan.Management.Game game, IClient client) : base(title, client)
         {
             _game = game;
             SelectGamePathCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).SelectGamePathDelegate));

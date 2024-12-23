@@ -18,6 +18,7 @@
                 <of:ImageButton
                     Margin="0,5,0,0"
                     HorizontalAlignment="Left"
+                    Background="{StaticResource BgGrayBrush}"
                     Command="{Binding OpenGitHubCommand}"
                     Content="GitHub"
                     ImageSource="{StaticResource GitHubIcon}"

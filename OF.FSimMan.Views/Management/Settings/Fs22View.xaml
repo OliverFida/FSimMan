@@ -22,15 +22,18 @@
             <StackPanel Orientation="Horizontal">
                 <of:TextBox
                     Width="500"
+                    Background="{StaticResource BgGrayBrush}"
                     IsReadOnly="True"
                     Text="{Binding GameSettings.ExeDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <of:Button
                     Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
                     Command="{Binding SelectGamePathCommand}"
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
                 <of:ImageButton
                     Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
                     Click="DebugSelectExeDirectoryPathButton_Click"
                     ImageSource="{StaticResource BugIcon}"
                     Style="{StaticResource SquareImageButtonStyle}"
@@ -43,15 +46,18 @@
             <StackPanel Orientation="Horizontal">
                 <of:TextBox
                     Width="500"
+                    Background="{StaticResource BgGrayBrush}"
                     IsReadOnly="True"
                     Text="{Binding GameSettings.DataDirectoryPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <of:Button
                     Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
                     Command="{Binding SelectDataPathCommand}"
                     Content="..."
                     Style="{StaticResource SquareButtonStyle}" />
                 <of:ImageButton
                     Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
                     Click="DebugSelectDataDirectoryPathButton_Click"
                     ImageSource="{StaticResource BugIcon}"
                     Style="{StaticResource SquareImageButtonStyle}"
@@ -63,23 +69,28 @@
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Start Arguments" />
             <of:CheckBox
                 Margin="0"
+                Background="{StaticResource BgGrayBrush}"
                 Content="Skip Intros"
                 IsChecked="{Binding GameSettings.StartArguments.SkipIntros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<of:CheckBox
                 Margin="0,5,0,0"
                 Content="Disable Frame Limit"
+                Background="{StaticResource BgGrayBrush}"
                 IsChecked="{Binding GameSettings.StartArguments.DisableFrameLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
             <of:CheckBox
                 Margin="0,5,0,0"
+                Background="{StaticResource BgGrayBrush}"
                 Content="Enable Cheats"
                 IsChecked="{Binding GameSettings.StartArguments.EnableCheats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <!--<of:CheckBox
                 Margin="0,5,0,0"
                 Content="Enable Script Debugging"
+                Background="{StaticResource BgGrayBrush}"
                 IsChecked="{Binding GameSettings.StartArguments.EnableScriptDebug, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
             <!--<of:CheckBox
                 Margin="0,5,0,0"
                 Content="Disable Shader Compiler"
+                Background="{StaticResource BgGrayBrush}"
                 IsChecked="{Binding GameSettings.StartArguments.DisableShaderCompiler, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
         </StackPanel>
     </Grid>

@@ -9,7 +9,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
         #endregion
 
         #region Constructor
-        public FsViewModelBase(FsClientBase client) : base(client) { }
+        public FsViewModelBase(string title, FsClientBase client) : base(title, client) { }
         #endregion
     }
 }

@@ -5,7 +5,7 @@ namespace OF.FSimMan.ViewModel.Base
     public abstract class RememberableBusyViewModelBase : OF.Base.ViewModel.BusyViewModelBase, IRememberableViewModel
     {
         #region Constructor
-        public RememberableBusyViewModelBase(IClient client) : base(client) { }
+        public RememberableBusyViewModelBase(string title, IClient client) : base(title, client) { }
         #endregion
     }
 }

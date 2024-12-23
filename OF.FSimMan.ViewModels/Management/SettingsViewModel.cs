@@ -1,4 +1,5 @@
-﻿using OF.FSimMan.Client.Management;
+﻿using OF.Base.ViewModel;
+using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
@@ -28,7 +29,7 @@ namespace OF.FSimMan.ViewModel.Management
         #endregion
 
         #region Constructor
-        public SettingsViewModel() : base(SettingsClient.Instance)
+        public SettingsViewModel() : base("Settings", SettingsClient.Instance)
         {
             ((SettingsClient)Client).AppSettings.GetGameSettings<AppSettingsGameFs25>().PropertyChanged += AppSettingsChanged;
         }
@@ -39,7 +40,8 @@ namespace OF.FSimMan.ViewModel.Management
         {
             SettingsViewModel settingsViewModel = new SettingsViewModel();
             MainViewModel.ViewModelSelector.OpenViewModel(settingsViewModel);
-            settingsViewModel.ShowChangeLog();
+
+            //OFDOI: Show ChangeLogTab
         }
         #endregion
 
@@ -49,11 +51,6 @@ namespace OF.FSimMan.ViewModel.Management
             if (e.PropertyName is null || !e.PropertyName.Equals(nameof(AppSettingsGameBase.IsEnabled))) return;
 
             OnPropertyChanged(nameof(IsFs25Visible));
-        }
-
-        private void ShowChangeLog()
-        {
-            // OFDOI
         }
         #endregion
     }

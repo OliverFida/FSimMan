@@ -96,7 +96,7 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Constructor
-        public GameRunningViewModel(GameViewModelBase gameViewModel)
+        public GameRunningViewModel(GameViewModelBase gameViewModel) : base ("Game Running")
         {
             _gameViewModel = gameViewModel;
 

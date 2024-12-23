@@ -51,7 +51,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs
         #endregion
 
         #region Constructor
-        public Fs22ViewModel() : base(new Fs22Client()) { }
+        public Fs22ViewModel() : base("Farming Simulator 22", new Fs22Client()) { }
         #endregion
     }
 }
