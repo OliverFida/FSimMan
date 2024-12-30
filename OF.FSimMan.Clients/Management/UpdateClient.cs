@@ -79,12 +79,12 @@ namespace OF.FSimMan.Client.Management
             }
         }
 
-        public async Task<bool> GetShowChangelogAsync()
-        {
-            await Task.Delay(250);
-            return true;
-            // OFDOI
-        }
+        //public async Task<bool> GetShowChangelogAsync()
+        //{
+        //    await Task.Delay(250);
+        //    return true;
+        //    // OFDOI
+        //}
         #endregion
 
         #region Methods PRIVATE

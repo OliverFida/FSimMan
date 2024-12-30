@@ -1,5 +1,4 @@
-﻿using OF.Base.Objects;
-using OF.FSimMan.Management.Exceptions;
+﻿using OF.FSimMan.Management.Exceptions;
 
 namespace OF.FSimMan.Management.Games.Fs
 {

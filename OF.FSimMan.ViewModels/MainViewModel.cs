@@ -4,7 +4,6 @@ using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
-using OF.FSimMan.ViewModel.Management;
 using OliverFida.FSimMan.Exceptions;
 using System.Reflection;
 
@@ -36,8 +35,8 @@ namespace OF.FSimMan.ViewModel
                 OpenLastView();
 #if !DEBUG
                 await AutoUpdateAsync();
+                //await ShowChangelogAsync();
 #endif
-                await ShowChangelogAsync(); // OFDOI: move isinde !DEBUG
             }
             catch (OfException ex)
             {
@@ -78,13 +77,13 @@ namespace OF.FSimMan.ViewModel
             await ExecuteUpdate();
         }
 
-        private async Task ShowChangelogAsync()
-        {
-            UpdateClient updateClient = UpdateClient.Instance;
-            if (!await updateClient.GetShowChangelogAsync()) return;
+        //private async Task ShowChangelogAsync()
+        //{
+        //    UpdateClient updateClient = UpdateClient.Instance;
+        //    if (!await updateClient.GetShowChangelogAsync()) return;
 
-            SettingsViewModel.OpenChangeLog();
-        }
+        //    SettingsViewModel.OpenChangeLog();
+        //}
 
         private void OpenLastView()
         {

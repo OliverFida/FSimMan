@@ -1,5 +1,4 @@
-﻿using OF.Base.ViewModel;
-using OF.FSimMan.Client.Management;
+﻿using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
@@ -36,13 +35,13 @@ namespace OF.FSimMan.ViewModel.Management
         #endregion
 
         #region Methods PUBLIC
-        public static void OpenChangeLog()
-        {
-            SettingsViewModel settingsViewModel = new SettingsViewModel();
-            MainViewModel.ViewModelSelector.OpenViewModel(settingsViewModel);
+        //public static void OpenChangeLog()
+        //{
+        //    SettingsViewModel settingsViewModel = new SettingsViewModel();
+        //    MainViewModel.ViewModelSelector.OpenViewModel(settingsViewModel);
 
-            //OFDOI: Show ChangeLogTab
-        }
+        //    //OFDOI: Show ChangeLogTab
+        //}
         #endregion
 
         #region Methods PRIVATE

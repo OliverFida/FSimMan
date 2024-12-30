@@ -8,7 +8,6 @@ using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games;
-using OF.FSimMan.Management.Games.Fs;
 using System.IO;
 
 namespace OF.FSimMan.ViewModel.Management.Settings
