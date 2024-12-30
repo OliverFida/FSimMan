@@ -5,6 +5,14 @@ namespace OF.FSimMan.Management
 {
     public abstract class AppSettingsBase : BindingObject
     {
+        #region Properties
+        internal int _id = 0;
+        public int Id
+        {
+            get => _id;
+        }
+        #endregion
+
         #region Events
         public event EventHandler<AppSettingsStoreTriggerEventArgs>? StoreTrigger;
         #endregion
