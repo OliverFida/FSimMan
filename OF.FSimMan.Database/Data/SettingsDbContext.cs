@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OF.FSimMan.Management;
 
-namespace OF.FSimMan.Database.Context
+namespace OF.FSimMan.Database.Data
 {
-    public class SettingsDbContext : DatabaseContextBase
+    public class SettingsDbContext : Base.EFCore.SQLite.DbContextBase
     {
         #region Properties
         public DbSet<AppSettingsData> AppSettings => Set<AppSettingsData>();
+        #endregion
+
+        #region Constructor
+        public SettingsDbContext() : base(Path.Combine(CurrentApplication.CONFIG_PATH, "dev.db")) { }
         #endregion
 
         #region Methods PUBLIC

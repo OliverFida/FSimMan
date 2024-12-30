@@ -16,6 +16,7 @@
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2024.12.30.2038-BetterTabControl-EFCore" />
 	</ItemGroup>
 
 	<ItemGroup>
