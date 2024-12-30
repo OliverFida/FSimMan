@@ -24,6 +24,14 @@ namespace OF.FSimMan.View.Management.Settings
 #endif
         }
 
+        private void DebugClearExeDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+#if DEBUG
+            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            settings.ExeDirectoryPath = string.Empty;
+#endif
+        }
+
         private void DebugSelectDataDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
@@ -31,6 +39,14 @@ namespace OF.FSimMan.View.Management.Settings
             AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
             settings.ValidateDataDirectoryPath(path);
             settings.DataDirectoryPath = path;
+#endif
+        }
+
+        private void DebugClearDataDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+#if DEBUG
+            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            settings.DataDirectoryPath = string.Empty;
 #endif
         }
     }

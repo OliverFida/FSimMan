@@ -38,6 +38,13 @@
                     ImageSource="{StaticResource BugIcon}"
                     Style="{StaticResource SquareImageButtonStyle}"
                     Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
+                <of:ImageButton
+                    Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
+                    Click="DebugClearExeDirectoryPathButton_Click"
+                    ImageSource="{StaticResource XIcon}"
+                    Style="{StaticResource SquareImageButtonStyle}"
+                    Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
         </StackPanel>
 
@@ -60,6 +67,13 @@
                     Background="{StaticResource BgGrayBrush}"
                     Click="DebugSelectDataDirectoryPathButton_Click"
                     ImageSource="{StaticResource BugIcon}"
+                    Style="{StaticResource SquareImageButtonStyle}"
+                    Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
+                <of:ImageButton
+                    Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
+                    Click="DebugClearDataDirectoryPathButton_Click"
+                    ImageSource="{StaticResource XIcon}"
                     Style="{StaticResource SquareImageButtonStyle}"
                     Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
