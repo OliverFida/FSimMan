@@ -1,14 +1,12 @@
 ﻿using OF.Base.Client;
 using OF.Base.Objects;
+using OF.FSimMan.Database.Access;
 using OF.FSimMan.Management;
-using OF.FSimMan.Utility;
 
 namespace OF.FSimMan.Client.Management
 {
     public class SettingsClient : ClientBase, ISingleton<SettingsClient>
     {
-        private const string _fileName = "appSettings.xml";
-
         #region Properties
         private AppSettings? _appSettings = null;
         public AppSettings AppSettings
@@ -24,7 +22,7 @@ namespace OF.FSimMan.Client.Management
         #region Constructor
         private SettingsClient()
         {
-            AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
+            UpdateHandlers();
         }
         #endregion
 
@@ -35,12 +33,13 @@ namespace OF.FSimMan.Client.Management
             {
                 if (doControlBusyIndicator) IsBusy = true;
 
-                AppSettingsData data = new AppSettingsData();
-                data.ToData(AppSettings);
-                FileSerializationHelper.SerializeConfigFile(_fileName, data);
+                AppSettings temp = SettingsDbAccess.Instance.StoreAppSettings(AppSettings);
+                if (AppSettings.Id.Equals(0)) AppSettings.Id = temp.Id;
             }
             finally
             {
+                OnPropertyChanged(nameof(AppSettings));
+                UpdateHandlers();
                 AppSettings.UpdateHandlers();
                 if (doControlBusyIndicator) ResetBusyIndicator();
             }
@@ -48,6 +47,12 @@ namespace OF.FSimMan.Client.Management
         #endregion
 
         #region Methods PRIVATE
+        private void UpdateHandlers()
+        {
+            AppSettings.StoreTrigger -= HandleAppSettingsStoreTrigger;
+            AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
+        }
+
         private void HandleAppSettingsStoreTrigger(object? sender, AppSettingsStoreTriggerEventArgs e)
         {
             StoreSettings();
@@ -59,14 +64,7 @@ namespace OF.FSimMan.Client.Management
             {
                 IsBusy = true;
 
-
-                AppSettingsData data = FileSerializationHelper.DeserializeConfigFile<AppSettingsData>(_fileName);
-                AppSettings temp = data.FromData();
-
-                if (!ReleaseFeatures.ApplicationModeCreator) temp.ApplicationModeValues = temp.ApplicationModeValues.Where(x => !x.Equals(ApplicationMode.Creator)).ToList();
-
-                _appSettings = temp;
-                StoreSettings(false);
+                _appSettings = SettingsDbAccess.Instance.ReadAppSettings();
             }
             finally
             {

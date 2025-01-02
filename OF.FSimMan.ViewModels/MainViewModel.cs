@@ -6,12 +6,25 @@ using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
 using OliverFida.FSimMan.Exceptions;
 using System.Reflection;
+using System.Windows;
 
 namespace OF.FSimMan.ViewModel
 {
     public class MainViewModel : ViewModelBase, ISingleton<MainViewModel>
     {
         #region Properties
+        public WindowState StartupWindowState
+        {
+            get
+            {
+#if DEBUG
+                return WindowState.Normal;
+#else
+                return WindowState.Maximized;
+#endif
+            }
+        }
+
         public CurrentApplication CurrentApplication { get => CurrentApplication.Instance; }
 
         public static ViewModelSelector ViewModelSelector { get; } = new ViewModelSelector();

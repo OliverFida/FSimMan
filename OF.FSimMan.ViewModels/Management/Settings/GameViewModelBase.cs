@@ -31,7 +31,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
 
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
-        public AppSettingsGameBase GameSettings
+        public GameSettingsBase GameSettings
         {
             get => AppSettings.GetGameSettings(_game);
         }
@@ -103,7 +103,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
                 {
                     if (!e.Game.Equals(_game)) return;
 
-                    AppSettingsGameBase gameSettings = AppSettings.GetGameSettings(_game);
+                    GameSettingsBase gameSettings = AppSettings.GetGameSettings(_game);
 
                     string modsDirectoryPath = Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings(_game).DataDirectoryPath, "mods");
                     DirectoryInfo modsDirectoryInfo = new DirectoryInfo(modsDirectoryPath);

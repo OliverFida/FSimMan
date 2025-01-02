@@ -1,6 +1,6 @@
-﻿namespace OF.FSimMan.Management.Games.Fs
+﻿namespace OF.FSimMan.Management.Games
 {
-    public class AppSettingsGameFsStartArguments : AppSettingsBase
+    public class GameSettingsStartArguments : AppSettingsBase
     {
         private const string _argumentPrefix = "-";
 

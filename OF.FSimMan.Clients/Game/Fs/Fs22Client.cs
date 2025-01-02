@@ -4,7 +4,7 @@ using OF.FSimMan.Utility;
 
 namespace OF.FSimMan.Client.Game.Fs
 {
-    public class Fs22Client : FsClientBase
+    public class Fs22Client : GameClientBase
     {
         #region Constructor
         public Fs22Client() : base(FSimMan.Management.Game.FarmingSim22) { }

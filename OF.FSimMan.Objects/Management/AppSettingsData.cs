@@ -1,48 +1,37 @@
 ﻿using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 using System.Collections.Concurrent;
-using System.Xml.Serialization;
 
 namespace OF.FSimMan.Management
 {
-    [XmlRoot("AppSettings")]
-    [XmlInclude(typeof(AppSettingsGameFs22Data))]
-    [XmlInclude(typeof(AppSettingsGameFs25Data))]
     public class AppSettingsData : AppSettingsDataBase<AppSettings>
     {
-        [XmlElement(IsNullable = false)]
-        public ApplicationMode ApplicationMode = ApplicationMode.None;
-
-        [XmlElement(IsNullable = false)]
-        public string LastSelectedView = string.Empty;
-
-        [XmlElement(IsNullable = false)]
-        public string LastVersionChangelogDisplayed = string.Empty;
-
-        [XmlArray(nameof(Games), IsNullable = true)]
-        [XmlArrayItem("GameSettings")]
-        public AppSettingsGameDataBase[] Games = [];
+        public ApplicationMode ApplicationMode { get; set; } = ApplicationMode.None;
+        public string LastSelectedView { get; set; } = string.Empty;
+        //public string LastVersionChangelogDisplayed { get; set; } = string.Empty;
+        public List<GameSettingsDataBase> GameSettings { get; set; } = new List<GameSettingsDataBase>();
 
         public override AppSettings FromData()
         {
             AppSettings temp = new AppSettings
             {
+                Id = Id,
                 _applicationMode = ApplicationMode,
                 _lastSelectedView = LastSelectedView,
-                _lastVersionChangelogDisplayed = LastVersionChangelogDisplayed
+                //_lastVersionChangelogDisplayed = LastVersionChangelogDisplayed
             };
 
-            if (temp._applicationMode == ApplicationMode.None) temp._applicationMode = ApplicationMode.User;
+            if (temp._applicationMode.Equals(ApplicationMode.None)) temp._applicationMode = ApplicationMode.User;
 
-            ConcurrentBag<AppSettingsGameBase> tempGames = new ConcurrentBag<AppSettingsGameBase>();
-            Parallel.ForEach(Games, game =>
+            ConcurrentBag<GameSettingsBase> tempGames = new ConcurrentBag<GameSettingsBase>();
+            Parallel.ForEach(GameSettings, game =>
             {
                 switch (game)
                 {
-                    case AppSettingsGameFs22Data data:
+                    case GameSettingsFs22Data data:
                         tempGames.Add(data.FromData());
                         break;
-                    case AppSettingsGameFs25Data data:
+                    case GameSettingsFs25Data data:
                         tempGames.Add(data.FromData());
                         break;
                     default:
@@ -56,25 +45,26 @@ namespace OF.FSimMan.Management
 
         public override void ToData(AppSettings value)
         {
+            Id = value.Id;
             ApplicationMode = value._applicationMode;
             LastSelectedView = value.LastSelectedView;
-            LastVersionChangelogDisplayed = value.LastVersionChangelogDisplayed;
+            //LastVersionChangelogDisplayed = value.LastVersionChangelogDisplayed;
 
-            ConcurrentBag<AppSettingsGameDataBase> temp = new ConcurrentBag<AppSettingsGameDataBase>();
+            ConcurrentBag<GameSettingsDataBase> temp = new ConcurrentBag<GameSettingsDataBase>();
             Parallel.ForEach(value.Games, game =>
             {
                 switch (game)
                 {
-                    case AppSettingsGameFs22 gameVal:
+                    case GameSettingsFs22 gameVal:
                         {
-                            AppSettingsGameFs22Data data = new AppSettingsGameFs22Data();
+                            GameSettingsFs22Data data = new GameSettingsFs22Data();
                             data.ToData(gameVal);
                             temp.Add(data);
                         }
                         break;
-                    case AppSettingsGameFs25 gameVal:
+                    case GameSettingsFs25 gameVal:
                         {
-                            AppSettingsGameFs25Data data = new AppSettingsGameFs25Data();
+                            GameSettingsFs25Data data = new GameSettingsFs25Data();
                             data.ToData(gameVal);
                             temp.Add(data);
                         }
@@ -83,7 +73,7 @@ namespace OF.FSimMan.Management
                         throw new NotImplementedException();
                 }
             });
-            Games = temp.ToArray();
+            GameSettings = temp.ToList();
         }
     }
 }

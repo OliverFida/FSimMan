@@ -10,14 +10,14 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         #region Properties
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
-        public AppSettingsGameFs22? GameSettingsFs22
+        public GameSettingsFs22? GameSettingsFs22
         {
-            get => AppSettings?.GetGameSettings<AppSettingsGameFs22>();
+            get => AppSettings?.GetGameSettings<GameSettingsFs22>();
         }
 
-        public AppSettingsGameFs25? GameSettingsFs25
+        public GameSettingsFs25? GameSettingsFs25
         {
-            get => AppSettings?.GetGameSettings<AppSettingsGameFs25>();
+            get => AppSettings?.GetGameSettings<GameSettingsFs25>();
         }
 
         public bool IsFs25Visible

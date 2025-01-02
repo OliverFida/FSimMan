@@ -18,8 +18,8 @@ namespace OF.FSimMan.Tests.Objects.Management
                 eventTriggered = true;
             };
 
-            AppSettingsGameFs22Data d = new AppSettingsGameFs22Data();
-            AppSettingsGameFs22 s = d.FromData();
+            GameSettingsFs22Data d = new GameSettingsFs22Data();
+            GameSettingsFs22 s = d.FromData();
             s.StoreTrigger += eH;
             Assert.IsFalse(s.IsEnabled);
             Assert.AreEqual(string.Empty, s.ExeDirectoryPath);
