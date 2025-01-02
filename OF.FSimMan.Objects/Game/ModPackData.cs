@@ -1,36 +1,48 @@
 ﻿using OF.Base.Objects;
 using System.Collections.Concurrent;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
 namespace OF.FSimMan.Game
 {
+    [Table("ModPacks")]
     [XmlType("ModPack")]
     public class ModPackData : DataObject<ModPack>
     {
         [XmlElement(IsNullable = false)]
-        public Guid Guid;
+        public Management.Game Game { get; set; }
 
+        [Required]
         [XmlElement(IsNullable = false)]
-        public Management.Game Game;
+        public Guid Guid { get; set; } = Guid.NewGuid();
 
+        [Required]
         [XmlElement(IsNullable = false)]
-        public string Title = string.Empty;
+        public string Title { get; set; } = string.Empty;
 
-        public string? Version;
+        [Required]
+        [XmlElement(IsNullable = false)]
+        public string Version { get; set; } = string.Empty;
+        [XmlElement(IsNullable = false)]
+        [Required]
+        public string Author { get; set; } = string.Empty;
 
-        public string? Author;
+        [Required]
+        [XmlElement(IsNullable = false)]
+        public string Description { get; set; } = string.Empty;
 
-        public string? Description;
+        public string? ImageSource { get; set; } = null;
 
-        public string? ImageSource = null;
-
+        [Required]
         [XmlArray(nameof(Mods), IsNullable = true)]
-        public ModData[] Mods = [];
+        public List<ModData> Mods { get; set; } = new List<ModData>();
 
         public override ModPack FromData()
         {
             ModPack temp = new ModPack
             {
+                Id = Id,
                 _guid = Guid,
                 _game = Game,
                 _title = Title,
@@ -50,6 +62,7 @@ namespace OF.FSimMan.Game
 
         public override void ToData(ModPack value)
         {
+            Id = value.Id;
             Guid = value._guid;
             Game = value._game;
             Title = value._title;
@@ -66,7 +79,7 @@ namespace OF.FSimMan.Game
                     data.ToData(mod);
                     temp.Add(data);
                 });
-                Mods = temp.ToArray();
+                Mods = temp.ToList();
             }
         }
     }

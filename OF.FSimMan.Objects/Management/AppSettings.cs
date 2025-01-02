@@ -42,10 +42,10 @@ namespace OF.FSimMan.Management
         #endregion
 
         #region Games
-        internal readonly List<AppSettingsGameBase> _games = new List<AppSettingsGameBase>();
-        public List<AppSettingsGameBase> Games => _games;
+        internal readonly List<GameSettingsBase> _games = new List<GameSettingsBase>();
+        public List<GameSettingsBase> Games => _games;
 
-        public T GetGameSettings<T>() where T : AppSettingsGameBase
+        public T GetGameSettings<T>() where T : GameSettingsBase
         {
             T? matchingSettings = Games.OfType<T>().SingleOrDefault();
             if (matchingSettings is not null) return matchingSettings;
@@ -55,14 +55,14 @@ namespace OF.FSimMan.Management
             return temp;
         }
 
-        public AppSettingsGameBase GetGameSettings(Game game)
+        public GameSettingsBase GetGameSettings(Game game)
         {
             switch (game)
             {
                 case Game.FarmingSim22:
-                    return GetGameSettings<AppSettingsGameFs22>();
+                    return GetGameSettings<GameSettingsFs22>();
                 case Game.FarmingSim25:
-                    return GetGameSettings<AppSettingsGameFs25>();
+                    return GetGameSettings<GameSettingsFs25>();
                 default:
                     throw new NotImplementedException();
             }
@@ -84,7 +84,7 @@ namespace OF.FSimMan.Management
                 game.ModPackAutogenerationNowPossible -= HandleGameModPackAutogenerationNowPossible; ;
                 game.ModPackAutogenerationNowPossible += HandleGameModPackAutogenerationNowPossible; ;
 
-                if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).UpdateHandlers();
+                if (game.GetType().IsAssignableTo(typeof(GameSettingsBase))) ((GameSettingsBase)game).UpdateHandlers();
             }
         }
         #endregion

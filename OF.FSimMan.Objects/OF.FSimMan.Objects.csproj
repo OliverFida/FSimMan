@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base" Version="2024.12.30.2038-BetterTabControl-EFCore" />
+    <PackageReference Include="OF.Base" Version="2024.12.31.923-vNext" />
   </ItemGroup>
 
 </Project>

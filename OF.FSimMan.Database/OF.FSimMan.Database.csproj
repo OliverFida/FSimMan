@@ -10,13 +10,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
-	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2024.12.30.2038-BetterTabControl-EFCore" />
+	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2024.12.31.923-vNext" />
 	</ItemGroup>
 
 	<ItemGroup>

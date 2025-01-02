@@ -11,26 +11,26 @@ namespace OF.FSimMan.ViewModel.Management
         #region Properties
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
-        public AppSettingsGameFs22? GameSettingsFs22
+        public GameSettingsFs22? GameSettingsFs22
         {
-            get => AppSettings?.GetGameSettings<AppSettingsGameFs22>();
+            get => AppSettings?.GetGameSettings<GameSettingsFs22>();
         }
 
-        public AppSettingsGameFs25? GameSettingsFs25
+        public GameSettingsFs25? GameSettingsFs25
         {
-            get => AppSettings?.GetGameSettings<AppSettingsGameFs25>();
+            get => AppSettings?.GetGameSettings<GameSettingsFs25>();
         }
 
         public bool IsFs25Visible
         {
-            get => ReleaseFeatures.GameFs25 && ((SettingsClient)Client).AppSettings.GetGameSettings<AppSettingsGameFs25>().IsEnabled;
+            get => ReleaseFeatures.GameFs25 && ((SettingsClient)Client).AppSettings.GetGameSettings<GameSettingsFs25>().IsEnabled;
         }
         #endregion
 
         #region Constructor
         public SettingsViewModel() : base("Settings", SettingsClient.Instance)
         {
-            ((SettingsClient)Client).AppSettings.GetGameSettings<AppSettingsGameFs25>().PropertyChanged += AppSettingsChanged;
+            ((SettingsClient)Client).AppSettings.GetGameSettings<GameSettingsFs25>().PropertyChanged += AppSettingsChanged;
         }
         #endregion
 
@@ -47,7 +47,7 @@ namespace OF.FSimMan.ViewModel.Management
         #region Methods PRIVATE
         private void AppSettingsChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName is null || !e.PropertyName.Equals(nameof(AppSettingsGameBase.IsEnabled))) return;
+            if (e.PropertyName is null || !e.PropertyName.Equals(nameof(GameSettingsBase.IsEnabled))) return;
 
             OnPropertyChanged(nameof(IsFs25Visible));
         }

@@ -8,10 +8,10 @@ using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.ViewModel.Game.Fs
 {
-    public class Fs22ViewModel : FsViewModelBase
+    public class Fs22ViewModel : GameViewModelBase
     {
         #region Properties
-        public override bool IsOpenable => SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().IsFullyConfigured;
+        public override bool IsOpenable => SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>().IsFullyConfigured;
         #endregion
 
         #region Commands

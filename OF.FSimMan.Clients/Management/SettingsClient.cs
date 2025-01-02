@@ -1,6 +1,6 @@
 ﻿using OF.Base.Client;
 using OF.Base.Objects;
-using OF.FSimMan.Database.Data;
+using OF.FSimMan.Database.Access;
 using OF.FSimMan.Management;
 
 namespace OF.FSimMan.Client.Management
@@ -33,10 +33,8 @@ namespace OF.FSimMan.Client.Management
             {
                 if (doControlBusyIndicator) IsBusy = true;
 
-                using(SettingsDbContext db = new SettingsDbContext())
-                {
-                    _appSettings = db.StoreAppSettings(AppSettings);
-                }
+                AppSettings temp = SettingsDbAccess.Instance.StoreAppSettings(AppSettings);
+                if (AppSettings.Id.Equals(0)) _appSettings = temp;
             }
             finally
             {
@@ -65,11 +63,7 @@ namespace OF.FSimMan.Client.Management
             {
                 IsBusy = true;
 
-                using(SettingsDbContext db = new SettingsDbContext())
-                {
-                    AppSettings appSettings = db.ReadAppSettings();
-                    _appSettings = appSettings;
-                }
+                _appSettings = SettingsDbAccess.Instance.ReadAppSettings();
             }
             finally
             {

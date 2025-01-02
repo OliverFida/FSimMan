@@ -12,6 +12,8 @@ namespace OF.FSimMan.ViewModel.Game
     public abstract class GameViewModelBase : RememberableBusyViewModelBase
     {
         #region Properties
+        public static bool IsModPackHubVisible { get => ReleaseFeatures.GiantsModPackHub; }
+
         public abstract bool IsOpenable { get; }
 
         public static AppSettings AppSettings { get => SettingsClient.Instance.AppSettings; }

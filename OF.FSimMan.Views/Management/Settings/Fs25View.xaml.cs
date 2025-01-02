@@ -18,7 +18,7 @@ namespace OF.FSimMan.View.Management.Settings
         {
 #if DEBUG
             string path = @"B:\Games\Giants\Farming Simulator 2025";
-            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            GameSettingsFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
             settings.ValidateExeDirectoryPath(path);
             settings.ExeDirectoryPath = path;
 #endif
@@ -27,7 +27,7 @@ namespace OF.FSimMan.View.Management.Settings
         private void DebugClearExeDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
-            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            GameSettingsFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
             settings.ExeDirectoryPath = string.Empty;
 #endif
         }
@@ -36,7 +36,7 @@ namespace OF.FSimMan.View.Management.Settings
         {
 #if DEBUG
             string path = @"C:\Users\Oliver Fida\Documents\My Games\FarmingSimulator2025";
-            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            GameSettingsFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
             settings.ValidateDataDirectoryPath(path);
             settings.DataDirectoryPath = path;
 #endif
@@ -45,7 +45,7 @@ namespace OF.FSimMan.View.Management.Settings
         private void DebugClearDataDirectoryPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 #if DEBUG
-            AppSettingsGameFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+            GameSettingsFs25 settings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
             settings.DataDirectoryPath = string.Empty;
 #endif
         }

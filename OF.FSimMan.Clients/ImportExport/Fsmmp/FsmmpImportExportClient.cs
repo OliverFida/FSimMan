@@ -69,6 +69,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
                 ModPackData modPackData = ReadModPackInfo(ref archive, sourceFileName);
                 if (!modPackData.Game.Equals(_game)) throw new InvalidModPackFileException(sourceFileName);
+                modPackData.Id = 0;
                 if (importAsNew) modPackData.Guid = Guid.NewGuid();
 
                 ModPack modPack = modPackData.FromData();
@@ -76,6 +77,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
                 ModPackEditor modPackEditor = new ModPackEditor(modPack);
                 modPackEditor.CheckIntegrity();
+                modPackEditor.TriggerEndEdit();
                 archive.Dispose();
                 return modPack;
             }

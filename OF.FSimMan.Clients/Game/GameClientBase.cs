@@ -1,10 +1,10 @@
 ﻿using OF.Base.Client;
 using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.Database.Access;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games.Fs;
-using OF.FSimMan.Utility;
 using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Game
@@ -22,9 +22,9 @@ namespace OF.FSimMan.Client.Game
                 switch (_game)
                 {
                     case FSimMan.Management.Game.FarmingSim22:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     case FSimMan.Management.Game.FarmingSim25:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     default:
                         throw new NotImplementedException();
                 }
@@ -132,8 +132,7 @@ namespace OF.FSimMan.Client.Game
 
                 _modPacksEditor?.TriggerCancelEdit();
 
-                ModPacksData data = FileSerializationHelper.DeserializeConfigFile<ModPacksData>(_modPacksFileName);
-                ModPacks = data.FromData();
+                ModPacks = GetDbAccess().ReadModPacks();
 
                 _modPacksEditor = new ModPacksEditor(ModPacks);
             }
@@ -279,10 +278,24 @@ namespace OF.FSimMan.Client.Game
         #region Methods INTERNAL
         internal void StoreModPacks()
         {
-            ModPacksData data = new ModPacksData();
-            data.ToData(ModPacks);
+            _modPacksEditor?.TriggerCancelEdit();
 
-            FileSerializationHelper.SerializeConfigFile(_modPacksFileName, data);
+            ModPacks = GetDbAccess().BulkStoreModPacks(ModPacks);
+
+            _modPacksEditor = new ModPacksEditor(ModPacks);
+        }
+
+        internal IModPacksDbAccess GetDbAccess()
+        {
+            switch (_game)
+            {
+                case FSimMan.Management.Game.FarmingSim22:
+                    return ModPacksFs22DbAccess.Instance;
+                case FSimMan.Management.Game.FarmingSim25:
+                    return ModPacksFs25DbAccess.Instance;
+                default:
+                    throw new NotImplementedException();
+            }
         }
         #endregion
 
@@ -307,14 +320,14 @@ namespace OF.FSimMan.Client.Game
             {
                 case FSimMan.Management.Game.FarmingSim22:
                     {
-                        AppSettingsGameFs22 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>();
+                        GameSettingsFs22 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>();
                         exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2022.exe");
                         args = gameSettings.StartArguments.GetArgumentsString();
                     }
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
                     {
-                        AppSettingsGameFs25 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
+                        GameSettingsFs25 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
                         exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2025.exe");
                         args = gameSettings.StartArguments.GetArgumentsString();
                     }

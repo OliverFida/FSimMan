@@ -1,54 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games;
+using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.Database.Data
 {
-    public class SettingsDbContext : Base.EFCore.SQLite.DbContextBase
+    public class SettingsDbContext : Base.EfCore.SqLite.DbContextBase
     {
         #region Properties
         public DbSet<AppSettingsData> AppSettings => Set<AppSettingsData>();
+        public DbSet<GameSettingsFs22Data> GameSettingsFs22 => Set<GameSettingsFs22Data>();
+        public DbSet<GameSettingsFs25Data> GameSettingsFs25 => Set<GameSettingsFs25Data>();
+        public DbSet<GameSettingsStartArgumentsData> GameSettingsStartArguments => Set<GameSettingsStartArgumentsData>();
         #endregion
 
         #region Constructor
-        public SettingsDbContext() : base(Path.Combine(CurrentApplication.CONFIG_PATH, "dev.db")) { }
-        #endregion
-
-        #region Methods PUBLIC
-        public AppSettings ReadAppSettings()
-        {
-            AppSettingsData? temp = ReadAppSettingsData();
-            if (temp is null) return new AppSettings();
-
-            return temp.FromData();
-        }
-
-        public AppSettings StoreAppSettings(AppSettings value)
-        {
-            AppSettingsData? existing = ReadAppSettingsData();
-
-            if (existing is null)
-            {
-                var temp = new AppSettingsData();
-                temp.ToData(value);
-                AppSettings.Add(temp);
-            }
-            else
-            {
-                existing.ToData(value);
-            }
-
-            SaveChanges();
-
-            if (existing is null) return ReadAppSettings();
-            return value;
-        }
-        #endregion
-
-        #region Methods PRIVATE
-        private AppSettingsData? ReadAppSettingsData()
-        {
-            return AppSettings.FirstOrDefault();
-        }
+        public SettingsDbContext() : base(Path.Combine(CurrentApplication.CONFIG_DATABASE_PATH)) { }
         #endregion
     }
 }

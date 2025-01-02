@@ -29,6 +29,15 @@ namespace OF.FSimMan
             };
         }
 
+        protected override void OnStartup(StartupEventArgs e)
+        {
+#if DEBUG
+            if (e.Args.Contains("--manual-testing")) CurrentApplication.LaunchMode = LaunchMode.ManualTesting;
+#endif
+
+            base.OnStartup(e);
+        }
+
         private void HandleException(Exception? exception, string source)
         {
             if (exception == null) return;

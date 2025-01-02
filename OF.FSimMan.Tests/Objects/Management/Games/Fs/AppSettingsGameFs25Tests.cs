@@ -19,7 +19,7 @@ namespace OF.FSimMan.Tests.Objects.Management
             };
 
             AppSettingsGameFs25Data d = new AppSettingsGameFs25Data();
-            AppSettingsGameFs25 s = d.FromData();
+            GameSettingsFs25 s = d.FromData();
             s.StoreTrigger += eH;
             Assert.IsFalse(s.IsEnabled);
             Assert.AreEqual(string.Empty, s.ExeDirectoryPath);

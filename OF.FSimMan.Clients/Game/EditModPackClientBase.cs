@@ -6,12 +6,15 @@ namespace OF.FSimMan.Client.Game
     public abstract class EditModPackClientBase : ClientBase
     {
         #region Properties
-        private readonly ModPack _modPack;
-        public ModPack ModPack => _modPack;
+        private ModPack _modPack;
+        public ModPack ModPack
+        {
+            get => _modPack;
+        }
 
         protected readonly GameClientBase _gameClient;
 
-        private readonly ModPackEditor _modPackEditor;
+        private ModPackEditor _modPackEditor;
         #endregion
 
         #region Constructor
@@ -27,8 +30,8 @@ namespace OF.FSimMan.Client.Game
         public void StoreModPack()
         {
             _modPackEditor.TriggerEndEdit();
-            _gameClient.StoreModPacks();
-            _modPackEditor.TriggerBeginEdit();
+            _modPack = _gameClient.GetDbAccess().StoreModPack(_modPack);
+            _modPackEditor = new ModPackEditor(_modPack);
         }
 
         public void CancelEdit()

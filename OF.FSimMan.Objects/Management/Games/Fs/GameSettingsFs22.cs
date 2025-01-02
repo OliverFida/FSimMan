@@ -2,10 +2,10 @@
 
 namespace OF.FSimMan.Management.Games.Fs
 {
-    public class AppSettingsGameFs22 : AppSettingsGameFsBase
+    public class GameSettingsFs22 : GameSettingsBase
     {
         #region Constructor
-        public AppSettingsGameFs22() : base(Game.FarmingSim22) { }
+        public GameSettingsFs22() : base(Game.FarmingSim22) { }
         #endregion
 
         #region Methods PUBLIC

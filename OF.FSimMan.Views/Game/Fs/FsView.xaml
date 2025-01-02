@@ -51,13 +51,13 @@
                     Visibility="{Binding IsModPackHubVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
             </StackPanel>
 
-            <of:DataGrid
+            <DataGrid
                 Grid.Row="2"
                 Margin="0,5,0,0"
                 VerticalAlignment="Stretch"
                 ItemsSource="{Binding Client.ModPacks.List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource ModpacksDataGridStyle}">
-                <of:DataGrid.Columns>
+                <DataGrid.Columns>
                     <DataGridTemplateColumn
                         MinWidth="150"
                         CellTemplate="{StaticResource ModpacksDataGridModpackDataTemplate}"
@@ -70,8 +70,8 @@
                         MinWidth="150"
                         CellTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}"
                         Header="Controls" />
-                </of:DataGrid.Columns>
-            </of:DataGrid>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </of:BusyIndicator>
 </UserControl>
