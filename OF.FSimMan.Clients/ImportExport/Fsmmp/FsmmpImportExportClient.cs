@@ -128,6 +128,8 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
         {
             foreach (Mod mod in modPack.Mods)
             {
+                mod.Id = 0;
+
                 {
                     string sourceModFilePath = $@"mods\{mod.FileName}";
                     ZipArchiveEntry? entry = archive.GetEntry(sourceModFilePath);
