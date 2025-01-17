@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using OF.FSimMan.Game;
+using System.Runtime.CompilerServices;
 
 namespace OF.FSimMan.Management.Games
 {
@@ -14,11 +15,40 @@ namespace OF.FSimMan.Management.Games
             set => SetProperty(ref _isEnabled, value);
         }
 
+        protected List<GameOrigin>? _gameOriginValues;
+        public List<GameOrigin> GameOriginValues
+        {
+            get
+            {
+                if (_gameOriginValues == null)
+                {
+                    _gameOriginValues = Enum.GetValues<GameOrigin>().ToList();
+                }
+                return _gameOriginValues;
+            }
+            set => SetProperty(ref _gameOriginValues, value);
+        }
+
+        internal GameOrigin _gameOrigin = GameOrigin.DvdWebsite;
+        public GameOrigin GameOrigin
+        {
+            get => _gameOrigin;
+            set => SetProperty(ref _gameOrigin, value);
+        }
+
         internal string _exeDirectoryPath = string.Empty;
         public string ExeDirectoryPath
         {
             get => _exeDirectoryPath;
             set => SetProperty(ref _exeDirectoryPath, value);
+        }
+        public bool IsExeDirectoryVisible
+        {
+            get
+            {
+                if (!_gameOrigin.Equals(GameOrigin.DvdWebsite)) return false;
+                return true;
+            }
         }
 
         internal string _dataDirectoryPath = string.Empty;
@@ -33,7 +63,7 @@ namespace OF.FSimMan.Management.Games
             get
             {
                 if (!IsEnabled) return false;
-                if (string.IsNullOrEmpty(ExeDirectoryPath)) return false;
+                if (IsExeDirectoryVisible && string.IsNullOrEmpty(ExeDirectoryPath)) return false;
                 if (string.IsNullOrEmpty(DataDirectoryPath)) return false;
 
                 InvokeModPackAutogenerationNowPossible();
@@ -86,7 +116,13 @@ namespace OF.FSimMan.Management.Games
         protected override bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
             bool hasChanged = base.SetProperty(ref field, value, propertyName);
-            if (hasChanged) OnPropertyChanged(nameof(IsFullyConfigured));
+            if (hasChanged)
+            {
+                OnPropertyChanged(nameof(IsExeDirectoryVisible));
+                if (!IsExeDirectoryVisible && !string.IsNullOrWhiteSpace(ExeDirectoryPath)) ExeDirectoryPath = string.Empty;
+
+                OnPropertyChanged(nameof(IsFullyConfigured));
+            }
             return hasChanged;
         }
         #endregion
