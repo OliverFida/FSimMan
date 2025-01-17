@@ -25,7 +25,7 @@
             set => SetProperty(ref _enableCheats, value);
         }
 
-        public string GetArgumentsString()
+        public List<string> GetArgumentsList()
         {
             List<string> temp = new List<string>();
 
@@ -35,7 +35,12 @@
             // OFDO: if (EnableScriptDebug) temp.Add($"{_argumentPrefix}scriptDebug");
             // OFDO: if (DisableShaderCompiler) temp.Add($"{_argumentPrefix}disableShaderCompiler");
 
-            return string.Join(" ", temp.ToArray());
+            return temp;
+        }
+
+        public string GetArgumentsString()
+        {
+            return string.Join(" ", GetArgumentsList());
         }
     }
 }

@@ -4,6 +4,7 @@ using OF.FSimMan.Client.Management;
 using OF.FSimMan.Database.Access;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
 using System.Diagnostics;
 
@@ -183,7 +184,7 @@ namespace OF.FSimMan.Client.Game
 
                 GameState = GameState.Started;
                 SetGameModFolder();
-                ExecuteGameExe();
+                ExecuteGame();
                 WaitForGameState(GameState.Started, true);
             }
             finally
@@ -311,32 +312,58 @@ namespace OF.FSimMan.Client.Game
             GameStateChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        private void ExecuteGameExe()
+        private void ExecuteGame()
         {
-            string exePath;
-            string? args;
-
-            switch (Game)
+            GameSettingsBase gameSettings;
+            switch (_game)
             {
                 case FSimMan.Management.Game.FarmingSim22:
-                    {
-                        GameSettingsFs22 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>();
-                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2022.exe");
-                        args = gameSettings.StartArguments.GetArgumentsString();
-                    }
+                    gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>();
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
-                    {
-                        GameSettingsFs25 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
-                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2025.exe");
-                        args = gameSettings.StartArguments.GetArgumentsString();
-                    }
+                    gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
+                    break;
+                default:
+                    throw new NotImplementedException();
+
+            }
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            switch (gameSettings.GameOrigin)
+            {
+                case FSimMan.Game.GameOrigin.DvdWebsite:
+                    processStartInfo.FileName = gameSettings.ExeFilePath;
+                    processStartInfo.Arguments = gameSettings.StartArguments.GetArgumentsString();
+                    break;
+                case FSimMan.Game.GameOrigin.Steam:
+                    processStartInfo.FileName = GetGameSteamUri(gameSettings);
+                    processStartInfo.UseShellExecute = true;
                     break;
                 default:
                     throw new NotImplementedException();
             }
 
-            Process.Start(exePath, args ?? string.Empty);
+            Process.Start(processStartInfo);
+        }
+
+        private string GetGameSteamUri(GameSettingsBase gameSettings)
+        {
+            List<string> uriParts = new List<string>
+            {
+                "steam://rungameid",
+                gameSettings.SteamId
+            };
+
+            string temp = string.Join("/", uriParts);
+            List<string> arguments = gameSettings.StartArguments.GetArgumentsList();
+            if (arguments.Count.Equals(0)) return temp;
+
+            uriParts.Clear();
+            temp += "/";
+            uriParts.Add(temp);
+            uriParts.AddRange(arguments);
+
+            return string.Join("/", uriParts);
         }
 
         private void KillGameProcess()

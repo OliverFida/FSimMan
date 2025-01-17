@@ -7,6 +7,8 @@ namespace OF.FSimMan.Management.Games
     {
         #region Properties
         internal Game _game;
+        public abstract string ExeFileName { get; }
+        public abstract string SteamId { get; }
 
         internal bool _isEnabled = false;
         public bool IsEnabled
@@ -49,6 +51,11 @@ namespace OF.FSimMan.Management.Games
                 if (!_gameOrigin.Equals(GameOrigin.DvdWebsite)) return false;
                 return true;
             }
+        }
+
+        public string ExeFilePath
+        {
+            get => Path.Combine(ExeDirectoryPath, ExeFileName);
         }
 
         internal string _dataDirectoryPath = string.Empty;
