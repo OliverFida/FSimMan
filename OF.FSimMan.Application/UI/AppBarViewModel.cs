@@ -108,10 +108,11 @@ namespace OF.FSimMan.UI
             {
                 try
                 {
-
-                    Fs22ViewModel.RunGameOnClientInitializeComplete(null);
-                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs22ViewModel);
-                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
+                    GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim22);
+                    // OFDO: RunFs22DefaultDelegate
+                    //Fs22ViewModel.RunGameOnClientInitializeComplete(null);
+                    //OldGameRunningViewModel gameRunningViewModel = new OldGameRunningViewModel(Fs22ViewModel);
+                    //MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {
@@ -152,9 +153,11 @@ namespace OF.FSimMan.UI
             {
                 try
                 {
-                    Fs25ViewModel.RunGameOnClientInitializeComplete(null);
-                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs25ViewModel);
-                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
+                    GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim25);
+                    // OFDO: RunFs25DefaultDelegate
+                    //Fs25ViewModel.RunGameOnClientInitializeComplete(null);
+                    //OldGameRunningViewModel gameRunningViewModel = new OldGameRunningViewModel(Fs25ViewModel);
+                    //MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {

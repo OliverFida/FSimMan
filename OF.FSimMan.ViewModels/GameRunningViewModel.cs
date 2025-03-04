@@ -1,27 +1,38 @@
-﻿using OF.Base.Objects;
+﻿using Accessibility;
+using OF.Base.Objects;
 using OF.Base.ViewModel;
-using OF.Base.Wpf.UiFunctions;
-using OF.FSimMan.Client.Game;
 using OF.FSimMan.Management;
-using OF.FSimMan.ViewModel.Game;
+using System.Collections.ObjectModel;
 
 namespace OF.FSimMan.ViewModel
 {
-    public class GameRunningViewModel : ViewModelBase
+    public class GameRunningViewModel : ViewModelBase, ISingleton<GameRunningViewModel>
     {
-        #region Properties
-        private readonly GameViewModelBase _gameViewModel;
+        #region ISingleton
+        private static readonly GameRunningViewModel _instance = new GameRunningViewModel();
+        public static GameRunningViewModel Instance => _instance;
+        #endregion
 
+        #region Properties
+        private bool _isStartPlanned = false;
+        private bool _isStopPlanned = false;
+
+        private GameInfoBase? _runningGame;
+        public GameInfoBase? RunningGame
+        {
+            get => _runningGame;
+            set => SetProperty(ref _runningGame, value);
+        }
+
+        private GameState _gameState = GameState.Stopped;
         public string GameStatusText
         {
             get
             {
-                if (((IGameClient)_gameViewModel.Client).GameState == GameState.Started)
-                {
-                    if (((IGameClient)_gameViewModel.Client).IsGameRunning) return "RUNNING";
-                    return "STARTING...";
-                }
-                return "STOPPING...";
+                if (_gameState.Equals(GameState.Stopped) && _isStartPlanned) return "STARTING...";
+                if (_gameState.Equals(GameState.Started) && _isStopPlanned) return "STOPPING...";
+                if (_gameState.Equals(GameState.Started)) return "RUNNING";
+                return string.Empty;
             }
         }
 
@@ -29,48 +40,8 @@ namespace OF.FSimMan.ViewModel
         {
             get
             {
-                IGameClient client = (IGameClient)_gameViewModel.Client;
-                if (client.GameState == GameState.Started && !client.IsGameRunning ||
-                    client.GameState == GameState.Stopped && client.IsGameRunning) return false;
-
-                return true;
-            }
-        }
-
-        public string GameName
-        {
-            get
-            {
-                switch (((IGameClient)_gameViewModel.Client).Game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        return "Farming Simulator 22";
-                    case FSimMan.Management.Game.FarmingSim25:
-                        return "Farming Simulator 25";
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-        }
-
-        public string GameImage
-        {
-            get
-            {
-                string path = "pack://application:,,,/OF.FSimMan.Resources;component/Logos/";
-                switch (((IGameClient)_gameViewModel.Client).Game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        path += "FS22.png";
-                        break;
-                    case FSimMan.Management.Game.FarmingSim25:
-                        path += "FS25.png";
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-
-                return path;
+                if (_gameState.Equals(GameState.Started) && !_isStopPlanned) return true;
+                return false;
             }
         }
         #endregion
@@ -79,46 +50,49 @@ namespace OF.FSimMan.ViewModel
         public Command CloseGameCommand { get; }
         private void CloseGameDelegate()
         {
-            Task.Run(() =>
-            {
-                try
-                {
-                    IGameClient client = (IGameClient)_gameViewModel.Client;
-                    client.StopGame();
-                    MainViewModel.ViewModelSelector.CloseCurrentViewModel();
-                }
-                catch (OfException ex)
-                {
-                    UiFunctions.ShowError(ex);
-                }
-            });
+            // OFDO: CloseGameDelegate
         }
         #endregion
 
         #region Constructor
-        public GameRunningViewModel(GameViewModelBase gameViewModel) : base("Game Running")
+        private GameRunningViewModel() : base("Game Running", true, false)
         {
-            _gameViewModel = gameViewModel;
+            CloseGameCommand = new Command(this, target => ((GameRunningViewModel) target).CloseGameDelegate());
 
-            CloseGameCommand = new Command(this, target => ((GameRunningViewModel)target).CloseGameDelegate());
-            ((IGameClient)_gameViewModel.Client).GameStateChanged += HandleGameStateChanged;
-            Task.Run(WatchIsGameClosed);
+            Task.Run(WatchIsAnyGameRunning);
         }
         #endregion
 
-        #region Methods PRIVATE
-        private void HandleGameStateChanged(object? sender, EventArgs e)
+        #region Methods PUBLIC
+        public void PlanStart(FSimMan.Management.Game game)
         {
-            OnPropertyChanged(nameof(GameStatusText));
-            OnPropertyChanged(nameof(IsCloseGameEnabled));
-            OnPropertyChanged(nameof(GameName));
-            OnPropertyChanged(nameof(GameImage));
+            _isStartPlanned = true;
+            RunningGame = GameInfoCollection.Instance.GetGameInfo(game);
+            MainViewModel.ViewModelSelector.OpenViewModel(this);
+            // OFOD: PlanStart
         }
 
-        private void WatchIsGameClosed()
+        //public void PlanStop()
+        //{
+        //    _isStopPlanned = true;
+        //    // OFOD: PlanStop
+        //}
+        #endregion
+
+        #region Methods PRIVATE
+        private void UpdateProperties()
         {
-            ((IGameClient)_gameViewModel.Client).WaitForGameState(GameState.SelfStopped, false);
-            MainViewModel.ViewModelSelector.CloseCurrentViewModel();
+            // OFDO: UpdateProperties
+        }
+
+        private void WatchIsAnyGameRunning()
+        {
+            ReadOnlyCollection<GameInfoBase> gameInfos = GameInfoCollection.Instance.GetAll();
+
+            foreach (GameInfoBase gameInfo in gameInfos)
+            {
+                // OFOD: WatchIsAnyGameRunning
+            }
         }
         #endregion
     }

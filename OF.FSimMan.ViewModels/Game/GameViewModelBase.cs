@@ -75,9 +75,11 @@ namespace OF.FSimMan.ViewModel.Game
                 if (PlayModpackCommand.Parameter == null) return;
                 ModPack modPack = (ModPack)PlayModpackCommand.Parameter;
 
-                RunGameOnClientInitializeComplete(modPack);
-                GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(this);
-                MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
+                GameRunningViewModel.Instance.PlanStart(((GameClientBase)Client).Game);
+                // OFDO: PlayModpackDelegate
+                //RunGameOnClientInitializeComplete(modPack);
+                //OldGameRunningViewModel gameRunningViewModel = new OldGameRunningViewModel(this);
+                //MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
             }
             catch (OfException ex)
             {
