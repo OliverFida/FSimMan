@@ -18,15 +18,17 @@
         }
 
         public readonly string ExeName;
+        public readonly string ProcessName;
         #endregion
 
         #region Constructor
-        public GameInfoBase(Game game, string title, string imageFileName, string exeName)
+        public GameInfoBase(Game game, string title, string imageFileName, string exeName, string processName)
         {
             Game = game;
             Title = title;
             _imageFileName = imageFileName;
             ExeName = exeName;
+            ProcessName = processName;
         }
         #endregion
     }

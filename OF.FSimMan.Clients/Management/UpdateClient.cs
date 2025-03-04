@@ -83,7 +83,7 @@ namespace OF.FSimMan.Client.Management
         //{
         //    await Task.Delay(250);
         //    return true;
-        //    // OFDOI
+        //    // OFDOL
         //}
         #endregion
 

@@ -50,6 +50,7 @@ namespace OF.FSimMan.ViewModel
                 await AutoUpdateAsync();
                 //await ShowChangelogAsync();
 #endif
+                GameRunningViewModel temp = GameRunningViewModel.Instance; // Triggering constructor
             }
             catch (OfException ex)
             {
@@ -114,10 +115,10 @@ namespace OF.FSimMan.ViewModel
                 }
             }
             ViewModelSelector.OpenViewModel(HomeViewModel);
-            // OFDO: OpenAvailableView();
+            // OFDOL: OpenAvailableView();
         }
 
-        // OFDO: private void OpenAvailableView()
+        // OFDOL: private void OpenAvailableView()
         //{
         //    if (SettingsClient.Instance.AppSettings.IsFs25Active) ViewModelSelector.OpenViewModel(new Fs25ViewModel());
         //    else if (SettingsClient.Instance.AppSettings.IsFs22Active) ViewModelSelector.OpenViewModel(new Fs22ViewModel());
