@@ -57,43 +57,6 @@ namespace OF.FSimMan.Client.Game
             get => _selectedModPack;
             set => SetProperty(ref _selectedModPack, value);
         }
-
-        private string _processName
-        {
-            get
-            {
-                switch (Game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        return "FarmingSimulator2022Game";
-                    case FSimMan.Management.Game.FarmingSim25:
-                        return "FarmingSimulator2025Game";
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-        }
-        private bool _isGameRunning = false;
-        public bool IsGameRunning
-        {
-            get
-            {
-                bool stateBefore = _isGameRunning;
-                if (SetProperty(ref _isGameRunning, Process.GetProcessesByName(_processName).Length > 0))
-                {
-                    InvokeGameStateChanged();
-                    if (stateBefore == true && _isGameRunning == false && GameState == GameState.Started) GameState = GameState.SelfStopped;
-                }
-                return _isGameRunning;
-            }
-        }
-
-        private GameState _gameState = GameState.Stopped;
-        public GameState GameState
-        {
-            get => _gameState;
-            private set { if (SetProperty(ref _gameState, value)) InvokeGameStateChanged(); }
-        }
         #endregion
 
         #region Events
@@ -182,10 +145,8 @@ namespace OF.FSimMan.Client.Game
             {
                 IsBusy = true;
 
-                GameState = GameState.Started;
                 SetGameModFolder();
                 ExecuteGame();
-                WaitForGameState(GameState.Started, true);
             }
             finally
             {
@@ -193,29 +154,19 @@ namespace OF.FSimMan.Client.Game
             }
         }
 
-        public void StopGame()
-        {
-            try
-            {
-                IsBusy = true;
+        //public void StopGame()
+        //{
+        //    try
+        //    {
+        //        IsBusy = true;
 
-                GameState = GameState.Stopped;
-                KillGameProcess();
-                WaitForGameState(GameState.Stopped, false);
-            }
-            finally
-            {
-                ResetBusyIndicator();
-            }
-        }
-
-        public void WaitForGameState(GameState gameState, bool isGameRunning)
-        {
-            while (GameState != gameState | IsGameRunning != isGameRunning)
-            {
-                Thread.Sleep(1000);
-            }
-        }
+        //        KillGameProcess();
+        //    }
+        //    finally
+        //    {
+        //        ResetBusyIndicator();
+        //    }
+        //}
 
         public void ExportModPack(ModPack modPack, string filePath)
         {
@@ -307,11 +258,6 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Methods PRIVATE
-        private void InvokeGameStateChanged()
-        {
-            GameStateChanged?.Invoke(this, EventArgs.Empty);
-        }
-
         private void ExecuteGame()
         {
             GameSettingsBase gameSettings;
@@ -366,13 +312,13 @@ namespace OF.FSimMan.Client.Game
             return string.Join("/", uriParts);
         }
 
-        private void KillGameProcess()
-        {
-            Process[] processes = Process.GetProcessesByName(_processName);
-            if (processes.Length == 0) return;
+        //private void KillGameProcess()
+        //{
+        //    Process[] processes = Process.GetProcessesByName(_processName);
+        //    if (processes.Length == 0) return;
 
-            processes[0].Kill(true);
-        }
+        //    processes[0].Kill(true);
+        //}
         #endregion
     }
 }

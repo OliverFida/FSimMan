@@ -59,17 +59,25 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Commands
-        public Command CloseGameCommand { get; }
-        private void CloseGameDelegate()
-        {
-            // OFDOI: CloseGameDelegate
-        }
+        //public Command CloseGameCommand { get; }
+        //private void CloseGameDelegate()
+        //{
+        //    try
+        //    {
+        //        PlanStop();
+        //        // OFDOL: GameClient.StopGame();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        UiFunctions.ShowError(ex);
+        //    }
+        //}
         #endregion
 
         #region Constructor
-        private GameRunningViewModel() : base("Game Running", false, false)
+        private GameRunningViewModel() : base("Game Running")
         {
-            CloseGameCommand = new Command(this, target => ((GameRunningViewModel)target).CloseGameDelegate());
+            //CloseGameCommand = new Command(this, target => ((GameRunningViewModel)target).CloseGameDelegate());
 
             Task.Run(WatchIsAnyGameRunning);
         }
@@ -81,48 +89,68 @@ namespace OF.FSimMan.ViewModel
             IsStartPlanned = true;
 
             RunningGame = GameInfoCollection.Instance.GetGameInfo(game);
-            MainViewModel.ViewModelSelector.OpenViewModel(this);
+            Open();
 
-            WatchRunningGame();
+            Task.Run(WatchRunningGame);
         }
 
-        //public void PlanStop()
-        //{
-        //    _isStopPlanned = true;
-        //    // OFOD: PlanStop
-        //}
+        public void PlanStop()
+        {
+            IsStopPlanned = true;
+        }
         #endregion
 
         #region Methods PRIVATE
         private void UpdateProperties()
         {
             OnPropertyChanged(nameof(GameStatusText));
+            OnPropertyChanged(nameof(IsCloseGameEnabled));
+        }
+
+        private void Open()
+        {
+            if (MainViewModel.ViewModelSelector.CurrentViewModel is not null) MainViewModel.ViewModelSelector.CurrentViewModel.PreventAutoclose = true;
+
+            MainViewModel.ViewModelSelector.OpenViewModel(this);
+        }
+
+        private void Close()
+        {
+            MainViewModel.ViewModelSelector.CloseViewModel(this);
+
+            if (MainViewModel.ViewModelSelector.CurrentViewModel is not null &&
+                MainViewModel.ViewModelSelector.CurrentViewModel.PreventAutoclose) MainViewModel.ViewModelSelector.CurrentViewModel.PreventAutoclose = false;
         }
 
         private void WatchIsAnyGameRunning()
         {
-            ReadOnlyCollection<GameInfoBase> gameInfos = GameInfoCollection.Instance.GetAll();
-
-            while (true)
+            try
             {
-                Thread.Sleep(5000);
+                ReadOnlyCollection<GameInfoBase> gameInfos = GameInfoCollection.Instance.GetAll();
 
-                if (RunningGame is null && !IsStartPlanned)
+                while (true)
                 {
-                    // Look for any game
-                    foreach (GameInfoBase gameInfo in gameInfos)
-                    {
-                        Debug.WriteLine("Checking game: " + gameInfo.Title);
+                    Thread.Sleep(5000);
 
-                        if (Process.GetProcessesByName(gameInfo.ProcessName).Count() > 0)
+                    if (RunningGame is null && !IsStartPlanned)
+                    {
+                        // Look for any game
+                        foreach (GameInfoBase gameInfo in gameInfos)
                         {
-                            // Running game found
-                            RunningGame = gameInfo;
-                            MainViewModel.ViewModelSelector.OpenViewModel(this);
-                            WatchRunningGame();
+                            if (Process.GetProcessesByName(gameInfo.ProcessName).Count() > 0)
+                            {
+                                // Running game found
+                                RunningGame = gameInfo;
+                                Open();
+                                WatchRunningGame();
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                UiFunctions.ShowError(ex);
             }
         }
 
@@ -139,9 +167,9 @@ namespace OF.FSimMan.ViewModel
                 {
                     if (Process.GetProcessesByName(RunningGame.ProcessName).Count() == 0)
                     {
-                        // Unexpected game exit
+                        // Game exit
                         RunningGame = null;
-                        MainViewModel.ViewModelSelector.CloseCurrentViewModel(); // OFDOI: Exception when FS running on startup and then closed
+                        Close();
                         break;
                     }
                 }

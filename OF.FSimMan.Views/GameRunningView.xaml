@@ -25,12 +25,12 @@
                 HorizontalAlignment="Center"
                 Style="{StaticResource InputGroupHeadingStyle}"
                 Text="{Binding RunningGame.Title, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <of:ImageButton
+            <!--<of:ImageButton
                 Margin="0,20,0,0"
                 Command="{Binding CloseGameCommand}"
                 Content="Close Game"
                 ImageSource="{StaticResource XIcon}"
-                IsEnabled="{Binding IsCloseGameEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                IsEnabled="{Binding IsCloseGameEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />-->
         </StackPanel>
     </Grid>
 </UserControl>
