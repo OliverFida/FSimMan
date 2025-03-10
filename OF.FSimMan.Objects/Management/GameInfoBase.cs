@@ -5,7 +5,7 @@
         #region Properties
         public readonly Game Game;
 
-        public readonly string Title;
+        public string Title { get; }
 
         private readonly string _imageFileName;
         private const string _imageBasePath = "pack://application:,,,/OF.FSimMan.Resources;component/Logos/";
