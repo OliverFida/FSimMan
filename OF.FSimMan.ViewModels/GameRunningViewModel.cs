@@ -4,7 +4,6 @@ using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Management;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.DirectoryServices.ActiveDirectory;
 
 namespace OF.FSimMan.ViewModel
 {
