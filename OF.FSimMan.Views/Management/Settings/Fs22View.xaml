@@ -20,7 +20,12 @@
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="I own this game via" />
-            <of:ComboBox ItemsSource="{Binding GameSettings.GameOriginValues, Mode=OneWay}" SelectedItem="{Binding GameSettings.GameOrigin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <of:ComboBox
+                Background="{StaticResource BgGrayBrush}"
+                Width="500"
+                HorizontalAlignment="Left"
+                ItemsSource="{Binding GameSettings.GameOriginValues, Mode=OneWay}"
+                SelectedItem="{Binding GameSettings.GameOrigin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <StackPanel

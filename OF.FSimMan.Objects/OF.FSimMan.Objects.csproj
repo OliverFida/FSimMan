@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base" Version="2025.3.10.1543-vNext-ComboBox" />
+    <PackageReference Include="OF.Base" Version="2025.3.10.1806-vNext" />
   </ItemGroup>
 
 </Project>
