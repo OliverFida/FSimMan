@@ -108,10 +108,8 @@ namespace OF.FSimMan.UI
             {
                 try
                 {
-
+                    GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim22);
                     Fs22ViewModel.RunGameOnClientInitializeComplete(null);
-                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs22ViewModel);
-                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {
@@ -152,9 +150,8 @@ namespace OF.FSimMan.UI
             {
                 try
                 {
+                    GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim25);
                     Fs25ViewModel.RunGameOnClientInitializeComplete(null);
-                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs25ViewModel);
-                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {

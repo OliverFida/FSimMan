@@ -20,17 +20,17 @@
                 Width="100"
                 Height="100"
                 Margin="0,20"
-                Source="{Binding GameImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                Source="{Binding RunningGame.ImageFilePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             <of:Heading
                 HorizontalAlignment="Center"
                 Style="{StaticResource InputGroupHeadingStyle}"
-                Text="{Binding GameName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <of:ImageButton
+                Text="{Binding RunningGame.Title, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <!--<of:ImageButton
                 Margin="0,20,0,0"
                 Command="{Binding CloseGameCommand}"
                 Content="Close Game"
                 ImageSource="{StaticResource XIcon}"
-                IsEnabled="{Binding IsCloseGameEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                IsEnabled="{Binding IsCloseGameEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />-->
         </StackPanel>
     </Grid>
 </UserControl>

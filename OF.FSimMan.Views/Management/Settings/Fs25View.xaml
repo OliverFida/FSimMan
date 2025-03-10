@@ -15,9 +15,23 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
+            <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="I own this game via" />
+            <of:ComboBox
+                Width="500"
+                HorizontalAlignment="Left"
+                Background="{StaticResource BgGrayBrush}"
+                ItemsSource="{Binding GameSettings.GameOriginValues, Mode=OneWay}"
+                SelectedItem="{Binding GameSettings.GameOrigin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Vertical"
+            Visibility="{Binding GameSettings.IsExeDirectoryVisible, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}">
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Game Path" />
             <StackPanel Orientation="Horizontal">
                 <of:TextBox
@@ -48,7 +62,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Vertical">
+        <StackPanel Grid.Row="2" Orientation="Vertical">
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Data Path" />
             <StackPanel Orientation="Horizontal">
                 <of:TextBox
@@ -79,7 +93,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Vertical">
+        <StackPanel Grid.Row="3" Orientation="Vertical">
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Start Arguments" />
             <of:CheckBox
                 Margin="0"

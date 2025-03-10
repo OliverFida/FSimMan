@@ -25,17 +25,22 @@
             set => SetProperty(ref _enableCheats, value);
         }
 
-        public string GetArgumentsString()
+        public List<string> GetArgumentsList()
         {
             List<string> temp = new List<string>();
 
             if (SkipIntros) temp.Add($"{_argumentPrefix}skipStartVideos");
-            // OFDO: if (DisableFrameLimit) temp.Add($"{_argumentPrefix}disableFrameLimiter"); // Apperently won't work anymore from FS22 upwards
+            // OFDOL: if (DisableFrameLimit) temp.Add($"{_argumentPrefix}disableFrameLimiter"); // Apperently won't work anymore from FS22 upwards
             if (EnableCheats) temp.Add($"{_argumentPrefix}cheats");
-            // OFDO: if (EnableScriptDebug) temp.Add($"{_argumentPrefix}scriptDebug");
-            // OFDO: if (DisableShaderCompiler) temp.Add($"{_argumentPrefix}disableShaderCompiler");
+            // OFDOL: if (EnableScriptDebug) temp.Add($"{_argumentPrefix}scriptDebug");
+            // OFDOL: if (DisableShaderCompiler) temp.Add($"{_argumentPrefix}disableShaderCompiler");
 
-            return string.Join(" ", temp.ToArray());
+            return temp;
+        }
+
+        public string GetArgumentsString()
+        {
+            return string.Join(" ", GetArgumentsList());
         }
     }
 }

@@ -1,27 +1,49 @@
 ﻿using OF.Base.Objects;
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
-using OF.FSimMan.Client.Game;
 using OF.FSimMan.Management;
-using OF.FSimMan.ViewModel.Game;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace OF.FSimMan.ViewModel
 {
-    public class GameRunningViewModel : ViewModelBase
+    public class GameRunningViewModel : ViewModelBase, ISingleton<GameRunningViewModel>
     {
+        #region ISingleton
+        private static readonly GameRunningViewModel _instance = new GameRunningViewModel();
+        public static GameRunningViewModel Instance { get => _instance; }
+        #endregion
+
         #region Properties
-        private readonly GameViewModelBase _gameViewModel;
+        private bool _isStartPlanned = false;
+        private bool IsStartPlanned
+        {
+            get => _isStartPlanned;
+            set { if (SetProperty(ref _isStartPlanned, value)) UpdateProperties(); }
+        }
+
+        private bool _isStopPlanned = false;
+        private bool IsStopPlanned
+        {
+            get => _isStopPlanned;
+            set { if (SetProperty(ref _isStopPlanned, value)) UpdateProperties(); }
+        }
+
+        private GameInfoBase? _runningGame;
+        public GameInfoBase? RunningGame
+        {
+            get => _runningGame;
+            private set { if (SetProperty(ref _runningGame, value)) UpdateProperties(); }
+        }
 
         public string GameStatusText
         {
             get
             {
-                if (((IGameClient)_gameViewModel.Client).GameState == GameState.Started)
-                {
-                    if (((IGameClient)_gameViewModel.Client).IsGameRunning) return "RUNNING";
-                    return "STARTING...";
-                }
-                return "STOPPING...";
+                if (RunningGame is null) return string.Empty;
+                if (IsStartPlanned) return "STARTING...";
+                if (IsStopPlanned) return "STOPPING...";
+                return "RUNNING";
             }
         }
 
@@ -29,96 +51,131 @@ namespace OF.FSimMan.ViewModel
         {
             get
             {
-                IGameClient client = (IGameClient)_gameViewModel.Client;
-                if (client.GameState == GameState.Started && !client.IsGameRunning ||
-                    client.GameState == GameState.Stopped && client.IsGameRunning) return false;
-
-                return true;
-            }
-        }
-
-        public string GameName
-        {
-            get
-            {
-                switch (((IGameClient)_gameViewModel.Client).Game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        return "Farming Simulator 22";
-                    case FSimMan.Management.Game.FarmingSim25:
-                        return "Farming Simulator 25";
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-        }
-
-        public string GameImage
-        {
-            get
-            {
-                string path = "pack://application:,,,/OF.FSimMan.Resources;component/Logos/";
-                switch (((IGameClient)_gameViewModel.Client).Game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        path += "FS22.png";
-                        break;
-                    case FSimMan.Management.Game.FarmingSim25:
-                        path += "FS25.png";
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-
-                return path;
+                if (RunningGame is not null && !IsStartPlanned && !IsStopPlanned) return true;
+                return false;
             }
         }
         #endregion
 
         #region Commands
-        public Command CloseGameCommand { get; }
-        private void CloseGameDelegate()
-        {
-            Task.Run(() =>
-            {
-                try
-                {
-                    IGameClient client = (IGameClient)_gameViewModel.Client;
-                    client.StopGame();
-                    MainViewModel.ViewModelSelector.CloseCurrentViewModel();
-                }
-                catch (OfException ex)
-                {
-                    UiFunctions.ShowError(ex);
-                }
-            });
-        }
+        //public Command CloseGameCommand { get; }
+        //private void CloseGameDelegate()
+        //{
+        //    try
+        //    {
+        //        PlanStop();
+        //        // OFDOL: GameClient.StopGame();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        UiFunctions.ShowError(ex);
+        //    }
+        //}
         #endregion
 
         #region Constructor
-        public GameRunningViewModel(GameViewModelBase gameViewModel) : base("Game Running")
+        private GameRunningViewModel() : base("Game Running")
         {
-            _gameViewModel = gameViewModel;
+            //CloseGameCommand = new Command(this, target => ((GameRunningViewModel)target).CloseGameDelegate());
 
-            CloseGameCommand = new Command(this, target => ((GameRunningViewModel)target).CloseGameDelegate());
-            ((IGameClient)_gameViewModel.Client).GameStateChanged += HandleGameStateChanged;
-            Task.Run(WatchIsGameClosed);
+            Task.Run(WatchIsAnyGameRunning);
+        }
+        #endregion
+
+        #region Methods PUBLIC
+        public void PlanStart(FSimMan.Management.Game game)
+        {
+            IsStartPlanned = true;
+
+            RunningGame = GameInfoCollection.Instance.GetGameInfo(game);
+            Open();
+
+            Task.Run(WatchRunningGame);
+        }
+
+        public void PlanStop()
+        {
+            IsStopPlanned = true;
         }
         #endregion
 
         #region Methods PRIVATE
-        private void HandleGameStateChanged(object? sender, EventArgs e)
+        private void UpdateProperties()
         {
             OnPropertyChanged(nameof(GameStatusText));
             OnPropertyChanged(nameof(IsCloseGameEnabled));
-            OnPropertyChanged(nameof(GameName));
-            OnPropertyChanged(nameof(GameImage));
         }
 
-        private void WatchIsGameClosed()
+        private void Open()
         {
-            ((IGameClient)_gameViewModel.Client).WaitForGameState(GameState.SelfStopped, false);
-            MainViewModel.ViewModelSelector.CloseCurrentViewModel();
+            if (MainViewModel.ViewModelSelector.CurrentViewModel is not null) MainViewModel.ViewModelSelector.CurrentViewModel.PreventAutoclose = true;
+
+            MainViewModel.ViewModelSelector.OpenViewModel(this);
+        }
+
+        private void Close()
+        {
+            MainViewModel.ViewModelSelector.CloseViewModel(this);
+
+            if (MainViewModel.ViewModelSelector.CurrentViewModel is not null &&
+                MainViewModel.ViewModelSelector.CurrentViewModel.PreventAutoclose) MainViewModel.ViewModelSelector.CurrentViewModel.PreventAutoclose = false;
+        }
+
+        private void WatchIsAnyGameRunning()
+        {
+            try
+            {
+                ReadOnlyCollection<GameInfoBase> gameInfos = GameInfoCollection.Instance.GetAll();
+
+                while (true)
+                {
+                    Thread.Sleep(5000);
+
+                    if (RunningGame is null && !IsStartPlanned)
+                    {
+                        // Look for any game
+                        foreach (GameInfoBase gameInfo in gameInfos)
+                        {
+                            if (Process.GetProcessesByName(gameInfo.ProcessName).Count() > 0)
+                            {
+                                // Running game found
+                                RunningGame = gameInfo;
+                                Open();
+                                WatchRunningGame();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        private void WatchRunningGame()
+        {
+            while (true)
+            {
+                if (RunningGame is not null && IsStartPlanned)
+                {
+                    // Expexcted game start occurred
+                    if (Process.GetProcessesByName(RunningGame.ProcessName).Count() > 0) IsStartPlanned = false;
+                }
+                else if (RunningGame is not null && !IsStartPlanned)
+                {
+                    if (Process.GetProcessesByName(RunningGame.ProcessName).Count() == 0)
+                    {
+                        // Game exit
+                        RunningGame = null;
+                        Close();
+                        break;
+                    }
+                }
+                else if (RunningGame is null) break;
+
+                Thread.Sleep(2000);
+            }
         }
         #endregion
     }

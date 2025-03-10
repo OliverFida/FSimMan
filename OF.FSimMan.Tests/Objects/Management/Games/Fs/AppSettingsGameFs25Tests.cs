@@ -18,7 +18,7 @@ namespace OF.FSimMan.Tests.Objects.Management
                 eventTriggered = true;
             };
 
-            AppSettingsGameFs25Data d = new AppSettingsGameFs25Data();
+            GameSettingsFs25Data d = new GameSettingsFs25Data();
             GameSettingsFs25 s = d.FromData();
             s.StoreTrigger += eH;
             Assert.IsFalse(s.IsEnabled);

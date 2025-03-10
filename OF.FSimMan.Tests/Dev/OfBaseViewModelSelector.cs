@@ -68,17 +68,17 @@ namespace OF.FSimMan.Tests.Dev
 
         private class PersistantViewModel : ViewModelBase
         {
-            public PersistantViewModel() : base(true) { }
+            public PersistantViewModel() : base("Persistant", true) { }
         }
 
         private class NonPersistantViewModel : ViewModelBase
         {
-            public NonPersistantViewModel() : base(false, false) { }
+            public NonPersistantViewModel() : base("NonPersistant", false, false) { }
         }
 
         private class AutocloseableViewModel : ViewModelBase
         {
-            public AutocloseableViewModel() : base(false, true) { }
+            public AutocloseableViewModel() : base("Autocloseable", false, true) { }
         }
     }
 }
