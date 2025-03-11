@@ -7,8 +7,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
-		<AssemblyName>OF.FSimMan</AssemblyName>
-		<RootNamespace>$(AssemblyName)</RootNamespace>
+		<AssemblyName>FSimMan</AssemblyName>
+		<RootNamespace>OF.$(AssemblyName)</RootNamespace>
 		<Title>FSimMan</Title>
 		<Authors>Oliver Fida</Authors>
 		<AssemblyVersion>0.2.2</AssemblyVersion>

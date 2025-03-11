@@ -9,6 +9,7 @@ namespace OF.FSimMan
     /// </summary>
     public partial class App : Application
     {
+        #region Constructor
         public App()
         {
             UiFunctions.Dispatcher = Dispatcher;
@@ -28,14 +29,33 @@ namespace OF.FSimMan
                 args.SetObserved();
             };
         }
+        #endregion
 
+        #region Methods PROTECTED
         protected override void OnStartup(StartupEventArgs e)
         {
+            if (CheckIsAlreadyRunning())
+            {
+                Shutdown();
+                return;
+            }
+
 #if DEBUG
             if (e.Args.Contains("--manual-testing")) CurrentApplication.LaunchMode = LaunchMode.ManualTesting;
 #endif
 
             base.OnStartup(e);
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private bool CheckIsAlreadyRunning()
+        {
+            string processName = Process.GetCurrentProcess().ProcessName;
+            int processCount = Process.GetProcessesByName(processName).Count();
+            if (processCount > 1) return true;
+
+            return false;
         }
 
         private void HandleException(Exception? exception, string source)
@@ -58,5 +78,6 @@ namespace OF.FSimMan
             if (tryStart) Process.Start(processModule!.FileName);
             Current.Shutdown(0);
         }
+        #endregion
     }
 }
