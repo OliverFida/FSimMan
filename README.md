@@ -17,7 +17,7 @@ Current and upcoming features are:
 |Exporting & Importing Modpacks|Importing and exporting complete modpacks.<br/>*Currently available in a simple form. Will be extended later.*|**RELEASED**|
 |Farming Simulator 25 Support||**RELEASED**|
 |Convert Default Mods Folder|Convert your default mods folder into a modpack on first configuration.|**RELEASED**|
-|Steam Support|Manage you game, even if you own it on steam.|PLANNED|
+|Steam Support|Manage you game, even if you own it on steam.|**RELEASED**|
 |Modpack Linked Savegames|See only the savegames, you've created with the currently playing modpack.|PLANNED|
 |Input Profiles||PLANNED|
 |32-bit Support|Run FSimMan on 32-bit based systems|PLANNED|
