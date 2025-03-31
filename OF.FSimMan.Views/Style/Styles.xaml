@@ -2,5 +2,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ModpacksDataGridStyle.xaml" />
         <ResourceDictionary Source="ModsDataGridStyle.xaml" />
+        <ResourceDictionary Source="ChangeLogItemsControlStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

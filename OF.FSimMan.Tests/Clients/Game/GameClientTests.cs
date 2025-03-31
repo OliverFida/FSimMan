@@ -1,5 +1,4 @@
 ﻿using OF.FSimMan.Client.Game;
-using OF.FSimMan.Management;
 using System.Diagnostics.CodeAnalysis;
 
 namespace OF.FSimMan.Tests.Clients.Game
@@ -17,8 +16,6 @@ namespace OF.FSimMan.Tests.Clients.Game
 
             Assert.AreEqual(0, c.ModPacks.List.Count);
             Assert.AreEqual(null, c.SelectedModPack);
-            Assert.IsFalse(c.IsGameRunning);
-            Assert.AreEqual(GameState.Stopped, c.GameState);
             Assert.IsFalse(isGameStateChanged);
             // OFDO: GameClient_New
         }

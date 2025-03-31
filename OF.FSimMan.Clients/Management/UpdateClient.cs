@@ -9,7 +9,7 @@ namespace OF.FSimMan.Client.Management
 {
     public class UpdateClient : ClientBase, ISingleton<UpdateClient>
     {
-        private GitHubClient _gitHubClient = new GitHubClient("OliverFida", "FSimMan");
+        private GitHubClient _gitHubClient = GitHubClient.Instance;
         private GitHubReleaseData? _latestRelease = null;
         private HttpClient _downloadClient = new HttpClient();
 
@@ -78,6 +78,13 @@ namespace OF.FSimMan.Client.Management
                 ResetBusyIndicator();
             }
         }
+
+        //public async Task<bool> GetShowChangelogAsync()
+        //{
+        //    await Task.Delay(250);
+        //    return true;
+        //    // OFDOL
+        //}
         #endregion
 
         #region Methods PRIVATE

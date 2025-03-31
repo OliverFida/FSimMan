@@ -22,10 +22,10 @@ namespace OF.FSimMan.Tests.Objects.Game
             string modIconsDirectoryPath = Path.Combine(modPackDirectoryPath, "modIcons");
 
             Assert.AreEqual(string.Empty, pack.Title);
-            Assert.AreEqual(null, pack.Version);
+            Assert.AreEqual(string.Empty, pack.Version);
             Assert.AreEqual(false, pack.IsVersionVisible);
-            Assert.AreEqual(null, pack.Author);
-            Assert.AreEqual(null, pack.Description);
+            Assert.AreEqual(string.Empty, pack.Author);
+            Assert.AreEqual(string.Empty, pack.Description);
             Assert.AreEqual(null, pack.ImageSource);
 
             Assert.AreEqual(0, pack.Mods.Count);
@@ -39,10 +39,10 @@ namespace OF.FSimMan.Tests.Objects.Game
 
             guid = pack.Guid;
             string title = "New modpack";
-            string? version = null;
+            string version = string.Empty;
             bool isVersionVisible = false;
-            string? author = null;
-            string? description = null;
+            string author = string.Empty;
+            string description = string.Empty;
             string? imageSource = null;
             modPackDirectoryPath = Path.Combine(CurrentApplication.MODPACKS_PATH, _game.ToString(), guid.ToString());
             modsDirectoryPath = Path.Combine(modPackDirectoryPath, "mods");
@@ -111,9 +111,9 @@ namespace OF.FSimMan.Tests.Objects.Game
 
             Guid orgGuid = pack.Guid;
             string orgTitle = "New modpack";
-            string? orgVersion = null;
-            string? orgAuthor = null;
-            string? orgDescription = null;
+            string orgVersion = string.Empty;
+            string orgAuthor = string.Empty;
+            string orgDescription = string.Empty;
             string? orgImageSource = null;
             string orgModPackDirectoryPath = Path.Combine(CurrentApplication.MODPACKS_PATH, _game.ToString(), orgGuid.ToString());
             string orgModsDirectoryPath = Path.Combine(orgModPackDirectoryPath, "mods");

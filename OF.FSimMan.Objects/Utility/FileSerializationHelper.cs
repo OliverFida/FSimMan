@@ -32,6 +32,8 @@ namespace OF.FSimMan.Utility
                     {
                         throw new InvalidFileException(fileName);
                     }
+
+                    reader.Close();
                 }
             }
             catch (Exception ex) when (ex is not OfException)

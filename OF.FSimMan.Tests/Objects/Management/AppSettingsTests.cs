@@ -24,13 +24,13 @@ namespace OF.FSimMan.Tests.Objects.Management
             Assert.AreEqual(0, s.Games.Count);
 
             bool eventTriggered = false;
-            EventHandler eH = (object? sender, EventArgs e) =>
+            EventHandler<AppSettingsStoreTriggerEventArgs> eH = (object? sender, AppSettingsStoreTriggerEventArgs e) =>
             {
                 eventTriggered = true;
             };
             s.StoreTrigger += eH;
             s.ApplicationMode = ApplicationMode.Creator;
-            s.Games.Add(new AppSettingsGameFs22());
+            s.Games.Add(new GameSettingsFs22());
             Assert.AreEqual(ApplicationMode.Creator, s.ApplicationMode);
             Assert.AreEqual(true, s.IsApplicationModeCreator);
             Assert.AreEqual(1, s.Games.Count);

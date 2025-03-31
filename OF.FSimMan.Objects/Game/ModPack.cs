@@ -20,8 +20,8 @@ namespace OF.FSimMan.Game
             set => SetProperty(ref _title, value);
         }
 
-        internal string? _version;
-        public string? Version
+        internal string _version = string.Empty;
+        public string Version
         {
             get => _version;
             set => SetProperty(ref _version, value);
@@ -31,15 +31,15 @@ namespace OF.FSimMan.Game
             get => !string.IsNullOrWhiteSpace(Version);
         }
 
-        internal string? _author;
-        public string? Author
+        internal string _author = string.Empty;
+        public string Author
         {
             get => _author;
             set => SetProperty(ref _author, value);
         }
 
-        internal string? _description;
-        public string? Description
+        internal string _description = string.Empty;
+        public string Description
         {
             get => _description;
             set => SetProperty(ref _description, value);

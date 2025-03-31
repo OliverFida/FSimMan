@@ -5,7 +5,7 @@ namespace OF.FSimMan.ViewModel
     public class HomeViewModel : RememberableViewModelBase
     {
         #region Constructor
-        public HomeViewModel() : base(true) { }
+        public HomeViewModel() : base("Home", true) { }
         #endregion
     }
 }

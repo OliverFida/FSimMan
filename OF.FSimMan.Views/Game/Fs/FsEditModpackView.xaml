@@ -91,11 +91,11 @@
                             ImageSource="{StaticResource PlusIcon}"
                             Style="{StaticResource W150ImageButtonStyle}" />
                     </StackPanel>
-                    <ui:DataGrid
+                    <DataGrid
                         Margin="0,5,0,0"
                         ItemsSource="{Binding Client.ModPack.Mods, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource ModsDataGridStyle}">
-                        <ui:DataGrid.Columns>
+                        <DataGrid.Columns>
                             <DataGridTemplateColumn
                                 MinWidth="150"
                                 CellTemplate="{StaticResource ModsDataGridModDataTemplate}"
@@ -108,8 +108,8 @@
                                 MinWidth="150"
                                 CellTemplate="{StaticResource ModsDataGridControlsDataTemplate}"
                                 Header="Controls" />
-                        </ui:DataGrid.Columns>
-                    </ui:DataGrid>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

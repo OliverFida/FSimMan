@@ -3,11 +3,12 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
-		<AssemblyName>OF.FSimMan</AssemblyName>
-		<RootNamespace>$(AssemblyName)</RootNamespace>
+		<AssemblyName>FSimMan</AssemblyName>
+		<RootNamespace>OF.$(AssemblyName)</RootNamespace>
 		<Title>FSimMan</Title>
 		<Authors>Oliver Fida</Authors>
 		<AssemblyVersion>0.2.2</AssemblyVersion>

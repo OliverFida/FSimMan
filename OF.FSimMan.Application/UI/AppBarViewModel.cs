@@ -7,6 +7,7 @@ using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel;
 using OF.FSimMan.ViewModel.Game;
 using OF.FSimMan.ViewModel.Game.Fs;
+using OF.FSimMan.ViewModel.Management;
 using System.ComponentModel;
 
 namespace OF.FSimMan.UI
@@ -24,14 +25,14 @@ namespace OF.FSimMan.UI
             get => SettingsClient.Instance.AppSettings;
         }
 
-        public AppSettingsGameFs22? GameSettingsFs22
+        public GameSettingsFs22? GameSettingsFs22
         {
-            get => AppSettings?.GetGameSettings<AppSettingsGameFs22>();
+            get => AppSettings?.GetGameSettings<GameSettingsFs22>();
         }
 
-        public AppSettingsGameFs25? GameSettingsFs25
+        public GameSettingsFs25? GameSettingsFs25
         {
-            get => AppSettings?.GetGameSettings<AppSettingsGameFs25>();
+            get => AppSettings?.GetGameSettings<GameSettingsFs25>();
         }
 
         public bool IsAppBarEnabled
@@ -107,10 +108,8 @@ namespace OF.FSimMan.UI
             {
                 try
                 {
-
+                    GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim22);
                     Fs22ViewModel.RunGameOnClientInitializeComplete(null);
-                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs22ViewModel);
-                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {
@@ -151,9 +150,8 @@ namespace OF.FSimMan.UI
             {
                 try
                 {
+                    GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim25);
                     Fs25ViewModel.RunGameOnClientInitializeComplete(null);
-                    GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(Fs25ViewModel);
-                    MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
                 }
                 catch (OfException ex)
                 {
@@ -201,7 +199,7 @@ namespace OF.FSimMan.UI
         #endregion
 
         #region Constructor
-        public AppBarViewModel() : base(true)
+        public AppBarViewModel() : base("AppBar", true)
         {
             MainViewModel.ViewModelSelector.CurrentViewModelChanged += HandleCurrentViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;

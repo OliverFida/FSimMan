@@ -13,6 +13,13 @@ namespace OF.FSimMan.Api.GitHub
         [JsonPropertyName("prerelease")]
         public bool IsPreRelease { get; set; } = true;
 
+        [JsonPropertyName("published_at")]
+        public string PublishedAt { get; set; } = string.Empty;
+        public DateTime? ReleaseDateTime { get => !string.IsNullOrEmpty(PublishedAt) ? DateTime.Parse(PublishedAt) : null; }
+
+        [JsonPropertyName("body")]
+        public string Body { get; set; } = string.Empty;
+
         [JsonPropertyName("assets")]
         public GitHubReleaseAssetData[] Assets { get; set; } = [];
     }

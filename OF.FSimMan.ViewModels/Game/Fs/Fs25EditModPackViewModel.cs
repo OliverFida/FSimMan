@@ -4,10 +4,10 @@ using OF.FSimMan.Management;
 
 namespace OF.FSimMan.ViewModel.Game.Fs
 {
-    public class Fs25EditModPackViewModel : FsEditModPackViewModelBase
+    public class Fs25EditModPackViewModel : EditModPackViewModelBase
     {
         #region Constructor
-        public Fs25EditModPackViewModel(EditMode editMode, ModPack modPack, Fs25Client gameClient) : base(new Fs25EditModPackClient(modPack, gameClient), editMode) { }
+        public Fs25EditModPackViewModel(EditMode editMode, ModPack modPack, Fs25Client gameClient) : base(modPack.Title, new Fs25EditModPackClient(modPack, gameClient), editMode) { }
         #endregion
     }
 }

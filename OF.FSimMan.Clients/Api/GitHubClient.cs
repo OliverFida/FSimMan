@@ -14,8 +14,8 @@ namespace OF.FSimMan.Client.Api
 
         private HttpClient _httpClient;
 
-        #region Consructor
-        public GitHubClient(string author, string repository) : base()
+        #region Constructor
+        private GitHubClient(string author, string repository) : base()
         {
             _repositoryPath = $"/repos/{author}/{repository}";
             _releasesPath = _repositoryPath + "/releases";
@@ -63,6 +63,11 @@ namespace OF.FSimMan.Client.Api
 
             return await response.Content.ReadAsStringAsync();
         }
+        #endregion
+
+        #region ISingleton
+        private static readonly GitHubClient _instance = new GitHubClient("OliverFida", "FSimMan");
+        public static GitHubClient Instance => _instance;
         #endregion
     }
 }

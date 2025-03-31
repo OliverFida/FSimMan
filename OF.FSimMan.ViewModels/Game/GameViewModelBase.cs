@@ -12,6 +12,8 @@ namespace OF.FSimMan.ViewModel.Game
     public abstract class GameViewModelBase : RememberableBusyViewModelBase
     {
         #region Properties
+        public static bool IsModPackHubVisible { get => ReleaseFeatures.GiantsModPackHub; }
+
         public abstract bool IsOpenable { get; }
 
         public static AppSettings AppSettings { get => SettingsClient.Instance.AppSettings; }
@@ -73,9 +75,8 @@ namespace OF.FSimMan.ViewModel.Game
                 if (PlayModpackCommand.Parameter == null) return;
                 ModPack modPack = (ModPack)PlayModpackCommand.Parameter;
 
+                GameRunningViewModel.Instance.PlanStart(((GameClientBase)Client).Game);
                 RunGameOnClientInitializeComplete(modPack);
-                GameRunningViewModel gameRunningViewModel = new GameRunningViewModel(this);
-                MainViewModel.ViewModelSelector.OpenViewModel(gameRunningViewModel);
             }
             catch (OfException ex)
             {
@@ -143,7 +144,7 @@ namespace OF.FSimMan.ViewModel.Game
         #endregion
 
         #region Constructor
-        public GameViewModelBase(IGameClient client) : base(client)
+        public GameViewModelBase(string title, IGameClient client) : base(title, client)
         {
             RefreshModPacksCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).RefreshModPacksDelegate)));
             NewModPackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((GameViewModelBase)target).NewModPackDelegate)));

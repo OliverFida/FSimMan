@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="OF.FSimMan.View.Management.Settings.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Management.Settings;assembly=OF.FSimMan.ViewModels"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:AboutViewModel}}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <Grid Style="{StaticResource SectionStyle}">
+            <StackPanel Orientation="Vertical">
+                <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="FSimMan" />
+                <TextBlock Text="{Binding VersionText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                <of:ImageButton
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    Background="{StaticResource BgGrayBrush}"
+                    Command="{Binding OpenGitHubCommand}"
+                    Content="GitHub"
+                    ImageSource="{StaticResource GitHubIcon}"
+                    Style="{StaticResource W150ImageButtonStyle}" />
+            </StackPanel>
+        </Grid>
+        <Grid Style="{StaticResource SectionStyle}">
+            <StackPanel Orientation="Vertical">
+                <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Developer" />
+                <TextBlock Text="{Binding PublisherText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

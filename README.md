@@ -16,13 +16,18 @@ Current and upcoming features are:
 |Start Arguments|Start game with arguments.|**RELEASED**|
 |Exporting & Importing Modpacks|Importing and exporting complete modpacks.<br/>*Currently available in a simple form. Will be extended later.*|**RELEASED**|
 |Farming Simulator 25 Support||**RELEASED**|
+|Convert Default Mods Folder|Convert your default mods folder into a modpack on first configuration.|**RELEASED**|
+|Steam Support|Manage you game, even if you own it on steam.|PLANNED|
 |Modpack Linked Savegames|See only the savegames, you've created with the currently playing modpack.|PLANNED|
 |Input Profiles||PLANNED|
 |32-bit Support|Run FSimMan on 32-bit based systems|PLANNED|
 |MacOS Support|Run FSimMan on MacOS based systems|PLANNED|
 |Multi-Language-Support||PLANNED|
 |Discord Rich Presence||PLANNED|
-|Convert Default Mods Folder|Convert your default mods folder into a modpack on first start.|PLANNED|
+|ModSettigns per Modpack|Appart for your mods, also the settings for all your mods get stored for each modpack seperately.|PLANNED|
+|In-App Change Log||PLANNED|
+|Game Log Viewer||PLANNED|
+|DLC Management|Appart from your mods, also manage your DLCs per modpack.|PLANNED|
 
 ## Installing FSimMan
 
@@ -31,17 +36,17 @@ Current and upcoming features are:
 - x64 Processor
 - .NET Desktop Runtime 8
 
+### Via WinGet (Recommended)
+
+- Open a Terminal.
+- Run ```winget install OliverFida.FSimMan```
+- Click through the installer, if necessary.
+
 ### Via GitHub
 
 - Download the latest installer .exe-file from [GitHub Releases][releases-link].
 - Run the installer .exe-file.
 - Click through the installer.
-
-### Via WinGet
-
-- Open a Terminal.
-- Run "winget install OliverFida.FSimMan"
-- Click through the installer, if necessary.
 
 ### Portable
 

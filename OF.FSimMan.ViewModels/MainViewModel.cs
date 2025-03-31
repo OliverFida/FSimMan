@@ -2,17 +2,29 @@
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
-using OF.FSimMan.Management.Games.Fs;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
 using OliverFida.FSimMan.Exceptions;
 using System.Reflection;
+using System.Windows;
 
 namespace OF.FSimMan.ViewModel
 {
     public class MainViewModel : ViewModelBase, ISingleton<MainViewModel>
     {
         #region Properties
+        public WindowState StartupWindowState
+        {
+            get
+            {
+#if DEBUG
+                return WindowState.Normal;
+#else
+                return WindowState.Maximized;
+#endif
+            }
+        }
+
         public CurrentApplication CurrentApplication { get => CurrentApplication.Instance; }
 
         public static ViewModelSelector ViewModelSelector { get; } = new ViewModelSelector();
@@ -25,7 +37,7 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Constructor & Initialize
-        private MainViewModel() : base(true) { }
+        private MainViewModel() : base("Main", true) { }
 
         public override async Task InitializeAsync()
         {
@@ -33,11 +45,12 @@ namespace OF.FSimMan.ViewModel
 
             try
             {
-                SetEventHandlers();
                 OpenLastView();
 #if !DEBUG
                 await AutoUpdateAsync();
+                //await ShowChangelogAsync();
 #endif
+                GameRunningViewModel temp = GameRunningViewModel.Instance; // Triggering constructor
             }
             catch (OfException ex)
             {
@@ -68,18 +81,6 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Methods PRIVATE
-        private void SetEventHandlers()
-        {
-            SettingsClient.Instance.AppSettings.StoreTrigger += HandleAppSettingsStoreTrigger;
-
-            SettingsClient.Instance.AppSettings.Games.ForEach(game =>
-            {
-                game.StoreTrigger += HandleAppSettingsStoreTrigger;
-
-                if (game.GetType().IsAssignableTo(typeof(AppSettingsGameFsBase))) ((AppSettingsGameFsBase)game).StartArguments.StoreTrigger += HandleAppSettingsStoreTrigger;
-            });
-        }
-
         private async Task AutoUpdateAsync()
         {
             UpdateClient updateClient = UpdateClient.Instance;
@@ -89,6 +90,14 @@ namespace OF.FSimMan.ViewModel
 
             await ExecuteUpdate();
         }
+
+        //private async Task ShowChangelogAsync()
+        //{
+        //    UpdateClient updateClient = UpdateClient.Instance;
+        //    if (!await updateClient.GetShowChangelogAsync()) return;
+
+        //    SettingsViewModel.OpenChangeLog();
+        //}
 
         private void OpenLastView()
         {
@@ -106,10 +115,10 @@ namespace OF.FSimMan.ViewModel
                 }
             }
             ViewModelSelector.OpenViewModel(HomeViewModel);
-            // OFDO: OpenAvailableView();
+            // OFDOL: OpenAvailableView();
         }
 
-        // OFDO: private void OpenAvailableView()
+        // OFDOL: private void OpenAvailableView()
         //{
         //    if (SettingsClient.Instance.AppSettings.IsFs25Active) ViewModelSelector.OpenViewModel(new Fs25ViewModel());
         //    else if (SettingsClient.Instance.AppSettings.IsFs22Active) ViewModelSelector.OpenViewModel(new Fs22ViewModel());
@@ -124,11 +133,6 @@ namespace OF.FSimMan.ViewModel
                 !((GameViewModelBase)ViewModelSelector.CurrentViewModel).IsOpenable) ViewModelSelector.OpenViewModel(HomeViewModel);
 
             if (ViewModelSelector.CurrentViewModel.GetType().IsAssignableTo(typeof(IRememberableViewModel))) SettingsClient.Instance.AppSettings.LastSelectedView = ViewModelSelector.CurrentViewModel.GetType().ToString();
-        }
-
-        private void HandleAppSettingsStoreTrigger(object? sender, EventArgs e)
-        {
-            SettingsClient.Instance.StoreSettings();
         }
         #endregion
 

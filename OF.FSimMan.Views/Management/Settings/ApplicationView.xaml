@@ -1,0 +1,41 @@
+﻿<UserControl
+    x:Class="OF.FSimMan.View.Management.Settings.ApplicationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Management.Settings;assembly=OF.FSimMan.ViewModels"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:ApplicationViewModel}}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Style="{StaticResource SectionStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Application Mode" />
+            <of:ComboBox ItemsSource="{Binding AppSettings.ApplicationModeValues, Mode=OneWay}" SelectedItem="{Binding AppSettings.ApplicationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="0,10,0,0"
+            Orientation="Vertical">
+            <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Games" />
+            <of:CheckBox
+                Background="{StaticResource BgGrayBrush}"
+                Content="Farming Simulator 22"
+                IsChecked="{Binding GameSettingsFs22.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <of:CheckBox
+                Margin="0,5,0,0"
+                Background="{StaticResource BgGrayBrush}"
+                Content="Farming Simulator 25"
+                IsChecked="{Binding GameSettingsFs25.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

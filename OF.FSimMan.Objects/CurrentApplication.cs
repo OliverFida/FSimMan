@@ -58,11 +58,24 @@ namespace OF.FSimMan
                     case LaunchMode.UnitTests:
                         debugSuffix = "-ut";
                         break;
+                    case LaunchMode.ManualTesting:
+                        DirectoryInfo dirInfo = new DirectoryInfo(AppContext.BaseDirectory);
+                        debugSuffix = $"-mt-{dirInfo.Name}";
+                        break;
                 }
                 temp = Path.Combine(temp, $"_debug{debugSuffix}");
 #endif
                 temp = Path.Combine(temp, "config");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
+        }
+
+        public static string CONFIG_DATABASE_PATH
+        {
+            get
+            {
+                string temp = Path.Combine(CONFIG_PATH, "config.db");
                 return temp;
             }
         }
@@ -116,6 +129,13 @@ namespace OF.FSimMan
 #if DEBUG
             ReleaseFeatures.InitializeDebugValues();
 #endif
+        }
+        #endregion
+
+        #region Methods PUBLIC
+        public static string GetModPackDatabasePath(Management.Game game)
+        {
+            return Path.Combine(CONFIG_PATH, $"modPacks{game.ToString()}.db");
         }
         #endregion
     }

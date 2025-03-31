@@ -1,10 +1,10 @@
 ﻿using OF.Base.Client;
 using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
+using OF.FSimMan.Database.Access;
 using OF.FSimMan.Game;
-using OF.FSimMan.Management;
+using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
-using OF.FSimMan.Utility;
 using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Game
@@ -22,9 +22,9 @@ namespace OF.FSimMan.Client.Game
                 switch (_game)
                 {
                     case FSimMan.Management.Game.FarmingSim22:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     case FSimMan.Management.Game.FarmingSim25:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>().DataDirectoryPath, FILE_NAME_GAMESETTINGS);
                     default:
                         throw new NotImplementedException();
                 }
@@ -56,43 +56,6 @@ namespace OF.FSimMan.Client.Game
             get => _selectedModPack;
             set => SetProperty(ref _selectedModPack, value);
         }
-
-        private string _processName
-        {
-            get
-            {
-                switch (Game)
-                {
-                    case FSimMan.Management.Game.FarmingSim22:
-                        return "FarmingSimulator2022Game";
-                    case FSimMan.Management.Game.FarmingSim25:
-                        return "FarmingSimulator2025Game";
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-        }
-        private bool _isGameRunning = false;
-        public bool IsGameRunning
-        {
-            get
-            {
-                bool stateBefore = _isGameRunning;
-                if (SetProperty(ref _isGameRunning, Process.GetProcessesByName(_processName).Length > 0))
-                {
-                    InvokeGameStateChanged();
-                    if (stateBefore == true && _isGameRunning == false && GameState == GameState.Started) GameState = GameState.SelfStopped;
-                }
-                return _isGameRunning;
-            }
-        }
-
-        private GameState _gameState = GameState.Stopped;
-        public GameState GameState
-        {
-            get => _gameState;
-            private set { if (SetProperty(ref _gameState, value)) InvokeGameStateChanged(); }
-        }
         #endregion
 
         #region Events
@@ -100,7 +63,7 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Constructor & Initialize
-        public GameClientBase(FSimMan.Management.Game game) : base()
+        public GameClientBase(FSimMan.Management.Game game, bool doInitialize = true) : base()
         {
             _game = game;
         }
@@ -132,8 +95,7 @@ namespace OF.FSimMan.Client.Game
 
                 _modPacksEditor?.TriggerCancelEdit();
 
-                ModPacksData data = FileSerializationHelper.DeserializeConfigFile<ModPacksData>(_modPacksFileName);
-                ModPacks = data.FromData();
+                ModPacks = GetDbAccess().ReadModPacks();
 
                 _modPacksEditor = new ModPacksEditor(ModPacks);
             }
@@ -182,10 +144,8 @@ namespace OF.FSimMan.Client.Game
             {
                 IsBusy = true;
 
-                GameState = GameState.Started;
                 SetGameModFolder();
-                ExecuteGameExe();
-                WaitForGameState(GameState.Started, true);
+                ExecuteGame();
             }
             finally
             {
@@ -193,29 +153,19 @@ namespace OF.FSimMan.Client.Game
             }
         }
 
-        public void StopGame()
-        {
-            try
-            {
-                IsBusy = true;
+        //public void StopGame()
+        //{
+        //    try
+        //    {
+        //        IsBusy = true;
 
-                GameState = GameState.Stopped;
-                KillGameProcess();
-                WaitForGameState(GameState.Stopped, false);
-            }
-            finally
-            {
-                ResetBusyIndicator();
-            }
-        }
-
-        public void WaitForGameState(GameState gameState, bool isGameRunning)
-        {
-            while (GameState != gameState | IsGameRunning != isGameRunning)
-            {
-                Thread.Sleep(1000);
-            }
-        }
+        //        KillGameProcess();
+        //    }
+        //    finally
+        //    {
+        //        ResetBusyIndicator();
+        //    }
+        //}
 
         public void ExportModPack(ModPack modPack, string filePath)
         {
@@ -239,15 +189,64 @@ namespace OF.FSimMan.Client.Game
             StoreModPacks();
             RefreshModPacks();
         }
+
+        public void AutoGenerateModPack(FileInfo[] modFileInfos)
+        {
+            try
+            {
+                IsBusy = true;
+
+                _modPacksEditor = new ModPacksEditor(ModPacks);
+                ModPack newModPack = new ModPack(_game)
+                {
+                    Title = "Default",
+                    Description = "Auto-imported modpack",
+                    Author = "FSimMan",
+                    Version = "1.0"
+                };
+
+                string[] modFilePaths = modFileInfos.Select(x => x.FullName).ToArray();
+
+                ModPackEditor modPackEditor = new ModPackEditor(newModPack);
+                modPackEditor.AddMods(modFilePaths);
+                modPackEditor.TriggerEndEdit();
+
+                _modPacksEditor.AddModPack(newModPack);
+                StoreModPacks();
+
+                Parallel.ForEach(modFileInfos, modFileInfo =>
+                {
+                    modFileInfo.Delete();
+                });
+            }
+            finally
+            {
+                ResetBusyIndicator();
+            }
+        }
         #endregion
 
         #region Methods INTERNAL
         internal void StoreModPacks()
         {
-            ModPacksData data = new ModPacksData();
-            data.ToData(ModPacks);
+            _modPacksEditor?.TriggerCancelEdit();
 
-            FileSerializationHelper.SerializeConfigFile(_modPacksFileName, data);
+            ModPacks = GetDbAccess().BulkStoreModPacks(ModPacks);
+
+            _modPacksEditor = new ModPacksEditor(ModPacks);
+        }
+
+        internal IModPacksDbAccess GetDbAccess()
+        {
+            switch (_game)
+            {
+                case FSimMan.Management.Game.FarmingSim22:
+                    return ModPacksFs22DbAccess.Instance;
+                case FSimMan.Management.Game.FarmingSim25:
+                    return ModPacksFs25DbAccess.Instance;
+                default:
+                    throw new NotImplementedException();
+            }
         }
         #endregion
 
@@ -258,46 +257,67 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Methods PRIVATE
-        private void InvokeGameStateChanged()
+        private void ExecuteGame()
         {
-            GameStateChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void ExecuteGameExe()
-        {
-            string exePath;
-            string? args;
-
-            switch (Game)
+            GameSettingsBase gameSettings;
+            switch (_game)
             {
                 case FSimMan.Management.Game.FarmingSim22:
-                    {
-                        AppSettingsGameFs22 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs22>();
-                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2022.exe");
-                        args = gameSettings.StartArguments.GetArgumentsString();
-                    }
+                    gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>();
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
-                    {
-                        AppSettingsGameFs25 gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<AppSettingsGameFs25>();
-                        exePath = Path.Combine(gameSettings.ExeDirectoryPath, "FarmingSimulator2025.exe");
-                        args = gameSettings.StartArguments.GetArgumentsString();
-                    }
+                    gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
+                    break;
+                default:
+                    throw new NotImplementedException();
+
+            }
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            switch (gameSettings.GameOrigin)
+            {
+                case FSimMan.Game.GameOrigin.DvdWebsite:
+                    processStartInfo.FileName = gameSettings.ExeFilePath;
+                    processStartInfo.Arguments = gameSettings.StartArguments.GetArgumentsString();
+                    break;
+                case FSimMan.Game.GameOrigin.Steam:
+                    processStartInfo.FileName = GetGameSteamUri(gameSettings);
+                    processStartInfo.UseShellExecute = true;
                     break;
                 default:
                     throw new NotImplementedException();
             }
 
-            Process.Start(exePath, args ?? string.Empty);
+            Process.Start(processStartInfo);
         }
 
-        private void KillGameProcess()
+        private string GetGameSteamUri(GameSettingsBase gameSettings)
         {
-            Process[] processes = Process.GetProcessesByName(_processName);
-            if (processes.Length == 0) return;
+            List<string> uriParts = new List<string>
+            {
+                "steam://rungameid",
+                gameSettings.SteamId
+            };
 
-            processes[0].Kill(true);
+            string temp = string.Join("/", uriParts);
+            List<string> arguments = gameSettings.StartArguments.GetArgumentsList();
+            if (arguments.Count.Equals(0)) return temp;
+
+            uriParts.Clear();
+            temp += "/";
+            uriParts.Add(temp);
+            uriParts.AddRange(arguments);
+
+            return string.Join("/", uriParts);
         }
+
+        //private void KillGameProcess()
+        //{
+        //    Process[] processes = Process.GetProcessesByName(_processName);
+        //    if (processes.Length == 0) return;
+
+        //    processes[0].Kill(true);
+        //}
         #endregion
     }
 }

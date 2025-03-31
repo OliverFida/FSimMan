@@ -12,6 +12,7 @@
     d:DesignHeight="500"
     d:DesignWidth="900"
     Style="{StaticResource MainWindowStyle}"
+    WindowState="{Binding StartupWindowState, Mode=OneTime}"
     mc:Ignorable="d">
     <of:BusyIndicator>
         <Grid>
