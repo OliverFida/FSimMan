@@ -1,5 +1,5 @@
 #define AppName "FSimMan"
-#define AppExeName "OF." + AppName + ".exe"
+#define AppExeName AppName + ".exe"
 #define AppVersion "0.0.0"
 #define AppPublisher "Oliver Fida"
 
