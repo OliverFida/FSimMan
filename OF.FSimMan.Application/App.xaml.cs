@@ -62,12 +62,11 @@ namespace OF.FSimMan
         {
             if (exception == null) return;
 
-            MessageBox.Show(exception.Message, source, MessageBoxButton.OK, MessageBoxImage.Error);
-            //            UiFunctions.ShowError(exception);
+            UiFunctions.ShowError(exception);
 
-            //#if !DEBUG
-            //            if (UiFunctions.ShowQuestion("Would you like to restart the application?")) RestartApplication();
-            //#endif
+#if !DEBUG
+            if (UiFunctions.ShowQuestion("Would you like to restart the application?")) RestartApplication();
+#endif
         }
 
         private void RestartApplication()
