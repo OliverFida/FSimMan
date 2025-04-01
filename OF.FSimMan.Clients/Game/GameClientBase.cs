@@ -58,10 +58,6 @@ namespace OF.FSimMan.Client.Game
         }
         #endregion
 
-        #region Events
-        public event EventHandler? GameStateChanged;
-        #endregion
-
         #region Constructor & Initialize
         public GameClientBase(FSimMan.Management.Game game, bool doInitialize = true) : base()
         {
