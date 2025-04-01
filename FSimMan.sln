@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Installer\FSimMan.iss = Installer\FSimMan.iss
 		LICENSE.md = LICENSE.md
+		RELEASE_GUIDE.md = RELEASE_GUIDE.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OF.FSimMan.Database", "OF.FSimMan.Database\OF.FSimMan.Database.csproj", "{E9E02A22-005A-451C-A73C-C91C47EBF723}"
