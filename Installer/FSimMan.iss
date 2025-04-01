@@ -34,11 +34,15 @@ WizardStyle=modern
 [Languages]
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 
+[InstallDelete]
+Type: files; Name: "{app}\OF.FSimMan.exe"
+
 [Files]
-Source: "{#BinDirectory}\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BinDirectory}\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BinDirectory}\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BinDirectory}\*.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDirectory}\*.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BinDirectory}\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
 
 ;[Registry]
 ;Root: HKLM; Subkey: "Software\Classes\{#AssocFsmmpExt}\OpenWithProgids"; ValueType: string; ValueName: "{#AssocFsmmpKey}"; ValueData: ""; Flags: uninsdeletevalue
