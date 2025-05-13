@@ -112,6 +112,8 @@ namespace OF.FSimMan.Game
                 _imageSource = iconFileName,
             };
 
+            CheckModIsNotInPackYet(newMod);
+
             // Mod file copying
             string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
             File.Copy(fileInfo.FullName, targetFilePath, true);
@@ -140,6 +142,31 @@ namespace OF.FSimMan.Game
             }
 
             throw new InvalidModFileException(fileInfo.Name);
+        }
+
+        private void CheckModIsNotInPackYet(Mod newMod)
+        {
+            List<Mod> tempMods = ObjectToEdit.Mods.ToList();
+            Mod? foundMod = tempMods.Find(m =>
+            {
+                if (!m.Title.ToLower().Replace(" ", "").Equals(newMod.Title.ToLower().Replace(" ", ""))) return false;
+                if (!(m.Author is null).Equals(newMod.Author is null)) return false;
+                if (m.Author is not null && newMod.Author is not null && (!m.Author.ToLower().Replace(" ", "").Equals(newMod.Author.ToLower().Replace(" ", "")))) return false;
+
+                return true;
+            });
+
+            if (foundMod is not null)
+            {
+                bool isSameVersion = false;
+
+                if ((foundMod.Version is null).Equals(newMod.Version is null))
+                    if (foundMod.Version is not null && newMod.Version is not null && (foundMod.Version.ToLower().Replace(" ", "").Equals(newMod.Version.ToLower().Replace(" ", "")))) isSameVersion = true;
+
+                if (isSameVersion)
+                    throw new ModAlreadyInPackException();
+                throw new ModAlreadyInPackDifferentVersionException();
+            }
         }
 
         private void CheckModsIntegrity(bool final)
