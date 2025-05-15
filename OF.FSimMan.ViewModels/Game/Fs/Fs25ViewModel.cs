@@ -5,6 +5,7 @@ using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management.Games.Fs;
+using OF.FSimMan.ViewModel.Game.Fs.Modi;
 
 namespace OF.FSimMan.ViewModel.Game.Fs
 {
@@ -54,10 +55,12 @@ namespace OF.FSimMan.ViewModel.Game.Fs
         {
             try
             {
-                if (EditModpackCommand.Parameter == null) return;
-                ModPack modPack = (ModPack)EditModpackCommand.Parameter;
+                if (SyncModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)SyncModpackCommand.Parameter;
 
-                // OFDOI: SyncModpackDelegate
+                ModiE83_Fs25SyncModpackViewModel modiE83_syncModPackViewModel = new ModiE83_Fs25SyncModpackViewModel(modPack, (Fs25Client)Client);
+
+                MainViewModel.ViewModelSelector.OpenViewModel(modiE83_syncModPackViewModel);
             }
             catch (OfException ex)
             {

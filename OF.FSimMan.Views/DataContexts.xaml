@@ -3,10 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="clr-namespace:OF.FSimMan.View"
     xmlns:viewGameFs="clr-namespace:OF.FSimMan.View.Game.Fs"
+    xmlns:viewGameFsModi="clr-namespace:OF.FSimMan.View.Game.Fs.Modi"
     xmlns:viewMngmnt="clr-namespace:OF.FSimMan.View.Management"
     xmlns:viewMngmntSettings="clr-namespace:OF.FSimMan.View.Management.Settings"
     xmlns:viewModel="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelGameFs="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
+    xmlns:viewModelGameFsModi="clr-namespace:OF.FSimMan.ViewModel.Game.Fs.Modi;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelMngmnt="clr-namespace:OF.FSimMan.ViewModel.Management;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelMngmntSettings="clr-namespace:OF.FSimMan.ViewModel.Management.Settings;assembly=OF.FSimMan.ViewModels"
     xmlns:viewModelUiFunctions="clr-namespace:OF.Base.Wpf.UiFunctions;assembly=OF.Base.WpfControls"
@@ -68,5 +70,10 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewModelGameFs:Fs25EditModPackViewModel}">
         <viewGameFs:FsEditModpackView />
+    </DataTemplate>
+
+    <!--  MODI  -->
+    <DataTemplate DataType="{x:Type viewModelGameFsModi:ModiE83_Fs25SyncModpackViewModel}">
+        <viewGameFsModi:ModiE83_Fs25SyncModpackView />
     </DataTemplate>
 </ResourceDictionary>

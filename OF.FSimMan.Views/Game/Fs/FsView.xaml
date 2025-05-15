@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
-    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
+    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game;assembly=OF.FSimMan.ViewModels"
     d:DataContext="{d:DesignInstance Type={x:Type vm:GameViewModelBase}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
