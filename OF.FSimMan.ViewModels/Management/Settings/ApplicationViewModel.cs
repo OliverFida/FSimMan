@@ -1,4 +1,6 @@
-﻿using OF.Base.ViewModel;
+﻿using OF.Base.Objects;
+using OF.Base.ViewModel;
+using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games.Fs;
@@ -8,6 +10,18 @@ namespace OF.FSimMan.ViewModel.Management.Settings
     public class ApplicationViewModel : BusyViewModelBase
     {
         #region Properties
+        public override bool IsDebug
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
         public GameSettingsFs22? GameSettingsFs22
@@ -26,8 +40,26 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         }
         #endregion
 
+        #region Commands
+        public Command CheckModiKeyCommand { get; }
+        private void CheckModiKeyDelegate()
+        {
+            try
+            {
+                ((SettingsClient)Client).AppSettings.CheckModiKey();
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+        #endregion
+
         #region Constructor
-        public ApplicationViewModel() : base("Application", SettingsClient.Instance) { }
+        public ApplicationViewModel() : base("Application", SettingsClient.Instance)
+        {
+            CheckModiKeyCommand = new Command(this, target => ExecuteBusy(((ApplicationViewModel)target).CheckModiKeyDelegate));
+        }
         #endregion
     }
 }

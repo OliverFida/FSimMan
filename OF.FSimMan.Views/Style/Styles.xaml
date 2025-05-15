@@ -1,7 +1,18 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:OF.FSimMan.View.Style">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ModpacksDataGridStyle.xaml" />
+        <ResourceDictionary Source="ModiE83_ModpacksDataGridStyle.xaml" />
         <ResourceDictionary Source="ModsDataGridStyle.xaml" />
         <ResourceDictionary Source="ChangeLogItemsControlStyle.xaml" />
+
+        <ResourceDictionary>
+            <local:ModpacksDataGridControlsDataTemplateSelector
+                x:Key="ModpacksDataGridControlsDataTemplateSelector"
+                DefaultTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}"
+                ModiE83Template="{StaticResource ModiE83_ModpacksDataGridControlsDataTemplate}" />
+        </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

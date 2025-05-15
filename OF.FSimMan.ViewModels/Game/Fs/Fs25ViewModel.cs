@@ -48,10 +48,29 @@ namespace OF.FSimMan.ViewModel.Game.Fs
                 UiFunctions.ShowError(ex);
             }
         }
+
+        public Command SyncModpackCommand { get; }
+        protected void SyncModpackDelegate()
+        {
+            try
+            {
+                if (EditModpackCommand.Parameter == null) return;
+                ModPack modPack = (ModPack)EditModpackCommand.Parameter;
+
+                // OFDOI: SyncModpackDelegate
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
         #endregion
 
         #region Constructor
-        public Fs25ViewModel() : base("Farming Simulator 25", new Fs25Client()) { }
+        public Fs25ViewModel() : base("Farming Simulator 25", new Fs25Client())
+        {
+            SyncModpackCommand = new Command(this, target => ExecuteBusy(() => ExecutePreventAutoclose(((Fs25ViewModel)target).SyncModpackDelegate)));
+        }
         #endregion
     }
 }

@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
-    d:DataContext="{d:DesignInstance Type={x:Type vm:FsViewModelBase}}"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:GameViewModelBase}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -66,10 +66,11 @@
                         Width="*"
                         CellTemplate="{StaticResource ModpacksDataGridDescriptionDataTemplate}"
                         Header="Description" />
-                    <DataGridTemplateColumn
-                        MinWidth="150"
-                        CellTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}"
-                        Header="Controls" />
+                    <DataGridTemplateColumn MinWidth="150" Header="Controls">
+                        <DataGridTemplateColumn.CellTemplateSelector>
+                            <StaticResource ResourceKey="ModpacksDataGridControlsDataTemplateSelector" />
+                        </DataGridTemplateColumn.CellTemplateSelector>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

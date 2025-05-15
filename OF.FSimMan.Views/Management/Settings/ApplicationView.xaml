@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
@@ -36,6 +37,39 @@
                 Content="Farming Simulator 25"
                 IsChecked="{Binding GameSettingsFs25.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="2"
+            Margin="0,10,0,0"
+            Orientation="Vertical">
+            <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Modification Key" />
+            <StackPanel Orientation="Horizontal">
+                <of:TextBox
+                    Width="500"
+                    Background="{StaticResource BgGrayBrush}"
+                    Text="{Binding AppSettings.ModificationKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <of:ImageButton
+                    Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
+                    Click="DebugModiKeyButton_Click"
+                    ImageSource="{StaticResource BugIcon}"
+                    Style="{StaticResource SquareImageButtonStyle}"
+                    Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
+                <of:Button
+                    Margin="5,0,0,0"
+                    Background="{StaticResource BgGrayBrush}"
+                    Command="{Binding CheckModiKeyCommand}"
+                    Content="Check" />
+                <Border
+                    Width="{StaticResource InputHeight}"
+                    Height="{StaticResource InputHeight}"
+                    Margin="5,0,0,0"
+                    Background="Transparent"
+                    Visibility="{Binding Client.AppSettings.IsModiKeyValid, Mode=OneWay, Converter={StaticResource BooleanVisibilityConverter}}">
+                    <Image Margin="5" Source="{StaticResource CheckIcon}" />
+                </Border>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

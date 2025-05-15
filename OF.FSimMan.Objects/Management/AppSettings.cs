@@ -1,5 +1,8 @@
-﻿using OF.FSimMan.Management.Games;
+﻿using OF.Base.Objects;
+using OF.FSimMan.Management.Exceptions;
+using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
+using OF.FSimMan.Management.Modi;
 
 namespace OF.FSimMan.Management
 {
@@ -38,6 +41,34 @@ namespace OF.FSimMan.Management
         {
             get => _lastVersionChangelogDisplayed;
             set => SetProperty(ref _lastVersionChangelogDisplayed, value);
+        }
+
+        internal string _modificationKey = string.Empty;
+        public string ModificationKey
+        {
+            get => _modificationKey;
+            set => SetProperty(ref _modificationKey, value);
+        }
+
+        internal bool _isModiKeyValid = false;
+        public bool IsModiKeyValid
+        {
+            get => _isModiKeyValid;
+            private set => SetProperty(ref _isModiKeyValid, value);
+        }
+
+        public ModificationKey SelectedModiKey
+        {
+            get
+            {
+                switch (ModificationKey)
+                {
+                    case "2025!E83.Sync":
+                        return Modi.ModificationKey.E83;
+                    default:
+                        return Modi.ModificationKey.None;
+                }
+            }
         }
         #endregion
 
@@ -85,6 +116,23 @@ namespace OF.FSimMan.Management
                 game.ModPackAutogenerationNowPossible += HandleGameModPackAutogenerationNowPossible; ;
 
                 if (game.GetType().IsAssignableTo(typeof(GameSettingsBase))) ((GameSettingsBase)game).UpdateHandlers();
+            }
+        }
+
+        public void CheckModiKey()
+        {
+            try
+            {
+                OnPropertyChanged(nameof(SelectedModiKey));
+                if (SelectedModiKey.Equals(Modi.ModificationKey.None))
+                    throw new UnknownModiKeyException();
+
+                IsModiKeyValid = true;
+            }
+            catch (OfException)
+            {
+                IsModiKeyValid = false;
+                throw;
             }
         }
         #endregion

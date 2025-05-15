@@ -9,6 +9,8 @@ namespace OF.FSimMan.Management
         public ApplicationMode ApplicationMode { get; set; } = ApplicationMode.None;
         public string LastSelectedView { get; set; } = string.Empty;
         //public string LastVersionChangelogDisplayed { get; set; } = string.Empty;
+        public string ModificationKey { get; set; } = string.Empty;
+
         public List<GameSettingsDataBase> GameSettings { get; set; } = new List<GameSettingsDataBase>();
 
         public override AppSettings FromData()
@@ -18,7 +20,8 @@ namespace OF.FSimMan.Management
                 Id = Id,
                 _applicationMode = ApplicationMode,
                 _lastSelectedView = LastSelectedView,
-                //_lastVersionChangelogDisplayed = LastVersionChangelogDisplayed
+                //_lastVersionChangelogDisplayed = LastVersionChangelogDisplayed,
+                _modificationKey = ModificationKey
             };
 
             if (temp._applicationMode.Equals(ApplicationMode.None)) temp._applicationMode = ApplicationMode.User;
@@ -49,6 +52,7 @@ namespace OF.FSimMan.Management
             ApplicationMode = value._applicationMode;
             LastSelectedView = value.LastSelectedView;
             //LastVersionChangelogDisplayed = value.LastVersionChangelogDisplayed;
+            ModificationKey = value.ModificationKey;
 
             ConcurrentBag<GameSettingsDataBase> temp = new ConcurrentBag<GameSettingsDataBase>();
             Parallel.ForEach(value.Games, game =>
