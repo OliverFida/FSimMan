@@ -1,4 +1,5 @@
 ﻿using OF.Base.Client;
+using OF.Base.Objects;
 using OF.FSimMan.Game;
 
 namespace OF.FSimMan.Client.Game.Fs.Modi
@@ -29,6 +30,8 @@ namespace OF.FSimMan.Client.Game.Fs.Modi
         #region Methods PUBLIC
         public void Store()
         {
+            CheckSettings();
+
             _modPackEditor.TriggerEndEdit();
             _modPack = _gameClient.GetDbAccess().StoreModPack(_modPack);
             _modPackEditor = new ModPackEditor(_modPack);
@@ -38,6 +41,18 @@ namespace OF.FSimMan.Client.Game.Fs.Modi
         {
             _modPackEditor.TriggerCancelEdit();
         }
+        #endregion
+
+        #region Methods PRIVATE
+        private void CheckSettings()
+        {
+            // If not active => ignore rest
+            if (!ModPack.ModiE83_IsSyncEnabled) return;
+
+            if (!Directory.Exists(ModPack.ModiE83_SyncPath))
+                throw new OfException("Sync Path does not exist!");
+        }
+        //string expectedFileName = _modPack.GetExportFileName();
         #endregion
     }
 }

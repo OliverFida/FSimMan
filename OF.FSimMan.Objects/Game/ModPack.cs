@@ -123,5 +123,19 @@ namespace OF.FSimMan.Game
             _game = game;
         }
         #endregion
+
+        #region Methods PUBLIC
+        public string GetExportFileName()
+        {
+            List<string> fileNameParts = new List<string>()
+            {
+                _game.ToString().ToLower(), // Game Name
+                Title.Replace(" ", "")// Title
+            };
+            if (!string.IsNullOrWhiteSpace(Version)) fileNameParts.Add($"v{Version}"); // Version
+
+            return String.Join("_", fileNameParts) + ".fsmmp";
+        }
+        #endregion
     }
 }

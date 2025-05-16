@@ -1,4 +1,5 @@
-﻿using OF.Base.Objects;
+﻿using Microsoft.Win32;
+using OF.Base.Objects;
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game.Fs;
@@ -51,7 +52,15 @@ namespace OF.FSimMan.ViewModel.Game.Fs.Modi
         {
             try
             {
-                // OFDOI
+                OpenFolderDialog dialog = new OpenFolderDialog()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    Title = "Select Sync Folder",
+                    Multiselect = false
+                };
+                if (dialog.ShowDialog() != true) return;
+
+                ((ModiE83_Fs25SyncModPackClient)Client).ModPack.ModiE83_SyncPath = dialog.FolderName;
             }
             catch(OfException ex)
             {

@@ -101,17 +101,13 @@ namespace OF.FSimMan.ViewModel.Game
 
                 if (!UiFunctions.ShowWarningOkCancel("FSimMan is exporting ALL you mods!\r\nPlease be aware to not act against copyright and distribution laws!\r\nFSimMan and it's developers are NOT responsible for any violations!")) return;
 
-                string fileName = $"{((IGameClient)Client).Game.ToString().ToLower()}_{modPack.Title.Replace(" ", "")}";
-                if (!string.IsNullOrWhiteSpace(modPack.Version)) fileName += $"_v{modPack.Version}";
-                fileName += ".fsmmp";
-
                 SaveFileDialog fileDialog = new SaveFileDialog()
                 {
                     InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     Filter = "Modpack files (*.fsmmp)|*.fsmmp",
                     Title = "Save modpack",
                     DefaultExt = "fsmmp",
-                    FileName = fileName
+                    FileName = modPack.GetExportFileName()
                 };
                 bool? result = fileDialog.ShowDialog();
                 if (result != true) return;
