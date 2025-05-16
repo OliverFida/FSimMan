@@ -17,7 +17,7 @@ namespace OF.FSimMan.ViewModel.Game
         public abstract bool IsOpenable { get; }
 
         public static AppSettings AppSettings { get => SettingsClient.Instance.AppSettings; }
-        public static bool IsModPackImportExportVisible { get => ReleaseFeatures.ModPackImportExport; }
+        public static bool IsModPackImportExportVisible { get => ReleaseFeatures.ModPackImportExport && AppSettings.IsApplicationModeCreator; }
 
         protected EditModPackViewModelBase? _editModPackViewModel;
         #endregion

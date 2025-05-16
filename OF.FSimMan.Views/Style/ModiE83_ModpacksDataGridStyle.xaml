@@ -20,7 +20,8 @@
                 Command="{Binding DataContext.EditModpackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 CommandParameter="{Binding}"
                 ImageSource="{StaticResource GearIcon}"
-                Style="{StaticResource SquareImageButtonStyle}" />
+                Style="{StaticResource SquareImageButtonStyle}"
+                Visibility="{Binding DataContext.AppSettings.IsApplicationModeCreator, Converter={StaticResource BooleanVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}" />
             <of:ImageButton
                 Margin="0,0,5,0"
                 Command="{Binding DataContext.ExportModpackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"

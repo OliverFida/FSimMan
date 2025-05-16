@@ -91,6 +91,13 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs22Db
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("ModiE83_IsSyncEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ModiE83_SyncPath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");

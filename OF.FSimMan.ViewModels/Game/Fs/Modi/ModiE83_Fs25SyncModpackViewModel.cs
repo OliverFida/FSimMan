@@ -45,6 +45,19 @@ namespace OF.FSimMan.ViewModel.Game.Fs.Modi
                 UiFunctions.ShowError(ex);
             }
         }
+
+        public Command SyncPathCommand { get; }
+        private void SyncPathDelegate()
+        {
+            try
+            {
+                // OFDOI
+            }
+            catch(OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
         #endregion
 
         #region Constructor
@@ -52,6 +65,7 @@ namespace OF.FSimMan.ViewModel.Game.Fs.Modi
         {
             CancelCommand = new Command(this, target => ExecuteBusy(((ModiE83_Fs25SyncModpackViewModel)target).CancelDelegate));
             OkCommand = new Command(this, target => ExecuteBusy(((ModiE83_Fs25SyncModpackViewModel)target).OkDelegate));
+            SyncPathCommand = new Command(this, target => ExecuteBusy(((ModiE83_Fs25SyncModpackViewModel)target).SyncPathDelegate));
         }
         #endregion
     }

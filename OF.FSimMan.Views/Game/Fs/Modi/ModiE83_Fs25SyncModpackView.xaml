@@ -5,23 +5,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:OF.FSimMan.View.Game.Fs.Modi"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game.Fs.Modi;assembly=OF.FSimMan.ViewModels"
     d:DataContext="{d:DesignInstance Type={x:Type vm:ModiE83_Fs25SyncModpackViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <ui:BusyIndicator BusyContent="DEBUG" IsBusy="False">
+    <of:BusyIndicator BusyContent="DEBUG" IsBusy="False">
         <StackPanel Orientation="Vertical">
             <!--  BUTTONS  -->
             <StackPanel Orientation="Horizontal">
-                <ui:ImageButton
+                <of:ImageButton
                     HorizontalAlignment="Left"
                     Command="{Binding CancelCommand}"
                     Content="Cancel"
                     ImageSource="{StaticResource XIcon}"
                     Style="{StaticResource W150ImageButtonStyle}" />
-                <ui:ImageButton
+                <of:ImageButton
                     Margin="5,0,0,0"
                     HorizontalAlignment="Left"
                     Command="{Binding OkCommand}"
@@ -29,6 +29,34 @@
                     ImageSource="{StaticResource CheckIcon}"
                     Style="{StaticResource W150ImageButtonStyle}" />
             </StackPanel>
+
+            <!--  DATA  -->
+            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <of:CheckBox Content="Enable Sync" IsChecked="{Binding Client.ModPack.ModiE83_IsSyncEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                    <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Sync Path" />
+                    <StackPanel Orientation="Horizontal">
+                        <of:TextBox
+                            Width="500"
+                            IsReadOnly="True"
+                            Text="{Binding Client.ModPack.ModiE83_SyncPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <of:Button
+                            Margin="5,0,0,0"
+                            Command="{Binding SyncPathCommand}"
+                            Content="..."
+                            Style="{StaticResource SquareButtonStyle}" />
+                        <of:ImageButton
+                            Margin="5,0,0,0"
+                            Click="DebugSelectSyncPathButton_Click"
+                            ImageSource="{StaticResource BugIcon}"
+                            Style="{StaticResource SquareImageButtonStyle}"
+                            Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
-    </ui:BusyIndicator>
+    </of:BusyIndicator>
 </UserControl>

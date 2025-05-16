@@ -8,5 +8,10 @@ namespace OF.FSimMan.View.Game.Fs.Modi
         {
             InitializeComponent();
         }
+
+        private void DebugSelectSyncPathButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

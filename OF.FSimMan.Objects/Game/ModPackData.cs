@@ -38,6 +38,10 @@ namespace OF.FSimMan.Game
         [XmlArray(nameof(Mods), IsNullable = true)]
         public List<ModData> Mods { get; set; } = new List<ModData>();
 
+        // MODI E83
+        public string ModiE83_SyncPath { get; set; } = string.Empty;
+        public bool ModiE83_IsSyncEnabled { get; set; } = false;
+
         public override ModPack FromData()
         {
             ModPack temp = new ModPack
@@ -50,6 +54,10 @@ namespace OF.FSimMan.Game
                 _author = Author,
                 _description = Description,
                 _imageSource = ImageSource,
+
+                // MODI E83
+                _modiE83_SyncPath = ModiE83_SyncPath,
+                _modiE83_IsSyncEnabled = ModiE83_IsSyncEnabled,
             };
 
             foreach (ModData mod in Mods)
@@ -70,6 +78,10 @@ namespace OF.FSimMan.Game
             Author = value._author;
             Description = value._description;
             ImageSource = value._imageSource;
+
+            // MODI E83
+            ModiE83_SyncPath = value._modiE83_SyncPath;
+            ModiE83_IsSyncEnabled = value._modiE83_IsSyncEnabled;
 
             {
                 ConcurrentBag<ModData> temp = new ConcurrentBag<ModData>();

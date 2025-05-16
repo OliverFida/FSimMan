@@ -98,6 +98,21 @@ namespace OF.FSimMan.Game
                 return temp;
             }
         }
+
+        // MODI E83
+        internal string _modiE83_SyncPath = string.Empty;
+        public string ModiE83_SyncPath
+        {
+            get => _modiE83_SyncPath;
+            set => SetProperty(ref _modiE83_SyncPath, value);
+        }
+
+        internal bool _modiE83_IsSyncEnabled = false;
+        public bool ModiE83_IsSyncEnabled
+        {
+            get => _modiE83_IsSyncEnabled;
+            set => SetProperty(ref _modiE83_IsSyncEnabled, value);
+        }
         #endregion
 
         #region Constructor
