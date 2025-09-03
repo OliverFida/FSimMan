@@ -26,7 +26,7 @@ namespace OF.FSimMan.Management
         #region Methods PRIVATE
         private void InvokeSettingsChanged(string? propertyName)
         {
-            InvokeSettingsChanged(new AppSettingsStoreTriggerEventArgs(propertyName));
+            InvokeSettingsChanged(new AppSettingsStoreTriggerEventArgs(GetType(), propertyName));
         }
         #endregion
     }

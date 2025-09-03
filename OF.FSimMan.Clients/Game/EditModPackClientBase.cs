@@ -48,6 +48,16 @@ namespace OF.FSimMan.Client.Game
         {
             _modPackEditor.RemoveMod(mod);
         }
+
+        public void AddIcon(string filePath)
+        {
+            _modPackEditor.AddIcon(filePath);
+        }
+
+        public void RemoveIcon()
+        {
+            _modPackEditor.RemoveIcon();
+        }
         #endregion
     }
 }

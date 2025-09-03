@@ -40,11 +40,45 @@ namespace OF.FSimMan.Game
             CheckIntegrity();
         }
 
+        public void AddIcon(string filePath)
+        {
+            if (!File.Exists(filePath)) return;
+
+            FileInfo fileInfo = new FileInfo(filePath);
+
+            string timeStamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string iconFileName = $"icon_{timeStamp}.{fileInfo.Name.Split(".").Last()}";
+            string iconFilePath = Path.Combine(ObjectToEdit.ModPackDirectoryPath, iconFileName);
+
+            if (ObjectToEdit.FullImageSource is not null && File.Exists(ObjectToEdit.FullImageSource))
+            {
+                // Rename old icon
+                File.Move(ObjectToEdit.FullImageSource, $"{ObjectToEdit.FullImageSource}.temp");
+            }
+
+            File.Copy(fileInfo.FullName, iconFilePath, true);
+            ObjectToEdit.ImageSource = iconFileName;
+            CheckIntegrity();
+        }
+
+        public void RemoveIcon()
+        {
+            if (File.Exists(ObjectToEdit.FullImageSource))
+            {
+                // Rename old icon
+                File.Move(ObjectToEdit.FullImageSource, $"{ObjectToEdit.FullImageSource}.temp");
+            }
+
+            ObjectToEdit.ImageSource = null;
+            CheckIntegrity();
+        }
+
         public void CheckIntegrity() => CheckIntegrity(false);
         public void CheckIntegrity(bool final)
         {
             CheckModsIntegrity(final);
             CheckModIconsIntegrity(final);
+            CheckIconIntegrity(final);
         }
         #endregion
 
@@ -89,9 +123,11 @@ namespace OF.FSimMan.Game
                 }
 
                 // icon.dds
-                if (modDescription.iconFilename.EndsWith(".dds"))
+                if (!string.IsNullOrWhiteSpace(modDescription.iconFilename))
                 {
-                    ZipArchiveEntry? entry = archive.GetEntry(modDescription.iconFilename);
+                    string fileName = modDescription.iconFilename.Split(".")[0] + ".dds";
+
+                    ZipArchiveEntry? entry = archive.GetEntry(fileName);
                     if (entry is not null)
                     {
                         iconFileName = $"icon_{Path.GetFileNameWithoutExtension(fileInfo.FullName)}.dds";
@@ -111,6 +147,8 @@ namespace OF.FSimMan.Game
                 _isMultiplayerCompatible = modDescription.multiplayer.supported,
                 _imageSource = iconFileName,
             };
+
+            CheckModIsNotInPackYet(newMod);
 
             // Mod file copying
             string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
@@ -140,6 +178,31 @@ namespace OF.FSimMan.Game
             }
 
             throw new InvalidModFileException(fileInfo.Name);
+        }
+
+        private void CheckModIsNotInPackYet(Mod newMod)
+        {
+            List<Mod> tempMods = ObjectToEdit.Mods.ToList();
+            Mod? foundMod = tempMods.Find(m =>
+            {
+                if (!m.Title.ToLower().Replace(" ", "").Equals(newMod.Title.ToLower().Replace(" ", ""))) return false;
+                if (!(m.Author is null).Equals(newMod.Author is null)) return false;
+                if (m.Author is not null && newMod.Author is not null && (!m.Author.ToLower().Replace(" ", "").Equals(newMod.Author.ToLower().Replace(" ", "")))) return false;
+
+                return true;
+            });
+
+            if (foundMod is not null)
+            {
+                bool isSameVersion = false;
+
+                if ((foundMod.Version is null).Equals(newMod.Version is null))
+                    if (foundMod.Version is not null && newMod.Version is not null && (foundMod.Version.ToLower().Replace(" ", "").Equals(newMod.Version.ToLower().Replace(" ", "")))) isSameVersion = true;
+
+                if (isSameVersion)
+                    throw new ModAlreadyInPackException();
+                throw new ModAlreadyInPackDifferentVersionException();
+            }
         }
 
         private void CheckModsIntegrity(bool final)
@@ -212,6 +275,39 @@ namespace OF.FSimMan.Game
 
                 if (matchingMod is null) File.Delete(fileInfo.FullName); // deprecated icon
             });
+        }
+
+        private void CheckIconIntegrity(bool final)
+        {
+            if (!final) return;
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(ObjectToEdit.ModPackDirectoryPath);
+            List<FileInfo> iconFiles = directoryInfo.GetFiles("icon_*").ToList();
+
+            foreach (FileInfo fileInfo in iconFiles)
+            {
+                bool isCurrent = fileInfo.Name.Equals(ObjectToEdit.ImageSource);
+                bool isTemp = fileInfo.Name.ToLower().EndsWith(".temp");
+                if (isTemp)
+                {
+                    string orgName = fileInfo.Name.Replace(".temp", "");
+                    isCurrent = orgName.Equals(ObjectToEdit.ImageSource);
+                }
+
+                if (!isCurrent)
+                {
+                    // !Current & !Temp => Anderes File
+                    // !Current & Temp => Altes Image
+                    fileInfo.Delete();
+                }
+                else if (isCurrent)
+                {
+                    // Current & Temp => Wenn Änderung nicht gespeichert
+                    fileInfo.MoveTo(ObjectToEdit.FullImageSource!);
+                }
+
+                // Current & !Temp => Aktuelles Image
+            }
         }
         #endregion
     }

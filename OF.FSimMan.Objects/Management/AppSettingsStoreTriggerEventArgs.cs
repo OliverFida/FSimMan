@@ -4,6 +4,11 @@ namespace OF.FSimMan.Management
 {
     public class AppSettingsStoreTriggerEventArgs : PropertyChangedEventArgs
     {
-        public AppSettingsStoreTriggerEventArgs(string? propertyName) : base(propertyName) { }
+        public Type Type { get; }
+
+        public AppSettingsStoreTriggerEventArgs(Type type, string? propertyName) : base(propertyName)
+        {
+            Type = type;
+        }
     }
 }

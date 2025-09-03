@@ -244,6 +244,8 @@ namespace OF.FSimMan.Client.Game
                     throw new NotImplementedException();
             }
         }
+
+        internal abstract void ResetGameModFolder();
         #endregion
 
         #region Methods PROTECTED

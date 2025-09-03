@@ -9,7 +9,7 @@
                 Width="70"
                 Height="70"
                 Margin="15"
-                Source="{Binding ImageSource, Converter={StaticResource StringImageSourceConverter}}" />
+                Source="{Binding FullImageSource, Converter={StaticResource StringImageSourceConverter}}" />
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
