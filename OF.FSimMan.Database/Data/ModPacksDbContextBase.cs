@@ -8,6 +8,7 @@ namespace OF.FSimMan.Database.Data
         #region Properties
         public DbSet<ModPackData> ModPacks => Set<ModPackData>();
         public DbSet<ModData> Mods => Set<ModData>();
+        public DbSet<DlcRequirementData> Dlcs => Set<DlcRequirementData>();
         #endregion
 
         #region Constructor

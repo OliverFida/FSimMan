@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OF.FSimMan.Database.Data;
 
@@ -10,9 +11,11 @@ using OF.FSimMan.Database.Data;
 namespace OF.FSimMan.Database.Migrations.ModPacksFs22Db
 {
     [DbContext(typeof(ModPacksFs22DbContext))]
-    partial class ModPacksFs22DbContextModelSnapshot : ModelSnapshot
+    [Migration("20250903145133_CreateTableDlcRequirements")]
+    partial class CreateTableDlcRequirements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");

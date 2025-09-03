@@ -17,6 +17,32 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs25Db
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
+            modelBuilder.Entity("OF.FSimMan.DlcRequirementData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ModPackId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModPackId");
+
+                    b.ToTable("DlcRequirements");
+                });
+
             modelBuilder.Entity("OF.FSimMan.Game.ModData", b =>
                 {
                     b.Property<int>("Id")
@@ -104,6 +130,17 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs25Db
                     b.ToTable("ModPacks");
                 });
 
+            modelBuilder.Entity("OF.FSimMan.DlcRequirementData", b =>
+                {
+                    b.HasOne("OF.FSimMan.Game.ModPackData", "ModPack")
+                        .WithMany("Dlcs")
+                        .HasForeignKey("ModPackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ModPack");
+                });
+
             modelBuilder.Entity("OF.FSimMan.Game.ModData", b =>
                 {
                     b.HasOne("OF.FSimMan.Game.ModPackData", "ModPack")
@@ -117,6 +154,8 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs25Db
 
             modelBuilder.Entity("OF.FSimMan.Game.ModPackData", b =>
                 {
+                    b.Navigation("Dlcs");
+
                     b.Navigation("Mods");
                 });
 #pragma warning restore 612, 618

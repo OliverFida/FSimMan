@@ -63,6 +63,13 @@ namespace OF.FSimMan.Game
             private set => SetProperty(ref _mods, value);
         }
 
+        internal EditableObservableCollection<DlcRequirement> _dlcs = new EditableObservableCollection<DlcRequirement>();
+        public EditableObservableCollection<DlcRequirement> Dlcs
+        {
+            get => _dlcs;
+            private set => SetProperty(ref _dlcs, value);
+        }
+
         public string ModPackDirectoryPath
         {
             get

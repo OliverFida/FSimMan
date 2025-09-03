@@ -38,6 +38,10 @@ namespace OF.FSimMan.Game
         [XmlArray(nameof(Mods), IsNullable = true)]
         public List<ModData> Mods { get; set; } = new List<ModData>();
 
+        [Required]
+        [XmlArray(nameof(Dlcs), IsNullable = true)]
+        public List<DlcRequirementData> Dlcs { get; set; } = new List<DlcRequirementData>();
+
         public override ModPack FromData()
         {
             ModPack temp = new ModPack
@@ -55,6 +59,11 @@ namespace OF.FSimMan.Game
             foreach (ModData mod in Mods)
             {
                 temp._mods.Add(mod.FromData(temp));
+            }
+
+            foreach (DlcRequirementData dlc in Dlcs)
+            {
+                temp._dlcs.Add(dlc.FromData(temp));
             }
 
             return temp;
@@ -80,6 +89,17 @@ namespace OF.FSimMan.Game
                     temp.Add(data);
                 });
                 Mods = temp.ToList();
+            }
+
+            {
+                ConcurrentBag<DlcRequirementData> temp = new ConcurrentBag<DlcRequirementData>();
+                Parallel.ForEach(value.Dlcs, dlc =>
+                {
+                    DlcRequirementData data = new DlcRequirementData();
+                    data.ToData(dlc);
+                    temp.Add(data);
+                });
+                Dlcs = temp.ToList();
             }
         }
     }
