@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
-    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game.Fs;assembly=OF.FSimMan.ViewModels"
-    d:DataContext="{d:DesignInstance Type={x:Type vm:FsEditModPackViewModelBase}}"
+    xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game;assembly=OF.FSimMan.ViewModels"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:EditModPackViewModelBase}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -70,13 +70,20 @@
                             <Image
                                 Width="100"
                                 Height="100"
-                                Source="{Binding Client.ModPack.ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringImageSourceConverter}}" />
+                                Source="{Binding Client.ModPack.FullImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringImageSourceConverter}}" />
                             <ui:Button
                                 Margin="5,0,0,5"
                                 VerticalAlignment="Bottom"
+                                Command="{Binding SelectImageCommand}"
                                 Content="Select Image"
-                                IsEnabled="False"
                                 Style="{StaticResource W150ButtonStyle}" />
+                            <ui:ImageButton
+                                Margin="5,0,0,5"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding RemoveImageCommand}"
+                                ImageSource="{StaticResource TrashIcon}"
+                                IsEnabled="{Binding IsRemoveImageEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource SquareImageButtonStyle}" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

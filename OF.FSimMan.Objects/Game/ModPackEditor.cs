@@ -40,11 +40,45 @@ namespace OF.FSimMan.Game
             CheckIntegrity();
         }
 
+        public void AddIcon(string filePath)
+        {
+            if (!File.Exists(filePath)) return;
+
+            FileInfo fileInfo = new FileInfo(filePath);
+
+            string timeStamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string iconFileName = $"icon_{timeStamp}.{fileInfo.Name.Split(".").Last()}";
+            string iconFilePath = Path.Combine(ObjectToEdit.ModPackDirectoryPath, iconFileName);
+
+            if (ObjectToEdit.FullImageSource is not null && File.Exists(ObjectToEdit.FullImageSource))
+            {
+                // Rename old icon
+                File.Move(ObjectToEdit.FullImageSource, $"{ObjectToEdit.FullImageSource}.temp");
+            }
+
+            File.Copy(fileInfo.FullName, iconFilePath, true);
+            ObjectToEdit.ImageSource = iconFileName;
+            CheckIntegrity();
+        }
+
+        public void RemoveIcon()
+        {
+            if (File.Exists(ObjectToEdit.FullImageSource))
+            {
+                // Rename old icon
+                File.Move(ObjectToEdit.FullImageSource, $"{ObjectToEdit.FullImageSource}.temp");
+            }
+
+            ObjectToEdit.ImageSource = null;
+            CheckIntegrity();
+        }
+
         public void CheckIntegrity() => CheckIntegrity(false);
         public void CheckIntegrity(bool final)
         {
             CheckModsIntegrity(final);
             CheckModIconsIntegrity(final);
+            CheckIconIntegrity(final);
         }
         #endregion
 
@@ -241,6 +275,39 @@ namespace OF.FSimMan.Game
 
                 if (matchingMod is null) File.Delete(fileInfo.FullName); // deprecated icon
             });
+        }
+
+        private void CheckIconIntegrity(bool final)
+        {
+            if (!final) return;
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(ObjectToEdit.ModPackDirectoryPath);
+            List<FileInfo> iconFiles = directoryInfo.GetFiles("icon_*").ToList();
+
+            foreach (FileInfo fileInfo in iconFiles)
+            {
+                bool isCurrent = fileInfo.Name.Equals(ObjectToEdit.ImageSource);
+                bool isTemp = fileInfo.Name.ToLower().EndsWith(".temp");
+                if (isTemp)
+                {
+                    string orgName = fileInfo.Name.Replace(".temp", "");
+                    isCurrent = orgName.Equals(ObjectToEdit.ImageSource);
+                }
+
+                if (!isCurrent)
+                {
+                    // !Current & !Temp => Anderes File
+                    // !Current & Temp => Altes Image
+                    fileInfo.Delete();
+                }
+                else if (isCurrent)
+                {
+                    // Current & Temp => Wenn Änderung nicht gespeichert
+                    fileInfo.MoveTo(ObjectToEdit.FullImageSource!);
+                }
+
+                // Current & !Temp => Aktuelles Image
+            }
         }
         #endregion
     }

@@ -49,7 +49,11 @@ namespace OF.FSimMan.Game
         public string? ImageSource
         {
             get => _imageSource;
-            set => SetProperty(ref _imageSource, value);
+            set { if (SetProperty(ref _imageSource, value)) OnPropertyChanged(nameof(FullImageSource)); }
+        }
+        public string? FullImageSource
+        {
+            get => !string.IsNullOrWhiteSpace(_imageSource) ? Path.Combine(ModPackDirectoryPath, _imageSource!) : null;
         }
 
         internal EditableObservableCollection<Mod> _mods = new EditableObservableCollection<Mod>();

@@ -93,6 +93,49 @@ namespace OF.FSimMan.ViewModel.Game
                 UiFunctions.ShowError(ex);
             }
         }
+
+        public Command SelectImageCommand { get; }
+        private void SelectImageDelegate()
+        {
+            try
+            {
+                OpenFileDialog fileDialog = new OpenFileDialog()
+                {
+                    InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"),
+                    Filter = "images|*.png;*.jpg;*.jpeg",
+                    Title = "Select image",
+                    DefaultExt = "png",
+                    Multiselect = false
+                };
+                bool? result = fileDialog.ShowDialog();
+                if (result != true) return;
+
+                Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).AddIcon(fileDialog.FileName));
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        public Command RemoveImageCommand { get; }
+        private void RemoveImageDelegate()
+        {
+            try
+            {
+                if (!UiFunctions.ShowQuestion($@"Are you sure you want to remove the image?")) return;
+
+                Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).RemoveIcon());
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+        public bool IsRemoveImageEnabled
+        {
+            get => ((EditModPackClientBase)Client).ModPack.ImageSource is not null;
+        }
         #endregion
 
         #region Constructor
@@ -104,6 +147,15 @@ namespace OF.FSimMan.ViewModel.Game
             SaveCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).SaveDelegate));
             AddModCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).AddModDelegate));
             RemoveModCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).RemoveModDelegate));
+            SelectImageCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).SelectImageDelegate));
+            RemoveImageCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).RemoveImageDelegate));
+
+            ((EditModPackClientBase)Client).ModPack.PropertyChanged += ModPack_PropertyChanged;
+        }
+
+        private void ModPack_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName is not null && e.PropertyName.Equals(nameof(ModPack.ImageSource))) OnPropertyChanged(nameof(IsRemoveImageEnabled));
         }
         #endregion
     }
