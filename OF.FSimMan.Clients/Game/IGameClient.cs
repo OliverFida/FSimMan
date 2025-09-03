@@ -17,5 +17,6 @@ namespace OF.FSimMan.Client.Game
         public void ExportModPack(ModPack modPack, string filePath);
         public bool GetModPackExists(string filePath);
         public void ImportModPack(string filePath, bool importAsNew);
+        public bool CheckDlcRequirementsMet();
     }
 }

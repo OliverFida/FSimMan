@@ -7,6 +7,7 @@
         {
             new KnownDlc(Management.Game.FarmingSim25, "MacDon Pack", "macDonPack"),
             new KnownDlc(Management.Game.FarmingSim25, "Straw Harvest Pack", "strawHaarvestPack"),
+            new KnownDlc(Management.Game.FarmingSim25, "Precision Farming 3.0", "precisionFarmingPack"),
         };
 
 

@@ -93,6 +93,13 @@ namespace OF.FSimMan.ViewModel
             Task.Run(WatchRunningGame);
         }
 
+        public void CancelStart()
+        {
+            if (!IsStartPlanned || IsStopPlanned || RunningGame is null) return;
+
+            IsStartPlanned = false;
+        }
+
         public void PlanStop()
         {
             IsStopPlanned = true;

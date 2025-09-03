@@ -30,6 +30,21 @@ namespace OF.FSimMan.Client.Game
                 }
             }
         }
+        protected string GameDlcsDirectoryPath
+        {
+            get
+            {
+                switch (_game)
+                {
+                    case FSimMan.Management.Game.FarmingSim22:
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>().DataDirectoryPath, "pdlc");
+                    case FSimMan.Management.Game.FarmingSim25:
+                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>().DataDirectoryPath, "pdlc");
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+        }
 
         protected IGameSettings? _gameSettings;
 
@@ -41,11 +56,6 @@ namespace OF.FSimMan.Client.Game
         {
             get => _modPacks;
             private set => SetProperty(ref _modPacks, value);
-        }
-
-        private string _modPacksFileName
-        {
-            get => $"modPacks{_game.ToString()}.xml";
         }
 
         private ModPacksEditor? _modPacksEditor;
@@ -219,6 +229,21 @@ namespace OF.FSimMan.Client.Game
             {
                 ResetBusyIndicator();
             }
+        }
+
+        public bool CheckDlcRequirementsMet()
+        {
+            if (SelectedModPack is null) return true;
+
+            DirectoryInfo dirInfo = new DirectoryInfo(GameDlcsDirectoryPath);
+            List<string> files = dirInfo.GetFiles().Where(f => f.Name.ToLower().EndsWith(".dlc")).Select(f => f.Name.Replace(".dlc", "")).ToList();
+
+            foreach (DlcRequirement dlc in SelectedModPack.Dlcs)
+            {
+                if (!files.Contains(dlc.Dlc!.FileName)) return false;
+            }
+
+            return true;
         }
         #endregion
 

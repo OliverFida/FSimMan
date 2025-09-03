@@ -164,7 +164,7 @@ namespace OF.FSimMan.ViewModel.Game
 
             if (Client.IsInitialized)
             {
-                client.RunGame();
+                RunGame();
             }
             else
             {
@@ -185,7 +185,21 @@ namespace OF.FSimMan.ViewModel.Game
         private void HandleClientInizializeCompleteRunGame(object? sender, EventArgs e)
         {
             Client.InitializeComplete -= HandleClientInizializeCompleteRunGame;
-            ((IGameClient)Client).RunGame();
+            RunGame();
+        }
+
+        private void RunGame()
+        {
+            IGameClient client = (IGameClient)Client;
+
+            if (!client.CheckDlcRequirementsMet())
+            {
+                GameRunningViewModel.Instance.CancelStart();
+                UiFunctions.ShowError("Your installation is missing required DLCs!");
+                return;
+            }
+
+            client.RunGame();
         }
         #endregion
     }
