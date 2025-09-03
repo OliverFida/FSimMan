@@ -11,6 +11,22 @@ namespace OF.FSimMan.Client.Game.Fs
         public Fs22Client(bool doInitialize) : base(FSimMan.Management.Game.FarmingSim22, doInitialize) { }
         #endregion
 
+        #region Methods INTERNAL
+        internal override void ResetGameModFolder()
+        {
+            if (_gameSettings is null) return;
+
+            gameSettingsModsDirectoryOverride directoryOverride = new()
+            {
+                active = false,
+                directory = string.Empty
+            };
+
+            ((gameSettings)_gameSettings).modsDirectoryOverride = directoryOverride;
+            StoreGameSettings();
+        }
+        #endregion
+
         #region Methods PROTECTED
         protected override void ReadGameSettings()
         {
@@ -28,19 +44,19 @@ namespace OF.FSimMan.Client.Game.Fs
 
         protected override void SetGameModFolder()
         {
-            if (_gameSettings is null) return;
-
-            gameSettingsModsDirectoryOverride directoryOverride = new gameSettingsModsDirectoryOverride();
             if (SelectedModPack is null)
             {
-                directoryOverride.active = false;
-                directoryOverride.directory = string.Empty;
+                ResetGameModFolder();
+                return;
             }
-            else
+
+            if (_gameSettings is null) return;
+
+            gameSettingsModsDirectoryOverride directoryOverride = new()
             {
-                directoryOverride.active = true;
-                directoryOverride.directory = SelectedModPack.ModsDirectoryPath;
-            }
+                active = true,
+                directory = SelectedModPack.ModsDirectoryPath
+            };
 
             ((gameSettings)_gameSettings).modsDirectoryOverride = directoryOverride;
             StoreGameSettings();
