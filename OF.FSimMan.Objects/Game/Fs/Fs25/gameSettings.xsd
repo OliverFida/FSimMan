@@ -91,7 +91,7 @@
 				<xsd:element name="woodHarvesterAutoCut" type="xsd:boolean" />
 				<xsd:element name="shownFreemodeWarning" type="xsd:boolean" />
 				<xsd:element name="showMultiplayerNames" type="xsd:boolean" />
-				<xsd:element name="ingameMapGrowthFilter" type="xsd:unsignedShort" />
+				<xsd:element name="ingameMapGrowthFilter" type="xsd:unsignedInt" />
 				<xsd:element name="ingameMapSoilFilter" type="xsd:unsignedShort" />
 				<xsd:element name="ingameMapHotspotFilter" type="xsd:unsignedInt" />
 				<xsd:element name="ingameMapFruitFilter" />
