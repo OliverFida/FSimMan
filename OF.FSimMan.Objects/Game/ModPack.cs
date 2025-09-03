@@ -112,9 +112,12 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Constructor
-        internal ModPack() { }
+        internal ModPack()
+        {
 
-        public ModPack(Management.Game game)
+        }
+
+        public ModPack(Management.Game game) : this()
         {
             _game = game;
         }

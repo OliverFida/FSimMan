@@ -39,7 +39,7 @@ namespace OF.FSimMan.Database.Access
 
             try
             {
-                ModPackData? existingModPackData = db.ModPacks.Where(d => d.Id.Equals(newModPack.Id)).Include(d => d.Mods).SingleOrDefault();
+                ModPackData? existingModPackData = db.ModPacks.Where(d => d.Id.Equals(newModPack.Id)).Include(d => d.Mods).Include(d => d.Dlcs).SingleOrDefault();
 
                 ModPackData newModPackData = new ModPackData();
                 newModPackData.ToData(newModPack);
@@ -49,6 +49,7 @@ namespace OF.FSimMan.Database.Access
                 {
                     db.Entry(existingModPackData).CurrentValues.SetValues(newModPackData);
                     AppendModsData(db, existingModPackData, newModPackData);
+                    AddendDlcsData(db, existingModPackData, newModPackData);
                     entityEntry = db.Entry(existingModPackData);
                 }
 
@@ -90,6 +91,7 @@ namespace OF.FSimMan.Database.Access
                     ModPackData existingModPackData = db.ModPacks.Local.SingleOrDefault(d => d.Id.Equals(p.Id)) ?? db.ModPacks.Find(p.Id)!;
                     db.ModPacks.Entry(existingModPackData).CurrentValues.SetValues(p);
                     AppendModsData(db, existingModPackData, p);
+                    AddendDlcsData(db, existingModPackData, p);
                 });
                 toInsert.ForEach(p => db.ModPacks.Add(p));
 
@@ -109,7 +111,7 @@ namespace OF.FSimMan.Database.Access
         #region ModPack
         private List<ModPackData> ReadModPacksData(ModPacksDbContextBase db)
         {
-            return db.ModPacks.Include(d => d.Mods).ToList();
+            return db.ModPacks.Include(d => d.Mods).Include(d => d.Dlcs).ToList();
         }
         #endregion
 
@@ -118,6 +120,12 @@ namespace OF.FSimMan.Database.Access
         {
             existingModPackData.Mods.Clear();
             existingModPackData.Mods.AddRange(newModPackData.Mods);
+        }
+
+        private void AddendDlcsData(ModPacksDbContextBase db, ModPackData existingModPackData, ModPackData newModPackData)
+        {
+            existingModPackData.Dlcs.Clear();
+            existingModPackData.Dlcs.AddRange(newModPackData.Dlcs);
         }
         #endregion
         #endregion

@@ -1,10 +1,9 @@
 ﻿using OF.Base.Objects;
-using OF.FSimMan.Game;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace OF.FSimMan
+namespace OF.FSimMan.Game
 {
     [Table("DlcRequirements")]
     [XmlType("DlcRequirement")]
@@ -29,14 +28,13 @@ namespace OF.FSimMan
             return new DlcRequirement((ModPack)parent!, FileName)
             {
                 Id = Id,
-                _fileName = FileName,
             };
         }
 
         public override void ToData(DlcRequirement value)
         {
             Id = value.Id;
-            FileName = value.FileName;
+            FileName = value.Dlc!.FileName;
         }
         #endregion
     }

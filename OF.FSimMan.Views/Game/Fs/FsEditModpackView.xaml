@@ -7,8 +7,8 @@
     xmlns:ui="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel.Game;assembly=OF.FSimMan.ViewModels"
     d:DataContext="{d:DesignInstance Type={x:Type vm:EditModPackViewModelBase}}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="900"
+    d:DesignWidth="1600"
     mc:Ignorable="d">
     <ui:BusyIndicator BusyContent="{Binding Client.BusyContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsBusy="{Binding Client.IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -86,6 +86,21 @@
                                 Style="{StaticResource SquareImageButtonStyle}" />
                         </StackPanel>
                     </StackPanel>
+                </StackPanel>
+
+                <!--  DLCS  -->
+                <StackPanel Margin="0,5,0,0" Orientation="Vertical">
+                    <ui:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Required DLCs" />
+                    <ItemsControl ItemsSource="{Binding Client.PossibleDlcs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ui:CheckBox
+                                    Margin="0,0,0,5"
+                                    Content="{Binding Dlc.Title}"
+                                    IsChecked="{Binding IsRequired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
 
                 <!--  MODS  -->

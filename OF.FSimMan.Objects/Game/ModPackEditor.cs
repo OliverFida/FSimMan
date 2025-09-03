@@ -73,6 +73,16 @@ namespace OF.FSimMan.Game
             CheckIntegrity();
         }
 
+        public void SetDlcRequirements(List<PossibleDlc> possibleDlcs)
+        {
+            ObjectToEdit.Dlcs.Clear();
+
+            foreach (PossibleDlc possibleDlc in possibleDlcs)
+            {
+                if (possibleDlc.IsRequired) ObjectToEdit.Dlcs.Add(new DlcRequirement(ObjectToEdit, possibleDlc.Dlc.FileName));
+            }
+        }
+
         public void CheckIntegrity() => CheckIntegrity(false);
         public void CheckIntegrity(bool final)
         {
