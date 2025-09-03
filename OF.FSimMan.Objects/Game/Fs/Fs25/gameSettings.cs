@@ -119,9 +119,9 @@ public partial class gameSettings : DataObject, IGameSettings {
     
     private bool showMultiplayerNamesField;
     
-    private ushort ingameMapGrowthFilterField;
+    private uint ingameMapGrowthFilterField;
     
-    private ushort ingameMapSoilFilterField;
+    private uint ingameMapSoilFilterField;
     
     private uint ingameMapHotspotFilterField;
     
@@ -622,7 +622,7 @@ public partial class gameSettings : DataObject, IGameSettings {
     }
     
     /// <remarks/>
-    public ushort ingameMapGrowthFilter {
+    public uint ingameMapGrowthFilter {
         get {
             return this.ingameMapGrowthFilterField;
         }
@@ -632,7 +632,7 @@ public partial class gameSettings : DataObject, IGameSettings {
     }
     
     /// <remarks/>
-    public ushort ingameMapSoilFilter {
+    public uint ingameMapSoilFilter {
         get {
             return this.ingameMapSoilFilterField;
         }
