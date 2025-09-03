@@ -89,9 +89,11 @@ namespace OF.FSimMan.Game
                 }
 
                 // icon.dds
-                if (modDescription.iconFilename.EndsWith(".dds"))
+                if (!string.IsNullOrWhiteSpace(modDescription.iconFilename))
                 {
-                    ZipArchiveEntry? entry = archive.GetEntry(modDescription.iconFilename);
+                    string fileName = modDescription.iconFilename.Split(".")[0] + ".dds";
+
+                    ZipArchiveEntry? entry = archive.GetEntry(fileName);
                     if (entry is not null)
                     {
                         iconFileName = $"icon_{Path.GetFileNameWithoutExtension(fileInfo.FullName)}.dds";
