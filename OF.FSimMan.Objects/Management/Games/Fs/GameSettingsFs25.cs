@@ -19,7 +19,7 @@ namespace OF.FSimMan.Management.Games.Fs
             string[] files = Directory.GetFiles(path);
             foreach (string file in files)
             {
-                if (file.EndsWith("FarmingSimulator2025.exe")) return;
+                if (file.EndsWith("FarmingSimulator2025.exe")) return; // TODOI: Change to value from GameInfo
             }
             throw new GamePathIncorrectException();
         }
