@@ -18,6 +18,7 @@ Current and upcoming features are:
 |Farming Simulator 25 Support||**RELEASED**|
 |Convert Default Mods Folder|Convert your default mods folder into a modpack on first configuration.|**RELEASED**|
 |Steam Support|Manage you game, even if you own it on steam.|**RELEASED**|
+|In-App Change Log||**RELEASED**|
 |Modpack Linked Savegames|See only the savegames, you've created with the currently playing modpack.|PLANNED|
 |Input Profiles||PLANNED|
 |32-bit Support|Run FSimMan on 32-bit based systems|PLANNED|
@@ -25,7 +26,6 @@ Current and upcoming features are:
 |Multi-Language-Support||PLANNED|
 |Discord Rich Presence||PLANNED|
 |ModSettigns per Modpack|Appart for your mods, also the settings for all your mods get stored for each modpack seperately.|PLANNED|
-|In-App Change Log||PLANNED|
 |Game Log Viewer||PLANNED|
 |DLC Management|Appart from your mods, also manage your DLCs per modpack.|PLANNED|
 
