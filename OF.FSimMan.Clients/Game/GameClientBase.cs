@@ -1,4 +1,5 @@
 ﻿using OF.Base.Client;
+using OF.FSimMan.Client.Api;
 using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Database.Access;
@@ -34,12 +35,34 @@ namespace OF.FSimMan.Client.Game
         {
             get
             {
+                GameSettingsBase? gameSettings;
+
                 switch (_game)
                 {
                     case FSimMan.Management.Game.FarmingSim22:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>().DataDirectoryPath, "pdlc");
+                        gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs22>();
+                        break;
                     case FSimMan.Management.Game.FarmingSim25:
-                        return Path.Combine(SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>().DataDirectoryPath, "pdlc");
+                        gameSettings = SettingsClient.Instance.AppSettings.GetGameSettings<GameSettingsFs25>();
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+
+                if (gameSettings is null)
+                {
+                    Thread.Sleep(1000);
+                    return GameDlcsDirectoryPath;
+                }
+
+                SteamClient.Instance.GetLibraryPaths();
+
+                switch(gameSettings.GameOrigin)
+                {
+                    case GameOrigin.DvdWebsite:
+                        return Path.Combine(gameSettings.DataDirectoryPath, "pdlc");
+                    // OFODI: case GameOrigin.Steam:
+                    //    return Path.Combine(gameSettings.ExeDirectoryPath, "pdlc");
                     default:
                         throw new NotImplementedException();
                 }

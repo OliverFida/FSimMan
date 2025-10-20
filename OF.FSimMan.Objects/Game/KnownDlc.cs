@@ -6,8 +6,13 @@
         public static List<KnownDlc> List = new List<KnownDlc>()
         {
             new KnownDlc(Management.Game.FarmingSim25, "MacDon Pack", "macDonPack"),
-            new KnownDlc(Management.Game.FarmingSim25, "Straw Harvest Pack", "strawHaarvestPack"),
+            new KnownDlc(Management.Game.FarmingSim25, "Straw Harvest Pack", "strawHarvestPack"),
             new KnownDlc(Management.Game.FarmingSim25, "Precision Farming 3.0", "precisionFarmingPack"),
+            new KnownDlc(Management.Game.FarmingSim25, "Mercedes-Benz Trucks Pack", "daimlerTruckPack"),
+            new KnownDlc(Management.Game.FarmingSim25, "Plains & Prairies Pack", "plainsAndPrairiesPack"),
+            new KnownDlc(Management.Game.FarmingSim25, "NEXAT Pack", "nexatPack"),
+            new KnownDlc(Management.Game.FarmingSim25, "New Holland CR11 Gold Edition", "extraContentNewHollandCR11"),
+            //new KnownDlc(Management.Game.FarmingSim25, "Highlands Fishing Expansion", "daimlerTruckPack"),
         };
 
 

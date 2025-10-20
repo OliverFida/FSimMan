@@ -82,7 +82,7 @@ namespace OF.FSimMan.Client.Game
 
             foreach (DlcRequirement dlcRequirement in _modPack.Dlcs)
             {
-                PossibleDlc? possibleDlc = possibleDlcs.Where(d => d.Dlc.FileName.Equals(dlcRequirement.Dlc!.FileName)).SingleOrDefault();
+                PossibleDlc? possibleDlc = possibleDlcs.Where(d => d.Dlc.FileName.Equals(dlcRequirement.Dlc?.FileName)).SingleOrDefault();
                 if (possibleDlc is not null) possibleDlc.IsRequired = true;
             }
 
