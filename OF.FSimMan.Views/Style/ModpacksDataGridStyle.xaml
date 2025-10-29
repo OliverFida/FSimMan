@@ -99,7 +99,7 @@
                 CommandParameter="{Binding}"
                 ImageSource="{StaticResource FileExportIcon}"
                 Style="{StaticResource SquareImageButtonStyle}"
-                Visibility="{Binding DataContext.IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                Visibility="{Binding DataContext.AppSettings.IsApplicationModeCreator, Converter={StaticResource BooleanVisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}" />
             <of:ImageButton
                 Margin="0,0,5,0"
                 Command="{Binding DataContext.DeleteModpackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"

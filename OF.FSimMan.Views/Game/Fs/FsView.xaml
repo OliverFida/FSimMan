@@ -42,7 +42,7 @@
                     Command="{Binding ImportModPackCommand}"
                     Content="Import"
                     ImageSource="{StaticResource FileImportIcon}"
-                    Visibility="{Binding IsModPackImportExportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
+                    Visibility="{Binding IsModPackImportVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
                 <of:ImageButton
                     Margin="5,0,0,0"
                     VerticalAlignment="Bottom"
