@@ -58,7 +58,7 @@ namespace OF.FSimMan.ViewModel
                 UiFunctions.ShowError(ex);
             }
         }
-#endregion
+        #endregion
 
         #region Methods PUBLIC
         //public async Task ExecuteUpdate()
@@ -128,10 +128,10 @@ namespace OF.FSimMan.ViewModel
                 }
             }
             ViewModelSelector.OpenViewModel(HomeViewModel);
-            // OFDOL: OpenAvailableView();
+            // OFDO: OpenAvailableView();
         }
 
-        // OFDOL: private void OpenAvailableView()
+        // OFDO: private void OpenAvailableView()
         //{
         //    if (SettingsClient.Instance.AppSettings.IsFs25Active) ViewModelSelector.OpenViewModel(new Fs25ViewModel());
         //    else if (SettingsClient.Instance.AppSettings.IsFs22Active) ViewModelSelector.OpenViewModel(new Fs22ViewModel());

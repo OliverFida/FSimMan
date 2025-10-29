@@ -40,7 +40,7 @@ namespace OF.FSimMan.ViewModel.Management
         //    SettingsViewModel settingsViewModel = new SettingsViewModel();
         //    MainViewModel.ViewModelSelector.OpenViewModel(settingsViewModel);
 
-        //    //OFDOL: Show ChangeLogTab
+        //    //OFDO: Show ChangeLogTab
         //}
         #endregion
 

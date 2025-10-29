@@ -22,7 +22,7 @@ namespace OF.FSimMan.Game
 
         public void AddMods(string[] filePaths)
         {
-            // OFDOL: object modsLock = new object();
+            // OFDO: object modsLock = new object();
             //Parallel.ForEach(filePaths, filePath =>
             //{
             //AddMod(filePath, modsLock);
@@ -97,7 +97,7 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PRIVATE
-        // OFDOL: private void AddMod(string filePath, object lockObject)
+        // OFDO: private void AddMod(string filePath, object lockObject)
         private void AddMod(string filePath)
         {
             if (!File.Exists(filePath)) return;
@@ -154,7 +154,7 @@ namespace OF.FSimMan.Game
             string targetFilePath = Path.Combine(ObjectToEdit.ModsDirectoryPath, fileInfo.Name);
             File.Copy(fileInfo.FullName, targetFilePath, true);
 
-            // OFDOL: lock (lockObject)
+            // OFDO: lock (lockObject)
             //{
             //    ObjectToEdit._mods.Add(newMod);
             //}
