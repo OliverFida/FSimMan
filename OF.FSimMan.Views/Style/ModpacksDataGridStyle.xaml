@@ -70,14 +70,14 @@
                             Width="16"
                             Height="16"
                             Margin="5,0,0,0"
-                            Source="{StaticResource FileImportIcon}"
+                            Source="{StaticResource FileImportYellowIcon}"
                             ToolTip="Imported"
                             Visibility="{Binding Tags.IsImported, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}" />
                         <Image
                             Width="16"
                             Height="16"
                             Margin="5,0,0,0"
-                            Source="{StaticResource FileImportIcon}"
+                            Source="{StaticResource FileImportGearYellowIcon}"
                             ToolTip="Imported but edited"
                             Visibility="{Binding Tags.IsImportedButEdited, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}" />
                     </StackPanel>
