@@ -169,7 +169,12 @@ namespace OF.FSimMan.Management.Games
 
             if (!Directory.Exists(temp)) throw new DataPathAutodetectionFailedWarning();
 
-            ValidateDataDirectoryPath(temp);
+            try
+            {
+                ValidateDataDirectoryPath(temp);
+            }
+            catch { throw new DataPathAutodetectionFailedWarning(); }
+
             DataDirectoryPath = temp;
         }
 

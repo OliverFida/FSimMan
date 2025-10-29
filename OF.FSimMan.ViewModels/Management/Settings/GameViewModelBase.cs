@@ -43,16 +43,28 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         {
             try
             {
-                OpenFolderDialog dialog = new OpenFolderDialog()
+                string busyContentBefore = BusyContent;
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
-                    Title = "Select Installation Folder",
-                    Multiselect = false
-                };
-                if (dialog.ShowDialog() != true) return;
+                    BusyContent = "Autodetection running...";
+                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).TryAutodetectExePath();
+                }
+                catch (WarningAsException ex)
+                {
+                    BusyContent = busyContentBefore;
+                    UiFunctions.ShowWarningOk(ex.Message);
 
-                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateExeDirectoryPath(dialog.FolderName);
-                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ExeDirectoryPath = dialog.FolderName;
+                    OpenFolderDialog dialog = new OpenFolderDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                        Title = "Select Installation Folder",
+                        Multiselect = false
+                    };
+                    if (dialog.ShowDialog() != true) return;
+
+                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateExeDirectoryPath(dialog.FolderName);
+                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ExeDirectoryPath = dialog.FolderName;
+                }
             }
             catch (OfException ex)
             {
@@ -65,16 +77,29 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         {
             try
             {
-                OpenFolderDialog dialog = new OpenFolderDialog()
+                string busyContentBefore = BusyContent;
+                try
                 {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    Title = "Select Data Folder",
-                    Multiselect = false
-                };
-                if (dialog.ShowDialog() != true) return;
+                    BusyContent = "Autodetection running...";
+                    Thread.Sleep(1000);
+                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).TryAutodetectDataPath();
+                }
+                catch (WarningAsException ex)
+                {
+                    BusyContent = busyContentBefore;
+                    UiFunctions.ShowWarningOk(ex.Message);
 
-                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateDataDirectoryPath(dialog.FolderName);
-                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).DataDirectoryPath = dialog.FolderName;
+                    OpenFolderDialog dialog = new OpenFolderDialog()
+                    {
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                        Title = "Select Data Folder",
+                        Multiselect = false
+                    };
+                    if (dialog.ShowDialog() != true) return;
+
+                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateDataDirectoryPath(dialog.FolderName);
+                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).DataDirectoryPath = dialog.FolderName;
+                }
             }
             catch (OfException ex)
             {

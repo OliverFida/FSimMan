@@ -36,20 +36,6 @@
                 Content="Farming Simulator 25"
                 IsChecked="{Binding GameSettingsFs25.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Visibility="{Binding IsFs25Visible, Converter={StaticResource BooleanVisibilityConverter}}" />
-            <of:ImageButton
-                Margin="0,5,0,0"
-                HorizontalAlignment="Left"
-                Click="DebugTryAutodetectExePathButton_Click"
-                ImageSource="{StaticResource BugIcon}"
-                Style="{StaticResource SquareImageButtonStyle}"
-                Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
-            <of:ImageButton
-                Margin="0,5,0,0"
-                HorizontalAlignment="Left"
-                Click="DebugTryAutodetectDataPathButton_Click"
-                ImageSource="{StaticResource BugIcon}"
-                Style="{StaticResource SquareImageButtonStyle}"
-                Visibility="{Binding IsDebug, Mode=OneTime, Converter={StaticResource BooleanVisibilityConverter}}" />
         </StackPanel>
     </Grid>
 </UserControl>
