@@ -29,6 +29,7 @@ namespace OF.FSimMan.Client.Game
         #region Methods PUBLIC
         public void StoreModPack()
         {
+            if (_modPack.Tags.IsImported) _modPack.Tags.Set(ModPackTag.ImportedButEdited);
             _modPackEditor.TriggerEndEdit();
             _modPack = _gameClient.GetDbAccess().StoreModPack(_modPack);
             _modPackEditor = new ModPackEditor(_modPack);
