@@ -73,6 +73,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
                 if (importAsNew) modPackData.Guid = Guid.NewGuid();
 
                 ModPack modPack = modPackData.FromData();
+                modPack.Tags.Set(ModPackTag.Imported);
                 ReadModPackData(ref archive, modPack);
 
                 ModPackEditor modPackEditor = new ModPackEditor(modPack);

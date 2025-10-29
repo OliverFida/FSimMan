@@ -91,6 +91,10 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs25Db
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");

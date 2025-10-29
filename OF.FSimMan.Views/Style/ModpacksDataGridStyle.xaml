@@ -15,7 +15,6 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -41,24 +40,47 @@
                         Visibility="{Binding IsVersionVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock
-                        FontSize="12"
-                        Foreground="DarkGray"
-                        Text="by " />
-                    <TextBlock
-                        FontSize="12"
-                        Foreground="DarkGray"
-                        Text="{Binding Author}" />
-                </StackPanel>
-                <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock
-                        FontSize="12"
-                        Foreground="DarkGray"
-                        Text="{Binding Mods.Count}" />
-                    <TextBlock
-                        FontSize="12"
-                        Foreground="DarkGray"
-                        Text=" mods" />
+                    <!--  By & ModsCount  -->
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="by " />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="{Binding Author}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text="{Binding Mods.Count}" />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="DarkGray"
+                                Text=" mods" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--  Tag Icons  -->
+                    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <Image
+                            Width="16"
+                            Height="16"
+                            Margin="5,0,0,0"
+                            Source="{StaticResource FileImportIcon}"
+                            ToolTip="Imported"
+                            Visibility="{Binding Tags.IsImported, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}" />
+                        <Image
+                            Width="16"
+                            Height="16"
+                            Margin="5,0,0,0"
+                            Source="{StaticResource FileImportIcon}"
+                            ToolTip="Imported but edited"
+                            Visibility="{Binding Tags.IsImportedButEdited, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </StackPanel>

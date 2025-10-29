@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OF.FSimMan.Database.Data;
 
 #nullable disable
 
-namespace OF.FSimMan.Database.Migrations.ModPacksFs22Db
+namespace OF.FSimMan.Database.Migrations.ModPacksFs25Db
 {
-    [DbContext(typeof(ModPacksFs22DbContext))]
-    partial class ModPacksFs22DbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ModPacksFs25DbContext))]
+    [Migration("20251029105608_AlterTableModPacksAddTags")]
+    partial class AlterTableModPacksAddTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");

@@ -35,6 +35,10 @@ namespace OF.FSimMan.Game
         public string? ImageSource { get; set; } = null;
 
         [Required]
+        [XmlElement(IsNullable = false)]
+        public string Tags { get; set; } = string.Empty;
+
+        [Required]
         [XmlArray(nameof(Mods), IsNullable = true)]
         public List<ModData> Mods { get; set; } = new List<ModData>();
 
@@ -51,6 +55,18 @@ namespace OF.FSimMan.Game
                 _description = Description,
                 _imageSource = ImageSource,
             };
+
+            {
+                ModPackTags tags = new ModPackTags();
+                string[] tagsList = Tags.Split(',');
+                foreach (string tag in tagsList)
+                {
+                    if (String.IsNullOrWhiteSpace(tag)) continue;
+
+                    tags.Set((ModPackTag)Convert.ToInt32(tag));
+                }
+                temp._tags = tags;
+            }
 
             foreach (ModData mod in Mods)
             {
@@ -70,6 +86,15 @@ namespace OF.FSimMan.Game
             Author = value._author;
             Description = value._description;
             ImageSource = value._imageSource;
+
+            {
+                List<int> tagsList = new List<int>();
+                foreach (ModPackTag tag in value.Tags.Tags)
+                {
+                    tagsList.Add((int)tag);
+                }
+                Tags = String.Join(",", tagsList);
+            }
 
             {
                 ConcurrentBag<ModData> temp = new ConcurrentBag<ModData>();
