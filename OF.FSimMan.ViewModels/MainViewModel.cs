@@ -46,11 +46,11 @@ namespace OF.FSimMan.ViewModel
             try
             {
                 OpenLastView();
-                //#if !DEBUG
+#if !DEBUG
                 await AnnounceUpdateAvailableAsync();
                 //await AutoUpdateAsync();
                 //await ShowChangelogAsync();
-                //#endif
+#endif
                 GameRunningViewModel temp = GameRunningViewModel.Instance; // Triggering constructor
             }
             catch (OfException ex)
@@ -58,7 +58,7 @@ namespace OF.FSimMan.ViewModel
                 UiFunctions.ShowError(ex);
             }
         }
-        #endregion
+#endregion
 
         #region Methods PUBLIC
         //public async Task ExecuteUpdate()
