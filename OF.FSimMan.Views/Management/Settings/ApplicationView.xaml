@@ -18,7 +18,12 @@
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <of:Heading Style="{StaticResource InputGroupHeadingStyle}" Text="Application Mode" />
-            <of:ComboBox ItemsSource="{Binding AppSettings.ApplicationModeValues, Mode=OneWay}" SelectedItem="{Binding AppSettings.ApplicationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <of:ComboBox
+                Width="500"
+                HorizontalAlignment="Left"
+                Background="{StaticResource BgGrayBrush}"
+                ItemsSource="{Binding AppSettings.ApplicationModeValues, Mode=OneWay}"
+                SelectedItem="{Binding AppSettings.ApplicationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <StackPanel
