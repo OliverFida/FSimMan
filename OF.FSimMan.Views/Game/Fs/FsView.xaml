@@ -61,15 +61,14 @@
                     <DataGridTemplateColumn
                         MinWidth="150"
                         CellTemplate="{StaticResource ModpacksDataGridModpackDataTemplate}"
-                        Header="Modpack" />
+                        Header="Modpack"
+                        HeaderStyle="{StaticResource DataGridColumnHeaderLeftStyle}" />
                     <DataGridTemplateColumn
                         Width="*"
                         CellTemplate="{StaticResource ModpacksDataGridDescriptionDataTemplate}"
-                        Header="Description" />
-                    <DataGridTemplateColumn
-                        MinWidth="150"
-                        CellTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}"
-                        Header="Controls" />
+                        Header="Description"
+                        HeaderStyle="{StaticResource DataGridColumnHeaderLeftStyle}" />
+                    <DataGridTemplateColumn MinWidth="150" CellTemplate="{StaticResource ModpacksDataGridControlsDataTemplate}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
