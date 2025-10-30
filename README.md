@@ -21,13 +21,16 @@ Current and upcoming features are:
 |In-App Change Log||**RELEASED**|
 |Modpack Linked Savegames|See only the savegames, you've created with the currently playing modpack.|PLANNED|
 |Input Profiles||PLANNED|
-|32-bit Support|Run FSimMan on 32-bit based systems|PLANNED|
-|MacOS Support|Run FSimMan on MacOS based systems|PLANNED|
 |Multi-Language-Support||PLANNED|
-|Discord Rich Presence||PLANNED|
 |ModSettigns per Modpack|Appart for your mods, also the settings for all your mods get stored for each modpack seperately.|PLANNED|
 |Game Log Viewer||PLANNED|
 |DLC Management|Appart from your mods, also manage your DLCs per modpack.|PLANNED|
+|Better Export & Import|Importing and exporting complete modpacks in a more intuitive way.|PLANNED|
+|Auto-Update|FSimMan automatically updates itself, when a new version is available.|PLANNED|
+|Tutorial|FSimMan introduces itself and shows guides the user through its features.|PLANNED|
+|~~32-bit Support~~|~~Run FSimMan on 32-bit based systems~~|POSTPONED|
+|~~MacOS Support~~|~~Run FSimMan on MacOS based systems~~|POSTPONED|
+|~~Discord Rich Presence~~||POSTPONED|
 
 ## Installing FSimMan
 
