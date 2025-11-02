@@ -5,6 +5,7 @@ using OF.FSimMan.Database.Access;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management.Games;
 using OF.FSimMan.Management.Games.Fs;
+using OF.FSimMan.Utility;
 using System.Diagnostics;
 
 namespace OF.FSimMan.Client.Game
@@ -271,42 +272,23 @@ namespace OF.FSimMan.Client.Game
 
             }
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo();
             switch (gameSettings.GameOrigin)
             {
                 case FSimMan.Game.GameOrigin.DvdWebsite:
-                    processStartInfo.FileName = gameSettings.ExeFilePath;
-                    processStartInfo.Arguments = gameSettings.StartArguments.GetArgumentsString();
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo
+                    {
+                        FileName = gameSettings.ExeFilePath,
+                        Arguments = gameSettings.StartArguments.GetArgumentsString()
+                    };
+                    Process.Start(processStartInfo);
                     break;
                 case FSimMan.Game.GameOrigin.Steam:
-                    processStartInfo.FileName = GetGameSteamUri(gameSettings);
-                    processStartInfo.UseShellExecute = true;
+                    SteamHelper.LaunchGame(gameSettings.SteamId, gameSettings.StartArguments.GetArgumentsString());
                     break;
                 default:
                     throw new NotImplementedException();
             }
 
-            Process.Start(processStartInfo);
-        }
-
-        private string GetGameSteamUri(GameSettingsBase gameSettings)
-        {
-            List<string> uriParts = new List<string>
-            {
-                "steam://rungameid",
-                gameSettings.SteamId
-            };
-
-            string temp = string.Join("/", uriParts);
-            List<string> arguments = gameSettings.StartArguments.GetArgumentsList();
-            if (arguments.Count.Equals(0)) return temp;
-
-            uriParts.Clear();
-            temp += "/";
-            uriParts.Add(temp);
-            uriParts.AddRange(arguments);
-
-            return string.Join("/", uriParts);
         }
 
         //private void KillGameProcess()

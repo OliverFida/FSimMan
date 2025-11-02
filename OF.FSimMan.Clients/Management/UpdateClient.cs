@@ -83,7 +83,7 @@ namespace OF.FSimMan.Client.Management
         //{
         //    await Task.Delay(250);
         //    return true;
-        //    // OFDOL
+        //    // OFDO
         //}
         #endregion
 
@@ -99,11 +99,17 @@ namespace OF.FSimMan.Client.Management
             _latestRelease = (from r in releases orderby r.TagName descending select r).First();
             (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
 
-            if (versionParts.major < CurrentApplication.AssemblyVersion.Major) return false;
-            if (versionParts.minor < CurrentApplication.AssemblyVersion.Minor) return false;
-            if (versionParts.build <= CurrentApplication.AssemblyVersion.Build) return false;
+            if (CurrentApplication.AssemblyVersion.Major < versionParts.major) return true; // 0.x.x -> 1.x.x
+            if (CurrentApplication.AssemblyVersion.Major == versionParts.major) // 0.x.x -> 0.y.x
+            {
+                if (CurrentApplication.AssemblyVersion.Minor < versionParts.minor) return true; // 0.0.x -> 0.1.x
+                if (CurrentApplication.AssemblyVersion.Minor == versionParts.minor) // 0.0.x -> 0.0.y
+                {
+                    if (CurrentApplication.AssemblyVersion.Build < versionParts.build) return true; // 0.0.0 -> 0.0.1
+                }
+            }
 
-            return true;
+            return false; // No update
         }
 
         private (int major, int minor, int build) GetVersionParts(string versionString)

@@ -4,7 +4,7 @@ using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
-using OliverFida.FSimMan.Exceptions;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 
@@ -47,7 +47,8 @@ namespace OF.FSimMan.ViewModel
             {
                 OpenLastView();
 #if !DEBUG
-                await AutoUpdateAsync();
+                await AnnounceUpdateAvailableAsync();
+                //await AutoUpdateAsync();
                 //await ShowChangelogAsync();
 #endif
                 GameRunningViewModel temp = GameRunningViewModel.Instance; // Triggering constructor
@@ -60,36 +61,48 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Methods PUBLIC
-        public async Task ExecuteUpdate()
-        {
-            try
-            {
-                UpdateClient updateClient = UpdateClient.Instance;
-                if (!await updateClient.TryExecuteUpdateAsync())
-                {
-                    UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
-                    return;
-                }
+        //public async Task ExecuteUpdate()
+        //{
+        //    try
+        //    {
+        //        UpdateClient updateClient = UpdateClient.Instance;
+        //        if (!await updateClient.TryExecuteUpdateAsync())
+        //        {
+        //            UiFunctions.ShowWarningOk("Update failed!" + Environment.NewLine + "Please try again later.");
+        //            return;
+        //        }
 
-                UpdateCompleteEvent?.Invoke(this, EventArgs.Empty);
-            }
-            catch (UpdateCanceledException ex)
-            {
-                UiFunctions.ShowInfoOk(ex.Message);
-            }
-        }
+        //        UpdateCompleteEvent?.Invoke(this, EventArgs.Empty);
+        //    }
+        //    catch (UpdateCanceledException ex)
+        //    {
+        //        UiFunctions.ShowInfoOk(ex.Message);
+        //    }
+        //}
         #endregion
 
         #region Methods PRIVATE
-        private async Task AutoUpdateAsync()
+        private async Task AnnounceUpdateAvailableAsync()
         {
             UpdateClient updateClient = UpdateClient.Instance;
             await updateClient.CheckUpdateAvailableAsync();
 
-            if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
+            if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to take a look?")) return;
 
-            await ExecuteUpdate();
+            ProcessStartInfo psi = new ProcessStartInfo("https://github.com/OliverFida/FSimMan/releases");
+            psi.UseShellExecute = true;
+            Process.Start(psi);
         }
+
+        //private async Task AutoUpdateAsync()
+        //{
+        //    UpdateClient updateClient = UpdateClient.Instance;
+        //    await updateClient.CheckUpdateAvailableAsync();
+
+        //    if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
+
+        //    await ExecuteUpdate();
+        //}
 
         //private async Task ShowChangelogAsync()
         //{
@@ -115,10 +128,10 @@ namespace OF.FSimMan.ViewModel
                 }
             }
             ViewModelSelector.OpenViewModel(HomeViewModel);
-            // OFDOL: OpenAvailableView();
+            // OFDO: OpenAvailableView();
         }
 
-        // OFDOL: private void OpenAvailableView()
+        // OFDO: private void OpenAvailableView()
         //{
         //    if (SettingsClient.Instance.AppSettings.IsFs25Active) ViewModelSelector.OpenViewModel(new Fs25ViewModel());
         //    else if (SettingsClient.Instance.AppSettings.IsFs22Active) ViewModelSelector.OpenViewModel(new Fs22ViewModel());

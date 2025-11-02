@@ -64,7 +64,7 @@ namespace OF.FSimMan.ViewModel
         //    try
         //    {
         //        PlanStop();
-        //        // OFDOL: GameClient.StopGame();
+        //        // OFDO: GameClient.StopGame();
         //    }
         //    catch(Exception ex)
         //    {

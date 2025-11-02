@@ -1,4 +1,6 @@
 ﻿using OF.FSimMan.Game;
+using OF.FSimMan.Management.Exceptions;
+using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 
 namespace OF.FSimMan.Management.Games
@@ -8,6 +10,7 @@ namespace OF.FSimMan.Management.Games
         #region Properties
         internal Game _game;
         public abstract string ExeFileName { get; }
+        public abstract string SettingsFileName { get; }
         public abstract string SteamId { get; }
 
         internal bool _isEnabled = false;
@@ -115,8 +118,85 @@ namespace OF.FSimMan.Management.Games
         #endregion
 
         #region Methods PUBLIC
-        public abstract void ValidateExeDirectoryPath(string path);
-        public abstract void ValidateDataDirectoryPath(string path);
+        public void TryAutodetectExePath()
+        {
+            string[] drives = Environment.GetLogicalDrives();
+
+            ConcurrentBag<string> possibleFiles = new ConcurrentBag<string>();
+
+            Parallel.ForEach(drives, drive =>
+            {
+                DriveInfo driveInfo = new(drive);
+                if (!driveInfo.IsReady) return;
+                if (driveInfo.DriveType != DriveType.Fixed) return;
+#if DEBUG
+                if (driveInfo.Name[0] == 'X') return;
+#endif
+
+                string[] directories = Directory.GetDirectories(drive, "*", SearchOption.TopDirectoryOnly);
+                foreach (string directory in directories)
+                {
+                    try
+                    {
+                        List<string> hits = Directory.GetFiles(directory, ExeFileName, SearchOption.AllDirectories).ToList();
+                        hits.ForEach(hit => possibleFiles.Add(hit));
+                    }
+                    catch (UnauthorizedAccessException) { }
+                }
+            });
+
+            List<string> possibleFilesList = new List<string>(possibleFiles);
+
+            possibleFilesList.RemoveAll(f => f.Contains("steam", StringComparison.OrdinalIgnoreCase));
+            if (possibleFilesList.Count != 1) throw new GamePathAutodetectionFailedWarning();
+
+            string? temp = Path.GetDirectoryName(possibleFilesList.Single());
+            if (temp is null) throw new GamePathAutodetectionFailedWarning();
+
+            try
+            {
+                ValidateExeDirectoryPath(temp);
+            }
+            catch { throw new GamePathAutodetectionFailedWarning(); }
+
+            ExeDirectoryPath = temp;
+        }
+
+        public void TryAutodetectDataPath()
+        {
+            string temp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            temp = Path.Combine(temp, "My Games", ExeFileName.Replace(".exe", string.Empty));
+
+            if (!Directory.Exists(temp)) throw new DataPathAutodetectionFailedWarning();
+
+            try
+            {
+                ValidateDataDirectoryPath(temp);
+            }
+            catch { throw new DataPathAutodetectionFailedWarning(); }
+
+            DataDirectoryPath = temp;
+        }
+
+        public void ValidateExeDirectoryPath(string path)
+        {
+            string[] files = Directory.GetFiles(path);
+            foreach (string file in files)
+            {
+                if (file.EndsWith(ExeFileName)) return;
+            }
+            throw new GamePathIncorrectException();
+        }
+
+        public void ValidateDataDirectoryPath(string path)
+        {
+            string[] files = Directory.GetFiles(path);
+            foreach (string file in files)
+            {
+                if (file.EndsWith(SettingsFileName)) return;
+            }
+            throw new DataPathIncorrectException();
+        }
         #endregion
 
         #region Methods PROTECTED

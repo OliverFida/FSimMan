@@ -56,6 +56,13 @@ namespace OF.FSimMan.Game
             get => !string.IsNullOrWhiteSpace(_imageSource) ? Path.Combine(ModPackDirectoryPath, _imageSource!) : null;
         }
 
+        internal ModPackTags _tags = new ModPackTags();
+        public ModPackTags Tags
+        {
+            get => _tags;
+            private set => SetProperty(ref _tags, value);
+        }
+
         internal EditableObservableCollection<Mod> _mods = new EditableObservableCollection<Mod>();
         public EditableObservableCollection<Mod> Mods
         {

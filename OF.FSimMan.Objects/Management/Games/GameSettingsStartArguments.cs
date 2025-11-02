@@ -2,8 +2,11 @@
 {
     public class GameSettingsStartArguments : AppSettingsBase
     {
+        #region Constants
         private const string _argumentPrefix = "-";
+        #endregion
 
+        #region Properties
         internal bool _skipIntros = false;
         public bool SkipIntros
         {
@@ -24,23 +27,28 @@
             get => _enableCheats;
             set => SetProperty(ref _enableCheats, value);
         }
+        #endregion
 
-        public List<string> GetArgumentsList()
-        {
-            List<string> temp = new List<string>();
-
-            if (SkipIntros) temp.Add($"{_argumentPrefix}skipStartVideos");
-            // OFDOL: if (DisableFrameLimit) temp.Add($"{_argumentPrefix}disableFrameLimiter"); // Apperently won't work anymore from FS22 upwards
-            if (EnableCheats) temp.Add($"{_argumentPrefix}cheats");
-            // OFDOL: if (EnableScriptDebug) temp.Add($"{_argumentPrefix}scriptDebug");
-            // OFDOL: if (DisableShaderCompiler) temp.Add($"{_argumentPrefix}disableShaderCompiler");
-
-            return temp;
-        }
-
+        #region Methods PUBLIC
         public string GetArgumentsString()
         {
             return string.Join(" ", GetArgumentsList());
         }
+        #endregion
+
+        #region Methods PRIVATE
+        private List<string> GetArgumentsList()
+        {
+            List<string> temp = new List<string>();
+
+            if (SkipIntros) temp.Add($"{_argumentPrefix}skipStartVideos");
+            // OFDO: if (DisableFrameLimit) temp.Add($"{_argumentPrefix}disableFrameLimiter"); // Apperently won't work anymore from FS22 upwards
+            if (EnableCheats) temp.Add($"{_argumentPrefix}cheats");
+            // OFDO: if (EnableScriptDebug) temp.Add($"{_argumentPrefix}scriptDebug");
+            // OFDO: if (DisableShaderCompiler) temp.Add($"{_argumentPrefix}disableShaderCompiler");
+
+            return temp;
+        }
+        #endregion
     }
 }

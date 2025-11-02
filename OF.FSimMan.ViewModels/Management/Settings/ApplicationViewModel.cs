@@ -8,6 +8,18 @@ namespace OF.FSimMan.ViewModel.Management.Settings
     public class ApplicationViewModel : BusyViewModelBase
     {
         #region Properties
+        public override bool IsDebug
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
         public AppSettings AppSettings => ((SettingsClient)Client).AppSettings;
 
         public GameSettingsFs22? GameSettingsFs22

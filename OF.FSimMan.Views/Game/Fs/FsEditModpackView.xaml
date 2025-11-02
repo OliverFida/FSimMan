@@ -106,15 +106,14 @@
                             <DataGridTemplateColumn
                                 MinWidth="150"
                                 CellTemplate="{StaticResource ModsDataGridModDataTemplate}"
-                                Header="Mod" />
+                                Header="Mod"
+                                HeaderStyle="{StaticResource DataGridColumnHeaderLeftStyle}" />
                             <DataGridTemplateColumn
                                 Width="*"
                                 CellTemplate="{StaticResource ModsDataGridDescriptionDataTemplate}"
-                                Header="Description" />
-                            <DataGridTemplateColumn
-                                MinWidth="150"
-                                CellTemplate="{StaticResource ModsDataGridControlsDataTemplate}"
-                                Header="Controls" />
+                                Header="Description"
+                                HeaderStyle="{StaticResource DataGridColumnHeaderLeftStyle}" />
+                            <DataGridTemplateColumn MinWidth="150" CellTemplate="{StaticResource ModsDataGridControlsDataTemplate}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

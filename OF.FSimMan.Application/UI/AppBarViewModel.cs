@@ -56,11 +56,12 @@ namespace OF.FSimMan.UI
         public Command UpdateCommand { get; }
         private async Task UpdateDelegate()
         {
-            await MainViewModel.Instance.ExecuteUpdate();
+            //await MainViewModel.Instance.ExecuteUpdate();
         }
         public bool IsUpdateAvailable
         {
-            get => UpdateClient.Instance.IsUpdateAvailable;
+            //get => UpdateClient.Instance.IsUpdateAvailable;
+            get => false;
         }
 
         public Command HomeCommand { get; } = new Command(HomeDelegate);

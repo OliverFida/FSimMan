@@ -54,7 +54,8 @@
     <DataTemplate x:Key="ModsDataGridDescriptionDataTemplate">
         <TextBlock
             Width="Auto"
-            MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+            MaxHeight="90"
+            Margin="0,5"
             VerticalAlignment="Center"
             FontSize="12"
             Text="{Binding Description}"

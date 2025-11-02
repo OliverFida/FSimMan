@@ -38,6 +38,9 @@ namespace OF.FSimMan.ViewModel.Game.Fs
                 if (EditModpackCommand.Parameter == null) return;
                 ModPack modPack = (ModPack)EditModpackCommand.Parameter;
 
+                if (modPack.Tags.IsImported)
+                    if (!UiFunctions.ShowWarningOkCancel("This modpack has been imported." + Environment.NewLine + "Manually changing it may cause compatibility issues with other players!")) return;
+
                 _editModPackViewModel = new Fs25EditModPackViewModel(FSimMan.Management.EditMode.Edit, modPack, (Fs25Client)Client);
 
                 _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
