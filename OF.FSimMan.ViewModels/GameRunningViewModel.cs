@@ -29,6 +29,13 @@ namespace OF.FSimMan.ViewModel
             set { if (SetProperty(ref _isStopPlanned, value)) UpdateProperties(); }
         }
 
+        private bool _isLauncherOpen = false;
+        private bool IsLauncherOpen
+        {
+            get => _isLauncherOpen;
+            set { if (SetProperty(ref _isLauncherOpen, value)) UpdateProperties(); }
+        }
+
         private GameInfoBase? _runningGame;
         public GameInfoBase? RunningGame
         {
@@ -41,6 +48,7 @@ namespace OF.FSimMan.ViewModel
             get
             {
                 if (RunningGame is null) return string.Empty;
+                if (IsLauncherOpen) return "LAUNCHER OPEN...";
                 if (IsStartPlanned) return "STARTING...";
                 if (IsStopPlanned) return "STOPPING...";
                 return "RUNNING";
@@ -51,7 +59,7 @@ namespace OF.FSimMan.ViewModel
         {
             get
             {
-                if (RunningGame is not null && !IsStartPlanned && !IsStopPlanned) return true;
+                if (RunningGame is not null && (!IsStartPlanned || (IsStartPlanned && IsLauncherOpen)) && !IsStopPlanned) return true;
                 return false;
             }
         }
@@ -160,7 +168,23 @@ namespace OF.FSimMan.ViewModel
                 if (RunningGame is not null && IsStartPlanned)
                 {
                     // Expexcted game start occurred
-                    if (Process.GetProcessesByName(RunningGame.ProcessName).Count() > 0) IsStartPlanned = false;
+                    if (!IsLauncherOpen &&
+                        RunningGame.LauncherProcessName is not null &&
+                        Process.GetProcessesByName(RunningGame.LauncherProcessName).Count() > 0)
+                    {
+                        IsLauncherOpen = true;
+                    }
+                    else if (Process.GetProcessesByName(RunningGame.ProcessName).Count() > 0)
+                    {
+                        IsLauncherOpen = false;
+                        IsStartPlanned = false;
+                    }
+                    else if (IsLauncherOpen &&
+                        RunningGame.LauncherProcessName is not null &&
+                        Process.GetProcessesByName(RunningGame.LauncherProcessName).Count() == 0)
+                    {
+                        IsStartPlanned = false;
+                    }
                 }
                 else if (RunningGame is not null && !IsStartPlanned)
                 {
