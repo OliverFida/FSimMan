@@ -69,7 +69,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
                 ModPackData modPackData = ReadModPackInfo(ref archive, sourceFileName);
                 if (!modPackData.Game.Equals(_game)) throw new InvalidModPackFileException(sourceFileName);
-                modPackData.Id = 0;
+                modPackData.Id = Guid.Empty;
                 if (importAsNew) modPackData.Guid = Guid.NewGuid();
 
                 ModPack modPack = modPackData.FromData();
@@ -129,7 +129,7 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
         {
             foreach (Mod mod in modPack.Mods)
             {
-                mod.Id = 0;
+                mod.Id = Guid.Empty;
 
                 {
                     string sourceModFilePath = $@"mods\{mod.FileName}";

@@ -14,7 +14,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2025.3.31.2038" />
+	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2026.2.20.2027-vNext" />
 	</ItemGroup>
 
 	<ItemGroup>

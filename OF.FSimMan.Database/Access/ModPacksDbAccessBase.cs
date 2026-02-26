@@ -70,7 +70,7 @@ namespace OF.FSimMan.Database.Access
 
             try
             {
-                List<int> existingIds = db.ModPacks
+                List<Guid> existingIds = db.ModPacks
                     .Where(d => newModPacks.List.Select(p => p.Id).Contains(d.Id))
                     .Select(d => d.Id)
                     .ToList();

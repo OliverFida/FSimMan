@@ -22,7 +22,7 @@ namespace OF.FSimMan.Management.Games
         public GameSettingsStartArgumentsData StartArguments { get; set; } = new GameSettingsStartArgumentsData();
 
 
-        public int AppSettingsId { get; set; }
+        public Guid AppSettingsId { get; set; }
 
         [ForeignKey(nameof(AppSettingsId))]
         [Required]
