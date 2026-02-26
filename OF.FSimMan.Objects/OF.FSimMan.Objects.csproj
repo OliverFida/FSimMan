@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base" Version="2026.2.20.2027-vNext" />
+    <PackageReference Include="OF.Base" Version="2026.2.26.2158-vNext" />
   </ItemGroup>
 
 </Project>
