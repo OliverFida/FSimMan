@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using OF.Base.Objects;
 using System.Xml.Serialization;
 
 // 
@@ -24,7 +23,7 @@ namespace OF.FSimMan.Game.Fs.Fs22.Mod;
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-public partial class modDesc : DataObject
+public partial class modDesc
 {
 
     private modDescTitle titleField;

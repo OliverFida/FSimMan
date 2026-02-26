@@ -116,7 +116,7 @@ namespace OF.FSimMan.Game
                     if (entry is null) throw new InvalidModFileException(fileInfo.Name);
 
                     Stream stream = entry.Open();
-                    modDescription = FileSerializationHelper.Deserialize<modDesc>(ref stream);
+                    modDescription = FileSerializationHelper.DeserializeAny<modDesc>(ref stream); // OFDOI: modDesc is from FS22 -> Make possible to use specific for Fs25
                     stream.Dispose();
 
                     if (modDescription.title is null) throw new InvalidModFileException(fileInfo.Name);

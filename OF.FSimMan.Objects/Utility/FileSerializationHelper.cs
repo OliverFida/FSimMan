@@ -52,6 +52,11 @@ namespace OF.FSimMan.Utility
 
         public static T Deserialize<T>(ref Stream stream) where T : DataObject
         {
+            return DeserializeAny<T>(ref stream);
+        }
+
+        public static T DeserializeAny<T>(ref Stream stream) where T : class
+        {
             T? data;
             try
             {
@@ -101,6 +106,11 @@ namespace OF.FSimMan.Utility
         }
 
         public static void Serialize<T>(ref Stream stream, T data) where T : DataObject
+        {
+            SerializeAny<T>(ref stream, data);
+        }
+
+        public static void SerializeAny<T>(ref Stream stream, T data) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             serializer.Serialize(stream, data);
