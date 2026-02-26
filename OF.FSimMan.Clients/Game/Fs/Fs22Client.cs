@@ -36,7 +36,7 @@ namespace OF.FSimMan.Client.Game.Fs
                 return;
             }
 
-            gameSettings gameSettings = FileSerializationHelper.DeserializeFile<gameSettings>(GameSettingsFilePath);
+            gameSettings gameSettings = FileSerializationHelper.DeserializeAnyFile<gameSettings>(GameSettingsFilePath);
             if (gameSettings.volume is null) throw new InvalidGameSettingsFileException();
 
             SetProperty(ref _gameSettings, gameSettings);
@@ -66,7 +66,7 @@ namespace OF.FSimMan.Client.Game.Fs
         {
             if (_gameSettings is null) return;
 
-            FileSerializationHelper.SerializeFile(GameSettingsFilePath, (gameSettings)_gameSettings);
+            FileSerializationHelper.SerializeAnyFile(GameSettingsFilePath, (gameSettings)_gameSettings);
         }
         #endregion
     }

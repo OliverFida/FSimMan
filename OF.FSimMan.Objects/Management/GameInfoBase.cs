@@ -19,16 +19,19 @@
 
         public readonly string ExeName;
         public readonly string ProcessName;
+        public readonly string? LauncherProcessName;
         #endregion
 
         #region Constructor
-        public GameInfoBase(Game game, string title, string imageFileName, string exeName, string processName)
+        public GameInfoBase(Game game, string title, string imageFileName, string exeName, string processName) : this(game, title, imageFileName, exeName, processName, null) { }
+        public GameInfoBase(Game game, string title, string imageFileName, string exeName, string processName, string? launcherProcessName)
         {
             Game = game;
             Title = title;
             _imageFileName = imageFileName;
             ExeName = exeName;
             ProcessName = processName;
+            LauncherProcessName = launcherProcessName;
         }
         #endregion
     }

@@ -16,6 +16,11 @@ namespace OF.FSimMan.Utility
 
         public static T DeserializeFile<T>(string filePath) where T : DataObject
         {
+            return DeserializeAnyFile<T>(filePath);
+        }
+
+        public static T DeserializeAnyFile<T>(string filePath) where T : class
+        {
             string fileName = Path.GetFileName(filePath);
             T? data;
             try
@@ -81,6 +86,11 @@ namespace OF.FSimMan.Utility
         }
 
         public static void SerializeFile<T>(string filePath, T data) where T : DataObject
+        {
+            SerializeAnyFile<T>(filePath, data);
+        }
+
+        public static void SerializeAnyFile<T>(string filePath, T data) where T : class
         {
             FileStream fileStream = File.Create(filePath);
 

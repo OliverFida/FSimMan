@@ -23,7 +23,7 @@ namespace OF.FSimMan.Game.Fs.Fs25;
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class gameSettings : DataObject, IGameSettings {
+public partial class gameSettings : IGameSettings {
     
     private gameSettingsModsDirectoryOverride modsDirectoryOverrideField;
     
