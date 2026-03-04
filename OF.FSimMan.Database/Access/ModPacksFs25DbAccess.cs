@@ -8,7 +8,7 @@ namespace OF.FSimMan.Database.Access
         #region Constructor
         private ModPacksFs25DbAccess(bool doAutoMigrate) : base(
             doAutoMigrate,
-            new string[]
+            backupBeforeMigrations: new string[]
             {
                 "20260226191359_MigrationToGuid",
             }

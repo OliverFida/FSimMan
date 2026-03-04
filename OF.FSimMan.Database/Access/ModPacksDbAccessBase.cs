@@ -13,10 +13,10 @@ namespace OF.FSimMan.Database.Access
         public ModPacks BulkStoreModPacks(ModPacks newModPacks);
     }
 
-    public abstract class ModPacksDbAccessBase<TContext> : OF.Base.EfCore.SqLite.DbAccessBase<TContext>, IModPacksDbAccess where TContext : ModPacksDbContextBase, new()
+    public abstract class ModPacksDbAccessBase<TContext> : DbAccessBase<TContext>, IModPacksDbAccess where TContext : ModPacksDbContextBase, new()
     {
         #region Constructor
-        protected ModPacksDbAccessBase(bool doAutoMigrate, IEnumerable<string>? backupBeforeMigrations = null) : base(doAutoMigrate, backupBeforeMigrations) { }
+        protected ModPacksDbAccessBase(bool doAutoMigrate, IEnumerable<string>? backupBeforeMigrations = null, int oldBackupsLimitDays = 30) : base(doAutoMigrate, backupBeforeMigrations, oldBackupsLimitDays) { }
         #endregion
 
         #region Methods PUBLIC

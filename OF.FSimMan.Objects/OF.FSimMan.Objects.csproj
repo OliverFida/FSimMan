@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base" Version="2026.3.4.1503-BackupBeforeMigration" />
+    <PackageReference Include="OF.Base" Version="2026.3.4.2118-vNext" />
   </ItemGroup>
 
 </Project>

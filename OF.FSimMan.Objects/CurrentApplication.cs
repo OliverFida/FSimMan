@@ -46,7 +46,7 @@ namespace OF.FSimMan
             }
         }
 
-        public static string CONFIG_PATH
+        private static string APPDATA_PATH
         {
             get
             {
@@ -65,8 +65,33 @@ namespace OF.FSimMan
                 }
                 temp = Path.Combine(temp, $"_debug{debugSuffix}");
 #endif
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
+        }
+
+        public static string CONFIG_PATH
+        {
+            get
+            {
+                string temp = APPDATA_PATH;
                 temp = Path.Combine(temp, "config");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
+        }
+
+        public static string CONFIG_BACKUP_PATH
+        {
+            get
+            {
+                string temp = APPDATA_PATH;
+                temp = Path.Combine(temp, "config_backups");
+                if (!Directory.Exists(temp))
+                {
+                    DirectoryInfo dirInfo = Directory.CreateDirectory(temp);
+                    dirInfo.Attributes = dirInfo.Attributes | FileAttributes.Hidden;
+                }
                 return temp;
             }
         }
