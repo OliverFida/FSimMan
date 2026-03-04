@@ -16,7 +16,7 @@ namespace OF.FSimMan.Database.Access
     public abstract class ModPacksDbAccessBase<TContext> : OF.Base.EfCore.SqLite.DbAccessBase<TContext>, IModPacksDbAccess where TContext : ModPacksDbContextBase, new()
     {
         #region Constructor
-        protected ModPacksDbAccessBase(bool doAutoMigrate) : base(doAutoMigrate) { }
+        protected ModPacksDbAccessBase(bool doAutoMigrate, IEnumerable<string>? backupBeforeMigrations = null) : base(doAutoMigrate, backupBeforeMigrations) { }
         #endregion
 
         #region Methods PUBLIC

@@ -11,7 +11,13 @@ namespace OF.FSimMan.Database.Access
     public class SettingsDbAccess : OF.Base.EfCore.SqLite.DbAccessBase<SettingsDbContext>, ISingleton<SettingsDbAccess>
     {
         #region Constructor
-        private SettingsDbAccess(bool doAutoMigrate) : base(doAutoMigrate) { }
+        private SettingsDbAccess(bool doAutoMigrate) : base(
+            doAutoMigrate,
+            new string[]
+            {
+                "20260226191300_MigrationToGuid",
+            }
+        ) { }
         #endregion
 
         #region Methods PUBLIC
