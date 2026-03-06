@@ -1,18 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<UseWPF>true</UseWPF>
 	<Nullable>enable</Nullable>
 	<RootNamespace>OF.FSimMan.ViewModel</RootNamespace>
 	<PackageId>$(AssemblyName)</PackageId>
-	<Authors>Oliver Fida</Authors>
-	<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base.WpfControls" Version="2026.3.4.2118-vNext" />
+    <PackageReference Include="OF.Base.WpfControls" Version="2026.3.6.1213-vNext" />
   </ItemGroup>
 
   <ItemGroup>

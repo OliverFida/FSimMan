@@ -25,7 +25,16 @@ namespace OF.FSimMan
         }
         public static string AssemblyVersionText
         {
-            get => $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
+            get
+            {
+#if DEBUG
+                if (_assemblyVersion is not null &&
+                    _assemblyVersion.Major.Equals(0) &&
+                    _assemblyVersion.Minor.Equals(0) &&
+                    _assemblyVersion.Build.Equals(0)) return "vDev";
+#endif
+                    return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
+            }
         }
 
         public static string WindowTitleBase
@@ -37,12 +46,8 @@ namespace OF.FSimMan
         {
             get
             {
-#if DEBUG
-                return $"{WindowTitleBase} (development)";
-#else
                 if (AssemblyVersion != null) return $"{WindowTitleBase} {AssemblyVersionText}";
                 return WindowTitleBase;
-#endif
             }
         }
 

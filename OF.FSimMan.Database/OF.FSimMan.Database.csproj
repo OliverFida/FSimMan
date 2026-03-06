@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RootNamespace>OF.FSimMan.Database</RootNamespace>
 		<PackageId>$(AssemblyName)</PackageId>
-		<Authors>Oliver Fida</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -14,7 +12,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2026.3.4.2118-vNext" />
+	  <PackageReference Include="OF.Base.EFCore.SQLite" Version="2026.3.6.1213-vNext" />
 	</ItemGroup>
 
 	<ItemGroup>

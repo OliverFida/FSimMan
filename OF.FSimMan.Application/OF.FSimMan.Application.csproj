@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -10,11 +9,6 @@
 		<AssemblyName>FSimMan</AssemblyName>
 		<RootNamespace>OF.$(AssemblyName)</RootNamespace>
 		<Title>FSimMan</Title>
-		<Authors>Oliver Fida</Authors>
-		<AssemblyVersion>0.2.2</AssemblyVersion>
-		<FileVersion>$(AssemblyVersion)</FileVersion>
-		<Version>$(AssemblyVersion)</Version>
-		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 		<ApplicationIcon>UI\Logo25.ico</ApplicationIcon>
 	</PropertyGroup>
 
