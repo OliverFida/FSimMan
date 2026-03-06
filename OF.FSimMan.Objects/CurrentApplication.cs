@@ -32,6 +32,8 @@ namespace OF.FSimMan
                     _assemblyVersion.Major.Equals(0) &&
                     _assemblyVersion.Minor.Equals(0) &&
                     _assemblyVersion.Build.Equals(0)) return "vDev";
+                else
+                    return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}.{_assemblyVersion?.Revision}";
 #endif
                     return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
             }
