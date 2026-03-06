@@ -80,6 +80,13 @@
                             Source="{StaticResource FileImportGearYellowIcon}"
                             ToolTip="Imported but edited"
                             Visibility="{Binding Tags.IsImportedButEdited, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}" />
+                        <Image
+                            Width="16"
+                            Height="16"
+                            Margin="5,0,0,0"
+                            Source="{StaticResource FileImportPlusYellowIcon}"
+                            ToolTip="Imported as new"
+                            Visibility="{Binding Tags.IsImportedAsNew, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanVisibilityConverter}}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

@@ -77,7 +77,7 @@ namespace OF.FSimMan.Database.Access
 
                 List<ModPackData> toDelete = db.ModPacks.Where(d => !existingIds.Contains(d.Id)).ToList();
                 List<ModPackData> toUpdate = newModPacks.List.Where(p => existingIds.Contains(p.Id)).Select(p => { var t = new ModPackData(); t.ToData(p); return t; }).ToList();
-                List<ModPackData> toInsert = newModPacks.List.Where(p => p.Id.Equals(0)).Select(p => { var t = new ModPackData(); t.ToData(p); return t; }).ToList();
+                List<ModPackData> toInsert = newModPacks.List.Where(p => p.Id.Equals(Guid.Empty)).Select(p => { var t = new ModPackData(); t.ToData(p); return t; }).ToList();
 
                 // OFDO: Not real bulk
                 //db.BulkDelete(toDelete);

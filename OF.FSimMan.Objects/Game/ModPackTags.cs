@@ -13,12 +13,13 @@ namespace OF.FSimMan.Game
             get => _tags;
             private set
             {
-                if (SetProperty(ref _tags, value))
-                {
-                    OnPropertyChanged(nameof(IsImported));
-                    OnPropertyChanged(nameof(IsImportedButEdited));
-                }
+                if (SetProperty(ref _tags, value)) OnPropertyChanged(nameof(IsGenerallyImported));
             }
+        }
+
+        public bool IsGenerallyImported
+        {
+            get => IsImported || IsImportedButEdited || IsImportedAsNew;
         }
 
         public bool IsImported
@@ -30,6 +31,11 @@ namespace OF.FSimMan.Game
         {
             get => Tags.Contains(ModPackTag.ImportedButEdited);
         }
+
+        public bool IsImportedAsNew
+        {
+            get => Tags.Contains(ModPackTag.ImportedAsNew);
+        }
         #endregion
 
         #region Methods PUBLIC
@@ -39,15 +45,21 @@ namespace OF.FSimMan.Game
             {
                 case ModPackTag.Imported:
                     if (Tags.Contains(ModPackTag.ImportedButEdited)) Tags.Remove(ModPackTag.ImportedButEdited);
-                    Tags.Add(ModPackTag.Imported);
+                    if (Tags.Contains(ModPackTag.ImportedAsNew)) Tags.Remove(ModPackTag.ImportedAsNew);
                     break;
                 case ModPackTag.ImportedButEdited:
                     if (Tags.Contains(ModPackTag.Imported)) Tags.Remove(ModPackTag.Imported);
-                    Tags.Add(ModPackTag.ImportedButEdited);
+                    if (Tags.Contains(ModPackTag.ImportedAsNew)) Tags.Remove(ModPackTag.ImportedAsNew);
+                    break;
+                case ModPackTag.ImportedAsNew:
+                    if (Tags.Contains(ModPackTag.Imported)) Tags.Remove(ModPackTag.Imported);
+                    if (Tags.Contains(ModPackTag.ImportedButEdited)) Tags.Remove(ModPackTag.ImportedButEdited);
                     break;
                 default:
                     throw new NotImplementedException();
             }
+
+            if (!Tags.Contains(newTag)) Tags.Add(newTag);
         }
         #endregion
     }
