@@ -5,5 +5,6 @@
         <ResourceDictionary Source="ModpacksDataGridStyle.xaml" />
         <ResourceDictionary Source="ModsDataGridStyle.xaml" />
         <ResourceDictionary Source="ChangeLogItemsControlStyle.xaml" />
+        <ResourceDictionary Source="NewsItemsControlStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -11,6 +11,7 @@ namespace OF.FSimMan.Client.Api
         private const string _githubUrl = "https://api.github.com";
         private string _repositoryPath;
         private string _releasesPath;
+        private string _newsPath;
 
         private HttpClient _httpClient;
 
@@ -19,6 +20,7 @@ namespace OF.FSimMan.Client.Api
         {
             _repositoryPath = $"/repos/{author}/{repository}";
             _releasesPath = _repositoryPath + "/releases";
+            _newsPath = _repositoryPath + "/contents/RepoAssets/News?ref=features/LU-Home";
 
             _httpClient = new HttpClient
             {
@@ -37,6 +39,22 @@ namespace OF.FSimMan.Client.Api
             if (response.Equals(string.Empty)) return null;
 
             return (from r in JsonSerializer.Deserialize<GitHubReleaseData[]>(response) where r.IsDraft == false && r.IsPreRelease == false select r).ToArray();
+        }
+
+        public async Task<GitHubContentData[]?> TryGetNewsAsync()
+        {
+            string response = await GetResponseStringAsync(_newsPath);
+            if (response.Equals(string.Empty)) return null;
+
+            return (from r in JsonSerializer.Deserialize<GitHubContentData[]>(response) where r.Type.ToLower().Equals("file") && r.Name.ToLower().EndsWith(".md") select r).ToArray();
+        }
+
+        public async Task<string[]?> TryDownloadContent(GitHubContentData contentData)
+        {
+            string response = await GetResponseStringAsync(contentData.DownloadUrl);
+            if (response.Equals(string.Empty)) return null;
+
+            return response.Split("\n");
         }
         #endregion
 

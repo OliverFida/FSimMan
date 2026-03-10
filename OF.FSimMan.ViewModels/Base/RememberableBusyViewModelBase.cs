@@ -6,6 +6,7 @@ namespace OF.FSimMan.ViewModel.Base
     {
         #region Constructor
         public RememberableBusyViewModelBase(string title, IClient client) : base(title, client) { }
+        public RememberableBusyViewModelBase(string title, IClient client, bool isPersistant) : base(title, client, isPersistant) { }
         #endregion
     }
 }

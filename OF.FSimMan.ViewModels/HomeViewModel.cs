@@ -1,11 +1,12 @@
-﻿using OF.FSimMan.ViewModel.Base;
+﻿using OF.FSimMan.Client;
+using OF.FSimMan.ViewModel.Base;
 
 namespace OF.FSimMan.ViewModel
 {
-    public class HomeViewModel : RememberableViewModelBase
+    public class HomeViewModel : RememberableBusyViewModelBase
     {
         #region Constructor
-        public HomeViewModel() : base("Home", true) { }
+        public HomeViewModel() : base("Home", new HomeClient(), true) { }
         #endregion
     }
 }

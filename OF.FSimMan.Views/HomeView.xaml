@@ -10,12 +10,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-        <Grid Style="{StaticResource SectionStyle}">
-            <of:Heading
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Text="Welcome!" />
-        </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Client.Entries, Mode=OneWay}" Style="{StaticResource NewsItemsControlStyle}" />
     </ScrollViewer>
 </UserControl>
