@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using OF.Base.Objects;
+using CLS.Core;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Management;

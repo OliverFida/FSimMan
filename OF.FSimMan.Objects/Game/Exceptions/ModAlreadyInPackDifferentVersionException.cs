@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 
 namespace OF.FSimMan.Game.Exceptions
 {
-    public class ModAlreadyInPackDifferentVersionException : OfException
+    public class ModAlreadyInPackDifferentVersionException: ClsException
     {
         public ModAlreadyInPackDifferentVersionException() : base($"Mod with different version already in pack!") { }
     }

@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 
 namespace OF.FSimMan.Game.Exceptions
 {
-    public class InvalidGameSettingsFileException : OfException
+    public class InvalidGameSettingsFileException: ClsException
     {
         public InvalidGameSettingsFileException() : base($"Invalid game settings file!") { }
     }

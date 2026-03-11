@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 using OF.Base.Client;
-using OF.Base.Objects;
+using CLS.Core;
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game;

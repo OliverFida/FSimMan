@@ -1,4 +1,4 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management.Games.Fs;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OF.FSimMan.Management.Games
 {
     [Table("GameSettings")]
-    public abstract class GameSettingsDataBase : DataObject
+    public abstract class GameSettingsDataBase<T> : DataObjectBase<T>, IGameSettingsData where T : GameSettingsBase
     {
         #region Properties
         public Game Game { get; set; } = Game.None;
@@ -32,12 +32,9 @@ namespace OF.FSimMan.Management.Games
         #region Constructor
         protected GameSettingsDataBase() { }
         #endregion
-    }
 
-    public abstract class GameSettingsDataBase<T> : GameSettingsDataBase, IDataObject<T> where T : GameSettingsBase
-    {
         #region Methods PUBLIC
-        public virtual T FromData()
+        public override T FromData()
         {
             if (Game.Equals(Game.None)) MigrateGame();
 
@@ -53,7 +50,7 @@ namespace OF.FSimMan.Management.Games
             return temp;
         }
 
-        public virtual void ToData(T value)
+        public override void ToData(T value)
         {
             Id = value.Id;
             Game = value._game;
@@ -65,6 +62,15 @@ namespace OF.FSimMan.Management.Games
             GameSettingsStartArgumentsData startArguments = new GameSettingsStartArgumentsData();
             startArguments.ToData(value.StartArguments);
             StartArguments = startArguments;
+        }
+
+        public override void UpdateData(T value)
+        {
+            // Code here
+
+            base.UpdateData(value);
+
+            throw new NotImplementedException();
         }
         #endregion
 

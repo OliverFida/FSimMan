@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects.Editable;
 
 namespace OF.FSimMan.Game
 {
-    public class ModPacks : EditableObject
+    public class ModPacks : EditableObjectBase
     {
         internal List<ModPack> _list = new List<ModPack>();
         public List<ModPack> List

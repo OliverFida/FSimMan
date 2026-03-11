@@ -1,9 +1,9 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects.Editable;
 using System.Collections.ObjectModel;
 
 namespace OF.FSimMan.Game
 {
-    public class ModPackTags : EditableObject
+    public class ModPackTags : EditableObjectBase
     {
         #region Properties
 

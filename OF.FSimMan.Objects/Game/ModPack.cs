@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects.Editable;
 
 namespace OF.FSimMan.Game
 {
-    public class ModPack : EditableObject
+    public class ModPack : EditableObjectBase
     {
         #region Properties
         internal Management.Game _game;

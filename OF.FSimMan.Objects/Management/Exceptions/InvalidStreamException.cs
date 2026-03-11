@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 
 namespace OF.FSimMan.Management.Exceptions
 {
-    public class InvalidStreamException : OfException
+    public class InvalidStreamException: ClsException
     {
         public InvalidStreamException() : base("Invalid stream") { }
     }

@@ -1,5 +1,5 @@
 ﻿using OF.Base.Client;
-using OF.Base.Objects;
+using CLS.Core;
 using OF.FSimMan.Api.GitHub;
 using OF.FSimMan.Client.Api;
 using OliverFida.FSimMan.Exceptions;

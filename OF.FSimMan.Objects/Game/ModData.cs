@@ -1,4 +1,4 @@
-﻿using OF.Base.Objects;
+﻿using OF.FSimMan.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
@@ -7,7 +7,7 @@ namespace OF.FSimMan.Game
 {
     [Table("Mods")]
     [XmlType("Mod")]
-    public class ModData : ParentedDataObject<Mod>
+    public class ModData : ParentedDataObjectBase<Mod, ModPack>
     {
         #region Properties
         [Required]
@@ -39,9 +39,9 @@ namespace OF.FSimMan.Game
         #endregion
 
         #region Methods PUBLIC
-        public override Mod FromData(object? parent)
+        public override Mod FromData(ModPack parent)
         {
-            return new Mod((ModPack)parent!, FileName)
+            return new Mod(parent, FileName)
             {
                 Id = Id,
                 _title = Title,

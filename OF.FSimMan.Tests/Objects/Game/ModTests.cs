@@ -15,7 +15,7 @@ namespace OF.FSimMan.Tests.Objects.Game
             ModPack pack = new ModPack(FSimMan.Management.Game.FarmingSim22);
 
             ModData data = new ModData();
-            Mod mod = data.FromData();
+            Mod mod = data.FromData(pack);
 
             Assert.AreEqual(string.Empty, mod.FileName);
             Assert.AreEqual(string.Empty, mod.Title);

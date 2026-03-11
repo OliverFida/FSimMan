@@ -1,4 +1,4 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 using OF.FSimMan.Database.Data;
 
 namespace OF.FSimMan.Database.Access

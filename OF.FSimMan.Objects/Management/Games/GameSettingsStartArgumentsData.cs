@@ -1,11 +1,11 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OF.FSimMan.Management.Games
 {
     [Table("GameStartArguments")]
-    public class GameSettingsStartArgumentsData : DataObject<GameSettingsStartArguments>
+    public class GameSettingsStartArgumentsData : DataObjectBase<GameSettingsStartArguments>
     {
         #region Properties
         public bool SkipIntros { get; set; } = false;
@@ -17,7 +17,7 @@ namespace OF.FSimMan.Management.Games
 
         [ForeignKey(nameof(GameSettingsId))]
         [Required]
-        public GameSettingsDataBase GameSettings { get; set; } = null!;
+        public IGameSettingsData GameSettings { get; set; } = null!;
         #endregion
 
         public override GameSettingsStartArguments FromData()

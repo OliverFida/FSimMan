@@ -1,5 +1,5 @@
 ﻿using OF.Base.Client;
-using OF.Base.Objects;
+using CLS.Core;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Database.Access;

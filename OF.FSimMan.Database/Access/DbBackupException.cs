@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 
 namespace OF.FSimMan.Database.Access
 {
-    public class DbBackupException : OfException
+    public class DbBackupException: ClsException
     {
         #region Constructor
         public DbBackupException(string reason) : base($"Database-Backup could not be created:" + Environment.NewLine + reason) { }

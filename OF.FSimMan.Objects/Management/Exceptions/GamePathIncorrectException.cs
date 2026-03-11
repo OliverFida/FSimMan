@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 
 namespace OF.FSimMan.Management.Exceptions
 {
-    public class GamePathIncorrectException : OfException
+    public class GamePathIncorrectException: ClsException
     {
         public GamePathIncorrectException() : base("Game Path does not seem to be correct!") { }
     }

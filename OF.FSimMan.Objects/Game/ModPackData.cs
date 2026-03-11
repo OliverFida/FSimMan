@@ -1,4 +1,4 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +8,7 @@ namespace OF.FSimMan.Game
 {
     [Table("ModPacks")]
     [XmlType("ModPack")]
-    public class ModPackData : DataObject<ModPack>
+    public class ModPackData : DataObjectBase<ModPack>
     {
         [XmlElement(IsNullable = false)]
         public Management.Game Game { get; set; }

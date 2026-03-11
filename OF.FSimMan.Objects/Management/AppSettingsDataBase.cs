@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects;
 
 namespace OF.FSimMan.Management
 {
-    public abstract class AppSettingsDataBase<T> : DataObject<T>
+    public abstract class AppSettingsDataBase<T> : DataObjectBase<T> where T : ObjectBase
     {
 
     }

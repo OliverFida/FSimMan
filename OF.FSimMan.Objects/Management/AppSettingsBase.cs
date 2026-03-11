@@ -1,9 +1,9 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects;
 using System.Runtime.CompilerServices;
 
 namespace OF.FSimMan.Management
 {
-    public abstract class AppSettingsBase : BindingObject
+    public abstract class AppSettingsBase : BindingObjectBase
     {
         #region Events
         public event EventHandler<AppSettingsStoreTriggerEventArgs>? StoreTrigger;

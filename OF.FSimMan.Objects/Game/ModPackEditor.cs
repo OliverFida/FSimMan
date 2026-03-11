@@ -1,4 +1,4 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects.Editable;
 using OF.FSimMan.Game.Exceptions;
 using OF.FSimMan.Game.Fs.Fs22.Mod;
 using OF.FSimMan.Utility;

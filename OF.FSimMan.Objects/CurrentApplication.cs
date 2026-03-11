@@ -1,9 +1,10 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
+using CLS.Core.Objects;
 using System.Reflection;
 
 namespace OF.FSimMan
 {
-    public class CurrentApplication : ISingleton<CurrentApplication>
+    public class CurrentApplication : ObjectBase, ISingleton<CurrentApplication>
     {
         #region ISingleton
         private static CurrentApplication _instance = new CurrentApplication();
@@ -34,8 +35,9 @@ namespace OF.FSimMan
                     _assemblyVersion.Build.Equals(0)) return "vDev";
                 else
                     return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}.{_assemblyVersion?.Revision}";
+#else
+                return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
 #endif
-                    return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
             }
         }
 

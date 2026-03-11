@@ -1,4 +1,5 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
+using CLS.Core.Objects;
 using OF.FSimMan.Management.Exceptions;
 using System.Xml;
 using System.Xml.Serialization;
@@ -8,13 +9,13 @@ namespace OF.FSimMan.Utility
     public static class FileSerializationHelper
     {
         #region Methods PUBLIC
-        public static T DeserializeConfigFile<T>(string fileName) where T : DataObject
+        public static T DeserializeConfigFile<T>(string fileName) where T : DataObjectBase
         {
             string filePath = GetConfigFilePath(fileName);
             return DeserializeFile<T>(filePath);
         }
 
-        public static T DeserializeFile<T>(string filePath) where T : DataObject
+        public static T DeserializeFile<T>(string filePath) where T : DataObjectBase
         {
             return DeserializeAnyFile<T>(filePath);
         }
@@ -41,7 +42,7 @@ namespace OF.FSimMan.Utility
                     reader.Close();
                 }
             }
-            catch (Exception ex) when (ex is not OfException)
+            catch (Exception ex) when (ex is not ClsException)
             {
                 return Activator.CreateInstance<T>();
             }
@@ -50,7 +51,7 @@ namespace OF.FSimMan.Utility
             return data;
         }
 
-        public static T Deserialize<T>(ref Stream stream) where T : DataObject
+        public static T Deserialize<T>(ref Stream stream) where T : DataObjectBase
         {
             return DeserializeAny<T>(ref stream);
         }
@@ -75,7 +76,7 @@ namespace OF.FSimMan.Utility
                     }
                 }
             }
-            catch (Exception ex) when (ex is not OfException)
+            catch (Exception ex) when (ex is not ClsException)
             {
                 return Activator.CreateInstance<T>();
             }
@@ -84,13 +85,13 @@ namespace OF.FSimMan.Utility
             return data;
         }
 
-        public static void SerializeConfigFile<T>(string fileName, T data) where T : DataObject
+        public static void SerializeConfigFile<T>(string fileName, T data) where T : DataObjectBase
         {
             string filePath = GetConfigFilePath(fileName);
             SerializeFile(filePath, data);
         }
 
-        public static void SerializeFile<T>(string filePath, T data) where T : DataObject
+        public static void SerializeFile<T>(string filePath, T data) where T : DataObjectBase
         {
             SerializeAnyFile<T>(filePath, data);
         }
@@ -105,7 +106,7 @@ namespace OF.FSimMan.Utility
             fileStream.Close();
         }
 
-        public static void Serialize<T>(ref Stream stream, T data) where T : DataObject
+        public static void Serialize<T>(ref Stream stream, T data) where T : DataObjectBase
         {
             SerializeAny<T>(ref stream, data);
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using OF.Base.Objects;
+using CLS.Core;
 using OF.FSimMan.Database.Data;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games;

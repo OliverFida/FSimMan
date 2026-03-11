@@ -1,8 +1,8 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
 
 namespace OF.FSimMan.Utility.Exceptions
 {
-    public class SteamInstallationPathNotFoundException : OfException
+    public class SteamInstallationPathNotFoundException: ClsException
     {
         public SteamInstallationPathNotFoundException() : base($"Steam installation path could not be found!") { }
     }

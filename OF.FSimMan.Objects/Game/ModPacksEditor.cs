@@ -1,4 +1,4 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core.Objects.Editable;
 using OF.FSimMan.Game.Exceptions;
 
 namespace OF.FSimMan.Game

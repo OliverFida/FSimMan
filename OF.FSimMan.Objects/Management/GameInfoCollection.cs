@@ -1,9 +1,10 @@
-﻿using OF.Base.Objects;
+﻿using CLS.Core;
+using CLS.Core.Objects;
 using System.Collections.ObjectModel;
 
 namespace OF.FSimMan.Management
 {
-    public class GameInfoCollection : ISingleton<GameInfoCollection>
+    public class GameInfoCollection : ObjectBase, ISingleton<GameInfoCollection>
     {
         #region ISingleton
         private static GameInfoCollection _instance = new GameInfoCollection();
