@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using OF.FSimMan.Client.ImportExport.Fsmmp;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Database.Access;
@@ -65,7 +65,7 @@ namespace OF.FSimMan.Client.Game
             _game = game;
         }
 
-        public override async Task InitializeAsync()
+        protected override async Task InitializeAsync()
         {
             try
             {
@@ -81,6 +81,8 @@ namespace OF.FSimMan.Client.Game
 
             await base.InitializeAsync();
         }
+
+        public async Task ExecuteInitializeAsync() => await InitializeAsync();
         #endregion
 
         #region Methods PUBLIC

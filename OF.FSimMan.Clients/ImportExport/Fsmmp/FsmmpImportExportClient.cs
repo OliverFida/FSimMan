@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using OF.FSimMan.Game;
 using OF.FSimMan.Game.Exceptions;
 using OF.FSimMan.ImportExport.Fsmmp.Exceptions;

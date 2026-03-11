@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using OF.FSimMan.Api.GitHub;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;

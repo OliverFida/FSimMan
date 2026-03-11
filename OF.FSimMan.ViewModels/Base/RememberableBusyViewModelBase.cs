@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 
 namespace OF.FSimMan.ViewModel.Base
 {

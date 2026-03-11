@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using CLS.Core;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Game.Fs;
@@ -100,7 +100,7 @@ namespace OF.FSimMan.Client.Management
             }
             if (gameSettings.IsEnabled) return;
 
-            await gameClient.InitializeAsync();
+            await gameClient.ExecuteInitializeAsync();
             gameClient.ResetGameModFolder();
         }
         #endregion

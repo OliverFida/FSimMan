@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CLS.Core" Version="2026.3.11.2206-Styling" />
+    <PackageReference Include="CLS.Core" Version="2026.3.11.2250-Styling" />
   </ItemGroup>
 
 </Project>

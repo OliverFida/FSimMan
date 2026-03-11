@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using CLS.Core;
 using OF.FSimMan.Api.GitHub;
 using OF.FSimMan.Client.Api;

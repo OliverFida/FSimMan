@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using CLS.Core;
 using OF.FSimMan.Api.GitHub;
 using OF.FSimMan.Client.Api;
@@ -18,7 +18,7 @@ namespace OF.FSimMan.Client.Management.Settings
         #region Constructor & Initialize
         private ChangeLogClient() { }
 
-        public override async Task InitializeAsync()
+        protected override async Task InitializeAsync()
         {
             try
             {

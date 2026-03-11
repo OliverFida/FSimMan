@@ -8,6 +8,10 @@
   </PropertyGroup>
 	
   <ItemGroup>
+    <PackageReference Include="CLS.Core.Client" Version="2026.3.11.2250-Styling" />
+  </ItemGroup>
+	
+  <ItemGroup>
     <ProjectReference Include="..\OF.FSimMan.Database\OF.FSimMan.Database.csproj" />
     <ProjectReference Include="..\OF.FSimMan.Objects\OF.FSimMan.Objects.csproj" />
   </ItemGroup>

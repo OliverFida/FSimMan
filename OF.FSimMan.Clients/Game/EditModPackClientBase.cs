@@ -1,4 +1,4 @@
-﻿using OF.Base.Client;
+﻿using CLS.Core.Client;
 using OF.FSimMan.Game;
 
 namespace OF.FSimMan.Client.Game

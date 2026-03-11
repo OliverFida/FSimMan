@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using OF.Base.Client;
+using CLS.Core.Client;
 using CLS.Core;
 using OF.Base.ViewModel;
 using OF.Base.Wpf.UiFunctions;
