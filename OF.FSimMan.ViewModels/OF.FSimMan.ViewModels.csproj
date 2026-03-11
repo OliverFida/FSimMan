@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base.WpfControls" Version="2026.3.11.1653" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OF.FSimMan.Clients\OF.FSimMan.Clients.csproj" />
   </ItemGroup>
 

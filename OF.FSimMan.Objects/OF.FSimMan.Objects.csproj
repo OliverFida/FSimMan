@@ -7,8 +7,4 @@
 	<PackageId>$(AssemblyName)</PackageId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="OF.Base" Version="2026.3.11.1653" />
-  </ItemGroup>
-
 </Project>
