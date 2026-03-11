@@ -5,7 +5,7 @@ using OF.FSimMan.Management.Games.Fs;
 
 namespace OF.FSimMan.Database.Data
 {
-    public class SettingsDbContext : Base.EfCore.SqLite.DbContextBase
+    public class SettingsDbContext : CLS.Core.EFCore.SqLite.DbContextBase
     {
         #region Properties
         public DbSet<AppSettingsData> AppSettings => Set<AppSettingsData>();

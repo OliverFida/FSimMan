@@ -1,9 +1,9 @@
-﻿using CLS.Core;
+﻿using OF.FSimMan.Base;
 using OF.FSimMan.Database.Data;
 
 namespace OF.FSimMan.Database.Access
 {
-    public class ModPacksFs22DbAccess : ModPacksDbAccessBase<ModPacksFs22DbContext>, ISingleton<ModPacksFs22DbAccess>
+    public class ModPacksFs22DbAccess : ModPacksDbAccessBase<ModPacksFs22DbContext>, ICustomSingleton<ModPacksFs22DbAccess>
     {
         #region Constructor
         private ModPacksFs22DbAccess(bool doAutoMigrate) : base(

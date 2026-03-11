@@ -1,10 +1,9 @@
-﻿using CLS.Core;
-using CLS.Core.Objects;
+﻿using OF.FSimMan.Base;
 using System.Reflection;
 
 namespace OF.FSimMan
 {
-    public class CurrentApplication : ObjectBase, ISingleton<CurrentApplication>
+    public class CurrentApplication : ICustomSingleton<CurrentApplication>
     {
         #region ISingleton
         private static CurrentApplication _instance = new CurrentApplication();

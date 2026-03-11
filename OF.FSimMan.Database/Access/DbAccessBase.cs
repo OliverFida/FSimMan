@@ -2,7 +2,7 @@
 
 namespace OF.FSimMan.Database.Access
 {
-    public abstract class DbAccessBase<TContext> : OF.Base.EfCore.SqLite.DbAccessBase<TContext> where TContext : OF.Base.EfCore.SqLite.DbContextBase, new()
+    public abstract class DbAccessBase<TContext> : CLS.Core.EFCore.SqLite.DbAccessBase<TContext> where TContext : CLS.Core.EFCore.SqLite.DbContextBase, new()
     {
         #region Properties
         protected readonly HashSet<string> _backupBeforeMigrations;

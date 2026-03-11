@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using CLS.Core;
 using OF.FSimMan.Database.Data;
 using OF.FSimMan.Management;
+using OF.FSimMan.Base;
 using OF.FSimMan.Management.Games;
 
 namespace OF.FSimMan.Database.Access
 {
-    public class SettingsDbAccess : DbAccessBase<SettingsDbContext>, ISingleton<SettingsDbAccess>
+    public class SettingsDbAccess : DbAccessBase<SettingsDbContext>, ICustomSingleton<SettingsDbAccess>
     {
         #region Constructor
         private SettingsDbAccess(bool doAutoMigrate) : base(
@@ -66,7 +66,7 @@ namespace OF.FSimMan.Database.Access
         #region AppSettings
         private AppSettingsData? ReadAppSettingsData(SettingsDbContext db)
         {
-            return db.AppSettings.Select(s => s).Include(s => s.GameSettings).ThenInclude(s => ((GameSettingsDataBase)s).StartArguments).SingleOrDefault();
+            return db.AppSettings.Select(s => s).Include(s => s.GameSettings).ThenInclude(s => ((IGameSettingsData)s).StartArguments).SingleOrDefault();
         }
         #endregion
         #region GameSettings

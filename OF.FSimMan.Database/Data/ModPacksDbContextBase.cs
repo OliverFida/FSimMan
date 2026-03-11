@@ -3,7 +3,7 @@ using OF.FSimMan.Game;
 
 namespace OF.FSimMan.Database.Data
 {
-    public abstract class ModPacksDbContextBase : Base.EfCore.SqLite.DbContextBase
+    public abstract class ModPacksDbContextBase : CLS.Core.EFCore.SqLite.DbContextBase
     {
         #region Properties
         public DbSet<ModPackData> ModPacks => Set<ModPackData>();
