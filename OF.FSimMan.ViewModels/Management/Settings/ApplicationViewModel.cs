@@ -1,4 +1,4 @@
-﻿using OF.Base.ViewModel;
+﻿using CLS.Core.ViewModel;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games.Fs;

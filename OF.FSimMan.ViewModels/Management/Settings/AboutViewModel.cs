@@ -1,5 +1,6 @@
 ﻿using CLS.Core;
-using OF.Base.ViewModel;
+using CLS.Core.ViewModel;
+using CLS.Core.ViewModel.Command;
 using System.Diagnostics;
 
 namespace OF.FSimMan.ViewModel.Management.Settings

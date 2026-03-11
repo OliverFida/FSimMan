@@ -1,5 +1,5 @@
 ﻿using CLS.Core;
-using OF.Base.Wpf.UiFunctions;
+using CLS.Core.Wpf.UiFunctions;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Client.Game.Fs;
 using OF.FSimMan.Client.Management;
@@ -15,38 +15,44 @@ namespace OF.FSimMan.ViewModel.Game.Fs
         #endregion
 
         #region Commands
-        protected override void NewModPackDelegate()
+        protected override Task NewModPackDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                ModPack modPack = ((IGameClient)Client).GetNewModPack();
-                _editModPackViewModel = new Fs22EditModPackViewModel(FSimMan.Management.EditMode.New, modPack, (Fs22Client)Client);
+                try
+                {
+                    ModPack modPack = ((IGameClient)Client).GetNewModPack();
+                    _editModPackViewModel = new Fs22EditModPackViewModel(FSimMan.Management.EditMode.New, modPack, (Fs22Client)Client);
 
-                _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
-                MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
+                    MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
 
-        protected override void EditModpackDelegate()
+        protected override Task EditModpackDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                if (EditModpackCommand.Parameter == null) return;
-                ModPack modPack = (ModPack)EditModpackCommand.Parameter;
+                try
+                {
+                    if (EditModpackCommand.Parameter == null) return;
+                    ModPack modPack = (ModPack)EditModpackCommand.Parameter;
 
-                _editModPackViewModel = new Fs22EditModPackViewModel(FSimMan.Management.EditMode.Edit, modPack, (Fs22Client)Client);
+                    _editModPackViewModel = new Fs22EditModPackViewModel(FSimMan.Management.EditMode.Edit, modPack, (Fs22Client)Client);
 
-                _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
-                MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    _editModPackViewModel.ViewModelClosedEvent += HandleEditModPackViewModelClosedEvent;
+                    MainViewModel.ViewModelSelector.OpenViewModel(_editModPackViewModel);
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
         #endregion
 

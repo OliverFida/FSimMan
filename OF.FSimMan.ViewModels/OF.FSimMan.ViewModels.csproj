@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CLS.Core.Wpf" Version="2026.3.11.2250-Styling" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OF.FSimMan.Clients\OF.FSimMan.Clients.csproj" />
   </ItemGroup>
 

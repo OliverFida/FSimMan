@@ -1,6 +1,6 @@
 ﻿using CLS.Core;
-using OF.Base.ViewModel;
-using OF.Base.Wpf.UiFunctions;
+using CLS.Core.ViewModel;
+using CLS.Core.Wpf.UiFunctions;
 using OF.FSimMan.Management;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

@@ -1,13 +1,14 @@
 ﻿using Microsoft.Win32;
 using CLS.Core.Client;
-using CLS.Core;
-using OF.Base.ViewModel;
-using OF.Base.Wpf.UiFunctions;
+using CLS.Core.ViewModel;
 using OF.FSimMan.Client.Game;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
 using System.IO;
 using System.Windows;
+using CLS.Core.ViewModel.Command;
+using CLS.Core;
+using CLS.Core.Wpf.UiFunctions;
 
 namespace OF.FSimMan.ViewModel.Game
 {
@@ -19,118 +20,136 @@ namespace OF.FSimMan.ViewModel.Game
 
         #region Commands
         public Command ExitCommand { get; }
-        private void ExitDelegate()
+        private Task ExitDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                EditModPackClientBase client = (EditModPackClientBase)Client;
-                if (client.ModPack.IsModified || _editMode == EditMode.New)
+                try
                 {
-                    if (!UiFunctions.ShowQuestion("Exit without saving?")) return;
+                    EditModPackClientBase client = (EditModPackClientBase)Client;
+                    if (client.ModPack.IsModified || _editMode == EditMode.New)
+                    {
+                        if (!UiFunctions.ShowQuestion("Exit without saving?")) return;
+                    }
+                    Application.Current.Dispatcher.Invoke(client.CancelEdit);
+                    MainViewModel.ViewModelSelector.CloseCurrentViewModel();
+                    InvokeViewModelClosedEvent();
                 }
-                Application.Current.Dispatcher.Invoke(client.CancelEdit);
-                MainViewModel.ViewModelSelector.CloseCurrentViewModel();
-                InvokeViewModelClosedEvent();
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
 
         public Command SaveCommand { get; }
-        private void SaveDelegate()
+        private Task SaveDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                ((EditModPackClientBase)Client).StoreModPack();
-                _editMode = EditMode.Edit;
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                try
+                {
+                    ((EditModPackClientBase)Client).StoreModPack();
+                    _editMode = EditMode.Edit;
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
 
         public Command AddModCommand { get; }
-        private void AddModDelegate()
+        private Task AddModDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                OpenFileDialog fileDialog = new OpenFileDialog()
+                try
                 {
-                    InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"),
-                    Filter = "zip archives (*.zip)|*.zip",
-                    Title = "Select mod .zip",
-                    DefaultExt = "zip",
-                    Multiselect = true
-                };
-                bool? result = fileDialog.ShowDialog();
-                if (result != true) return;
+                    OpenFileDialog fileDialog = new OpenFileDialog()
+                    {
+                        InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"),
+                        Filter = "zip archives (*.zip)|*.zip",
+                        Title = "Select mod .zip",
+                        DefaultExt = "zip",
+                        Multiselect = true
+                    };
+                    bool? result = fileDialog.ShowDialog();
+                    if (result != true) return;
 
-                Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).AddMods(fileDialog.FileNames));
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).AddMods(fileDialog.FileNames));
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
 
         public Command RemoveModCommand { get; }
-        private void RemoveModDelegate()
+        private Task RemoveModDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                if (RemoveModCommand.Parameter == null) return;
-                Mod mod = (Mod)RemoveModCommand.Parameter;
+                try
+                {
+                    if (RemoveModCommand.Parameter == null) return;
+                    Mod mod = (Mod)RemoveModCommand.Parameter;
 
-                if (!UiFunctions.ShowQuestion($@"Are you sure you want to remove the mod ""{mod.Title}""?")) return;
+                    if (!UiFunctions.ShowQuestion($@"Are you sure you want to remove the mod ""{mod.Title}""?")) return;
 
-                Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).RemoveMod(mod));
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).RemoveMod(mod));
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
 
         public Command SelectImageCommand { get; }
-        private void SelectImageDelegate()
+        private Task SelectImageDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                OpenFileDialog fileDialog = new OpenFileDialog()
+                try
                 {
-                    InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"),
-                    Filter = "images|*.png;*.jpg;*.jpeg",
-                    Title = "Select image",
-                    DefaultExt = "png",
-                    Multiselect = false
-                };
-                bool? result = fileDialog.ShowDialog();
-                if (result != true) return;
+                    OpenFileDialog fileDialog = new OpenFileDialog()
+                    {
+                        InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"),
+                        Filter = "images|*.png;*.jpg;*.jpeg",
+                        Title = "Select image",
+                        DefaultExt = "png",
+                        Multiselect = false
+                    };
+                    bool? result = fileDialog.ShowDialog();
+                    if (result != true) return;
 
-                Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).AddIcon(fileDialog.FileName));
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).AddIcon(fileDialog.FileName));
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
 
         public Command RemoveImageCommand { get; }
-        private void RemoveImageDelegate()
+        private Task RemoveImageDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                if (!UiFunctions.ShowQuestion($@"Are you sure you want to remove the image?")) return;
+                try
+                {
+                    if (!UiFunctions.ShowQuestion($@"Are you sure you want to remove the image?")) return;
 
-                Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).RemoveIcon());
-            }
-            catch (OfException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                    Application.Current.Dispatcher.Invoke(() => ((EditModPackClientBase)Client).RemoveIcon());
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
         public bool IsRemoveImageEnabled
         {
@@ -143,12 +162,12 @@ namespace OF.FSimMan.ViewModel.Game
         {
             _editMode = editMode;
 
-            ExitCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).ExitDelegate));
-            SaveCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).SaveDelegate));
-            AddModCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).AddModDelegate));
-            RemoveModCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).RemoveModDelegate));
-            SelectImageCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).SelectImageDelegate));
-            RemoveImageCommand = new Command(this, target => ExecuteBusy(((EditModPackViewModelBase)target).RemoveImageDelegate));
+            ExitCommand = new Command(this, target => ExecuteDelegate(((EditModPackViewModelBase)target).ExitDelegate, false));
+            SaveCommand = new Command(this, target => ExecuteDelegate(((EditModPackViewModelBase)target).SaveDelegate, false));
+            AddModCommand = new Command(this, target => ExecuteDelegate(((EditModPackViewModelBase)target).AddModDelegate, false));
+            RemoveModCommand = new Command(this, target => ExecuteDelegate(((EditModPackViewModelBase)target).RemoveModDelegate, false));
+            SelectImageCommand = new Command(this, target => ExecuteDelegate(((EditModPackViewModelBase)target).SelectImageDelegate, false));
+            RemoveImageCommand = new Command(this, target => ExecuteDelegate(((EditModPackViewModelBase)target).RemoveImageDelegate, false));
 
             ((EditModPackClientBase)Client).ModPack.PropertyChanged += ModPack_PropertyChanged;
         }

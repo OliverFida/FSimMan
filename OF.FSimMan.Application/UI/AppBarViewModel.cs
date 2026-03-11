@@ -1,5 +1,5 @@
 ﻿using CLS.Core;
-using OF.Base.ViewModel;
+using CLS.Core.ViewModel;
 using OF.Base.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
@@ -71,7 +71,7 @@ namespace OF.FSimMan.UI
             {
                 MainViewModel.ViewModelSelector.OpenViewModel(MainViewModel.HomeViewModel);
             }
-            catch (OfException ex)
+            catch (ClsException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -95,7 +95,7 @@ namespace OF.FSimMan.UI
                 Fs22ViewModel = new Fs22ViewModel();
                 MainViewModel.ViewModelSelector.OpenViewModel(Fs22ViewModel!);
             }
-            catch (OfException ex)
+            catch (ClsException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -112,7 +112,7 @@ namespace OF.FSimMan.UI
                     GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim22);
                     Fs22ViewModel.RunGameOnClientInitializeComplete(null);
                 }
-                catch (OfException ex)
+                catch (ClsException ex)
                 {
                     UiFunctions.ShowError(ex);
                 }
@@ -137,7 +137,7 @@ namespace OF.FSimMan.UI
                 Fs25ViewModel = new Fs25ViewModel();
                 MainViewModel.ViewModelSelector.OpenViewModel(Fs25ViewModel!);
             }
-            catch (OfException ex)
+            catch (ClsException ex)
             {
                 UiFunctions.ShowError(ex);
             }
@@ -154,7 +154,7 @@ namespace OF.FSimMan.UI
                     GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim25);
                     Fs25ViewModel.RunGameOnClientInitializeComplete(null);
                 }
-                catch (OfException ex)
+                catch (ClsException ex)
                 {
                     UiFunctions.ShowError(ex);
                 }
@@ -182,7 +182,7 @@ namespace OF.FSimMan.UI
             {
                 MainViewModel.ViewModelSelector.OpenViewModel(new SettingsViewModel());
             }
-            catch (OfException ex)
+            catch (ClsException ex)
             {
                 UiFunctions.ShowError(ex);
             }

@@ -1,4 +1,4 @@
-﻿using OF.Base.ViewModel;
+﻿using CLS.Core.ViewModel;
 using OF.FSimMan.Client.Management.Settings;
 
 namespace OF.FSimMan.ViewModel.Management.Settings

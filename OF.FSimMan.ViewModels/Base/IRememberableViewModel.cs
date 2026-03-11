@@ -1,4 +1,4 @@
-﻿using OF.Base.ViewModel;
+﻿using CLS.Core.ViewModel;
 
 namespace OF.FSimMan.ViewModel.Base
 {

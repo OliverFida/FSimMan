@@ -1,6 +1,6 @@
 ﻿using CLS.Core;
-using OF.Base.ViewModel;
-using OF.Base.Wpf.UiFunctions;
+using CLS.Core.ViewModel;
+using CLS.Core.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
@@ -39,7 +39,7 @@ namespace OF.FSimMan.ViewModel
         #region Constructor & Initialize
         private MainViewModel() : base("Main", true) { }
 
-        public override async Task InitializeAsync()
+        protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();
 
@@ -53,7 +53,7 @@ namespace OF.FSimMan.ViewModel
 #endif
                 GameRunningViewModel temp = GameRunningViewModel.Instance; // Triggering constructor
             }
-            catch (OfException ex)
+            catch (ClsException ex)
             {
                 UiFunctions.ShowError(ex);
             }
