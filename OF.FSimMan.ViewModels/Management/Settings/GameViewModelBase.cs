@@ -43,6 +43,28 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         {
             try
             {
+                OpenFolderDialog dialog = new OpenFolderDialog()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                    Title = "Select Installation Folder",
+                    Multiselect = false
+                };
+                if (dialog.ShowDialog() != true) return;
+
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateExeDirectoryPath(dialog.FolderName);
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ExeDirectoryPath = dialog.FolderName;
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        public Command AutodetectGamePathCommand { get; }
+        private void AutodetectGamePathDelegate()
+        {
+            try
+            {
                 string busyContentBefore = BusyContent;
                 try
                 {
@@ -54,16 +76,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
                     BusyContent = busyContentBefore;
                     UiFunctions.ShowWarningOk(ex.Message);
 
-                    OpenFolderDialog dialog = new OpenFolderDialog()
-                    {
-                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
-                        Title = "Select Installation Folder",
-                        Multiselect = false
-                    };
-                    if (dialog.ShowDialog() != true) return;
-
-                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateExeDirectoryPath(dialog.FolderName);
-                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ExeDirectoryPath = dialog.FolderName;
+                    SelectGamePathDelegate();
                 }
             }
             catch (OfException ex)
@@ -74,6 +87,28 @@ namespace OF.FSimMan.ViewModel.Management.Settings
 
         public Command SelectDataPathCommand { get; }
         private void SelectDataPathDelegate()
+        {
+            try
+            {
+                OpenFolderDialog dialog = new OpenFolderDialog()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    Title = "Select Data Folder",
+                    Multiselect = false
+                };
+                if (dialog.ShowDialog() != true) return;
+
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateDataDirectoryPath(dialog.FolderName);
+                ((SettingsClient)Client).AppSettings.GetGameSettings(_game).DataDirectoryPath = dialog.FolderName;
+            }
+            catch (OfException ex)
+            {
+                UiFunctions.ShowError(ex);
+            }
+        }
+
+        public Command AutodetectDataPathCommand { get; }
+        private void AutodetectDataPathDelegate()
         {
             try
             {
@@ -89,16 +124,7 @@ namespace OF.FSimMan.ViewModel.Management.Settings
                     BusyContent = busyContentBefore;
                     UiFunctions.ShowWarningOk(ex.Message);
 
-                    OpenFolderDialog dialog = new OpenFolderDialog()
-                    {
-                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                        Title = "Select Data Folder",
-                        Multiselect = false
-                    };
-                    if (dialog.ShowDialog() != true) return;
-
-                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).ValidateDataDirectoryPath(dialog.FolderName);
-                    ((SettingsClient)Client).AppSettings.GetGameSettings(_game).DataDirectoryPath = dialog.FolderName;
+                    SelectDataPathDelegate();
                 }
             }
             catch (OfException ex)
@@ -113,7 +139,9 @@ namespace OF.FSimMan.ViewModel.Management.Settings
         {
             _game = game;
             SelectGamePathCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).SelectGamePathDelegate));
+            AutodetectGamePathCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).AutodetectGamePathDelegate));
             SelectDataPathCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).SelectDataPathDelegate));
+            AutodetectDataPathCommand = new Command(this, target => ExecuteBusy(((GameViewModelBase)target).AutodetectDataPathDelegate));
 
             AppSettings.ModPackAutogenerationNowPossible += HandleAppSettingsModPackAutogenerationNowPossible;
         }

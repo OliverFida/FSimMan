@@ -6,7 +6,14 @@ namespace OF.FSimMan.Database.Access
     public class ModPacksFs25DbAccess : ModPacksDbAccessBase<ModPacksFs25DbContext>, ISingleton<ModPacksFs25DbAccess>
     {
         #region Constructor
-        private ModPacksFs25DbAccess(bool doAutoMigrate) : base(doAutoMigrate) { }
+        private ModPacksFs25DbAccess(bool doAutoMigrate) : base(
+            doAutoMigrate,
+            backupBeforeMigrations: new string[]
+            {
+                "20260226191359_MigrationToGuid",
+            }
+        )
+        { }
         #endregion
 
         #region ISingleton

@@ -69,11 +69,12 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
                 ModPackData modPackData = ReadModPackInfo(ref archive, sourceFileName);
                 if (!modPackData.Game.Equals(_game)) throw new InvalidModPackFileException(sourceFileName);
-                modPackData.Id = 0;
+                modPackData.Id = Guid.Empty;
                 if (importAsNew) modPackData.Guid = Guid.NewGuid();
 
                 ModPack modPack = modPackData.FromData();
                 modPack.Tags.Set(ModPackTag.Imported);
+                if (importAsNew) modPack.Tags.Set(ModPackTag.ImportedAsNew);
                 ReadModPackData(ref archive, modPack);
 
                 ModPackEditor modPackEditor = new ModPackEditor(modPack);
@@ -101,6 +102,13 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
         private void WriteModPackData(ref ZipArchive archive, ModPack modPack)
         {
+            if (!string.IsNullOrWhiteSpace(modPack.FullImageSource))
+            {
+                string sourceModPackIconFilePath = modPack.FullImageSource;
+                string targetModPackIconFilePath = modPack.ImageSource!;
+                archive.CreateEntryFromFile(sourceModPackIconFilePath, targetModPackIconFilePath);
+            }
+
             foreach (Mod mod in modPack.Mods)
             {
                 string sourceModFilePath = Path.Combine(modPack.ModsDirectoryPath, mod.FileName);
@@ -127,9 +135,20 @@ namespace OF.FSimMan.Client.ImportExport.Fsmmp
 
         private void ReadModPackData(ref ZipArchive archive, ModPack modPack)
         {
+            if (!string.IsNullOrWhiteSpace(modPack.FullImageSource))
+            {
+                string sourceModPackIconFilePath = modPack.ImageSource!;
+                ZipArchiveEntry? entry = archive.GetEntry(sourceModPackIconFilePath);
+                if (entry is not null)
+                {
+                    string targetModPackIconFilePath = modPack.FullImageSource;
+                    entry.ExtractToFile(targetModPackIconFilePath, true);
+                }
+            }
+
             foreach (Mod mod in modPack.Mods)
             {
-                mod.Id = 0;
+                mod.Id = Guid.Empty;
 
                 {
                     string sourceModFilePath = $@"mods\{mod.FileName}";

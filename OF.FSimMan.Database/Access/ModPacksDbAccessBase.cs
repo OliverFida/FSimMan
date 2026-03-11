@@ -13,10 +13,10 @@ namespace OF.FSimMan.Database.Access
         public ModPacks BulkStoreModPacks(ModPacks newModPacks);
     }
 
-    public abstract class ModPacksDbAccessBase<TContext> : OF.Base.EfCore.SqLite.DbAccessBase<TContext>, IModPacksDbAccess where TContext : ModPacksDbContextBase, new()
+    public abstract class ModPacksDbAccessBase<TContext> : DbAccessBase<TContext>, IModPacksDbAccess where TContext : ModPacksDbContextBase, new()
     {
         #region Constructor
-        protected ModPacksDbAccessBase(bool doAutoMigrate) : base(doAutoMigrate) { }
+        protected ModPacksDbAccessBase(bool doAutoMigrate, IEnumerable<string>? backupBeforeMigrations = null, int oldBackupsLimitDays = 30) : base(doAutoMigrate, backupBeforeMigrations, oldBackupsLimitDays) { }
         #endregion
 
         #region Methods PUBLIC
@@ -70,14 +70,14 @@ namespace OF.FSimMan.Database.Access
 
             try
             {
-                List<int> existingIds = db.ModPacks
+                List<Guid> existingIds = db.ModPacks
                     .Where(d => newModPacks.List.Select(p => p.Id).Contains(d.Id))
                     .Select(d => d.Id)
                     .ToList();
 
                 List<ModPackData> toDelete = db.ModPacks.Where(d => !existingIds.Contains(d.Id)).ToList();
                 List<ModPackData> toUpdate = newModPacks.List.Where(p => existingIds.Contains(p.Id)).Select(p => { var t = new ModPackData(); t.ToData(p); return t; }).ToList();
-                List<ModPackData> toInsert = newModPacks.List.Where(p => p.Id.Equals(0)).Select(p => { var t = new ModPackData(); t.ToData(p); return t; }).ToList();
+                List<ModPackData> toInsert = newModPacks.List.Where(p => p.Id.Equals(Guid.Empty)).Select(p => { var t = new ModPackData(); t.ToData(p); return t; }).ToList();
 
                 // OFDO: Not real bulk
                 //db.BulkDelete(toDelete);

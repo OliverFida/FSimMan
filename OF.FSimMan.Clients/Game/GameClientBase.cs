@@ -184,7 +184,6 @@ namespace OF.FSimMan.Client.Game
             ModPack importedModPack = client.Import(filePath, importAsNew);
             _modPacksEditor!.AddModPack(importedModPack, !importAsNew);
             StoreModPacks();
-            RefreshModPacks();
         }
 
         public void AutoGenerateModPack(FileInfo[] modFileInfos)

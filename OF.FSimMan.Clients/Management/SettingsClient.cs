@@ -38,7 +38,7 @@ namespace OF.FSimMan.Client.Management
                 if (doControlBusyIndicator) IsBusy = true;
 
                 AppSettings temp = SettingsDbAccess.Instance.StoreAppSettings(AppSettings);
-                if (AppSettings.Id.Equals(0)) AppSettings.Id = temp.Id;
+                if (AppSettings.Id.Equals(Guid.Empty)) AppSettings.Id = temp.Id;
             }
             finally
             {

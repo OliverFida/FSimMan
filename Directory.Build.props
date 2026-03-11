@@ -1,0 +1,12 @@
+<Project>
+	<PropertyGroup>
+		<Authors>Oliver Fida</Authors>
+		<Copyright>© $(Authors)</Copyright>
+		<AssemblyVersion>0.0.0</AssemblyVersion>
+		<FileVersion>$(AssemblyVersion)</FileVersion>
+		<VersionPrefix>$(AssemblyVersion)</VersionPrefix>
+		<VersionSuffix>dev</VersionSuffix>
+		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+</Project>

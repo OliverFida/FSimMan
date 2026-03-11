@@ -25,7 +25,18 @@ namespace OF.FSimMan
         }
         public static string AssemblyVersionText
         {
-            get => $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
+            get
+            {
+#if DEBUG
+                if (_assemblyVersion is not null &&
+                    _assemblyVersion.Major.Equals(0) &&
+                    _assemblyVersion.Minor.Equals(0) &&
+                    _assemblyVersion.Build.Equals(0)) return "vDev";
+                else
+                    return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}.{_assemblyVersion?.Revision}";
+#endif
+                    return $"v{_assemblyVersion?.Major}.{_assemblyVersion?.Minor}.{_assemblyVersion?.Build}";
+            }
         }
 
         public static string WindowTitleBase
@@ -37,21 +48,21 @@ namespace OF.FSimMan
         {
             get
             {
-#if DEBUG
-                return $"{WindowTitleBase} (development)";
-#else
                 if (AssemblyVersion != null) return $"{WindowTitleBase} {AssemblyVersionText}";
                 return WindowTitleBase;
-#endif
             }
         }
 
-        public static string CONFIG_PATH
+        private static string APPDATA_PATH
         {
             get
             {
-                string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Oliver Fida", "FSimMan");
+                string temp = string.Empty;
+                string pathInstalled = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Oliver Fida", "FSimMan");
+
 #if DEBUG
+                temp = pathInstalled;
+
                 string debugSuffix = string.Empty;
                 switch (LaunchMode)
                 {
@@ -64,9 +75,37 @@ namespace OF.FSimMan
                         break;
                 }
                 temp = Path.Combine(temp, $"_debug{debugSuffix}");
+#else
+                if (GetIsRunningAsInstalled()) temp = pathInstalled;
+                else temp = Path.Combine(AppContext.BaseDirectory, "data");
 #endif
+                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
+        }
+
+        public static string CONFIG_PATH
+        {
+            get
+            {
+                string temp = APPDATA_PATH;
                 temp = Path.Combine(temp, "config");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+                return temp;
+            }
+        }
+
+        public static string CONFIG_BACKUP_PATH
+        {
+            get
+            {
+                string temp = APPDATA_PATH;
+                temp = Path.Combine(temp, "config_backups");
+                if (!Directory.Exists(temp))
+                {
+                    DirectoryInfo dirInfo = Directory.CreateDirectory(temp);
+                    dirInfo.Attributes = dirInfo.Attributes | FileAttributes.Hidden;
+                }
                 return temp;
             }
         }
@@ -84,17 +123,7 @@ namespace OF.FSimMan
         {
             get
             {
-                string temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Oliver Fida", "FSimMan");
-#if DEBUG
-                string debugSuffix = string.Empty;
-                switch (LaunchMode)
-                {
-                    case LaunchMode.UnitTests:
-                        debugSuffix = "-ut";
-                        break;
-                }
-                temp = Path.Combine(temp, $"_debug{debugSuffix}");
-#endif
+                string temp = APPDATA_PATH;
                 temp = Path.Combine(temp, "modPacks");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
                 return temp;
@@ -105,17 +134,7 @@ namespace OF.FSimMan
         {
             get
             {
-                string temp = Path.Combine($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}Low", "Oliver Fida", "FSimMan");
-#if DEBUG
-                string debugSuffix = string.Empty;
-                switch (LaunchMode)
-                {
-                    case LaunchMode.UnitTests:
-                        debugSuffix = "-ut";
-                        break;
-                }
-                temp = Path.Combine(temp, $"_debug{debugSuffix}");
-#endif
+                string temp = APPDATA_PATH;
                 temp = Path.Combine(temp, "temp");
                 if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
                 return temp;
@@ -136,6 +155,23 @@ namespace OF.FSimMan
         public static string GetModPackDatabasePath(Management.Game game)
         {
             return Path.Combine(CONFIG_PATH, $"modPacks{game.ToString()}.db");
+        }
+        #endregion
+
+        #region Methods PRIVATE
+        private static bool GetIsRunningAsInstalled()
+        {
+            try
+            {
+                string testFilePath = Path.Combine(AppContext.BaseDirectory, "testIsInstalled.tmp");
+                File.WriteAllText(testFilePath, "test");
+                File.Delete(testFilePath);
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
         }
         #endregion
     }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OF.FSimMan.Database.Data;
 
@@ -10,9 +11,11 @@ using OF.FSimMan.Database.Data;
 namespace OF.FSimMan.Database.Migrations.ModPacksFs25Db
 {
     [DbContext(typeof(ModPacksFs25DbContext))]
-    partial class ModPacksFs25DbContextModelSnapshot : ModelSnapshot
+    [Migration("20260226191359_MigrationToGuid")]
+    partial class MigrationToGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");

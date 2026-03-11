@@ -19,9 +19,9 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs22Db
 
             modelBuilder.Entity("OF.FSimMan.Game.ModData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Author")
                         .HasColumnType("TEXT");
@@ -45,8 +45,8 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs22Db
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ModPackId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ModPackId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -64,9 +64,9 @@ namespace OF.FSimMan.Database.Migrations.ModPacksFs22Db
 
             modelBuilder.Entity("OF.FSimMan.Game.ModPackData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Author")
                         .IsRequired()

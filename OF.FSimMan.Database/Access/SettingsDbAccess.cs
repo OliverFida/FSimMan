@@ -8,10 +8,16 @@ using OF.FSimMan.Management.Games;
 
 namespace OF.FSimMan.Database.Access
 {
-    public class SettingsDbAccess : OF.Base.EfCore.SqLite.DbAccessBase<SettingsDbContext>, ISingleton<SettingsDbAccess>
+    public class SettingsDbAccess : DbAccessBase<SettingsDbContext>, ISingleton<SettingsDbAccess>
     {
         #region Constructor
-        private SettingsDbAccess(bool doAutoMigrate) : base(doAutoMigrate) { }
+        private SettingsDbAccess(bool doAutoMigrate) : base(
+            doAutoMigrate,
+            backupBeforeMigrations: new string[]
+            {
+                "20260226191300_MigrationToGuid",
+            }
+        ) { }
         #endregion
 
         #region Methods PUBLIC

@@ -31,7 +31,7 @@ namespace OF.FSimMan.Game
         public string? ImageSource { get; set; }
 
 
-        public int ModPackId { get; set; }
+        public Guid ModPackId { get; set; }
 
         [ForeignKey(nameof(ModPackId))]
         [Required]

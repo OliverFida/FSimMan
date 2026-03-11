@@ -13,7 +13,7 @@ namespace OF.FSimMan.Management.Games
         public bool EnableCheats { get; set; } = false;
 
 
-        public int GameSettingsId { get; set; }
+        public Guid GameSettingsId { get; set; }
 
         [ForeignKey(nameof(GameSettingsId))]
         [Required]
