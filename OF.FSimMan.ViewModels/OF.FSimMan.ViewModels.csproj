@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OF.Base.WpfControls" Version="2026.3.8.1505-vNext" />
+    <PackageReference Include="OF.Base.WpfControls" Version="2026.3.11.1653" />
   </ItemGroup>
 
   <ItemGroup>
