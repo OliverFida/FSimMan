@@ -1,0 +1,52 @@
+variables:
+- name: BuildParameters.solution
+  readonly: true
+  value: FSimMan.sln
+- name: OF.dotnetVersion
+  readonly: true  
+  value: 8.x
+
+trigger:
+  branches:
+    include:
+    - refs/heads/features/*
+
+pool:
+  name: OF Build
+
+name: $(date:yyyy).$(date:MM).$(date:dd).$(date:HHmm)
+
+jobs:
+- job: Prepare
+  displayName: Prepare
+  timeoutInMinutes: 30
+  cancelTimeoutInMinutes: 5
+  steps:
+  - task: UseDotNet@2
+    displayName: Install .NET Core 
+    inputs:
+      packageType: sdk
+      version: $(OF.dotnetVersion)
+- job: Build
+  displayName: Build FSimMan
+  timeoutInMinutes: 5
+  cancelTimeoutInMinutes: 5
+  steps:
+  - checkout: self
+    clean: true
+  - task: UseDotNet@2
+    displayName: Use .NET Core 
+    inputs:
+      packageType: sdk
+      version: $(OF.dotnetVersion)
+  # Assembly metadata
+  - task: DotNetCoreCLI@2
+    displayName: .NET restore
+    inputs:
+      command: restore
+      projects: $(BuildParameters.solution)
+  - task: DotNetCoreCLI@2
+    displayName: .NET build
+    inputs:
+      projects: $(BuildParameters.solution)
+      arguments: -c $(BuildConfiguration) -o $(Build.BinariesDirectory) --version-suffix $(Build.SourceBranchName)

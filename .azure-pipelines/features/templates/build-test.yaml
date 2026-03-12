@@ -1,0 +1,113 @@
+trigger:
+  branches:
+    include:
+      - features/*
+
+pool:
+  name: OF Build
+
+parameters:
+  - name: Solution
+    displayName: Solution to build
+    type: string
+    default: FSimMan.sln
+  - name: dotnetVersion
+    displayName: .NET SDK Version
+    type: string
+    default: 8.x
+
+name: $(date:yyyy).$(date:MM).$(date:dd).$(date:HHmm)
+# TODO: Global Timeouts
+
+jobs:
+  - job: Prepare
+    displayName: Prepare
+    timeoutInMinutes: 30
+    cancelTimeoutInMinutes: 5
+    steps:
+      - task: UseDotNet@2
+        displayName: Install .NET Core
+        inputs:
+          packageType: sdk
+          version: $(dotnetVersion)
+
+  - job: Build-FSimMan
+    displayName: Build FSimMan
+    dependsOn: Prepare
+    steps:
+      - checkout: self
+        clean: true
+      - task: UseDotNet@2
+        displayName: Use .NET Core
+        inputs:
+          packageType: sdk
+          version: $(dotnetVersion)
+      # - task: Assembly-Info-NetCore@3
+      #   displayName: 'Set Assembly Metadata'
+      #   inputs:
+      #     FileNames: ''
+
+
+# pool:
+#   name: OF Build
+# #Your build pipeline references a secret variable named ‘netshare.password’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it secret. See https://go.microsoft.com/fwlink/?linkid=865972
+# variables:
+#   solution: 'FSimMan.sln'
+
+# steps:
+# - task: UseDotNet@2
+#   displayName: 'Use .NET Core sdk 8.x'
+#   inputs:
+#     version: 8.x
+
+# - task: bleddynrichards.Assembly-Info-Task.Assembly-Info-NetCore.Assembly-Info-NetCore@3
+#   displayName: 'Set Assembly Manifest Data'
+#   inputs:
+#     FileNames: '**/Directory.Build.props'
+#     InsertAttributes: true
+#     VersionNumber: '$(Build.BuildNumber)'
+
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet restore'
+#   inputs:
+#     command: restore
+#     projects: '$(Parameters.solution)'
+#     restoreArguments: '--no-cache'
+#     vstsFeed: '29527bd3-29ca-4fb3-bd0a-6d56dc3e5bc5'
+
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet build'
+#   inputs:
+#     projects: '$(Parameters.Solution)'
+#     arguments: '-c $(BuildConfiguration) -o $(Build.BinariesDirectory) --version-suffix $(Build.SourceBranchName)'
+
+# - powershell: |
+#    $Username = "$(netshare.user)"
+#    $Password = "$(netshare.password)"
+#    $Root = "$(netshare.root)"
+   
+#    net use $Root /user:$Username $Password /persistent:no
+#   displayName: 'Authenticatie SMB share'
+
+# - task: DeleteFiles@1
+#   displayName: 'Delete files from $(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)'
+#   inputs:
+#     SourceFolder: '$(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)'
+#     Contents: '**/*'
+
+# - task: CopyFiles@2
+#   displayName: 'Copy Files to: $(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)'
+#   inputs:
+#     SourceFolder: '$(Build.BinariesDirectory)'
+#     TargetFolder: '$(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)'
+
+# - task: maikvandergaag.maikvandergaag-trigger-pipeline.TriggerPipeline.TriggerPipeline@2
+#   displayName: 'Trigger FSimMan-CI-features'
+#   inputs:
+#     serviceConnection: 'DevOps (oliverfidasoftware)'
+#     project: 'b070728f-7729-4ddc-a4a8-d9fdbc6e5ee7'
+#     Pipeline: Build
+#     buildDefinition: 11
+#     Branch: '$(Build.SourceBranch)'
+#   enabled: false
+

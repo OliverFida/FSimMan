@@ -1,0 +1,77 @@
+# Variable 'netshare.password' was defined in the Variables tab
+# Variable 'netshare.root' was defined in the Variables tab
+# Variable 'netshare.user' was defined in the Variables tab
+variables:
+- name: BuildParameters.solution
+  value: FSimMan.sln
+trigger:
+  branches:
+    include:
+    - refs/heads/features/*
+name: $(date:yyyy).$(date:MM).$(date:dd).$(date:HHmm)
+jobs:
+- job: Job_1
+  displayName: Job 1
+  timeoutInMinutes: 5
+  cancelTimeoutInMinutes: 1
+  pool:
+    name: OF Build
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: UseDotNet@2
+    displayName: Use .NET Core sdk 8.x
+    inputs:
+      version: 8.x
+  - task: bleddynrichards.Assembly-Info-Task.Assembly-Info-NetCore.Assembly-Info-NetCore@3
+    displayName: Set Assembly Manifest Data
+    inputs:
+      FileNames: '**/Directory.Build.props'
+      InsertAttributes: true
+      VersionNumber: $(Build.BuildNumber)
+  - task: DotNetCoreCLI@2
+    displayName: dotnet restore
+    inputs:
+      command: restore
+      projects: $(BuildParameters.solution)
+      restoreArguments: --no-cache
+      feedRestore: 29527bd3-29ca-4fb3-bd0a-6d56dc3e5bc5
+  - task: DotNetCoreCLI@2
+    displayName: dotnet build
+    inputs:
+      projects: $(Parameters.Solution)
+      arguments: -c $(BuildConfiguration) -o $(Build.BinariesDirectory) --version-suffix $(Build.SourceBranchName)
+  - task: PowerShell@2
+    displayName: Authenticatie SMB share
+    inputs:
+      targetType: inline
+      script: >-
+        $Username = "$(netshare.user)"
+
+        $Password = "$(netshare.password)"
+
+        $Root = "$(netshare.root)"
+
+
+        net use $Root /user:$Username $Password /persistent:no
+  - task: DeleteFiles@1
+    displayName: Delete files from $(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)
+    inputs:
+      SourceFolder: $(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)
+      Contents: '**/*'
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)'
+    inputs:
+      SourceFolder: $(Build.BinariesDirectory)
+      TargetFolder: $(netshare.root)\$(System.TeamProject)\features\$(Build.SourceBranchName)
+  - task: maikvandergaag.maikvandergaag-trigger-pipeline.TriggerPipeline.TriggerPipeline@2
+    displayName: Trigger FSimMan-CI-features
+    enabled: False
+    inputs:
+      connectedServiceName: 161125d1-2266-4e91-9064-529def62b7f1
+      project: b070728f-7729-4ddc-a4a8-d9fdbc6e5ee7
+      Pipeline: Build
+      buildDefinition: 11
+      Branch: $(Build.SourceBranch)
+...
