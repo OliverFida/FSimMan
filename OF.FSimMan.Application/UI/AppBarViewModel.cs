@@ -112,7 +112,7 @@ namespace OF.FSimMan.UI
         {
             return AsTask(() =>
             {
-                if (Fs22ViewModel is null || !Fs22ViewModel.IsInitialized) return;
+                if (Fs22ViewModel is null) return;
 
                 try
                 {
@@ -157,7 +157,7 @@ namespace OF.FSimMan.UI
         {
             return AsTask(() =>
             {
-                if (Fs25ViewModel is null || !Fs25ViewModel.IsInitialized) return;
+                if (Fs25ViewModel is null) return;
 
                 try
                 {

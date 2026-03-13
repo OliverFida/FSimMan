@@ -61,6 +61,11 @@ namespace OF.FSimMan.ViewModel.Game.Fs
 
         #region Constructor
         public Fs25ViewModel() : base("Farming Simulator 25", new Fs25Client()) { }
+
+        protected override Task InitializeAsync()
+        {
+            return base.InitializeAsync();
+        }
         #endregion
     }
 }

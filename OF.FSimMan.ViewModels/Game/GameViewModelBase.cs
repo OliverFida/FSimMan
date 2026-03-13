@@ -7,6 +7,7 @@ using OF.FSimMan.Client.Management;
 using OF.FSimMan.Game;
 using OF.FSimMan.Management;
 using OF.FSimMan.ViewModel.Base;
+using System.Diagnostics;
 
 namespace OF.FSimMan.ViewModel.Game
 {
@@ -178,14 +179,8 @@ namespace OF.FSimMan.ViewModel.Game
             IGameClient client = (IGameClient)Client;
             client.SelectedModPack = modPack;
 
-            if (Client.IsInitialized)
-            {
-                client.RunGame();
-            }
-            else
-            {
-                // OFDOI: Client.InitializeComplete += HandleClientInizializeCompleteRunGame;
-            }
+            if (!Client.IsInitialized) Client.WaitForInitializationComplete();
+            client.RunGame();
         }
         #endregion
 
@@ -194,14 +189,6 @@ namespace OF.FSimMan.ViewModel.Game
         {
             ((IGameClient)Client).RefreshModPacks();
             _editModPackViewModel!.ViewModelClosedEvent -= HandleEditModPackViewModelClosedEvent;
-        }
-        #endregion
-
-        #region Methods PRIVATE
-        private void HandleClientInizializeCompleteRunGame(object? sender, EventArgs e)
-        {
-            // OFDOI: Client.InitializeComplete -= HandleClientInizializeCompleteRunGame;
-            ((IGameClient)Client).RunGame();
         }
         #endregion
     }

@@ -32,15 +32,6 @@
 		<Compile Update="Management\Settings\Fs22View.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="UiFunctions\InfoView.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="UiFunctions\QuestionView.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="UiFunctions\WarningView.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
 	</ItemGroup>
 
 </Project>

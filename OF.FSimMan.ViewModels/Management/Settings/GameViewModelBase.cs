@@ -197,10 +197,10 @@ namespace OF.FSimMan.ViewModel.Management.Settings
             switch (_game)
             {
                 case FSimMan.Management.Game.FarmingSim22:
-                    client = new Fs22Client(false);
+                    client = new Fs22Client();
                     break;
                 case FSimMan.Management.Game.FarmingSim25:
-                    client = new Fs25Client(false);
+                    client = new Fs25Client();
                     break;
                 default:
                     throw new NotImplementedException();

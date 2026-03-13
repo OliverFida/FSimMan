@@ -11,9 +11,10 @@
                 <ResourceDictionary Source="pack://application:,,,/OF.FSimMan.Resources;component/Icons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/CLS.Core.Wpf;component/Index.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OF.FSimMan.Views;component/DataContexts.xaml" />
+                <ResourceDictionary Source="/UI/Style/AppBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!--<Style BasedOn="{StaticResource AppBarBaseStyle}" TargetType="{x:Type ui:AppBar}" />-->
+            <Style BasedOn="{StaticResource AppBarBaseStyle}" TargetType="{x:Type ui:AppBar}" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

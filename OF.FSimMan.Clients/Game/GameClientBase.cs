@@ -60,9 +60,10 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Constructor & Initialize
-        public GameClientBase(FSimMan.Management.Game game, bool doInitialize = true) : base()
+        public GameClientBase(FSimMan.Management.Game game) : base(false)
         {
             _game = game;
+            StartInitialization();
         }
 
         protected override async Task InitializeAsync()
@@ -73,6 +74,7 @@ namespace OF.FSimMan.Client.Game
 
                 ReadGameSettings();
                 RefreshModPacks(false);
+                Thread.Sleep(5000);
             }
             finally
             {

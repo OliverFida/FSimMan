@@ -8,7 +8,6 @@ namespace OF.FSimMan.Client.Game.Fs
     {
         #region Constructor
         public Fs22Client() : base(FSimMan.Management.Game.FarmingSim22) { }
-        public Fs22Client(bool doInitialize) : base(FSimMan.Management.Game.FarmingSim22, doInitialize) { }
         #endregion
 
         #region Methods INTERNAL
