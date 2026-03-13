@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:objSettings="clr-namespace:OF.FSimMan.Management.Settings;assembly=OF.FSimMan.Objects"
-    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls">
+    xmlns:cmp="clr-namespace:CLS.Core.Wpf.Component;assembly=CLS.Core.Wpf"
+    xmlns:objSettings="clr-namespace:OF.FSimMan.Management.Settings;assembly=OF.FSimMan.Objects">
 
     <DataTemplate x:Key="ChangeLogItemsControlItemDataTemplate">
         <Border
@@ -11,7 +11,7 @@
             Background="{StaticResource TitleBarButtonGrayBrush}"
             CornerRadius="10">
             <StackPanel Orientation="Vertical">
-                <of:Heading Margin="0,0,0,-5" Text="{Binding Title}" />
+                <cmp:Heading Margin="0,0,0,-5" Text="{Binding Title}" />
                 <TextBlock
                     Margin="0,0,0,5"
                     FontSize="12"
@@ -21,7 +21,7 @@
                     Height="0.75"
                     HorizontalAlignment="Stretch"
                     Fill="DarkSlateGray" />
-                <of:MarkdownDisplay ItemsSource="{Binding Content}" />
+                <cmp:MarkdownDisplay ItemsSource="{Binding Content}" />
             </StackPanel>
         </Border>
     </DataTemplate>

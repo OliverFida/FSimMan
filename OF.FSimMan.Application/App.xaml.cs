@@ -1,4 +1,4 @@
-﻿using OF.Base.Wpf.UiFunctions;
+﻿using CLS.Core.Wpf.UiFunctions;
 using System.Diagnostics;
 using System.Windows;
 

@@ -1,6 +1,6 @@
 ﻿using CLS.Core;
 using CLS.Core.ViewModel;
-using OF.Base.Wpf.UiFunctions;
+using CLS.Core.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
 using OF.FSimMan.Management.Games.Fs;

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:of="clr-namespace:OF.Base.Wpf;assembly=OF.Base.WpfControls"
+    xmlns:cmp="clr-namespace:CLS.Core.Wpf.Component;assembly=CLS.Core.Wpf"
     xmlns:vm="clr-namespace:OF.FSimMan.ViewModel;assembly=OF.FSimMan.ViewModels"
     d:DataContext="{d:DesignInstance Type={x:Type vm:GameRunningViewModel}}"
     d:DesignHeight="1080"
@@ -15,17 +15,17 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
-            <of:Heading HorizontalAlignment="Center" Text="{Binding GameStatusText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <cmp:Heading HorizontalAlignment="Center" Text="{Binding GameStatusText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             <Image
                 Width="100"
                 Height="100"
                 Margin="0,20"
                 Source="{Binding RunningGame.ImageFilePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <of:Heading
+            <cmp:Heading
                 HorizontalAlignment="Center"
                 Style="{StaticResource InputGroupHeadingStyle}"
                 Text="{Binding RunningGame.Title, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <!--<of:ImageButton
+            <!--<cmp:ImageButton
                 Margin="0,20,0,0"
                 Command="{Binding CloseGameCommand}"
                 Content="Close Game"
