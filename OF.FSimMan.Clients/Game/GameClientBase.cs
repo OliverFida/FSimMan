@@ -60,10 +60,10 @@ namespace OF.FSimMan.Client.Game
         #endregion
 
         #region Constructor & Initialize
-        public GameClientBase(FSimMan.Management.Game game) : base(false)
+        public GameClientBase(FSimMan.Management.Game game, bool doInitialize = true) : base(false)
         {
             _game = game;
-            StartInitialization();
+            if (doInitialize) StartInitialization();
         }
 
         protected override async Task InitializeAsync()
@@ -74,7 +74,6 @@ namespace OF.FSimMan.Client.Game
 
                 ReadGameSettings();
                 RefreshModPacks(false);
-                Thread.Sleep(5000);
             }
             finally
             {
@@ -199,6 +198,7 @@ namespace OF.FSimMan.Client.Game
                 _modPacksEditor = new ModPacksEditor(ModPacks);
                 ModPack newModPack = new ModPack(_game)
                 {
+                    Id = Guid.Empty,
                     Title = "Default",
                     Description = "Auto-imported modpack",
                     Author = "FSimMan",

@@ -89,11 +89,11 @@ namespace OF.FSimMan.Client.Management
             {
                 case nameof(GameSettingsFs22):
                     gameSettings = AppSettings.GetGameSettings<GameSettingsFs22>();
-                    gameClient = new Fs22Client();
+                    gameClient = new Fs22Client(doInitialize: false);
                     break;
                 case nameof(GameSettingsFs25):
                     gameSettings = AppSettings.GetGameSettings<GameSettingsFs25>();
-                    gameClient = new Fs25Client();
+                    gameClient = new Fs25Client(doInitialize: false);
                     break;
                 default:
                     throw new NotImplementedException();
