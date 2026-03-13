@@ -9,7 +9,7 @@ namespace OF.FSimMan.Management
         public ApplicationMode ApplicationMode { get; set; } = ApplicationMode.None;
         public string LastSelectedView { get; set; } = string.Empty;
         //public string LastVersionChangelogDisplayed { get; set; } = string.Empty;
-        public List<IGameSettingsData> GameSettings { get; set; } = new List<IGameSettingsData>();
+        public List<GameSettingsDataBase> GameSettings { get; set; } = new List<GameSettingsDataBase>();
 
         public override AppSettings FromData()
         {
@@ -50,7 +50,7 @@ namespace OF.FSimMan.Management
             LastSelectedView = value.LastSelectedView;
             //LastVersionChangelogDisplayed = value.LastVersionChangelogDisplayed;
 
-            ConcurrentBag<IGameSettingsData> temp = new ConcurrentBag<IGameSettingsData>();
+            ConcurrentBag<GameSettingsDataBase> temp = new ConcurrentBag<GameSettingsDataBase>();
             Parallel.ForEach(value.Games, game =>
             {
                 switch (game)

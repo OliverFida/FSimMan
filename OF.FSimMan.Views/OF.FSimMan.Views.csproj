@@ -1,43 +1,46 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<UseWPF>true</UseWPF>
-	<Nullable>enable</Nullable>
-	<RootNamespace>OF.FSimMan.View</RootNamespace>
-	<PackageId>$(AssemblyName)</PackageId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<Nullable>enable</Nullable>
+		<RootNamespace>OF.FSimMan.View</RootNamespace>
+		<PackageId>$(AssemblyName)</PackageId>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
-    <ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
-  </ItemGroup>
+		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Update="Management\Settings\ChangeLogView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Management\Settings\AboutView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="HomeView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Management\Settings\Fs25View.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Management\Settings\Fs22View.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UiFunctions\InfoView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UiFunctions\QuestionView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UiFunctions\WarningView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\OF.FSimMan.Resources\OF.FSimMan.Resources.csproj" />
+		<ProjectReference Include="..\OF.FSimMan.ViewModels\OF.FSimMan.ViewModels.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Management\Settings\ChangeLogView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Management\Settings\AboutView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="HomeView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Management\Settings\Fs25View.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Management\Settings\Fs22View.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="UiFunctions\InfoView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="UiFunctions\QuestionView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="UiFunctions\WarningView.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+	</ItemGroup>
 
 </Project>

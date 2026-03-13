@@ -17,7 +17,7 @@ namespace OF.FSimMan.Management.Games
 
         [ForeignKey(nameof(GameSettingsId))]
         [Required]
-        public IGameSettingsData GameSettings { get; set; } = null!;
+        public GameSettingsDataBase GameSettings { get; set; } = null!;
         #endregion
 
         public override GameSettingsStartArguments FromData()

@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CLS.Core.EFCore.SqLite" Version="2026.3.11.2250-Styling" />
+	  <PackageReference Include="CLS.Core.EFCore.SqLite" Version="2026.3.13.855-Styling" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.14">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -1,5 +1,6 @@
 ﻿using CLS.Core;
 using CLS.Core.ViewModel;
+using CLS.Core.ViewModel.Command;
 using CLS.Core.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.Management;
@@ -64,17 +65,20 @@ namespace OF.FSimMan.UI
             get => false;
         }
 
-        public Command HomeCommand { get; } = new Command(HomeDelegate);
-        private static void HomeDelegate()
+        public Command HomeCommand { get; }
+        private Task HomeDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                MainViewModel.ViewModelSelector.OpenViewModel(MainViewModel.HomeViewModel);
-            }
-            catch (ClsException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                try
+                {
+                    MainViewModel.ViewModelSelector.OpenViewModel(MainViewModel.HomeViewModel);
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
         public bool IsHomeSelected
         {
@@ -87,26 +91,29 @@ namespace OF.FSimMan.UI
             }
         }
 
-        public Command SelectFs22Command { get; } = new Command(SelectFs22Delegate);
-        private static void SelectFs22Delegate()
+        public Command SelectFs22Command { get; }
+        private Task SelectFs22Delegate()
         {
-            try
+            return AsTask(() =>
             {
-                Fs22ViewModel = new Fs22ViewModel();
-                MainViewModel.ViewModelSelector.OpenViewModel(Fs22ViewModel!);
-            }
-            catch (ClsException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                try
+                {
+                    Fs22ViewModel = new Fs22ViewModel();
+                    MainViewModel.ViewModelSelector.OpenViewModel(Fs22ViewModel!);
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
-        public Command RunFs22DefaultCommand { get; } = new Command(RunFs22DefaultDelegate);
-        private static async void RunFs22DefaultDelegate()
+        public Command RunFs22DefaultCommand { get; }
+        private Task RunFs22DefaultDelegate()
         {
-            if (Fs22ViewModel is null || !Fs22ViewModel.IsInitialized) return;
-
-            await Task.Run(() => Fs22ViewModel.ExecutePreventAutoclose(() =>
+            return AsTask(() =>
             {
+                if (Fs22ViewModel is null || !Fs22ViewModel.IsInitialized) return;
+
                 try
                 {
                     GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim22);
@@ -116,7 +123,7 @@ namespace OF.FSimMan.UI
                 {
                     UiFunctions.ShowError(ex);
                 }
-            }));
+            });
         }
         public bool IsFs22Selected
         {
@@ -129,26 +136,29 @@ namespace OF.FSimMan.UI
             }
         }
 
-        public Command SelectFs25Command { get; } = new Command(SelectFs25Delegate);
-        private static void SelectFs25Delegate()
+        public Command SelectFs25Command { get; }
+        private Task SelectFs25Delegate()
         {
-            try
+            return AsTask(() =>
             {
-                Fs25ViewModel = new Fs25ViewModel();
-                MainViewModel.ViewModelSelector.OpenViewModel(Fs25ViewModel!);
-            }
-            catch (ClsException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                try
+                {
+                    Fs25ViewModel = new Fs25ViewModel();
+                    MainViewModel.ViewModelSelector.OpenViewModel(Fs25ViewModel!);
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
-        public Command RunFs25DefaultCommand { get; } = new Command(RunFs25DefaultDelegate);
-        private static async void RunFs25DefaultDelegate()
+        public Command RunFs25DefaultCommand { get; }
+        private Task RunFs25DefaultDelegate()
         {
-            if (Fs25ViewModel is null || !Fs25ViewModel.IsInitialized) return;
-
-            await Task.Run(() => Fs25ViewModel.ExecutePreventAutoclose(() =>
+            return AsTask(() =>
             {
+                if (Fs25ViewModel is null || !Fs25ViewModel.IsInitialized) return;
+
                 try
                 {
                     GameRunningViewModel.Instance.PlanStart(Management.Game.FarmingSim25);
@@ -158,7 +168,7 @@ namespace OF.FSimMan.UI
                 {
                     UiFunctions.ShowError(ex);
                 }
-            }));
+            });
         }
         public static bool IsFs25Visible
         {
@@ -175,17 +185,20 @@ namespace OF.FSimMan.UI
             }
         }
 
-        public Command SettingsCommand { get; } = new Command(SettingsDelegate);
-        private static void SettingsDelegate()
+        public Command SettingsCommand { get; }
+        private Task SettingsDelegate()
         {
-            try
+            return AsTask(() =>
             {
-                MainViewModel.ViewModelSelector.OpenViewModel(new SettingsViewModel());
-            }
-            catch (ClsException ex)
-            {
-                UiFunctions.ShowError(ex);
-            }
+                try
+                {
+                    MainViewModel.ViewModelSelector.OpenViewModel(new SettingsViewModel());
+                }
+                catch (ClsException ex)
+                {
+                    UiFunctions.ShowError(ex);
+                }
+            });
         }
         public bool IsSettingsSelected
         {
@@ -205,7 +218,13 @@ namespace OF.FSimMan.UI
             MainViewModel.ViewModelSelector.CurrentViewModelChanged += HandleCurrentViewModelChanged;
             UpdateClient.Instance.PropertyChanged += HandleIsUpdateAvailableChanged;
 
-            UpdateCommand = new Command(this, async target => await ((AppBarViewModel)target).UpdateDelegate());
+            UpdateCommand = new Command(async () => await ExecuteDelegate(UpdateDelegate));
+            HomeCommand = new Command(() => ExecuteDelegate(HomeDelegate));
+            SelectFs22Command = new Command(() => ExecuteDelegate(SelectFs22Delegate));
+            RunFs22DefaultCommand = new Command(() => ExecuteDelegate(RunFs22DefaultDelegate));
+            SelectFs25Command = new Command(() => ExecuteDelegate(SelectFs25Delegate));
+            RunFs25DefaultCommand = new Command(() => ExecuteDelegate(RunFs25DefaultDelegate));
+            SettingsCommand = new Command(() => ExecuteDelegate(SettingsDelegate));
         }
         #endregion
 

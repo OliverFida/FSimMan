@@ -1,19 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<UseWPF>true</UseWPF>
-	<Nullable>enable</Nullable>
-	<RootNamespace>OF.FSimMan.ViewModel</RootNamespace>
-	<PackageId>$(AssemblyName)</PackageId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<Nullable>enable</Nullable>
+		<RootNamespace>OF.FSimMan.ViewModel</RootNamespace>
+		<PackageId>$(AssemblyName)</PackageId>
 
-  <ItemGroup>
-    <PackageReference Include="CLS.Core.Wpf" Version="2026.3.11.2250-Styling" />
-  </ItemGroup>
+		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OF.FSimMan.Clients\OF.FSimMan.Clients.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CLS.Core.Wpf" Version="2026.3.13.855-Styling" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\OF.FSimMan.Clients\OF.FSimMan.Clients.csproj" />
+	</ItemGroup>
 
 </Project>
