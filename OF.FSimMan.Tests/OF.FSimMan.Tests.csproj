@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
 	<RootNamespace>OF.FSimMan.Tests</RootNamespace>
 	<PackageId>$(AssemblyName)</PackageId>
-    <Nullable>enable</Nullable>
+	  
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

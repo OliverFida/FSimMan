@@ -7,5 +7,7 @@
 		<VersionPrefix>$(AssemblyVersion)</VersionPrefix>
 		<VersionSuffix>dev</VersionSuffix>
 		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 </Project>

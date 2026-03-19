@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<UseWPF>true</UseWPF>
-		<Nullable>enable</Nullable>
 		<RootNamespace>OF.FSimMan</RootNamespace>
 		<PackageId>$(AssemblyName)</PackageId>
 
+		<UseWPF>true</UseWPF>
 		<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
 		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
