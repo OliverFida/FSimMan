@@ -1,8 +1,8 @@
 ﻿using CLS.Core.Client;
 using CLS.Core;
-using OF.FSimMan.Api.GitHub;
 using OF.FSimMan.Client.Api;
 using OF.FSimMan.Management.Settings;
+using OF.FSimMan.Updater.Api.GitHub;
 
 namespace OF.FSimMan.Client.Management.Settings
 {

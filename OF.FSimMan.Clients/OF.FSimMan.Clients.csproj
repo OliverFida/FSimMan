@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\OF.FSimMan.Database\OF.FSimMan.Database.csproj" />
     <ProjectReference Include="..\OF.FSimMan.Objects\OF.FSimMan.Objects.csproj" />
-    <ProjectReference Include="..\OF.FSimMan.Updater\OF.FSimMan.Updater.csproj" />
   </ItemGroup>
 
 </Project>

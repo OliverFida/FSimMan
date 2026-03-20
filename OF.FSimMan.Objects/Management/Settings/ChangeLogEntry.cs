@@ -1,4 +1,4 @@
-﻿using OF.FSimMan.Api.GitHub;
+﻿using OF.FSimMan.Updater.Api.GitHub;
 
 namespace OF.FSimMan.Management.Settings
 {

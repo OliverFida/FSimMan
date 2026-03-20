@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OF.FSimMan.Database", "OF.F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OF.FSimMan.Updater", "OF.FSimMan.Updater\OF.FSimMan.Updater.csproj", "{53AABAE0-A3FE-4BBC-B8E2-B5C388C75109}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OF.FSimMan.Updater.Shared", "OF.FSimMan.Updater.Shared\OF.FSimMan.Updater.Shared.csproj", "{61261161-871E-409B-AE34-FA74A0AB671A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{53AABAE0-A3FE-4BBC-B8E2-B5C388C75109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53AABAE0-A3FE-4BBC-B8E2-B5C388C75109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53AABAE0-A3FE-4BBC-B8E2-B5C388C75109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61261161-871E-409B-AE34-FA74A0AB671A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61261161-871E-409B-AE34-FA74A0AB671A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61261161-871E-409B-AE34-FA74A0AB671A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61261161-871E-409B-AE34-FA74A0AB671A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

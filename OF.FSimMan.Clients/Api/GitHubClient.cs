@@ -3,7 +3,7 @@
 namespace OF.FSimMan.Client.Api
 {
     [ExcludeFromCodeCoverage]
-    public class GitHubClient : OF.FSimMan.Updater.Clients.GitHubClient
+    public class GitHubClient : OF.FSimMan.Updater.Clients.Api.GitHubClient
     {
         #region Constructor
         private GitHubClient() : base("OliverFida", "FSimMan")
