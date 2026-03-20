@@ -7,8 +7,8 @@
 #define AssocFsmmpExt ".fsmmp"
 #define AssocFsmmpKey StringChange(AssocFsmmpName, " ", "") + AssocFsmmpExt
 
-#define BuildDirectory ""
-#define BinDirectory ""
+#define BuildDirectory "C:\Users\Oliver Fida\Desktop\TEMP"
+#define BinDirectory "X:\Oliver Fida\FSimMan\OF.FSimMan.Application\bin\Debug\net8.0-windows10.0.26100.0\win-x64"
 
 [Setup]
 AppId={{1370E40A-AD93-4EE6-9784-C343811282C7}
@@ -16,7 +16,7 @@ AppName={#AppName}
 AppVersion={#AppVersion}
 AppPublisher={#AppPublisher}
 DefaultDirName={autopf}\{#AppPublisher}\{#AppName}
-DisableDirPage=no
+DisableDirPage=yes
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 UninstallDisplayName={#AppName}

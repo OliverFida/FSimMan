@@ -4,7 +4,6 @@ using CLS.Core.Wpf.UiFunctions;
 using OF.FSimMan.Client.Management;
 using OF.FSimMan.ViewModel.Base;
 using OF.FSimMan.ViewModel.Game;
-using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 
@@ -47,8 +46,7 @@ namespace OF.FSimMan.ViewModel
             {
                 OpenLastView();
 #if !DEBUG
-                await AnnounceUpdateAvailableAsync();
-                //await AutoUpdateAsync();
+                await AutoUpdateAsync();
                 //await ShowChangelogAsync();
 #endif
                 GameRunningViewModel temp = GameRunningViewModel.Instance; // Triggering constructor
@@ -82,27 +80,15 @@ namespace OF.FSimMan.ViewModel
         #endregion
 
         #region Methods PRIVATE
-        private async Task AnnounceUpdateAvailableAsync()
+        private async Task AutoUpdateAsync()
         {
             UpdateClient updateClient = UpdateClient.Instance;
             await updateClient.CheckUpdateAvailableAsync();
 
-            if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to take a look?")) return;
+            if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
 
-            ProcessStartInfo psi = new ProcessStartInfo("https://github.com/OliverFida/FSimMan/releases");
-            psi.UseShellExecute = true;
-            Process.Start(psi);
+            await ExecuteUpdate();
         }
-
-        //private async Task AutoUpdateAsync()
-        //{
-        //    UpdateClient updateClient = UpdateClient.Instance;
-        //    await updateClient.CheckUpdateAvailableAsync();
-
-        //    if (!updateClient.IsUpdateAvailable || !UiFunctions.ShowQuestion("A new version of FSimMan is available!" + Environment.NewLine + Environment.NewLine + "Would you like to update now?")) return;
-
-        //    await ExecuteUpdate();
-        //}
 
         //private async Task ShowChangelogAsync()
         //{
@@ -128,15 +114,7 @@ namespace OF.FSimMan.ViewModel
                 }
             }
             ViewModelSelector.OpenViewModel(HomeViewModel);
-            // OFDO: OpenAvailableView();
         }
-
-        // OFDO: private void OpenAvailableView()
-        //{
-        //    if (SettingsClient.Instance.AppSettings.IsFs25Active) ViewModelSelector.OpenViewModel(new Fs25ViewModel());
-        //    else if (SettingsClient.Instance.AppSettings.IsFs22Active) ViewModelSelector.OpenViewModel(new Fs22ViewModel());
-        //    else ViewModelSelector.OpenViewModel(new SettingsViewModel());
-        //}
 
         private void HandleCurrentViewModelChanged(object? sender, EventArgs e)
         {

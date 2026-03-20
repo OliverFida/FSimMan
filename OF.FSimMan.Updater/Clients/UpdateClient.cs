@@ -1,17 +1,23 @@
-﻿using CLS.Core.Client;
-using CLS.Core;
+﻿using CLS.Core;
+using CLS.Core.Client;
 using OF.FSimMan.Api.GitHub;
 using OF.FSimMan.Client.Api;
 using OliverFida.FSimMan.Exceptions;
 using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
 
-namespace OF.FSimMan.Client.Management
+namespace OF.FSimMan.Updater.Clients
 {
     public class UpdateClient : ClientBase, ISingleton<UpdateClient>
     {
         private GitHubClient _gitHubClient = GitHubClient.Instance;
-        private GitHubReleaseData? _latestRelease = null;
         private HttpClient _downloadClient = new HttpClient();
+        private readonly string[] _installerArguments = [
+            "verysilent",
+            "norestart",
+            "mergetasks=\"desktopicon\""
+        ];
 
         #region Properties
         private bool _isUpdateAvailable = false;
@@ -19,6 +25,13 @@ namespace OF.FSimMan.Client.Management
         {
             get => _isUpdateAvailable;
             set => SetProperty(ref _isUpdateAvailable, value);
+        }
+
+        private GitHubReleaseData? _latestRelease = null;
+        public GitHubReleaseData? LatestRelease
+        {
+            get => _latestRelease;
+            private set => SetProperty(ref _latestRelease, value);
         }
         #endregion
 
@@ -49,7 +62,7 @@ namespace OF.FSimMan.Client.Management
                 IsBusy = true;
                 BusyContent = "Downloading update...";
 
-                if (_latestRelease is null) return false;
+                if (LatestRelease is null) return false;
 
                 GitHubReleaseAssetData[] assets = GetValidReleaseAssets();
                 if (assets.Length != 1) return false;
@@ -59,12 +72,22 @@ namespace OF.FSimMan.Client.Management
                 BusyContent = "Starting update...";
                 try
                 {
-                    Process.Start(new ProcessStartInfo
+                    ProcessStartInfo psi = new ProcessStartInfo
                     {
                         FileName = downloadedFilePath,
-                        UseShellExecute = true,
-                        Verb = "runas"
-                    });
+                        Arguments = GetInstallerArgs(),
+                        UseShellExecute = false
+                    };
+
+                    Process p = new Process
+                    {
+                        StartInfo = psi,
+                    };
+
+                    p.Start();
+                    await p.WaitForExitAsync();
+
+                    // OFDOI: Handle not successful
                 }
                 catch
                 {
@@ -78,26 +101,19 @@ namespace OF.FSimMan.Client.Management
                 ResetBusyIndicator();
             }
         }
-
-        //public async Task<bool> GetShowChangelogAsync()
-        //{
-        //    await Task.Delay(250);
-        //    return true;
-        //    // OFDO
-        //}
         #endregion
 
         #region Methods PRIVATE
         private async Task<bool> GetUpdateAvailableAsync()
         {
-            _latestRelease = null;
+            LatestRelease = null;
             if (CurrentApplication.AssemblyVersion is null) return false;
 
             GitHubReleaseData[]? releases = await _gitHubClient.TryGetReleasesAsync();
             if (releases is null || releases.Length == 0) return false;
 
-            _latestRelease = (from r in releases orderby r.TagName descending select r).First();
-            (int major, int minor, int build) versionParts = GetVersionParts(_latestRelease.TagName);
+            LatestRelease = (from r in releases orderby r.TagName descending select r).First();
+            (int major, int minor, int build) versionParts = GetVersionParts(LatestRelease.TagName);
 
             if (CurrentApplication.AssemblyVersion.Major < versionParts.major) return true; // 0.x.x -> 1.x.x
             if (CurrentApplication.AssemblyVersion.Major == versionParts.major) // 0.x.x -> 0.y.x
@@ -122,7 +138,7 @@ namespace OF.FSimMan.Client.Management
 
         private GitHubReleaseAssetData[] GetValidReleaseAssets()
         {
-            return (from a in _latestRelease!.Assets where a.Name.EndsWith(".exe") select a).ToArray();
+            return (from a in LatestRelease!.Assets where a.Name.EndsWith(".exe") select a).ToArray();
         }
 
         private async Task<string> DownloadFileAsync(string url, string fileName)
@@ -133,6 +149,18 @@ namespace OF.FSimMan.Client.Management
             await File.WriteAllBytesAsync(targetPath, fileBytes);
 
             return targetPath;
+        }
+
+        private string GetInstallerArgs()
+        {
+            string retVal = string.Empty;
+
+            foreach (string arg in _installerArguments)
+            {
+                retVal += $"/{arg} ";
+            }
+
+            return retVal;
         }
         #endregion
 

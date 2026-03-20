@@ -1,0 +1,24 @@
+﻿<Window
+    x:Class="OF.FSimMan.Updater.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cmp="clr-namespace:CLS.Core.Wpf.Component;assembly=CLS.Core.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OF.FSimMan.Updater"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:OF.FSimMan.Updater.ViewModels"
+    Title="FSimMan Updater"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
+    Style="{StaticResource MainWindowStyle}"
+    mc:Ignorable="d">
+    <cmp:BusyIndicator BusyContent="{Binding UpdateClient.BusyContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsBusy="{Binding UpdateClient.IsBusy, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+        <Grid>
+            <ContentControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Content="{Binding ViewModelSelector.CurrentViewModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </cmp:BusyIndicator>
+</Window>
