@@ -1,8 +1,8 @@
 ﻿using CLS.Core;
 
-namespace OliverFida.FSimMan.Exceptions
+namespace OF.FSimMan.Updater.Exceptions
 {
-    public class UpdateCanceledException: ClsException
+    public class UpdateCanceledException : ClsException
     {
         public UpdateCanceledException() : base("The update has been canceled.") { }
     }

@@ -16,8 +16,4 @@
 	  <PackageReference Include="CLS.Core.Wpf" Version="2026.3.13.855-Styling" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\OF.FSimMan.Clients\OF.FSimMan.Clients.csproj" />
-	</ItemGroup>
-
 </Project>

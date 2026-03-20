@@ -1,8 +1,8 @@
 ﻿using CLS.Core;
 using CLS.Core.Client;
-using OF.FSimMan.Api.GitHub;
-using OF.FSimMan.Client.Api;
-using OliverFida.FSimMan.Exceptions;
+using OF.FSimMan.Updater.Api.GitHub;
+using OF.FSimMan.Updater.Clients.Api;
+using OF.FSimMan.Updater.Exceptions;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -11,7 +11,7 @@ namespace OF.FSimMan.Updater.Clients
 {
     public class UpdateClient : ClientBase, ISingleton<UpdateClient>
     {
-        private GitHubClient _gitHubClient = GitHubClient.Instance;
+        private GitHubClient _gitHubClient;
         private HttpClient _downloadClient = new HttpClient();
         private readonly string[] _installerArguments = [
             "verysilent",
@@ -36,7 +36,10 @@ namespace OF.FSimMan.Updater.Clients
         #endregion
 
         #region Constructor
-        private UpdateClient() : base() { }
+        private UpdateClient() : base()
+        {
+            _gitHubClient = new GitHubClient(App.START_ARGS["ghusername"]!, App.START_ARGS["ghrepo"]!);
+        }
         #endregion
 
         #region Methods PUBLIC
@@ -107,7 +110,6 @@ namespace OF.FSimMan.Updater.Clients
         private async Task<bool> GetUpdateAvailableAsync()
         {
             LatestRelease = null;
-            if (CurrentApplication.AssemblyVersion is null) return false;
 
             GitHubReleaseData[]? releases = await _gitHubClient.TryGetReleasesAsync();
             if (releases is null || releases.Length == 0) return false;
@@ -115,13 +117,13 @@ namespace OF.FSimMan.Updater.Clients
             LatestRelease = (from r in releases orderby r.TagName descending select r).First();
             (int major, int minor, int build) versionParts = GetVersionParts(LatestRelease.TagName);
 
-            if (CurrentApplication.AssemblyVersion.Major < versionParts.major) return true; // 0.x.x -> 1.x.x
-            if (CurrentApplication.AssemblyVersion.Major == versionParts.major) // 0.x.x -> 0.y.x
+            if (Convert.ToInt32(App.START_ARGS["currentmajor"]) < versionParts.major) return true; // 0.x.x -> 1.x.x
+            if (Convert.ToInt32(App.START_ARGS["currentmajor"]) == versionParts.major) // 0.x.x -> 0.y.x
             {
-                if (CurrentApplication.AssemblyVersion.Minor < versionParts.minor) return true; // 0.0.x -> 0.1.x
-                if (CurrentApplication.AssemblyVersion.Minor == versionParts.minor) // 0.0.x -> 0.0.y
+                if (Convert.ToInt32(App.START_ARGS["currentminor"]) < versionParts.minor) return true; // 0.0.x -> 0.1.x
+                if (Convert.ToInt32(App.START_ARGS["currentminor"]) == versionParts.minor) // 0.0.x -> 0.0.y
                 {
-                    if (CurrentApplication.AssemblyVersion.Build < versionParts.build) return true; // 0.0.0 -> 0.0.1
+                    if (Convert.ToInt32(App.START_ARGS["currentbuild"]) < versionParts.build) return true; // 0.0.0 -> 0.0.1
                 }
             }
 
@@ -145,7 +147,7 @@ namespace OF.FSimMan.Updater.Clients
         {
             byte[] fileBytes = await _downloadClient.GetByteArrayAsync(url);
 
-            string targetPath = Path.Combine(CurrentApplication.TEMP_PATH, fileName);
+            string targetPath = Path.Combine(App.TEMP_PATH, fileName);
             await File.WriteAllBytesAsync(targetPath, fileBytes);
 
             return targetPath;

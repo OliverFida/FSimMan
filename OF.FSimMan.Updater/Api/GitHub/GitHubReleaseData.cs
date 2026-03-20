@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OF.FSimMan.Api.GitHub
+namespace OF.FSimMan.Updater.Api.GitHub
 {
     public class GitHubReleaseData
     {

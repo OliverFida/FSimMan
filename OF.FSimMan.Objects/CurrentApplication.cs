@@ -130,17 +130,6 @@ namespace OF.FSimMan
                 return temp;
             }
         }
-
-        public static string TEMP_PATH
-        {
-            get
-            {
-                string temp = APPDATA_PATH;
-                temp = Path.Combine(temp, "temp");
-                if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
-                return temp;
-            }
-        }
         #endregion
 
         #region Constructor
